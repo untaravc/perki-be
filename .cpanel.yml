@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/u9090851/repositories/perki-be/
+    - /bin/cp -R * $DEPLOYPATH
