@@ -17,9 +17,11 @@ class CreateUsersTable extends Migration
             $table->id('user_id');
             $table->boolean('user_is_speaker')->default(0);
             $table->string('user_name');
+            $table->string('user_first_name')->nullable();
+            $table->string('user_last_name')->nullable();
             $table->string('user_email')->unique();
             $table->timestamp('user_email_verified_at')->nullable();
-            $table->string('user_password');
+            $table->string('user_password')->nullable();
             $table->string('user_phone')->nullable();
             $table->string('user_institution')->nullable();
             $table->string('user_city')->nullable();
@@ -30,7 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('user_forgot_password_token')->nullable();
             $table->string('user_otp')->nullable();
             $table->string('user_type')->nullable();
-            $table->mediumInteger('user_status');
+            $table->mediumInteger('user_status')->default(100);
             $table->rememberToken();
             $table->timestamps();
         });

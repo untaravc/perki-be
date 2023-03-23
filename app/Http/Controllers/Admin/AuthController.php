@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends BaseController
 {
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $this->response['status'] = false;
 
         $message = 'Email atau password salah.';
@@ -19,13 +20,13 @@ class AuthController extends BaseController
             'password' => 'required|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $this->response['message'] = $message . '01';
             return $this->response;
         }
 
         $user = User::whereUserEmail($request->email)
-            ->where('user_type','admin')
+            ->where('user_type', 'admin')
             ->whereUserStatus(1)
             ->first();
 
@@ -49,14 +50,20 @@ class AuthController extends BaseController
         $this->response['status'] = true;
         $this->response['result'] = [
             'token' => $token->plainTextToken,
-            'user' => $user
+            'user'  => $user
         ];
 
         return $this->response;
     }
 
-    public function profile(Request $request){
+    public function profile(Request $request)
+    {
         $data = $request->user()->only(['user_id', 'user_name', 'user_email']);
-        return $this->sendResponse(200, $data);
+        return $this->sendGetResponse($data, '');
+    }
+
+    public function notFound()
+    {
+        return view('404');
     }
 }

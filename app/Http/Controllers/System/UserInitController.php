@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class DataInitController extends Controller
+class UserInitController extends Controller
 {
-    public function init()
+    public function user_init()
     {
         $data = [
             [
@@ -28,7 +27,7 @@ class DataInitController extends Controller
                 "user_forgot_password_token" => null,
                 "user_type"                  => 'admin',
                 "user_otp"                   => null,
-                "user_status"                => 1,
+                "user_status"                => 100,
                 "remember_token"             => null,
             ],
             [
@@ -47,13 +46,18 @@ class DataInitController extends Controller
                 "user_forgot_password_token" => null,
                 "user_type"                  => 'user',
                 "user_otp"                   => null,
-                "user_status"                => 1,
+                "user_status"                => 100,
                 "remember_token"             => null,
             ],
         ];
 
         foreach ($data as $item) {
-            User::create($item);
+            $user = User::whereUserEmail($item['user_email'])->first();
+            if($user){
+                $user->update($item);
+            } else{
+                User::create($item);
+            }
         }
     }
 }

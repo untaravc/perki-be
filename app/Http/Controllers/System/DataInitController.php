@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers\System;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
-class DataInitController extends Controller
+class DataInitController extends BaseController
 {
     public function init()
     {
-        return $this->events();
+        $this->events();
+
+        $speakers = new SpeakerInitController();
+        $speakers->init_speaker();
+
+        $user = new UserInitController();
+        $user->user_init();
+
+        return $this->sendGetResponse(['ok']);
     }
 
     private function events()

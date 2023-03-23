@@ -12,7 +12,7 @@ class BaseController extends Controller
         'result'  => null,
     ];
 
-    public function sendError($response_code, $message = null, $errors = null)
+    public function sendError($response_code, $errors = null, $message = null)
     {
         switch ($response_code) {
             case 404:
@@ -33,26 +33,20 @@ class BaseController extends Controller
         }
     }
 
-    public function sendResponse(int $response_code, $data, string $message = null)
+    public function sendGetResponse($data, string $message = null)
     {
-        switch ($response_code) {
-            case 211:
-                $message_response = $message ?? 'Data created.';
-                break;
-            case 212:
-                $message_response = $message ?? 'Data updated.';
-                break;
-            case 213:
-                $message_response = $message ?? 'Data deleted.';
-                break;
-            default:
-                $message_response = $message ?? 'Access data success.';
-        }
-
         return response()->json([
             'status'  => true,
-            'message' => $message_response,
+            'message' => $message ?? 'Access data success',
             'result'  => $data,
-        ], $response_code);
+        ]);
+    }
+
+    public function sendPostResponse($data, string $message = null){
+        return response()->json([
+            'status'  => true,
+            'message' => $message ?? 'Access data success',
+            'result'  => $data,
+        ], 201);
     }
 }

@@ -15,6 +15,6 @@ class HomeController extends BaseController
             ->select('user_id', 'user_name', 'user_desc', 'user_image')
             ->get();
 
-        return $this->sendResponse(200, $data);
+        return $this->sendGetResponse($data);
     }
 }
