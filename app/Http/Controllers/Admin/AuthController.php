@@ -62,6 +62,10 @@ class AuthController extends BaseController
         return $this->sendGetResponse($data, '');
     }
 
+    public function adminPanel(){
+        return view('admin_panel.layout');
+    }
+
     public function notFound()
     {
         return view('404');

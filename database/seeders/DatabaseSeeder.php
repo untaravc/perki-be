@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Http\Controllers\System\UserInitController;
+use App\Http\Controllers\System\DataInitController;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $initCtrl = new UserInitController();
+        $initCtrl = new DataInitController();
         $initCtrl->init();
     }
 }
