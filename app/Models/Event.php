@@ -10,10 +10,22 @@ class Event extends Model
     use HasFactory;
 
     protected $fillable = [
-        "event_name",
-        "event_parent_id",
-        "event_date_start",
-        "event_date_end",
-        "event_has_price",
+        "name",
+        "section",
+        "data_type",
+        "parent_id",
+        "date_start",
+        "date_end",
+        "has_price",
+        "title",
+        "image",
+        "place",
+        "speaker_ids",
+        "speakers",
+        "certificate",
+        "status",
+        "link",
+        "subtitle",
+        "body",
     ];
 }

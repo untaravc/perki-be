@@ -15,6 +15,12 @@ class HomeController extends BaseController
             ->select('user_id', 'user_name', 'user_desc', 'user_image')
             ->get();
 
-        return $this->sendGetResponse($data);
+        $this->sendGetResponse($data);
+    }
+
+    public function events(){
+        $data = [];
+
+        $this->sendPostResponse(null, $data);
     }
 }

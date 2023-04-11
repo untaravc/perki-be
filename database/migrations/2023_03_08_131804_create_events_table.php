@@ -14,12 +14,31 @@ class CreateEventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id('event_id');
-            $table->string('event_name');
-            $table->integer('event_parent_id')->default(0);
-            $table->timestamp('event_date_start')->nullable();
-            $table->timestamp('event_date_end')->nullable();
-            $table->boolean('event_has_price')->default(0);
+            $table->id('id');
+            $table->string('section');
+            $table->string('data_type');
+            $table->string('name');
+            $table->string('title')->nullable();
+            $table->string('subtitle')->nullable();
+            $table->text('body')->nullable();
+            $table->string('image')->nullable();
+            $table->string('place')->nullable();
+            $table->string('place_link')->nullable();
+            $table->string('link')->nullable();
+
+            $table->string('speaker_ids')->nullable();
+            $table->string('speakers')->nullable();
+            $table->string('moderator_ids')->nullable();
+            $table->string('moderators')->nullable();
+            $table->string('panel_ids')->nullable();
+            $table->string('panels')->nullable();
+
+            $table->string('certificate')->nullable();
+            $table->integer('parent_id')->default(0);
+            $table->timestamp('date_start')->nullable();
+            $table->timestamp('date_end')->nullable();
+            $table->boolean('has_price')->default(0);
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

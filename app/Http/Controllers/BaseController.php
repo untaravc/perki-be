@@ -12,41 +12,61 @@ class BaseController extends Controller
         'result'  => null,
     ];
 
-    public function sendError($response_code, $errors = null, $message = null)
+    public function sendError($response_code, $message = null, $errors = null )
     {
         switch ($response_code) {
-            case 404:
-                $this->response['status'] = false;
-                $this->response['message'] = 'Data not found.';
-                return response()->json($this->response, 404);
             case 401:
                 $this->response['status'] = false;
-                $this->response['message'] = 'Unauthenticated. Please Register or Login.';
-                return response()->json($this->response, 401);
+                $this->response['message'] = $message ?? 'Unauthenticated. Please Register or Login.';
+                abort(response()->json($this->response, 401));
+            case 404:
+                $this->response['status'] = false;
+                $this->response['message'] = $message ?? 'Data not found.';
+                abort(response()->json($this->response, 404));
             case 422:
                 $this->response['status'] = false;
-                $this->response['message'] = $message;
+                $this->response['message'] = $message ?? "Data tidak sesuai.";
                 if ($errors) {
                     $this->response['errors'] = $errors;
                 }
-                return response()->json($this->response, 422);
+                abort(response()->json($this->response, 422));
+            default:
+                $this->response['status'] = false;
+                $this->response['message'] = $message ?? 'Application Error. Message information not available.';
+                abort(response()->json($this->response, 500));
         }
     }
 
     public function sendGetResponse($data, string $message = null)
     {
-        return response()->json([
+        abort(response()->json([
             'status'  => true,
             'message' => $message ?? 'Access data success',
             'result'  => $data,
-        ]);
+        ]));
     }
 
-    public function sendPostResponse($data, string $message = null){
-        return response()->json([
+    public function sendPostResponse(string $message = null, array $data = []){
+        abort(response()->json([
             'status'  => true,
-            'message' => $message ?? 'Access data success',
+            'message' => $message ?? 'Create data success',
             'result'  => $data,
-        ], 201);
+        ], 201));
+    }
+
+    public function sendPatchResponse(string $message = null, array $data = []){
+        abort(response()->json([
+            'status'  => true,
+            'message' => $message ?? 'Update data success',
+            'result'  => $data,
+        ], 201));
+    }
+
+    public function sendDeleteResponse(string $message = null, array $data = []){
+        abort(response()->json([
+            'status'  => true,
+            'message' => $message ?? 'Delete data success',
+            'result'  => $data,
+        ], 201));
     }
 }

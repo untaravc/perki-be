@@ -26,6 +26,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function(){
 Route::group(['prefix' => 'pub'], function(){
     Route::get('speakers', [HomeController::class, 'speakers']);
     Route::get('events', [HomeController::class, 'events']);
+    Route::get('events', [HomeController::class, 'events']);
 });
 
 // end PUBLIC API

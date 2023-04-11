@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventPricesTable extends Migration
+class CreateTransactionDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,16 @@ class CreateEventPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_prices', function (Blueprint $table) {
+        Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
-            $table->integer('event_id');
+            $table->string('section');
+            $table->integer('transaction_id');
             $table->string('job_type_code');
+            $table->integer('user_id');
+            $table->integer('event_id');
+            $table->string('event_name');
             $table->integer('price');
+            $table->integer('status');
             $table->timestamps();
         });
     }
@@ -29,6 +34,6 @@ class CreateEventPricesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('event_prices');
+        Schema::dropIfExists('transaction_details');
     }
 }
