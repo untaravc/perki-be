@@ -13,9 +13,11 @@ class CreateEventPricesTable extends Migration
      */
     public function up()
     {
-        Schema::create('event_prices', function (Blueprint $table) {
+        Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('event_id');
+            $table->string('section');
+            $table->string('model');
+            $table->integer('model_id');
             $table->string('job_type_code');
             $table->integer('price');
             $table->timestamps();

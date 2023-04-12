@@ -45,7 +45,7 @@ class JobTypeInitController extends Controller
         ];
 
         foreach ($data as $item){
-            $job_type = JobType::whereCode($item['code']);
+            $job_type = JobType::whereCode($item['code'])->first();
 
             if($job_type){
                 $job_type->update($item);

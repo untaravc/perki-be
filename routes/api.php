@@ -27,6 +27,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function(){
 Route::group(['prefix' => 'pub'], function(){
     Route::post('verify-google', [HomeController::class, 'google']);
 
+    Route::get('get-job-types', [HomeController::class, 'job_types']);
     Route::get('speakers', [HomeController::class, 'speakers']);
     Route::get('events', [HomeController::class, 'events']);
 

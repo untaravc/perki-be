@@ -60,8 +60,18 @@ class AuthController extends BaseController
 
     public function profile(Request $request)
     {
-        $data = $request->user()->only(['user_id', 'user_name', 'user_email']);
-        return $this->sendResponse(200, $data);
+        $data = $request->user()->only([
+            'id',
+            'name',
+            'email',
+            'image',
+            'phone',
+            'institution',
+            'city',
+            'job_type_code',
+        ]);
+
+        $this->sendGetResponse($data);
     }
 
     public function login_by_google(Request $request)

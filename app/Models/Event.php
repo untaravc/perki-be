@@ -12,6 +12,7 @@ class Event extends Model
     protected $fillable = [
         "name",
         "section",
+        "marker",
         "data_type",
         "parent_id",
         "date_start",

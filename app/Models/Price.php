@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventPrice extends Model
+class Price extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "event_id",
+        "model",
+        "model_id",
         "job_type_code",
         "price",
     ];
