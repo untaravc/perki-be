@@ -12,50 +12,50 @@ class UserInitController extends Controller
     {
         $data = [
             [
-                "user_is_speaker"            => 0,
-                "user_name"                  => 'Untara',
-                "user_email"                 => "vyvy1777@gmail.com",
-                "user_email_verified_at"     => now(),
-                "user_password"              => Hash::make('password'),
-                "user_phone"                 => '081239709445',
-                "user_institution"           => "UGM",
-                "user_city"                  => 'Sleman',
-                "user_province"              => "DIY",
-                "user_job_type"              => null,
-                "user_image"                 => null,
-                "user_desc"                  => 'Oke',
-                "user_forgot_password_token" => null,
-                "user_type"                  => 'admin',
-                "user_otp"                   => null,
-                "user_status"                => 100,
-                "remember_token"             => null,
+                "is_speaker"            => 0,
+                "name"                  => 'Untara',
+                "email"                 => "vyvy1777@gmail.com",
+                "email_verified_at"     => now(),
+                "password"              => Hash::make('password'),
+                "phone"                 => '081239709445',
+                "institution"           => "UGM",
+                "city"                  => 'Sleman',
+                "province"              => "DIY",
+                "job_type_code"         => null,
+                "image"                 => null,
+                "desc"                  => 'Oke',
+                "forgot_password_token" => null,
+                "type"                  => 'admin',
+                "otp"                   => null,
+                "status"                => 100,
+                "remember_token"        => null,
             ],
             [
-                "user_is_speaker"            => 0,
-                "user_name"                  => 'Vivi',
-                "user_email"                 => "untaravivichahya@gmail.com",
-                "user_email_verified_at"     => now(),
-                "user_password"              => Hash::make('password'),
-                "user_phone"                 => '081239709445',
-                "user_institution"           => "Tries",
-                "user_city"                  => 'Kulon Progo',
-                "user_province"              => "DIY",
-                "user_job_type"              => null,
-                "user_image"                 => null,
-                "user_desc"                  => 'My Name is Khan',
-                "user_forgot_password_token" => null,
-                "user_type"                  => 'user',
-                "user_otp"                   => null,
-                "user_status"                => 100,
-                "remember_token"             => null,
+                "is_speaker"            => 0,
+                "name"                  => 'Vivi',
+                "email"                 => "untaravivichahya@gmail.com",
+                "email_verified_at"     => now(),
+                "password"              => Hash::make('password'),
+                "phone"                 => '081239709445',
+                "institution"           => "Tries",
+                "city"                  => 'Kulon Progo',
+                "province"              => "DIY",
+                "job_type_code"         => null,
+                "image"                 => null,
+                "desc"                  => 'My Name is Khan',
+                "forgot_password_token" => null,
+                "type"                  => 'user',
+                "otp"                   => null,
+                "status"                => 100,
+                "remember_token"        => null,
             ],
         ];
 
         foreach ($data as $item) {
-            $user = User::whereUserEmail($item['user_email'])->first();
-            if($user){
+            $user = User::whereEmail($item['email'])->first();
+            if ($user) {
                 $user->update($item);
-            } else{
+            } else {
                 User::create($item);
             }
         }

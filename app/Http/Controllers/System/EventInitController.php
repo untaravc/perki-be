@@ -110,7 +110,7 @@ class EventInitController extends Controller
                         ->first();
 
                     if ($event_price) {
-                        $price->update($price);
+                        $event_price->update($price);
                     } else {
                         EventPrice::create([
                             "event_id"      => $event->id,

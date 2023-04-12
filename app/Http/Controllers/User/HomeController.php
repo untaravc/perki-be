@@ -18,7 +18,7 @@ class HomeController extends BaseController
         $this->sendGetResponse($data);
     }
 
-    public function events(){
+    public function events(Request $request){
         $data = [];
 
         $this->sendPostResponse(null, $data);

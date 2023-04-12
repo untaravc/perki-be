@@ -10,31 +10,31 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Status
- * 100 ->
- * 200 ->
+ * 100 -> pending, data belum lengkap
+ * 200 -> register event, data lengkap
+ * 400 -> block
  */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $primaryKey = 'user_id';
-
     protected $fillable = [
-        "user_is_speaker",
-        "user_name",
-        "user_email",
-        "user_email_verified_at",
-        "user_password",
-        "user_phone",
-        "user_institution",
-        "user_city",
-        "user_province",
-        "user_job_type",
-        "user_image",
-        "user_desc",
-        "user_forgot_password_token",
-        "user_otp",
-        "user_status",
+        "is_speaker",
+        "name",
+        "email",
+        "email_verified_at",
+        "password",
+        "phone",
+        "institution",
+        "city",
+        "province",
+        "job_type_code",
+        "type", // user, admin, committee
+        "image",
+        "desc",
+        "forgot_password_token",
+        "otp",
+        "status",
         "remember_token",
     ];
 

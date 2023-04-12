@@ -17,6 +17,8 @@ class CreateEventsTable extends Migration
             $table->id('id');
             $table->string('section');
             $table->string('data_type');
+            $table->integer('parent_id')->default(0);
+
             $table->string('name');
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
@@ -34,7 +36,7 @@ class CreateEventsTable extends Migration
             $table->string('panels')->nullable();
 
             $table->string('certificate')->nullable();
-            $table->integer('parent_id')->default(0);
+            $table->string('record_link')->nullable();
             $table->timestamp('date_start')->nullable();
             $table->timestamp('date_end')->nullable();
             $table->boolean('has_price')->default(0);

@@ -17,6 +17,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function(){
 
 // PUBLIC AUTH API
 Route::post('/pub/login', [UserAuthController::class, 'login']);
+Route::post('/pub/login-by-google', [UserAuthController::class, 'login_by_google']);
 Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function(){
     Route::get('profile', [UserAuthController::class, 'profile']);
 });
@@ -24,9 +25,11 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function(){
 
 // PUBLIC API
 Route::group(['prefix' => 'pub'], function(){
+    Route::post('verify-google', [HomeController::class, 'google']);
+
     Route::get('speakers', [HomeController::class, 'speakers']);
     Route::get('events', [HomeController::class, 'events']);
-    Route::get('events', [HomeController::class, 'events']);
+
 });
 
 // end PUBLIC API

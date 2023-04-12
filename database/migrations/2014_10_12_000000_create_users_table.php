@@ -14,25 +14,24 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
-            $table->boolean('user_is_speaker')->default(0);
-            $table->string('user_name');
-            $table->string('user_first_name')->nullable();
-            $table->string('user_last_name')->nullable();
-            $table->string('user_email')->unique();
-            $table->timestamp('user_email_verified_at')->nullable();
-            $table->string('user_password')->nullable();
-            $table->string('user_phone')->nullable();
-            $table->string('user_institution')->nullable();
-            $table->string('user_city')->nullable();
-            $table->string('user_province')->nullable();
-            $table->string('user_job_type')->nullable();
-            $table->string('user_image')->nullable();
-            $table->string('user_desc')->nullable();
-            $table->string('user_forgot_password_token')->nullable();
-            $table->string('user_otp')->nullable();
-            $table->string('user_type')->nullable();
-            $table->mediumInteger('user_status')->default(100);
+            $table->id();
+            $table->boolean('is_speaker')->default(0);
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('institution')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
+            $table->string('job_type_code')->nullable();
+            $table->string('image')->nullable();
+            $table->string('desc')->nullable();
+            $table->string('forgot_password_token')->nullable();
+            $table->string('otp')->nullable();
+            $table->string('type')->nullable();
+            $table->timestamp('last_login')->nullable();
+            $table->mediumInteger('status')->default(100);
             $table->rememberToken();
             $table->timestamps();
         });
