@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
+use App\Models\Event;
 use App\Models\JobType;
+use App\Models\Price;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,13 +21,8 @@ class HomeController extends BaseController
         $this->sendGetResponse($data);
     }
 
-    public function events(Request $request){
-        $data = [];
-
-        $this->sendPostResponse(null, $data);
-    }
-
-    public function job_types(){
+    public function job_types()
+    {
         $data = JobType::get();
         $this->sendGetResponse($data);
     }

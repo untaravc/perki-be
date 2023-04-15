@@ -19,6 +19,10 @@ class BaseController extends Controller
                 $this->response['status'] = false;
                 $this->response['message'] = $message ?? 'Unauthenticated. Please Register or Login.';
                 abort(response()->json($this->response, 401));
+            case 403:
+                $this->response['status'] = false;
+                $this->response['message'] = $message ?? 'Forbidden email address.';
+                abort(response()->json($this->response, 401));
             case 404:
                 $this->response['status'] = false;
                 $this->response['message'] = $message ?? 'Data not found.';

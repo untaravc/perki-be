@@ -13,6 +13,7 @@ class Event extends Model
         "name",
         "section",
         "marker",
+        "slug",
         "data_type",
         "parent_id",
         "date_start",

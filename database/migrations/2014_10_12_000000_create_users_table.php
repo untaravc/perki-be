@@ -28,11 +28,11 @@ class CreateUsersTable extends Migration
             $table->string('image')->nullable();
             $table->string('desc')->nullable();
             $table->string('forgot_password_token')->nullable();
+            $table->string('email_verification_token')->nullable();
             $table->string('otp')->nullable();
             $table->string('type')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->mediumInteger('status')->default(100);
-            $table->rememberToken();
             $table->timestamps();
         });
     }

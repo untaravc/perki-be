@@ -9,6 +9,7 @@ class Price extends Model
 {
     use HasFactory;
     protected $fillable = [
+        "section",
         "model",
         "model_id",
         "job_type_code",

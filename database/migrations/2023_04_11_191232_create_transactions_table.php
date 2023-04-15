@@ -22,7 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->string('user_phone')->nullable();
             $table->string('user_email')->nullable();
             $table->string('job_type_code');
-            $table->integer('subtotal');
+            $table->integer('subtotal')->nullable();
             $table->string('voucher_code')->nullable();
             $table->integer('discount_amount')->nullable();
             $table->integer('service_fee')->nullable();
