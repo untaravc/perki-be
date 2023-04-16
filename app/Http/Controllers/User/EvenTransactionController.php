@@ -229,7 +229,9 @@ class EvenTransactionController extends BaseController
         ]);
 
         // create trx detail
+        $item_ids = [];
         foreach ($items as $item) {
+            $item_ids[] = $item;
             $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
                 ->whereEventId($item)
                 ->first();
@@ -253,9 +255,32 @@ class EvenTransactionController extends BaseController
                     "status"         => $transaction->status,
                 ]);
             } else {
-
+                $transaction_detail->update([
+                    "price"          => $price ? $price['price'] : 0,
+                    "status"         => $transaction->status,
+                ]);
             }
         }
 
+        // delete unused
+        TransactionDetail::whereTransactionId($transaction->id)
+            ->whereNotIn('event_id', $item_ids)
+            ->delete();
+
+        $this->sendPostResponse();
+    }
+
+    public function show(Request $request, $transaction_number){
+        $user = $request->user();
+        $data = Transaction::whereNumber($transaction_number)
+            ->with('transaction_details')
+//            ->whereUserId($user['id'])
+            ->first();
+
+        if(!$data){
+            $this->sendError(404);
+        }
+
+        $this->sendGetResponse($data);
     }
 }

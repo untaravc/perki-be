@@ -33,6 +33,7 @@ class CreateTransactionsTable extends Migration
             $table->timestamp('paid_at')->nullable();
             $table->string('transfer_proof')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

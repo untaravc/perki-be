@@ -24,6 +24,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->integer('price');
             $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

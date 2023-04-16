@@ -22,6 +22,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::get('events-list', [EvenTransactionController::class, 'event_list']);
     Route::post('calculate-price', [EvenTransactionController::class, 'calculate_price']);
     Route::post('create-payment', [EvenTransactionController::class, 'create_payment']);
+    Route::get('transaction/{transaction_number}', [EvenTransactionController::class, 'show']);
 });
 // =========
 

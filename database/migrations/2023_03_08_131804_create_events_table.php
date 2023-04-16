@@ -44,6 +44,7 @@ class CreateEventsTable extends Migration
             $table->boolean('has_price')->default(0);
             $table->boolean('status')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
