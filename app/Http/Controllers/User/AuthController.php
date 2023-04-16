@@ -19,11 +19,10 @@ class AuthController extends BaseController
     public function register(Request $request)
     {
         $this->validate_register($request->all());
-
         $user = User::whereEmail($request->email)->first();
 
         // jika email sudah ada, beda dengan logged_user_id, return false, silakan login
-        if ($user && $user->id != $request->logged_user_id) {
+        if (isset($request->logged_user_id) && $user && $user->id != $request->logged_user_id) {
             $this->sendError(403);
         }
 
@@ -40,9 +39,11 @@ class AuthController extends BaseController
         // jika sudah ada, langsung buat transaksi, status 100 (pending)
         $transaction = $this->draft_transaction($user, $request);
 
+        $token = $user->createToken('user');
         // return data transaksi
         $this->sendPostResponse('Pendaftaran berhasil', [
-            'transaction' => $transaction
+            'transaction' => $transaction,
+            'token'       => $token->plainTextToken
         ]);
     }
 
@@ -65,7 +66,7 @@ class AuthController extends BaseController
         } else {
             $validator = Validator::make($request, [
                 "name"          => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
-                "email"         => "required|email",
+                "email"         => "required|email|unique:users",
                 "phone"         => "required|numeric|digits_between:8,15",
                 "institution"   => "required|string",
                 "city"          => "required|string",
@@ -126,7 +127,7 @@ class AuthController extends BaseController
 
     public function profile(Request $request)
     {
-        $data = $request->user()->only([
+        $data = User::select([
             'id',
             'name',
             'email',
@@ -135,7 +136,8 @@ class AuthController extends BaseController
             'institution',
             'city',
             'job_type_code',
-        ]);
+        ])
+            ->find($request->user()['id']);
 
         $this->sendGetResponse($data);
     }
@@ -229,19 +231,19 @@ class AuthController extends BaseController
             ->whereStatus(100)
             ->first();
 
-        if($trx){
+        if ($trx) {
             return $trx;
         }
 
         $payload = [
-            "section"         => "jcu23",
-            "number"          => null,
-            "user_id"         => $user->id,
-            "user_name"       => $request->name,
-            "user_phone"      => $request->phone,
-            "user_email"      => $request->email,
-            "job_type_code"   => $request->job_type_code,
-            "status"          => 100,
+            "section"       => "jcu23",
+            "number"        => null,
+            "user_id"       => $user->id,
+            "user_name"     => $request->name,
+            "user_phone"    => $request->phone,
+            "user_email"    => $request->email,
+            "job_type_code" => $request->job_type_code,
+            "status"        => 100,
         ];
 
         $trx = Transaction::create($payload);
@@ -251,5 +253,17 @@ class AuthController extends BaseController
         ]);
 
         return $trx;
+    }
+
+    public function logout(Request $request)
+    {
+        if ($request->all_device == 1) {
+            $request->user()->tokens()->delete();
+        } else {
+            $request->user()->currentAccessToken()->delete();
+        }
+
+        $this->response['message'] = 'Logged out!';
+        return $this->response;
     }
 }

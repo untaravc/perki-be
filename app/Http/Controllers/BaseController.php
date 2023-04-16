@@ -22,7 +22,7 @@ class BaseController extends Controller
             case 403:
                 $this->response['status'] = false;
                 $this->response['message'] = $message ?? 'Forbidden email address.';
-                abort(response()->json($this->response, 401));
+                abort(response()->json($this->response, 403));
             case 404:
                 $this->response['status'] = false;
                 $this->response['message'] = $message ?? 'Data not found.';

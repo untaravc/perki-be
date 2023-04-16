@@ -18,6 +18,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $appends = ['job_label'];
+
     protected $fillable = [
         "is_speaker",
         "name",
@@ -56,4 +58,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getJobLabelAttribute()
+    {
+        if (isset($this->attributes['job_type_code'])) {
+            switch ($this->attributes['job_type_code']) {
+                case 'DRSP':
+                    return 'Dokter Spesialis';
+                case 'DRGN':
+                    return 'Dokter Umum';
+                case 'NURS':
+                    return 'Perawat';
+            }
+        }
+    }
 }

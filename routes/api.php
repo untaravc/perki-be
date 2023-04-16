@@ -18,11 +18,15 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
 
 // PUBLIC AUTH API
 Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('logout', [UserAuthController::class, 'logout']);
+
     Route::get('profile', [UserAuthController::class, 'profile']);
     Route::get('events-list', [EvenTransactionController::class, 'event_list']);
     Route::post('calculate-price', [EvenTransactionController::class, 'calculate_price']);
     Route::post('create-payment', [EvenTransactionController::class, 'create_payment']);
     Route::get('transaction/{transaction_number}', [EvenTransactionController::class, 'show']);
+
+    Route::get('transaction-list', [EvenTransactionController::class, 'transaction_list']);
 });
 // =========
 
@@ -42,5 +46,7 @@ Route::group(['prefix' => 'pub'], function () {
 
     Route::get('get-job-types', [HomeController::class, 'job_types']);
     Route::get('speakers', [HomeController::class, 'speakers']);
+    Route::get('schedule', [HomeController::class, 'schedule']);
+    Route::get('pricing', [HomeController::class, 'pricing']);
 });
 // =========

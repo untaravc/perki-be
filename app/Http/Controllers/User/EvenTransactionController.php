@@ -237,28 +237,29 @@ class EvenTransactionController extends BaseController
                 ->first();
 
             $event = Event::find($item);
+            if($event){
+                $price = Price::whereModel('event')
+                    ->whereModelId($item)
+                    ->whereJobTypeCode($transaction->job_type_code)
+                    ->first();
 
-            $price = Price::whereModel('event')
-                ->whereModelId($item)
-                ->whereJobTypeCode($transaction->job_type_code)
-                ->first();
-
-            if (!$transaction_detail) {
-                TransactionDetail::create([
-                    "section"        => $transaction->section,
-                    "transaction_id" => $transaction->id,
-                    "job_type_code"  => $transaction->job_type_code,
-                    "user_id"        => $transaction->user_id,
-                    "event_id"       => $item,
-                    "event_name"     => $event->name,
-                    "price"          => $price ? $price['price'] : 0,
-                    "status"         => $transaction->status,
-                ]);
-            } else {
-                $transaction_detail->update([
-                    "price"          => $price ? $price['price'] : 0,
-                    "status"         => $transaction->status,
-                ]);
+                if (!$transaction_detail) {
+                    TransactionDetail::create([
+                        "section"        => $transaction->section,
+                        "transaction_id" => $transaction->id,
+                        "job_type_code"  => $transaction->job_type_code,
+                        "user_id"        => $transaction->user_id,
+                        "event_id"       => $item,
+                        "event_name"     => $event->name,
+                        "price"          => $price ? $price['price'] : 0,
+                        "status"         => $transaction->status,
+                    ]);
+                } else {
+                    $transaction_detail->update([
+                        "price"          => $price ? $price['price'] : 0,
+                        "status"         => $transaction->status,
+                    ]);
+                }
             }
         }
 
@@ -282,5 +283,16 @@ class EvenTransactionController extends BaseController
         }
 
         $this->sendGetResponse($data);
+    }
+
+    public function transaction_list(Request $request){
+        $user = $request->user();
+
+        $data = Transaction::whereUserId($user['id'])
+            ->with('transaction_details')
+            ->get();
+
+        $this->response['result'] = $data;
+        return $this->response;
     }
 }
