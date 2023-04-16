@@ -9,6 +9,9 @@ use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\User\EvenTransactionController;
 
 // ADMIN API
+Route::post('/', function (){
+    return 'app';
+});
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
