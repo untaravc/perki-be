@@ -28,7 +28,6 @@ class UserInitController extends Controller
                 "type"                  => 'admin',
                 "otp"                   => null,
                 "status"                => 100,
-                "remember_token"        => null,
             ],
             [
                 "is_speaker"            => 0,
@@ -47,7 +46,6 @@ class UserInitController extends Controller
                 "type"                  => 'user',
                 "otp"                   => null,
                 "status"                => 100,
-                "remember_token"        => null,
             ],
         ];
 
