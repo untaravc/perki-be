@@ -36,6 +36,13 @@ class AuthController extends BaseController
             $user = $this->create_user($request);
         }
 
+        // update data user
+        $user->update([
+            'name'          => $request->name,
+            'phone'         => $request->phone,
+            "job_type_code" => $request->job_type_code,
+        ]);
+
         // jika sudah ada, langsung buat transaksi, status 100 (pending)
         $transaction = $this->draft_transaction($user, $request);
 

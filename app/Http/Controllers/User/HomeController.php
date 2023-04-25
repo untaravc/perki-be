@@ -15,7 +15,7 @@ class HomeController extends BaseController
     {
         $data = User::orderBy('name')
             ->where('is_speaker', 1)
-            ->when($request->limit, function ($q) use ($request){
+            ->when($request->limit, function ($q) use ($request) {
                 $q->limit($request->limit);
             })
             ->select('id', 'name', 'desc', 'image')
@@ -126,6 +126,41 @@ class HomeController extends BaseController
         ];
 
         $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function sponsor_slider()
+    {
+        $sponsors = [
+            ["image" => "abbott.png"],
+            ["image" => "bayer.png"],
+            ["image" => "biofarma.png"],
+            ["image" => "biolitec.png"],
+            ["image" => "biosensor.png"],
+            ["image" => "bts.png"],
+            ["image" => "feron.png"],
+            ["image" => "idsmed.png"],
+            ["image" => "indosopha.png"],
+            ["image" => "kalbe.png"],
+            ["image" => "merck.png"],
+            ["image" => "msa.png"],
+            ["image" => "novartis.png"],
+            ["image" => "otsuka.png"],
+            ["image" => "pfizer.png"],
+            ["image" => "pharmasolindo.png"],
+            ["image" => "philips.png"],
+            ["image" => "rum.png"],
+            ["image" => "sanofi.png"],
+            ["image" => "servier.png"],
+            ["image" => "tanabe.png"],
+            ["image" => "zp.png"],
+        ];
+
+        for ($i = 0; $i < count($sponsors); $i++) {
+            $sponsors[$i]['image'] = env('APP_URL') . 'assets/logo/sponsors/' . $sponsors[$i]['image'];
+        }
+
+        $this->response['result'] = $sponsors;
         return $this->response;
     }
 }
