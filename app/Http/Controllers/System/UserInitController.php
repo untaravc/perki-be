@@ -13,7 +13,7 @@ class UserInitController extends Controller
         $data = [
             [
                 "is_speaker"            => 0,
-                "name"                  => 'Untara',
+                "name"                  => 'Vyvy 1777',
                 "email"                 => "vyvy1777@gmail.com",
                 "email_verified_at"     => now(),
                 "password"              => Hash::make('password'),
@@ -31,7 +31,7 @@ class UserInitController extends Controller
             ],
             [
                 "is_speaker"            => 0,
-                "name"                  => 'Vivi',
+                "name"                  => 'Untara Vivi Chahya',
                 "email"                 => "untaravivichahya@gmail.com",
                 "email_verified_at"     => now(),
                 "password"              => Hash::make('password'),

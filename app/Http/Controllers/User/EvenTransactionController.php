@@ -295,4 +295,23 @@ class EvenTransactionController extends BaseController
         $this->response['result'] = $data;
         return $this->response;
     }
+
+    public function transfer_proof(Request $request){
+        $user = $request->user();
+
+        $transaction = Transaction::whereUserId($user['id'])
+//            ->whereIn('status', [100,110])
+            ->find($request->transaction_id);
+
+        if(!$transaction){
+            $this->sendError(404);
+        }
+
+        $transaction->update([
+            'transfer_proof' => $request->transfer_proof_link,
+            'status' => 120,
+        ]);
+
+    }
+
 }

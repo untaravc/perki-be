@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * Status
  * 100 -> pending, belum ada transaksi
  * 110 -> sudah memilih event
+ * 120 -> sudah upload transfer proof
  * 200 -> sudah bayar
  */
 
@@ -33,9 +34,10 @@ class Transaction extends Model
     {
         if (isset($this->attributes['status'])) {
             switch ($this->attributes['status']) {
-                case 100: return 'tunda';
-                case 110: return 'menunggu pembayaran';
-                case 200: return 'lunas';
+                case 100: return 'Tunda';
+                case 110: return 'Menunggu pembayaran';
+                case 120: return 'Menunggu konfirmasi';
+                case 200: return 'Lunas';
             }
         }
     }

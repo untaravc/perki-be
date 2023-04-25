@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->boolean('is_speaker')->default(0);
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('phone')->nullable();
@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->string('email_verification_token')->nullable();
             $table->string('otp')->nullable();
             $table->string('type')->nullable();
+            $table->string('slug')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->mediumInteger('status')->default(100);
             $table->timestamps();
