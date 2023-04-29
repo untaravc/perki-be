@@ -29,7 +29,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://kardiologi.fk.ugm.ac.id/wp-content/uploads/sites/434/2023/03/D56218B7-ADFD-45FE-9BA7-3D71EB244FF2_1_201_a-560x376.jpeg',
             ],
             [
-                'name'  => 'Dr. Hasanah Mumpuni, SpPD, SpJP(K)',
+                'name'  => 'dr. Hasanah Mumpuni, SpPD, SpJP(K)',
                 'slug'  => 'hasanah.mumpuni',
                 'desc'  => "Departemen Kardiologi & Ked. Vaskular, FKKMK, UGM",
                 'image' => 'https://kardiologi.fk.ugm.ac.id/wp-content/uploads/sites/434/2023/03/9196FD50-1F28-4783-A1B4-24B9DA047FFE_1_201_a-560x376.jpeg',
@@ -59,7 +59,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://kardiologi.fk.ugm.ac.id/wp-content/uploads/sites/434/2023/03/CD3CDC73-2131-4C1D-8071-4C51D6F48653_1_201_a-560x376.jpeg',
             ],
             [
-                'name'  => 'Dr. Erika Maharani, SpJP(K)',
+                'name'  => 'dr. Erika Maharani, SpJP(K)',
                 'slug'  => 'erika.maharani',
                 'desc'  => "Departemen Kardiologi & Ked. Vaskular, FKKMK, UGM",
                 'image' => 'https://kardiologi.fk.ugm.ac.id/wp-content/uploads/sites/434/2023/03/003EB0B7-A194-405A-9A6C-4F40907A5043_1_105_c-560x376.jpeg',
@@ -90,7 +90,7 @@ class SpeakerInitController extends Controller
             ],
             [
                 'name'  => 'dr. Real Kusumanjaya Marsam, Sp.JP(K)',
-                'slug'  => 'real.jusumanjaya',
+                'slug'  => 'real.kusumanjaya',
                 'desc'  => "Departemen Kardiologi & Ked. Vaskular, FKKMK, UGM",
                 'image' => 'https://kardiologi.fk.ugm.ac.id/wp-content/uploads/sites/434/2023/03/5CB8582E-B0CB-44C7-A42A-B7C5C0AF2DC8_1_201_a-560x376.jpeg',
             ],
@@ -120,7 +120,7 @@ class SpeakerInitController extends Controller
             ],
             [
                 'name'  => 'dr. Firandi Saputra, Sp.JP',
-                'slug'  => 'gahan.satwiko',
+                'slug'  => 'firandi.saputra',
                 'desc'  => "Departemen Kardiologi & Ked. Vaskular, FKKMK, UGM",
                 'image' => 'https://kardiologi.fk.ugm.ac.id/wp-content/uploads/sites/434/2023/03/10715CCB-B136-451C-9456-ADFBB1BFE1F4_1_201_a-560x376.jpeg',
             ],

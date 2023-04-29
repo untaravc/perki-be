@@ -88,7 +88,7 @@ class EvenTransactionController extends BaseController
         $data = [];
 
         $transaction = Transaction::whereNumber($request->transaction_number)
-//            ->whereUserId($user['id'])
+            ->whereUserId($user['id'])
             ->first();
 
         if (!$transaction) {
@@ -173,7 +173,7 @@ class EvenTransactionController extends BaseController
             }
         }
 
-        $discount = isset($bundle_price) ? - ($subtotal - $bundle_price) : 0;
+        $discount = isset($bundle_price) ? -($subtotal - $bundle_price) : 0;
 
         $data['discount'] = [
             'name'   => "Bundle Discount",
@@ -187,7 +187,7 @@ class EvenTransactionController extends BaseController
             'price'  => $subtotal + $discount,
         ];
 
-        if($request->voucher){
+        if ($request->voucher) {
             $data = $this->redeem_voucher($request, $data);
         }
 
@@ -207,7 +207,7 @@ class EvenTransactionController extends BaseController
             ->where('status', 1)
             ->first();
 
-        if(!$voucher){
+        if (!$voucher) {
             $this->response['message'] = "Voucher Code not available";
             return $data;
         }
@@ -216,19 +216,19 @@ class EvenTransactionController extends BaseController
         $active = 0;
         $subtotal = 0;
         $voucher_role = explode(',', $voucher->role);
-        foreach ($data as $item){
-            if(in_array($item['marker'], $voucher_role)){
+        foreach ($data as $item) {
+            if (in_array($item['marker'], $voucher_role)) {
                 $active = 1;
                 $subtotal += $item['price'];
             }
         }
 
-        if($active == 0){
+        if ($active == 0) {
             $this->response['message'] = "Voucher Code not available";
             return $data;
         }
 
-        if($voucher->type == "percent"){
+        if ($voucher->type == "percent") {
             $voucher_discount_amount = $subtotal * $voucher->value / 100;
         } else {
             $voucher_discount_amount = $voucher->value;
@@ -270,16 +270,23 @@ class EvenTransactionController extends BaseController
         // update trx
         $transaction = Transaction::find($result['transaction']['id']);
 
-        $total = collect($result['items'])->where('marker', 'total')->first();
-        $discount = collect($result['items'])->where('marker', 'discount')->first();
+        $items_collect = collect($result['items']);
+        $voucher_discount = $items_collect->where('marker', 'discount-voucher')->first();
+        $total = $items_collect->where('marker', 'total')->first();
+        $discount = $items_collect->where('marker', 'discount')->first();
+        $subtotal = $items_collect->whereIn('marker', ['symposium-jcu23', 'workshop-jcu23-full-day'])->sum('price');
 
-        $transaction->update([
-            'subtotal'        => $total['price'] - $discount['price'],
-            'discount_amount' => -$discount['price'],
-            'total'           => $total['price'],
-            'status'          => 110,
-            'payment_method'  => 'manual_transfer',
-        ]);
+        $transaction_payload = [
+            'subtotal'         => $subtotal,
+            'voucher_code'     => $voucher_discount ? $request->voucher : null,
+            'voucher_discount' => $voucher_discount ? $voucher_discount['price'] : null,
+            'discount_amount'  => $discount ? $discount['price'] : null,
+            'total'            => $total['price'],
+            'status'           => 110,
+            'payment_method'   => 'manual_transfer',
+        ];
+
+        $transaction->update($transaction_payload);
 
         // create trx detail
         $item_ids = [];
@@ -290,7 +297,7 @@ class EvenTransactionController extends BaseController
                 ->first();
 
             $event = Event::find($item);
-            if($event){
+            if ($event) {
                 $price = Price::whereModel('event')
                     ->whereModelId($item)
                     ->whereJobTypeCode($transaction->job_type_code)
@@ -309,8 +316,8 @@ class EvenTransactionController extends BaseController
                     ]);
                 } else {
                     $transaction_detail->update([
-                        "price"          => $price ? $price['price'] : 0,
-                        "status"         => $transaction->status,
+                        "price"  => $price ? $price['price'] : 0,
+                        "status" => $transaction->status,
                     ]);
                 }
             }
@@ -324,21 +331,23 @@ class EvenTransactionController extends BaseController
         $this->sendPostResponse();
     }
 
-    public function show(Request $request, $transaction_number){
+    public function show(Request $request, $transaction_number)
+    {
         $user = $request->user();
         $data = Transaction::whereNumber($transaction_number)
             ->with('transaction_details')
 //            ->whereUserId($user['id'])
             ->first();
 
-        if(!$data){
+        if (!$data) {
             $this->sendError(404);
         }
 
         $this->sendGetResponse($data);
     }
 
-    public function transaction_list(Request $request){
+    public function transaction_list(Request $request)
+    {
         $user = $request->user();
 
         $data = Transaction::whereUserId($user['id'])
@@ -349,20 +358,21 @@ class EvenTransactionController extends BaseController
         return $this->response;
     }
 
-    public function transfer_proof(Request $request){
+    public function transfer_proof(Request $request)
+    {
         $user = $request->user();
 
         $transaction = Transaction::whereUserId($user['id'])
 //            ->whereIn('status', [100,110])
             ->find($request->transaction_id);
 
-        if(!$transaction){
+        if (!$transaction) {
             $this->sendError(404);
         }
 
         $transaction->update([
             'transfer_proof' => $request->transfer_proof_link,
-            'status' => 120,
+            'status'         => 120,
         ]);
 
     }

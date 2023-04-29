@@ -24,6 +24,7 @@ class CreateTransactionsTable extends Migration
             $table->string('job_type_code');
             $table->integer('subtotal')->nullable();
             $table->string('voucher_code')->nullable();
+            $table->integer('voucher_discount')->nullable();
             $table->integer('discount_amount')->nullable();
             $table->integer('service_fee')->nullable();
             $table->integer('tax')->nullable();

@@ -1,17 +1,43 @@
 require('./bootstrap');
 import 'flowbite';
-//
-// window.Vue = require('vue').default;
-//
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//
-// import router from './router'
-//
-// const app = new Vue({
-//     el: '#app',
-//     router
-// });
+import Vue from 'vue'
 
+window.Vue = require('vue').default;
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import VueRouter from 'vue-router'
+import TobBar from './components/Topbar'
+import SideBar from './components/Sidebar'
+import Layout from './views/Layout'
+import Dashboard from './views/dashboard'
+import Posts from './views/posts'
+
+Vue.component('top-bar', TobBar)
+Vue.component('side-bar', SideBar)
+
+const routes = [
+    {
+        path: '/panel',
+        component: Layout,
+        children:[
+            {
+                path: 'dashboard',
+                component: Dashboard,
+            },
+            {
+                path: 'posts',
+                component: Posts,
+            }
+        ]
+    },
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes
+})
+Vue.use(VueRouter);
+
+const app = new Vue({
+    el: '#__tenisindo',
+    router
+});
