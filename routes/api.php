@@ -57,6 +57,7 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('speakers', [HomeController::class, 'speakers']);
     Route::get('schedule', [HomeController::class, 'schedule']);
     Route::get('pricing', [HomeController::class, 'pricing']);
+    Route::get('hero-banner', [HomeController::class, 'hero_banner']);
     Route::get('sponsor-slider', [HomeController::class, 'sponsor_slider']);
 });
 // =========

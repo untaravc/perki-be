@@ -95,34 +95,45 @@ class HomeController extends BaseController
 
     public function pricing()
     {
-        $data["ws_fd"] = [
-            "name"          => "Full Day Workshop",
-            "desc"          => "Dilaksanakan pada hari Minggu 3 September 2023, bertempat di Hotel Tentrem Yogyakarta. Mulai pukul 08.00 - 16.00 WIB",
-            "price_drgn"    => 750000,
-            "price_drgn_eb" => 0,
-            "price_drsp"    => 1250000,
-            "price_drsp_eb" => 0,
-        ];
-        $data["sympo_ws"] = [
-            "name"          => "Symposium & Workshop",
-            "desc"          => "Dilaksanakan pada hari Jumat hingga Sabtu, 1-2 September 2023, bertempat di Hotel Tentrem Yogyakarta.
-                Simposium berlangsung di hari Jumat 09.00-16.00 WIB dan hari Sabtu 08.00-11.30 WIB.
-                Workshop Half Day berlangsung pada  hari Sabtu pukul 13.00-16.00 WIB",
-            "price_drgn"    => 1500000,
-            "price_drgn_eb" => 1500000,
-            "price_drsp"    => 3000000,
-            "price_drsp_eb" => 2750000,
-        ];
-        $data["all_event"] = [
-            "name"          => "All Event",
-            "desc"          => "Dilaksanakan pada hari Jumat hingga Minggu, 1-3 September 2023, bertempat di Hotel Tentrem Yogyakarta.
-                Simposium berlangsung di hari Jumat 09.00-16.00 WIB dan hari Sabtu 08.00-11.30 WIB.
-                Workshop Half Day berlangsung pada hari Sabtu pukul 13.00-16.00 WIB.
-                Workshop Full Day berlangsung pada hari Minggu 08.00-16.00 WIB",
+        $platinum_desc = "<ul>
+        <li>Symposium: Friday 1 Sep 2023 (09.00-15.00) - Saturday, 2 Sep 2023 (08.00-11.30)</li>
+        <li>Saturday Workshop: Saturday, 2 Sep 2023 (13.00-15.30)</li>
+        <li>Sunday Workshop: Sunday, 3 September 2023 (09.00-15.30)</li>
+        </ul>";
+
+        $gold_desc = "<ul>
+        <li>Simposium: Friday 1 Sep 2023 (09.00-15.00) - Saturday, 2 Sep 2023 (08.00-11.30)</li>
+        <li>Saturday Workshop: Saturday, 2 Sep 2023 (13.00-15.30)</li>
+        </ul>";
+
+        $bronze_desc = "<ul>
+        <li>Sunday Workshop: Sunday, 3 Sep 2023 (09.00-15.30)</li>
+        </ul>";
+
+        $data["platinum"] = [
+            "name"          => "Platinum",
+            "desc"          => $platinum_desc,
             "price_drgn"    => 2000000,
             "price_drgn_eb" => 1750000,
             "price_drsp"    => 4000000,
             "price_drsp_eb" => 3750000,
+
+        ];
+        $data["gold"] = [
+            "name"          => "Gold",
+            "desc"          => $gold_desc,
+            "price_drgn"    => 1750000,
+            "price_drgn_eb" => 1500000,
+            "price_drsp"    => 3000000,
+            "price_drsp_eb" => 2750000,
+        ];
+        $data["bronze"] = [
+            "name"          => "Bronze",
+            "desc"          => $bronze_desc,
+            "price_drgn"    => 750000,
+            "price_drgn_eb" => 0,
+            "price_drsp"    => 1250000,
+            "price_drsp_eb" => 0,
         ];
 
         $this->response['result'] = $data;
@@ -161,6 +172,32 @@ class HomeController extends BaseController
         }
 
         $this->response['result'] = $sponsors;
+        return $this->response;
+    }
+
+    public function hero_banner()
+    {
+        $data = [
+            [
+                "title"    => "Jogja Cardiology Update",
+                "subtitle" => "Integrating Technology In Cardiovascular Disease Management: Towards A Harmonic Fusion",
+                "date"     => "Yogyakarta, 1-3 September 2023",
+                "poster"   => '/storage/img/1st_announcement.jpg',
+            ],
+            [
+                "title"    => "12 Symposium & 8 Workshop",
+                "subtitle" => "Jogja Cardiology Update in Conjunction with Jogja International Cardiovascular Topic Series",
+                "date"     => "Tentrem Hotel, Yogyakarta",
+                "poster"   => '/storage/img/1st_announcement.jpg',
+            ], [
+                "title"    => "The Sixth JINCARTOS",
+                "subtitle" => "Jogja International Cardiovascular Topic Series: Scientific Breakthrough in Hearth Rhythm Disorder",
+                "date"     => "12 Symposium & 8 Workshop",
+                "poster"   => '/storage/img/1st_announcement.jpg',
+            ]
+        ];
+
+        $this->response['result'] = $data;
         return $this->response;
     }
 }

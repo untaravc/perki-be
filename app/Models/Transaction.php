@@ -34,10 +34,10 @@ class Transaction extends Model
     {
         if (isset($this->attributes['status'])) {
             switch ($this->attributes['status']) {
-                case 100: return 'Tunda';
-                case 110: return 'Menunggu pembayaran';
-                case 120: return 'Menunggu konfirmasi';
-                case 200: return 'Lunas';
+                case 100: return 'Select Event';
+                case 110: return 'Waiting payment';
+                case 120: return 'Waiting confirmation';
+                case 200: return 'Paid';
             }
         }
     }

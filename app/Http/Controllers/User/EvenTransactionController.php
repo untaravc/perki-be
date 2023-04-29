@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Price;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 const DRSP_BUNDLE_PRICE = 3750000;
@@ -87,7 +88,7 @@ class EvenTransactionController extends BaseController
         $data = [];
 
         $transaction = Transaction::whereNumber($request->transaction_number)
-            ->whereUserId($user['id'])
+//            ->whereUserId($user['id'])
             ->first();
 
         if (!$transaction) {
@@ -164,7 +165,7 @@ class EvenTransactionController extends BaseController
             $subtotal += $item['price'];
         }
 
-        if ($bundle == 2) {
+        if ($bundle == 2 && (now() < "2023-04-31")) {
             if ($job_type_code == 'DRSP') {
                 $bundle_price = DRSP_BUNDLE_PRICE;
             } else {
@@ -172,10 +173,10 @@ class EvenTransactionController extends BaseController
             }
         }
 
-        $discount = isset($bundle_price) ? -($subtotal - $bundle_price) : 0;
+        $discount = isset($bundle_price) ? - ($subtotal - $bundle_price) : 0;
 
         $data['discount'] = [
-            'name'   => "Potongan Harga",
+            'name'   => "Bundle Discount",
             'marker' => "discount",
             'price'  => $discount,
         ];
@@ -186,6 +187,10 @@ class EvenTransactionController extends BaseController
             'price'  => $subtotal + $discount,
         ];
 
+        if($request->voucher){
+            $data = $this->redeem_voucher($request, $data);
+        }
+
         $this->response['result'] = [
             'items'       => $data,
             'count'       => $bundle,
@@ -195,9 +200,57 @@ class EvenTransactionController extends BaseController
         return $this->response;
     }
 
-    private function redeem_voucher($voucher_code)
+    private function redeem_voucher($request, $data)
     {
+        $voucher = Voucher::whereCode($request->voucher)
+//            ->where('qty_rest', '>', 0)
+            ->where('status', 1)
+            ->first();
 
+        if(!$voucher){
+            $this->response['message'] = "Voucher Code not available";
+            return $data;
+        }
+
+        // apakah voucher berlaku
+        $active = 0;
+        $subtotal = 0;
+        $voucher_role = explode(',', $voucher->role);
+        foreach ($data as $item){
+            if(in_array($item['marker'], $voucher_role)){
+                $active = 1;
+                $subtotal += $item['price'];
+            }
+        }
+
+        if($active == 0){
+            $this->response['message'] = "Voucher Code not available";
+            return $data;
+        }
+
+        if($voucher->type == "percent"){
+            $voucher_discount_amount = $subtotal * $voucher->value / 100;
+        } else {
+            $voucher_discount_amount = $voucher->value;
+        }
+
+        array_pop($data);
+
+        $data["voucher_discount"] = [
+            'name'   => "Discount Voucher: " . $request->voucher,
+            'marker' => "discount-voucher",
+            'price'  => -$voucher_discount_amount,
+        ];
+
+        $data['total'] = [
+            'name'   => "Total",
+            'marker' => "total",
+            'price'  => collect($data)->sum('price'),
+        ];
+
+        $this->response['message'] = "Voucher Code activated";
+
+        return $data;
     }
 
     public function create_payment(Request $request)

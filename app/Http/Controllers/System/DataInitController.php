@@ -23,6 +23,9 @@ class DataInitController extends BaseController
         $cat = new CategoryInitController();
         $cat->categories_init();
 
+        $voucher = new VoucherInitController();
+        $voucher->voucher_init();
+
         return $this->response;
     }
 

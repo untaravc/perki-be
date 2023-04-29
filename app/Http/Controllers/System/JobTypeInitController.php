@@ -11,11 +11,11 @@ class JobTypeInitController extends Controller
     public function job_type_init(){
         $data = [
             [
-                "name" => "Mahasiswa",
+                "name" => "Medical student",
                 "code" => "MHSA",
             ],
             [
-                "name" => "Coas",
+                "name" => "Co-ass",
                 "code" => "COAS",
             ],
             [
@@ -23,24 +23,24 @@ class JobTypeInitController extends Controller
                 "code" => "ITRS",
             ],
             [
-                "name" => "Residen",
+                "name" => "Residency",
                 "code" => "RSDN",
             ],
             [
-                "name" => "Dokter Umum",
+                "name" => "General Practitioner",
                 "code" => "DRGN",
             ],
             [
-                "name" => "Dokter Spesialis",
+                "name" => "Specialist",
                 "code" => "DRSP",
             ],
             [
-                "name" => "Perawat",
+                "name" => "Nurse",
                 "code" => "NURS",
             ],
             [
-                "name" => "Tenaga Medis",
-                "code" => "TMDS",
+                "name" => "Other Healthcare Provider",
+                "code" => "OTHR",
             ],
         ];
 
