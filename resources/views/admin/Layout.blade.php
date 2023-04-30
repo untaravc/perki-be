@@ -9,7 +9,7 @@
     <title>Admin Panel</title>
 </head>
 <body>
-<div id="__tenisindo">
+<div id="__perki_app">
     <router-view></router-view>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>

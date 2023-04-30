@@ -1,43 +1,25 @@
 require('./bootstrap');
 import 'flowbite';
 import Vue from 'vue'
-
 window.Vue = require('vue').default;
 
+// Icon
+import Unicon from 'vue-unicons/dist/vue-unicons-vue2.umd'
+import icons from './config/icons'
+Unicon.add(icons)
+
+// router
 import VueRouter from 'vue-router'
-import TobBar from './components/Topbar'
-import SideBar from './components/Sidebar'
-import Layout from './views/Layout'
-import Dashboard from './views/dashboard'
-import Posts from './views/posts'
+import router from './config/router'
 
-Vue.component('top-bar', TobBar)
-Vue.component('side-bar', SideBar)
-
-const routes = [
-    {
-        path: '/panel',
-        component: Layout,
-        children:[
-            {
-                path: 'dashboard',
-                component: Dashboard,
-            },
-            {
-                path: 'posts',
-                component: Posts,
-            }
-        ]
-    },
-]
-
-const router = new VueRouter({
-    mode: 'history',
-    routes
-})
-Vue.use(VueRouter);
+// Register plugin
+Vue.use(VueRouter)
+    .use(Unicon,{
+        height: 20,
+        width: 20
+    })
 
 const app = new Vue({
-    el: '#__tenisindo',
+    el: '#__perki_app',
     router
 });

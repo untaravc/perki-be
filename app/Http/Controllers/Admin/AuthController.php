@@ -63,7 +63,7 @@ class AuthController extends BaseController
     }
 
     public function adminPanel(){
-        return view('admin_panel.layout');
+        return view('admin.Layout');
     }
 
     public function notFound()
