@@ -377,4 +377,15 @@ class EvenTransactionController extends BaseController
 
     }
 
+    public function pending_transaction_count(Request $request){
+        $user = $request->user();
+
+        $data['pending_transaction'] = Transaction::whereUserId($user['id'])
+        ->where('status', '<', 200)
+        ->count();
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
 }
