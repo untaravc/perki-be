@@ -171,6 +171,18 @@ class AuthController extends BaseController
         $user = User::whereEmail($data['email'])->first();
         if ($user) {
             $token = $user->createToken('user');
+
+            $update_payload['last_login'] = now();
+            if ($user->email_verified_at == null) {
+                $update_payload['email_verified_at'] = now();
+            }
+
+            if ($user->image == null) {
+                $update_payload['image'] = $data['image'];
+            }
+
+            $user->update($update_payload);
+
             $result = [
                 'token' => $token->plainTextToken,
                 'user'  => $user

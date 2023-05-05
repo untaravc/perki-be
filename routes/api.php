@@ -9,6 +9,7 @@ use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\User\EvenTransactionController;
 use App\Http\Controllers\System\UploadFileController;
 use App\Http\Controllers\User\EventController;
+use App\Http\Controllers\User\AbstractController;
 
 // ADMIN API
 Route::post('/', function (){
@@ -35,6 +36,9 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::get('transaction-list', [EvenTransactionController::class, 'transaction_list']);
     Route::post('transaction-transfer-proof', [EvenTransactionController::class, 'transfer_proof']);
     Route::get('event-schedules', [EventController::class, 'event_schedule']);
+
+    Route::get('abstracts', [AbstractController::class, 'abstract_list']);
+    Route::post('abstracts', [AbstractController::class, 'abstract_submit']);
 
 });
 // =========

@@ -104,7 +104,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="overflow-x-auto">
+                        <div class="overflow-x-auto" style="min-height: 600px;">
                             <Table></Table>
 
                         </div>
