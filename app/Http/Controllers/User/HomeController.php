@@ -96,18 +96,18 @@ class HomeController extends BaseController
     public function pricing()
     {
         $platinum_desc = "<ul>
-        <li>Symposium: Friday 1 Sep 2023 (09.00-15.00) - Saturday, 2 Sep 2023 (08.00-11.30)</li>
-        <li>Saturday Workshop: Saturday, 2 Sep 2023 (13.00-15.30)</li>
-        <li>Sunday Workshop: Sunday, 3 September 2023 (09.00-15.30)</li>
+        <li>Symposium: Friday, Sept 1st 2023 (09.00-15.00) - Saturday, Sept 2nd 2023 (08.00-11.30)</li>
+        <li>Saturday Workshop: Saturday, Sep 2nd 2023 (13.00-15.30)</li>
+        <li>Sunday Workshop: Sunday, September 3rd 2023 (09.00-15.30)</li>
         </ul>";
 
         $gold_desc = "<ul>
-        <li>Simposium: Friday 1 Sep 2023 (09.00-15.00) - Saturday, 2 Sep 2023 (08.00-11.30)</li>
-        <li>Saturday Workshop: Saturday, 2 Sep 2023 (13.00-15.30)</li>
+        <li>Simposium: Friday, Sept 1st 2023 (09.00-15.00) - Saturday, Sept 2nd 2023 (08.00-11.30)</li>
+        <li>Saturday Workshop: Saturday, Sept 2nd 2023 (13.00-15.30)</li>
         </ul>";
 
         $bronze_desc = "<ul>
-        <li>Sunday Workshop: Sunday, 3 Sep 2023 (09.00-15.30)</li>
+        <li>Sunday Workshop: Sunday, Sept 3rd 2023 (09.00-15.30)</li>
         </ul>";
 
         $data["platinum"] = [
@@ -175,7 +175,7 @@ class HomeController extends BaseController
         return $this->response;
     }
 
-    public function hero_banner()
+    public function hero_banner(Request $request)
     {
         $data = [
             [
@@ -196,6 +196,8 @@ class HomeController extends BaseController
                 "poster"   => '/storage/img/1st_announcement.jpg',
             ]
         ];
+
+//        return $request->ip();
 
         $this->response['result'] = $data;
         return $this->response;

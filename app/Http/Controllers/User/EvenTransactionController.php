@@ -375,6 +375,8 @@ class EvenTransactionController extends BaseController
             'status'         => 120,
         ]);
 
+        return $this->response;
+
     }
 
     public function pending_transaction_count(Request $request){
