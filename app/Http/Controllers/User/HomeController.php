@@ -185,7 +185,7 @@ class HomeController extends BaseController
                 "poster"   => '/storage/img/1st_announcement.jpg',
             ],
             [
-                "title"    => "12 Symposium & 8 Workshop",
+                "title"    => "12 Symposium and 8 Workshop",
                 "subtitle" => "Jogja Cardiology Update in Conjunction with Jogja International Cardiovascular Topic Series",
                 "date"     => "Tentrem Hotel, Yogyakarta",
                 "poster"   => '/storage/img/1st_announcement.jpg',

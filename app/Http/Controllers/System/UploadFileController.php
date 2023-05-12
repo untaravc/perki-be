@@ -17,7 +17,7 @@ class UploadFileController extends BaseController
 
         $folder = $request->model ?? 'files';
 
-        $link = $this->fileUploadProcessing($request, $folder . '/' . date('Ymd'), 'file', true);
+        $link = $this->fileUploadProcessing($request, $folder . '/' . date('Ymd'), 'file');
         $link = env('APP_URL') . 'storage/' . $link;
 
         $payload = [
@@ -66,6 +66,7 @@ class UploadFileController extends BaseController
             } else {
                 $filename = str_replace(' ', '_', strtolower(pathinfo($filenameWithExt, PATHINFO_FILENAME)));
             }
+
             $extension = $request->file($file_container)->getClientOriginalExtension();
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
 
