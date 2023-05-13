@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Event;
+use App\Models\Post;
 use App\Models\Price;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -379,12 +380,17 @@ class EvenTransactionController extends BaseController
 
     }
 
-    public function pending_transaction_count(Request $request){
+    public function pending_transaction_count(Request $request)
+    {
         $user = $request->user();
 
         $data['pending_transaction'] = Transaction::whereUserId($user['id'])
-        ->where('status', '<', 200)
-        ->count();
+            ->where('status', '<', 200)
+            ->count();
+
+        $data['abstracts'] = Post::whereUserId($user['id'])
+            ->whereIn('category', ['case_report', 'research'])
+            ->count();
 
         $this->response['result'] = $data;
         return $this->response;
