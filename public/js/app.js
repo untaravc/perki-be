@@ -5803,15 +5803,17 @@ var render = function render() {
     staticClass: "p-6 space-y-4 md:space-y-6 sm:p-8"
   }, [_c("h1", {
     staticClass: "text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-  }, [_vm._v("\n                    Sign in to your account\n                ")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _c("button", {
-    staticClass: "w-full text-white bg-primary hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800",
+  }, [_vm._v("\n                    Sign in to your account\n                ")]), _vm._v(" "), _c("div", {
+    staticClass: "space-y-4 md:space-y-6"
+  }, [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("button", {
+    staticClass: "w-full text-white bg-blue-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800",
     attrs: {
       type: "submit"
     },
     on: {
       click: _vm.login
     }
-  }, [_vm._v("\n                    Sign in\n                ")]), _vm._v(" "), _vm._m(4)])])])]);
+  }, [_vm._v("\n                        Sign in\n                    ")])])])])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -5822,12 +5824,12 @@ var staticRenderFns = [function () {
       href: "#"
     }
   }, [_c("img", {
-    staticClass: "w-8 h-8 mr-2",
+    staticClass: "h-8 mr-2",
     attrs: {
-      src: "https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg",
+      src: "https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png",
       alt: "logo"
     }
-  }), _vm._v("\n            Flowbite\n        ")]);
+  })]);
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
@@ -5836,7 +5838,7 @@ var staticRenderFns = [function () {
     attrs: {
       "for": "email"
     }
-  }, [_vm._v("Your\n                        email")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Your\n                            email")]), _vm._v(" "), _c("input", {
     staticClass: "bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
     attrs: {
       type: "email",
@@ -5864,47 +5866,6 @@ var staticRenderFns = [function () {
       required: ""
     }
   })]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "flex items-center justify-between"
-  }, [_c("div", {
-    staticClass: "flex items-start"
-  }, [_c("div", {
-    staticClass: "flex items-center h-5"
-  }, [_c("input", {
-    staticClass: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800",
-    attrs: {
-      id: "remember",
-      "aria-describedby": "remember",
-      type: "checkbox",
-      required: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "ml-3 text-sm"
-  }, [_c("label", {
-    staticClass: "text-gray-500 dark:text-gray-300",
-    attrs: {
-      "for": "remember"
-    }
-  }, [_vm._v("Remember me")])])]), _vm._v(" "), _c("a", {
-    staticClass: "text-sm font-medium text-primary-600 hover:underline dark:text-primary-500",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Forgot\n                        password?")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("p", {
-    staticClass: "text-sm font-light text-gray-500 dark:text-gray-400"
-  }, [_vm._v("\n                    Don’t have an account yet? "), _c("a", {
-    staticClass: "font-medium text-primary-600 hover:underline dark:text-primary-500",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Sign\n                    up")])]);
 }];
 render._withStripped = true;
 

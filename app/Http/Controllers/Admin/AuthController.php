@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends BaseController
 {
+    public function login_view(){
+        return view('admin.Login');
+    }
+
     public function login(Request $request)
     {
         $this->response['status'] = false;
