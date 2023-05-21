@@ -29,9 +29,8 @@ class AuthController extends BaseController
             return $this->response;
         }
 
-        $user = User::whereUserEmail($request->email)
-            ->where('user_type', 'admin')
-            ->whereUserStatus(1)
+        $user = User::whereEmail($request->email)
+            ->where('type', 'admin')
             ->first();
 
         if (!$user) {
@@ -39,7 +38,7 @@ class AuthController extends BaseController
             return $this->response;
         }
 
-        if (!Hash::check($request->password, $user->user_password)) {
+        if (!Hash::check($request->password, $user->password)) {
 
             $this->response['message'] = $message . '03';
             return $this->response;
@@ -62,8 +61,8 @@ class AuthController extends BaseController
 
     public function profile(Request $request)
     {
-        $data = $request->user()->only(['user_id', 'user_name', 'user_email']);
-        return $this->sendGetResponse($data, '');
+        $data = $request->user()->only(['id', 'name', 'email']);
+        $this->sendGetResponse($data);
     }
 
     public function adminPanel(){

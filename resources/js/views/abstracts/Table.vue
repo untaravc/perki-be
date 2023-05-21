@@ -4,8 +4,9 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" class="px-4 py-3">No</th>
-                <th scope="col" class="px-4 py-3">User Name</th>
-                <th scope="col" class="px-4 py-3">Nominal</th>
+                <th scope="col" class="px-4 py-3">Title</th>
+                <th scope="col" class="px-4 py-3">Category</th>
+                <th scope="col" class="px-4 py-3">User</th>
                 <th scope="col" class="px-4 py-3">Date</th>
                 <th scope="col" class="px-4 py-3">Status</th>
                 <th scope="col" class="px-4 py-3">
@@ -16,19 +17,22 @@
             <tbody v-if="data_content.data">
             <tr class="border-b" v-for="(data, i) in data_content.data">
                 <td class="px-4 py-3">
-                    {{(data_content.current_page - 1) * data_content.per_page + i + 1}}
+                    {{ (data_content.current_page - 1) * data_content.per_page + i + 1 }}
                 </td>
                 <td class="px-4 py-3">
-                    {{data.user_name}}
+                    {{ data.title }}
                 </td>
                 <td class="px-4 py-3">
-                    {{data.total | currency}}
+                    {{ data.category }}
                 </td>
                 <td class="px-4 py-3">
-                    {{data.created_at | formatDateTime}}
+                    <span v-if="data.user">{{ data.user.name }}</span>
                 </td>
-                <td>
-                    {{data.status_label}}
+                <td class="px-4 py-3">
+                    {{ data.created_at | formatDateTime }}
+                </td>
+                <td class="px-4 py-3">
+                    {{ data.status_label }}
                 </td>
                 <td class="px-4 py-3 flex items-center justify-end">
                     <div class="dropdown relative group">
@@ -46,14 +50,12 @@
                                        class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                    <a :href="data.file" target="_blank"
+                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                        Download File
+                                    </a>
                                 </li>
                             </ul>
-                            <div class="py-1">
-                                <a href="#"
-                                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                            </div>
                         </div>
                     </div>
                 </td>

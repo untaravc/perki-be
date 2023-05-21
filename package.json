@@ -28,6 +28,9 @@
     },
     "dependencies": {
         "vue-router": "^3.6.5",
-        "vue-unicons": "^3.3.1"
+        "vue-moment": "^4.1.0",
+        "vue-sweetalert2": "^5.0.5",
+        "vue-unicons": "^3.3.1",
+        "laravel-vue-pagination": "^2.3.1"
     }
 }

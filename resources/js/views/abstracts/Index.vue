@@ -1,7 +1,9 @@
 <template>
     <div class="p-4 sm:ml-64">
         <div class="mt-14">
-            <div class="text-2xl font-bold mb-3">Transaksi</div>
+            <div class="text-2xl font-bold mb-3">
+                Abstract Submission
+            </div>
             <section class="bg-gray-50 dark:bg-gray-900">
                 <div class="mx-auto max-w-screen-xl">
                     <!-- Start coding here -->
@@ -113,13 +115,14 @@ export default {
                 page: 2,
                 per_page: 10,
                 s: '',
+                type: 'abstract',
             }
         }
     },
     methods:{
         loadDataContent(page = 1){
             this.filters.page = page
-            this.authGet('adm/transactions', this.filters)
+            this.authGet('adm/posts', this.filters)
                 .then((data)=>{
                     this.data_content = data
                 })
