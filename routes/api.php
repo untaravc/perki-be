@@ -32,6 +32,8 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [UserAuthController::class, 'logout']);
 
     Route::get('profile', [UserAuthController::class, 'profile']);
+    Route::patch('profile', [UserAuthController::class, 'profile_update']);
+    Route::patch('profile-photo', [UserAuthController::class, 'profile_photo_update']);
     Route::get('events-list', [EvenTransactionController::class, 'event_list']);
     Route::post('calculate-price', [EvenTransactionController::class, 'calculate_price']);
     Route::post('create-payment', [EvenTransactionController::class, 'create_payment']);

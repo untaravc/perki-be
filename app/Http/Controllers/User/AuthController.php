@@ -285,4 +285,60 @@ class AuthController extends BaseController
         $this->response['message'] = 'Logged out!';
         return $this->response;
     }
+
+    public function profile_update(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            "name"        => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
+            "phone"       => "required|numeric|digits_between:8,15",
+            "institution" => "required|string",
+            "city"        => "required|string",
+            "password"    => "nullable|min:6|confirmed",
+        ]);
+
+        if ($validator->fails()) {
+            $this->sendError(422, $validator->errors()->first(), $validator->errors());
+        }
+
+        $model = User::find($user['id']);
+
+        $model->update([
+            'name'        => $request->name,
+            'phone'       => $request->phone,
+            'city'        => $request->city,
+            'institution' => $request->institution,
+        ]);
+
+        if ($request->password) {
+            $model->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
+        $this->response['message'] = "Profile updated";
+        return $this->response;
+    }
+
+    public function profile_photo_update(Request $request)
+    {
+        $user = $request->user();
+
+        $validator = Validator::make($request->all(), [
+            "image" => "required|string",
+        ]);
+
+        if ($validator->fails()) {
+            $this->sendError(422, $validator->errors()->first(), $validator->errors());
+        }
+
+        $model = User::find($user['id']);
+
+        $model->update([
+            'image' => $request->image,
+        ]);
+
+        return $this->response;
+    }
 }
