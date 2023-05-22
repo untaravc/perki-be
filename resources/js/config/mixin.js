@@ -30,7 +30,7 @@ const mixin = {
         }
     },
     created: function () {
-        this.base_api = 'http://localhost:8000/api/'
+        this.base_api = '/api/'
     },
     methods: {
         async apiGet(uri, params) {
