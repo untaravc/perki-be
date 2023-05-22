@@ -47,6 +47,7 @@ class EventInitController extends Controller
                 "children"   => [
                     [
                         "name"       => "Symposium 1",
+                        "title"      => "Beyond the Basics : Atherosclerosis and Antiplatelet Management",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-a",
@@ -56,6 +57,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Symposium 2",
+                        "title"      => "Enhancing Outcomes in Heart Failure: Innovations in Diagnosis and Treatment",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-b",

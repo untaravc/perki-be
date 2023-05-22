@@ -186,7 +186,7 @@ class HomeController extends BaseController
             ],
             [
                 "title"    => "12 Symposium and 8 Workshop",
-                "subtitle" => "Jogja Cardiology Update in Conjunction with Jogja International Cardiovascular Topic Series",
+                "subtitle" => "Jogja Cardiology Update 2023 in Conjunction with the Sixth Jogja INternational CARdiovascular TOpic Series 2023",
                 "date"     => "Tentrem Hotel, Yogyakarta",
                 "poster"   => '/storage/img/1st_announcement.jpg',
             ], [

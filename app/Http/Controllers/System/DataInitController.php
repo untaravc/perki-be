@@ -3,11 +3,22 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
 
 class DataInitController extends BaseController
 {
-    public function init()
+    public function init(Request $request)
     {
+        switch ($request->section) {
+            case 'event':
+                $event = new EventInitController();
+                $event->event_init();
+                break;
+            default:
+                return [
+                    'message' => 'section required'
+                ];
+        }
         $speakers = new SpeakerInitController();
         $speakers->init_speaker();
 
@@ -16,9 +27,6 @@ class DataInitController extends BaseController
 
         $job_type = new JobTypeInitController();
         $job_type->job_type_init();
-
-        $event = new EventInitController();
-        $event->event_init();
 
         $cat = new CategoryInitController();
         $cat->categories_init();

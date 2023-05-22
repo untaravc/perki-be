@@ -166,7 +166,7 @@ class EvenTransactionController extends BaseController
             $subtotal += $item['price'];
         }
 
-        if ($bundle == 2 && (now() < "2023-04-31")) {
+        if ($bundle == 2 && (now() < "2023-07-31")) {
             if ($job_type_code == 'DRSP') {
                 $bundle_price = DRSP_BUNDLE_PRICE;
             } else {
