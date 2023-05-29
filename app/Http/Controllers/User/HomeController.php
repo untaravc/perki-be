@@ -36,6 +36,18 @@ class HomeController extends BaseController
 
         $friday = [
             [
+                'date_start' => '2023-09-01 08:30:00',
+                'date_end'   => '2023-09-01 08:50:00',
+                'room_a'     => $events->where('slug', 'symposium-jcu23-ab1')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-ab1')->first(),
+            ],
+            [
+                'date_start' => '2023-09-01 08:50:00',
+                'date_end'   => '2023-09-01 09:10:00',
+                'room_a'     => $events->where('slug', 'symposium-jcu23-ab2')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-ab2')->first(),
+            ],
+            [
                 'date_start' => '2023-09-01 09:10:00',
                 'date_end'   => '2023-09-01 10:25:00',
                 'room_a'     => $events->where('slug', 'symposium-jcu23-a1')->first(),
@@ -46,18 +58,6 @@ class HomeController extends BaseController
                 'date_end'   => '2023-09-01 11:55:00',
                 'room_a'     => $events->where('slug', 'symposium-jcu23-a3')->first(),
                 'room_b'     => $events->where('slug', 'symposium-jcu23-b4')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 13:00:00',
-                'date_end'   => '2023-09-01 14:15:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 14:15:00',
-                'date_end'   => '2023-09-01 15:30:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
             ],
         ];
 
@@ -70,7 +70,7 @@ class HomeController extends BaseController
             ],
             [
                 'date_start' => '2023-09-02 08:45:00',
-                'date_end'   => '2023-09-02 10:00:00',
+                'date_end'   => '2023-09-02 10:15:00',
                 'room_a'     => $events->where('slug', 'symposium-jcu23-a9')->first(),
                 'room_b'     => $events->where('slug', 'symposium-jcu23-b10')->first(),
             ],
@@ -79,6 +79,18 @@ class HomeController extends BaseController
                 'date_end'   => '2023-09-02 11:30:00',
                 'room_a'     => $events->where('slug', 'symposium-jcu23-a11')->first(),
                 'room_b'     => $events->where('slug', 'symposium-jcu23-b12')->first(),
+            ],
+            [
+                'date_start' => '2023-09-01 13:00:00',
+                'date_end'   => '2023-09-01 14:15:00',
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
+            ],
+            [
+                'date_start' => '2023-09-01 14:15:00',
+                'date_end'   => '2023-09-01 15:30:00',
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
             ],
         ];
 

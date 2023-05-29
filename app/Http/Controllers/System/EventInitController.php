@@ -19,6 +19,8 @@ class EventInitController extends Controller
 
         $half_day = $this->workshop_half_day();
         $this->insert_event($half_day);
+
+        return 'event updated';
     }
 
     private function symposium()
@@ -46,6 +48,27 @@ class EventInitController extends Controller
                 ],
                 "children"   => [
                     [
+                        "name"       => "Plenary Lecture I",
+                        "title"      => "The Latest Updates in Cardiovascular Technology and Future of Cardiovascular Medicine",
+                        "data_type"  => "schedule",
+                        "section"    => "jcu23",
+                        "marker"     => "symposium-jcu23-ab",
+                        "slug"       => "symposium-jcu23-ab1",
+                        "date_start" => "2023-09-01 08:30:00",
+                        "date_end"   => "2023-09-01 08:50:00",
+                    ],
+                    [
+                        "name"       => "Plenary Lecture II",
+                        "title"      => "The Role of Wearable Technologies Aid Patient Monitoring and ArtficiaI Intelegent in Cardiovascular Disease",
+                        "data_type"  => "schedule",
+                        "section"    => "jcu23",
+                        "marker"     => "symposium-jcu23-ab",
+                        "slug"       => "symposium-jcu23-ab2",
+                        "date_start" => "2023-09-01 08:50:00",
+                        "date_end"   => "2023-09-01 09:10:00",
+                    ],
+
+                    [
                         "name"       => "Symposium 1",
                         "title"      => "Beyond the Basics : Atherosclerosis and Antiplatelet Management",
                         "data_type"  => "schedule",
@@ -69,6 +92,7 @@ class EventInitController extends Controller
                     [
                         "name"       => "Symposium 3",
                         "data_type"  => "schedule",
+                        "title"      => "Myocarditis and inflammatory cardiomyopathy: current evidence and future directions",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-a",
                         "slug"       => "symposium-jcu23-a3",
@@ -77,6 +101,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Symposium 4",
+                        "title"      => "Unpacking the Complexities of Acute Coronary Syndrome and Cardiogenic Shock",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-b",
@@ -86,45 +111,8 @@ class EventInitController extends Controller
                     ],
 
                     [
-                        "name"       => "Symposium 5",
-                        "data_type"  => "schedule",
-                        "section"    => "jcu23",
-                        "marker"     => "symposium-jcu23-a",
-                        "slug"       => "symposium-jcu23-a5",
-                        "date_start" => "2023-09-01 13:00:00",
-                        "date_end"   => "2023-09-01 14:15:00",
-                    ],
-                    [
-                        "name"       => "Symposium 6",
-                        "data_type"  => "schedule",
-                        "section"    => "jcu23",
-                        "marker"     => "symposium-jcu23-b",
-                        "slug"       => "symposium-jcu23-b6",
-                        "date_start" => "2023-09-01 13:00:00",
-                        "date_end"   => "2023-09-01 14:15:00",
-                    ],
-
-                    [
-                        "name"       => "Symposium 7",
-                        "data_type"  => "schedule",
-                        "section"    => "jcu23",
-                        "marker"     => "symposium-jcu23-a",
-                        "slug"       => "symposium-jcu23-a7",
-                        "date_start" => "2023-09-01 14:15:00",
-                        "date_end"   => "2023-09-01 15:30:00",
-                    ],
-                    [
-                        "name"       => "Symposium 8",
-                        "data_type"  => "schedule",
-                        "section"    => "jcu23",
-                        "marker"     => "symposium-jcu23-b",
-                        "slug"       => "symposium-jcu23-b8",
-                        "date_start" => "2023-09-01 14:15:00",
-                        "date_end"   => "2023-09-01 15:30:00",
-                    ],
-
-                    [
                         "name"       => "Panel 1",
+                        "title"      => "Improving Outcomes in Right Heart Failure Treatment; Optimizing Diagnosis & Management of Clinically Myocarditis",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-a",
@@ -134,6 +122,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Panel 2",
+                        "title"      => "Mastering Rate Control Management in Arrhythmia Problem; Strategies for Early Detection & Treatment of Hypertension",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-b",
@@ -143,41 +132,87 @@ class EventInitController extends Controller
                     ],
 
                     [
+                        "name"       => "Symposium 5",
+                        "title"      => "Current Status and Future Prospect in Cardiac Pacing as Antibradyarrhythmia Therapy",
+                        "data_type"  => "schedule",
+                        "section"    => "jcu23",
+                        "marker"     => "symposium-jcu23-a",
+                        "slug"       => "symposium-jcu23-a5",
+                        "date_start" => "2023-09-02 08:45:00",
+                        "date_end"   => "2023-09-02 10:15:00",
+                    ],
+                    [
+                        "name"       => "Symposium 6",
+                        "title"      => "Tailoring Management in Heart Failure Patients : Focus on Pharmacological therapy",
+                        "data_type"  => "schedule",
+                        "section"    => "jcu23",
+                        "marker"     => "symposium-jcu23-b",
+                        "slug"       => "symposium-jcu23-b6",
+                        "date_start" => "2023-09-02 08:45:00",
+                        "date_end"   => "2023-09-02 10:15:00",
+                    ],
+
+                    [
+                        "name"       => "Symposium 7",
+                        "title"      => "A Closer Look to New Guideline in Ventricular Arrhythmia",
+                        "data_type"  => "schedule",
+                        "section"    => "jcu23",
+                        "marker"     => "symposium-jcu23-a",
+                        "slug"       => "symposium-jcu23-a7",
+                        "date_start" => "2023-09-02 10:15:00",
+                        "date_end"   => "2023-09-02 11:30:00",
+                    ],
+                    [
+                        "name"       => "Symposium 8",
+                        "title"      => "Uniting Expertise : The Importance of Multidisciplinary Approach in Chronic Limb Threatening Ischemia",
+                        "data_type"  => "schedule",
+                        "section"    => "jcu23",
+                        "marker"     => "symposium-jcu23-b",
+                        "slug"       => "symposium-jcu23-b8",
+                        "date_start" => "2023-09-02 10:15:00",
+                        "date_end"   => "2023-09-02 11:30:00",
+                    ],
+
+                    [
                         "name"       => "Symposium 9",
+                        "title"      => "The Current Landscape of Management in Cardiac Channelopathy & Infiltrative Cardiomyopathy",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-a",
                         "slug"       => "symposium-jcu23-a9",
-                        "date_start" => "2023-09-02 08:45:00",
-                        "date_end"   => "2023-09-02 10:00:00",
+                        "date_start" => "2023-09-02 13:00:00",
+                        "date_end"   => "2023-09-02 14:15:00",
                     ],
                     [
                         "name"       => "Symposium 10",
+                        "title"      => "Navigating the Complexities of Valvular Heart Disease : A Comprehensive Perspective",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-b",
                         "slug"       => "symposium-jcu23-b10",
-                        "date_start" => "2023-09-02 08:45:00",
-                        "date_end"   => "2023-09-02 10:00:00",
+                        "date_start" => "2023-09-02 13:00:00",
+                        "date_end"   => "2023-09-02 14:15:00",
                     ],
 
                     [
                         "name"       => "Symposium 11",
+                        "title"      => "Cutting Edge Concepts in Advanced Heart Failure",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-a",
                         "slug"       => "symposium-jcu23-a11",
-                        "date_start" => "2023-09-02 10:15:00",
-                        "date_end"   => "2023-09-02 11:30:00",
+                        "date_start" => "2023-09-02 14:15:00",
+                        "date_end"   => "2023-09-02 15:30:00",
                     ],
                     [
                         "name"       => "Symposium 12",
+                        "title"      => "Breaking Down Pulmonary Hypertension : From Etiology to Management Strategies",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "marker"     => "symposium-jcu23-b",
                         "slug"       => "symposium-jcu23-b12",
-                        "date_start" => "2023-09-02 10:15:00",
-                        "date_end"   => "2023-09-02 11:30:00",
+                        "date_start" => "2023-09-02 14:15:00",
+                        "date_end"   => "2023-09-02 15:30:00",
                     ]
                 ]
             ],
@@ -189,13 +224,13 @@ class EventInitController extends Controller
         return [
             [
                 "name"       => "Workshop 5",
-                "title"      => "Workshop 5 title sample",
+                "title"      => "OMG My Patient Got Metabolic Acidosis While in Ventilator !! Let's Talk About Acid Base Imbalance and Mechanical Ventilation in ICCU”",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-full-day-5",
                 "marker"     => "workshop-jcu23-full-day",
-                "date_start" => "2023-09-03 08:00:00",
-                "date_end"   => "2023-09-03 14:30:00",
+                "date_start" => "2023-09-03 09:00:00",
+                "date_end"   => "2023-09-03 15:30:00",
                 "has_price"  => 1,
                 "prices"     => [
                     [
@@ -210,13 +245,13 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 6",
-                "title"      => "Workshop 6 title sample",
+                "title"      => "Hands-on emergency Ultrasound Worskhop",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-full-day-6",
                 "marker"     => "workshop-jcu23-full-day",
-                "date_start" => "2023-09-03 08:00:00",
-                "date_end"   => "2023-09-03 14:30:00",
+                "date_start" => "2023-09-03 09:00:00",
+                "date_end"   => "2023-09-03 15:30:00",
                 "has_price"  => 1,
                 "prices"     => [
                     [
@@ -231,13 +266,13 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 7",
-                "title"      => "Workshop 7 title sample",
+                "title"      => "Maximizing Cardiovascular Health : A Comprehensive Approach to Outpatient Cardiac Rehabilitation Programs",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-full-day-7",
                 "marker"     => "workshop-jcu23-full-day",
-                "date_start" => "2023-09-03 08:00:00",
-                "date_end"   => "2023-09-03 14:30:00",
+                "date_start" => "2023-09-03 09:00:00",
+                "date_end"   => "2023-09-03 15:30:00",
                 "has_price"  => 1,
                 "prices"     => [
                     [
@@ -252,13 +287,13 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 8",
-                "title"      => "Workshop 8 title sample",
+                "title"      => "ECG Courses in Emergency Care",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-full-day-8",
                 "marker"     => "workshop-jcu23-full-day",
-                "date_start" => "2023-09-03 08:00:00",
-                "date_end"   => "2023-09-03 14:30:00",
+                "date_start" => "2023-09-03 09:00:00",
+                "date_end"   => "2023-09-03 15:30:00",
                 "has_price"  => 1,
                 "prices"     => [
                     [
@@ -279,43 +314,43 @@ class EventInitController extends Controller
         return [
             [
                 "name"       => "Workshop 1",
-                "title"      => "Workshop 1 title sample",
+                "title"      => "Update Management of ACS in 2023: What’s New from the Guideline ?",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-1",
                 "marker"     => "workshop-jcu23-half-day",
-                "date_start" => "2023-09-02 13:00:00",
-                "date_end"   => "2023-09-02 16:00:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
             ],
             [
                 "name"       => "Workshop 2",
-                "title"      => "Workshop 2 title sample",
+                "title"      => "Emerging Trends in Atrial Fibrillation Management : From Stroke Prevention to Latest Method of Ablation",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-2",
                 "marker"     => "workshop-jcu23-half-day",
-                "date_start" => "2023-09-02 13:00:00",
-                "date_end"   => "2023-09-02 16:00:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
             ],
             [
                 "name"       => "Workshop 3",
-                "title"      => "Workshop 3 title sample",
+                "title"      => "Translating Transthoracal Echocardiography into Clinical Practice in Adult and Pediatric Congenital Heart Disease",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-3",
                 "marker"     => "workshop-jcu23-half-day",
-                "date_start" => "2023-09-02 13:00:00",
-                "date_end"   => "2023-09-02 16:00:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
             ],
             [
                 "name"       => "Workshop 4",
-                "title"      => "Workshop 4 title sample",
+                "title"      => "All about shock in Emergency Care",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-4",
                 "marker"     => "workshop-jcu23-half-day",
-                "date_start" => "2023-09-02 13:00:00",
-                "date_end"   => "2023-09-02 16:00:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
             ],
         ];
     }
