@@ -10,17 +10,23 @@ class DataInitController extends BaseController
     public function init(Request $request)
     {
         switch ($request->section) {
-            case 'event':
+            case 'events':
                 $event = new EventInitController();
                 $event->event_init();
+                break;
+
+            case 'speakers':
+                $speakers = new SpeakerInitController();
+                $speakers->init_speaker();
                 break;
             default:
                 return [
                     'message' => 'section required'
                 ];
         }
-        $speakers = new SpeakerInitController();
-        $speakers->init_speaker();
+
+//        return '';
+
 
         $user = new UserInitController();
         $user->user_init();

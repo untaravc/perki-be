@@ -109,13 +109,13 @@ class HomeController extends BaseController
     {
         $platinum_desc = "<ul>
         <li>Symposium: Friday, Sept 1st 2023 (09.00-15.00) - Saturday, Sept 2nd 2023 (08.00-11.30)</li>
-        <li>Saturday Workshop: Saturday, Sep 2nd 2023 (13.00-15.30)</li>
+        <li>Friday Workshop: Friday, Sep 1st 2023 (13.00-15.30)</li>
         <li>Sunday Workshop: Sunday, September 3rd 2023 (09.00-15.30)</li>
         </ul>";
 
         $gold_desc = "<ul>
         <li>Simposium: Friday, Sept 1st 2023 (09.00-15.00) - Saturday, Sept 2nd 2023 (08.00-11.30)</li>
-        <li>Saturday Workshop: Saturday, Sept 2nd 2023 (13.00-15.30)</li>
+        <li>Friday Workshop: Friday, Sept 1nd 2023 (13.00-15.30)</li>
         </ul>";
 
         $bronze_desc = "<ul>
@@ -210,6 +210,109 @@ class HomeController extends BaseController
         ];
 
 //        return $request->ip();
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function committee()
+    {
+        $data = [];
+        $data[] = [
+            'title' => "Advisor",
+            'users' => [
+                ['user' => 'bambang.irawan'],
+                ['user' => 'budi.yuli'],
+//                ['user' => 'arjono'],
+                ['user' => 'hariadi.hariawan'],
+                ['user' => 'irsad.andi'],
+            ],
+        ];
+
+        $data[] = [
+            'title' => "Executive",
+            'users' => [
+                ['user' => 'anggoro.budi', 'position' => 'Chairperson'],
+                ['user' => 'vita.yanti', 'position' => 'Vice chairperson'],
+//                ['user' => 'dyah.samti', 'position' => 'Secretary'],
+                ['user' => 'lucia.kris', 'position' => 'Treasurer'],
+                ['user' => 'hendry.purnasidha', 'position' => 'Sponsorship coordinator'],
+            ]
+        ];
+
+//        $data[] = [
+//            'title' => "Scientific Section",
+//            'users' => [
+//                ['user' => 'fera.hidayati', 'position' => 'Coordinator'],
+//                ['user' => 'lucia.kris'],
+//                ['user' => 'nahar.taufiq'],
+//                ['user' => 'putrika.prastuti'],
+//                ['user' => 'dyah.wulan'],
+//                ['user' => 'rizky.amalia'],
+//            ]
+//        ];
+//
+//        $data[] = [
+//            'title' => "Program Section",
+//            'users' => [
+//                ['user' => 'hendry.purnasidha', 'position' => 'Coordinator'],
+//                ['user' => 'hasanah.mumpuni'],
+//                ['user' => 'erika.maharani'],
+//                ['user' => 'annisa.tridamayanti'],
+//            ]
+//        ];
+
+//        $data[] = [
+//            'title' => "Registration Section",
+//            'users' => [
+//                ['user' => 'royhan.rozqie', 'position' => 'Coordinator'],
+//                ['user' => 'inggita.hanung'],
+//            ]
+//        ];
+
+//        $data[] = [
+//            'title' => "Publication, Website and Documentation Section",
+//            'users' => [
+//                ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
+//                ['user' => 'margono.gatot'],
+//                ['user' => 'firman.fauzan'],
+//            ]
+//        ];
+//
+//        $data[] = [
+//            'title' => "Logistic and Consumption Section",
+//            'users' => [
+//                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
+//                ['user' => 'indah.paranita'],
+//                ['user' => 'evita.devi'],
+//                ['user' => 'dyah.adhi'],
+//            ]
+//        ];
+//
+//        $data[] = [
+//            'title' => "Free Paper Section (Abstract, Oral Presentation and Proceeding)",
+//            'users' => [
+//                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
+//                ['user' => 'indah.paranita'],
+//                ['user' => 'evita.devi'],
+//                ['user' => 'dyah.adhi'],
+//            ]
+//        ];
+
+        $user = User::where('is_speaker', 1)
+            ->select('image', 'name', 'slug', 'desc')
+            ->get();
+
+        for ($i = 0; $i < count($data); $i++) {
+
+            for ($u = 0; $u < count($data[$i]['users']); $u++) {
+                $selected = $user->where('slug', $data[$i]['users'][$u]['user'])->first();
+
+                if ($selected) {
+                    $data[$i]['users'][$u]['data'] = $selected;
+                }
+            }
+        }
 
         $this->response['result'] = $data;
         return $this->response;

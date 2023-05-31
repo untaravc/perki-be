@@ -69,6 +69,7 @@ Route::group(['prefix' => 'pub'], function () {
 
     Route::get('get-job-types', [HomeController::class, 'job_types']);
     Route::get('speakers', [HomeController::class, 'speakers']);
+    Route::get('committee', [HomeController::class, 'committee']);
     Route::get('schedule', [HomeController::class, 'schedule']);
     Route::get('pricing', [HomeController::class, 'pricing']);
     Route::get('hero-banner', [HomeController::class, 'hero_banner']);
