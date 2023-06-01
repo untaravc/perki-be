@@ -3,11 +3,20 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
+use App\Mail\SendDefaultMail;
+use App\Models\MailLog;
+use App\Models\Transaction;
+use App\Models\TransactionDetail;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
+const MODE = 'dev'; // dev / prod
 
 class EmailServiceController extends Controller
 {
-    public function register(){
+    public function register()
+    {
         $data = [
             'name' => '',
             'link' => '',
@@ -15,7 +24,8 @@ class EmailServiceController extends Controller
         return view('email.jcu22.email-confirmation', $data);
     }
 
-    public function bill(){
+    public function bill()
+    {
         $data = [
             'name' => 'Budi',
             'link' => '',
@@ -23,11 +33,45 @@ class EmailServiceController extends Controller
         return view('email.jcu22.bill', $data);
     }
 
-    public function invoice(){
-        $data = [
-            'name' => 'Budi',
-            'link' => '',
+    public function invoice($transaction_id)
+    {
+        $data['transaction'] = Transaction::find($transaction_id);
+        $data['transaction_details'] = TransactionDetail::with('event')
+            ->orderBy('event_id')
+            ->whereTransactionId($transaction_id)
+            ->get();
+
+        $data['user'] = User::find($data['transaction']['user_id']);
+
+        $data['view'] = 'email.jcu22.invoice';
+        $data['email_subject'] = 'JCU 2023: Invoice ' . $data['transaction']['number'];
+
+        $mail_log = [
+            "email_sender"   => env("perki.yogyakarta@gmail.com"),
+            "email_receiver" => $data['user']['email'],
+            "receiver_name"  => $data['user']['name'],
+            "label"          => "invoice",
+            "category"       => null,
+            "title"          => $data['email_subject'],
+            "model"          => "transaction",
+            "model_id"       => $transaction_id,
+            "status"         => 1,
+            "sent_at"        => now(),
         ];
-        return view('email.jcu22.invoice', $data);
+
+        try {
+            if (MODE === "prod") {
+                Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
+            } else {
+                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+            }
+
+            MailLog::create($mail_log);
+        } catch (\Exception $exception) {
+            $mail_log['sent_at'] = null;
+            $mail_log['status'] = 2;
+
+            MailLog::create($mail_log);
+        }
     }
 }

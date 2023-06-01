@@ -20,6 +20,10 @@ class Transaction extends Model
     protected $guarded = [];
     protected $appends = ['last_time', 'status_label'];
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
     public function transaction_details()
     {
         return $this->hasMany(TransactionDetail::class);

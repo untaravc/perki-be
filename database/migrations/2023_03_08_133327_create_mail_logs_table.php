@@ -15,6 +15,16 @@ class CreateMailLogsTable extends Migration
     {
         Schema::create('mail_logs', function (Blueprint $table) {
             $table->id();
+            $table->string('email_sender');
+            $table->string('email_receiver');
+            $table->string('receiver_name')->nullable();
+            $table->string('label')->nullable();
+            $table->string('category')->nullable();
+            $table->string('title')->nullable();
+            $table->string('model')->nullable();
+            $table->string('model_id')->nullable();
+            $table->tinyInteger('status')->default(0);
+            $table->timestamp('sent_at')->nullable();
             $table->timestamps();
         });
     }

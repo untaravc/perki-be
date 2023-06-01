@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\System\EmailServiceController;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -24,5 +27,33 @@ class TransactionController extends Controller
             $data_content = $data_content->where('user_name', 'LIKE', '%' . $request->s . '%');
         }
         return $data_content;
+    }
+
+    public function confirm(Request $request){
+        $transaction = Transaction::where('status', '>', 100)
+//            ->where('status', '<', 200)
+            ->find($request->id);
+
+        if(!$transaction){
+            return $this->responseErrors('transaksi tidak dapat di proses.');
+        }
+
+        DB::transaction(function() use ($transaction){
+            $transaction->update([
+                'status' => 200,
+                'paid_at' => now()
+            ]);
+
+            TransactionDetail::whereTransactionId($transaction->id)
+                ->update([
+                    'status' => 200
+                ]);
+        });
+
+        // kirim invoice
+        $email = new EmailServiceController();
+        $email->invoice($transaction->id);
+
+        return $this->responseUpdate($transaction);
     }
 }

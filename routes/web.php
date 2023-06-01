@@ -15,3 +15,4 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('test-view', [EmailServiceController::class, 'invoice']);
 
 Route::get('event-init', [\App\Http\Controllers\System\EventInitController::class, 'event_init']);
+Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::class, 'invoice']);

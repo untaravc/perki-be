@@ -24,6 +24,8 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
 
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);
+
+    Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
 });
 // =========
 
