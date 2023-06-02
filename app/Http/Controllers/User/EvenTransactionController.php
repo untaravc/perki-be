@@ -257,6 +257,7 @@ class EvenTransactionController extends BaseController
     public function create_payment(Request $request)
     {
         $this->response['status'] = false;
+        $this->response['message'] = "Registration on review. Will be available in the next few days.";
         return $this->response;
 
         // validasi select halfday
