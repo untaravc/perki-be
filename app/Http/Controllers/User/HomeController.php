@@ -32,7 +32,10 @@ class HomeController extends BaseController
 
     public function schedule()
     {
-        $events = Event::whereSection('jcu23')->get();
+        $events = Event::with('schedule_details')
+            ->where('slug', 'symposium-jcu23-a1')
+            ->whereSection('jcu23')
+            ->get();
 
         $friday = [
             [
@@ -62,45 +65,51 @@ class HomeController extends BaseController
         ];
 
         $saturday = [
+//            [
+//                'date_start' => '',
+//                'date_end'   => '',
+//                'room_a'     => $events->where('slug', 'symposium-jcu23-apanel1')->first(),
+//                'room_b'     => $events->where('slug', 'symposium-jcu23-bpanel2')->first(),
+//            ],
             [
-                'date_start' => '2023-09-02 08:00:00',
-                'date_end'   => '2023-09-02 08:45:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-apanel1')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-bpanel2')->first(),
+                'date_start' => $events->where('slug', 'symposium-jcu23-a1')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a1')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a1')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-a2')->first(),
             ],
-            [
-                'date_start' => '2023-09-02 08:45:00',
-                'date_end'   => '2023-09-02 10:15:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a9')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b10')->first(),
-            ],
-            [
-                'date_start' => '2023-09-02 10:15:00',
-                'date_end'   => '2023-09-02 11:30:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a11')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b12')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 13:00:00',
-                'date_end'   => '2023-09-01 14:15:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 14:15:00',
-                'date_end'   => '2023-09-01 15:30:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
-            ],
+//            [
+//                'date_start' => '2023-09-02 08:45:00',
+//                'date_end'   => '2023-09-02 10:15:00',
+//                'room_a'     => $events->where('slug', 'symposium-jcu23-a9')->first(),
+//                'room_b'     => $events->where('slug', 'symposium-jcu23-b10')->first(),
+//            ],
+//            [
+//                'date_start' => '2023-09-02 10:15:00',
+//                'date_end'   => '2023-09-02 11:30:00',
+//                'room_a'     => $events->where('slug', 'symposium-jcu23-a11')->first(),
+//                'room_b'     => $events->where('slug', 'symposium-jcu23-b12')->first(),
+//            ],
+//            [
+//                'date_start' => '2023-09-01 13:00:00',
+//                'date_end'   => '2023-09-01 14:15:00',
+//                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
+//                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
+//            ],
+//            [
+//                'date_start' => '2023-09-01 14:15:00',
+//                'date_end'   => '2023-09-01 15:30:00',
+//                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
+//                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
+//            ],
         ];
 
         $workshop_half_day = $events->where('marker', 'workshop-jcu23-half-day')->flatten();
         $workshop_full_day = $events->where('marker', 'workshop-jcu23-full-day')->flatten();
 
-        $this->response['result']['friday'] = $friday;
+//        $this->response['result']['friday'] = $friday;
         $this->response['result']['saturday'] = $saturday;
-        $this->response['result']['workshop_half_day'] = $workshop_half_day;
-        $this->response['result']['workshop_full_day'] = $workshop_full_day;
+//        $this->response['result']['workshop_half_day'] = $workshop_half_day;
+//        $this->response['result']['workshop_full_day'] = $workshop_full_day;
 
         return $this->response;
     }

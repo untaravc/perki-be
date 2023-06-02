@@ -256,6 +256,9 @@ class EvenTransactionController extends BaseController
 
     public function create_payment(Request $request)
     {
+        $this->response['status'] = false;
+        return $this->response;
+
         // validasi select halfday
         $items = $request->items;
         if ($items['symposium'] && $items['workshop_half_day'] == null) {

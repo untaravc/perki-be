@@ -30,4 +30,9 @@ class Event extends Model
         "subtitle",
         "body",
     ];
+
+    public function schedule_details(){
+        return $this->hasMany(self::class, 'parent_id', 'id')
+            ->where('data_type', 'schedule-detail');
+    }
 }
