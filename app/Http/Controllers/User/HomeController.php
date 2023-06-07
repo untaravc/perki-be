@@ -242,17 +242,55 @@ class HomeController extends BaseController
                 "subtitle" => "Integrating Technology In Cardiovascular Disease Management: Towards A Harmonic Fusion",
                 "date"     => "Yogyakarta, 1-3 September 2023",
                 "poster"   => '/storage/img/1st_announcement.jpg',
+                "buttons"  => [
+                    [
+                        "theme" => "light",
+                        "text" => "Schedule",
+                        "link" => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text" => "Register",
+                        "link" => "/register",
+                    ]
+                ]
             ],
             [
-                "title"    => "12 Symposium and 8 Workshop",
-                "subtitle" => "Jogja Cardiology Update 2023 in Conjunction with the Sixth Jogja INternational CARdiovascular TOpic Series 2023",
-                "date"     => "Tentrem Hotel, Yogyakarta",
-                "poster"   => '/storage/img/1st_announcement.jpg',
-            ], [
+                "title"    => "Call for Abstracts",
+                "subtitle" => "For Cardiologist, Resident, GP, Medical Student, and Researcher",
+                "date"     => "Submit before: 17 July 2023",
+                "poster"   => '/storage/img/abstract_jcu.jpeg',
+                "buttons"  => [
+                    [
+                        "theme" => "dark",
+                        "text" => "Submit Now",
+                        "link" => "/abstracts",
+                    ]
+                ]
+            ],
+//            [
+//                "title"    => "12 Symposium and 8 Workshop",
+//                "subtitle" => "Jogja Cardiology Update 2023 in Conjunction with the Sixth Jogja INternational CARdiovascular TOpic Series 2023",
+//                "date"     => "Tentrem Hotel, Yogyakarta",
+//                "poster"   => '/storage/img/1st_announcement.jpg',
+//            ],
+            [
                 "title"    => "The Sixth JINCARTOS",
                 "subtitle" => "Jogja International Cardiovascular Topic Series: Scientific Breakthrough in Hearth Rhythm Disorder",
                 "date"     => "12 Symposium & 8 Workshop",
                 "poster"   => '/storage/img/1st_announcement.jpg',
+                "buttons"  => [
+                    [
+                        "theme" => "light",
+                        "text" => "Schedule",
+                        "link" => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text" => "Register",
+                        "link" => "/register",
+                    ]
+                ]
             ]
         ];
 
