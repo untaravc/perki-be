@@ -32,84 +32,122 @@ class HomeController extends BaseController
 
     public function schedule()
     {
-        $events = Event::with('schedule_details')
-            ->where('slug', 'symposium-jcu23-a1')
+        $events = Event::with('schedule_details', 'schedules')
             ->whereSection('jcu23')
             ->get();
 
-        $friday = [
-            [
-                'date_start' => '2023-09-01 08:30:00',
-                'date_end'   => '2023-09-01 08:50:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-ab1')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-ab1')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 08:50:00',
-                'date_end'   => '2023-09-01 09:10:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-ab2')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-ab2')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 09:10:00',
-                'date_end'   => '2023-09-01 10:25:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a1')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b2')->first(),
-            ],
-            [
-                'date_start' => '2023-09-01 10:40:00',
-                'date_end'   => '2023-09-01 11:55:00',
-                'room_a'     => $events->where('slug', 'symposium-jcu23-a3')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-b4')->first(),
-            ],
-        ];
-
         $saturday = [
-//            [
-//                'date_start' => '',
-//                'date_end'   => '',
-//                'room_a'     => $events->where('slug', 'symposium-jcu23-apanel1')->first(),
-//                'room_b'     => $events->where('slug', 'symposium-jcu23-bpanel2')->first(),
-//            ],
             [
                 'date_start' => $events->where('slug', 'symposium-jcu23-a1')->first()['date_start'],
                 'date_end'   => $events->where('slug', 'symposium-jcu23-a1')->first()['date_end'],
                 'room_a'     => $events->where('slug', 'symposium-jcu23-a1')->first(),
-                'room_b'     => $events->where('slug', 'symposium-jcu23-a2')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b2')->first(),
             ],
-//            [
-//                'date_start' => '2023-09-02 08:45:00',
-//                'date_end'   => '2023-09-02 10:15:00',
-//                'room_a'     => $events->where('slug', 'symposium-jcu23-a9')->first(),
-//                'room_b'     => $events->where('slug', 'symposium-jcu23-b10')->first(),
-//            ],
-//            [
-//                'date_start' => '2023-09-02 10:15:00',
-//                'date_end'   => '2023-09-02 11:30:00',
-//                'room_a'     => $events->where('slug', 'symposium-jcu23-a11')->first(),
-//                'room_b'     => $events->where('slug', 'symposium-jcu23-b12')->first(),
-//            ],
-//            [
-//                'date_start' => '2023-09-01 13:00:00',
-//                'date_end'   => '2023-09-01 14:15:00',
-//                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
-//                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
-//            ],
-//            [
-//                'date_start' => '2023-09-01 14:15:00',
-//                'date_end'   => '2023-09-01 15:30:00',
-//                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
-//                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
-//            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a3')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a3')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a3')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b4')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a5')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a5')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a7')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a7')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a9')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a9')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a9')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b10')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a11')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a11')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a11')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b12')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a13')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a13')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a13')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b14')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a15')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a15')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a15')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b16')->first(),
+            ],
         ];
 
-        $workshop_half_day = $events->where('marker', 'workshop-jcu23-half-day')->flatten();
-        $workshop_full_day = $events->where('marker', 'workshop-jcu23-full-day')->flatten();
+        $saturday = [
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a1')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a1')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a1')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b2')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a3')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a3')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a3')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b4')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a5')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a5')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a5')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b6')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a7')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a7')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a7')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b8')->first(),
+            ],
+        ];
 
-//        $this->response['result']['friday'] = $friday;
+        $sunday = [
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a9')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a9')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a9')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b10')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a11')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a11')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a11')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b12')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a13')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a13')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a13')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b14')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu23-a15')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu23-a15')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu23-a15')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu23-b16')->first(),
+            ],
+        ];
+
+        $workshop_half_day_1 = $events->where('marker', 'workshop-jcu23-half-day-1')->sortByDesc('title')->flatten();
+        $workshop_half_day_2 = $events->where('marker', 'workshop-jcu23-half-day-2')->flatten();
+
+        $this->response['result']['workshop_half_day_1'] = $workshop_half_day_1;
+        $this->response['result']['workshop_half_day_2'] = $workshop_half_day_2;
         $this->response['result']['saturday'] = $saturday;
-//        $this->response['result']['workshop_half_day'] = $workshop_half_day;
-//        $this->response['result']['workshop_full_day'] = $workshop_full_day;
+        $this->response['result']['sunday'] = $sunday;
 
         return $this->response;
     }
@@ -249,29 +287,31 @@ class HomeController extends BaseController
             ]
         ];
 
-//        $data[] = [
-//            'title' => "Scientific Section",
-//            'users' => [
-//                ['user' => 'fera.hidayati', 'position' => 'Coordinator'],
-//                ['user' => 'lucia.kris'],
-//                ['user' => 'nahar.taufiq'],
-//                ['user' => 'putrika.prastuti'],
-//                ['user' => 'dyah.wulan'],
-//                ['user' => 'rizky.amalia'],
-//            ]
-//        ];
-//
-//        $data[] = [
-//            'title' => "Program Section",
-//            'users' => [
-//                ['user' => 'hendry.purnasidha', 'position' => 'Coordinator'],
-//                ['user' => 'hasanah.mumpuni'],
-//                ['user' => 'erika.maharani'],
-//                ['user' => 'annisa.tridamayanti'],
-//            ]
-//        ];
+        $names = [];
 
-//        $data[] = [
+        $names[] = [
+            'title' => "Scientific Section",
+            'users' => [
+                ['user' => 'fera.hidayati', 'position' => 'Coordinator'],
+                ['user' => 'lucia.kris'],
+                ['user' => 'nahar.taufiq'],
+                ['user' => 'putrika.prastuti'],
+                ['user' => 'dyah.wulan'],
+//                ['user' => 'rizky.amalia'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Program Section",
+            'users' => [
+                ['user' => 'hendry.purnasidha', 'position' => 'Coordinator'],
+                ['user' => 'hasanah.mumpuni'],
+                ['user' => 'erika.maharani'],
+//                ['user' => 'annisa.tridamayanti'],
+            ]
+        ];
+
+//        $names[] = [
 //            'title' => "Registration Section",
 //            'users' => [
 //                ['user' => 'royhan.rozqie', 'position' => 'Coordinator'],
@@ -279,41 +319,40 @@ class HomeController extends BaseController
 //            ]
 //        ];
 
-//        $data[] = [
-//            'title' => "Publication, Website and Documentation Section",
-//            'users' => [
-//                ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
+        $names[] = [
+            'title' => "Publication, Website and Documentation Section",
+            'users' => [
+                ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
 //                ['user' => 'margono.gatot'],
 //                ['user' => 'firman.fauzan'],
-//            ]
-//        ];
-//
-//        $data[] = [
-//            'title' => "Logistic and Consumption Section",
-//            'users' => [
-//                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Logistic and Consumption Section",
+            'users' => [
+                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
 //                ['user' => 'indah.paranita'],
 //                ['user' => 'evita.devi'],
-//                ['user' => 'dyah.adhi'],
-//            ]
-//        ];
-//
-//        $data[] = [
-//            'title' => "Free Paper Section (Abstract, Oral Presentation and Proceeding)",
-//            'users' => [
-//                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
+                ['user' => 'dyah.adhi'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Free Paper Section (Abstract, Oral Presentation and Proceeding)",
+            'users' => [
+                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
 //                ['user' => 'indah.paranita'],
 //                ['user' => 'evita.devi'],
-//                ['user' => 'dyah.adhi'],
-//            ]
-//        ];
+                ['user' => 'dyah.adhi'],
+            ]
+        ];
 
         $user = User::where('is_speaker', 1)
             ->select('image', 'name', 'slug', 'desc')
             ->get();
 
         for ($i = 0; $i < count($data); $i++) {
-
             for ($u = 0; $u < count($data[$i]['users']); $u++) {
                 $selected = $user->where('slug', $data[$i]['users'][$u]['user'])->first();
 
@@ -323,7 +362,18 @@ class HomeController extends BaseController
             }
         }
 
-        $this->response['result'] = $data;
+        for ($i = 0; $i < count($names); $i++) {
+            for ($u = 0; $u < count($names[$i]['users']); $u++) {
+                $selected = $user->where('slug', $names[$i]['users'][$u]['user'])->first();
+
+                if ($selected) {
+                    $names[$i]['users'][$u]['data'] = $selected;
+                }
+            }
+        }
+
+        $this->response['result']['photos'] = $data;
+        $this->response['result']['name'] = $names;
         return $this->response;
     }
 }

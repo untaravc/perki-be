@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\DashboardController;
 
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\HomeController;
@@ -21,6 +22,9 @@ Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('profile', [AdminAuthController::class, 'profile']);
+
+    Route::get('dashboard-stat', [DashboardController::class, 'statistics']);
+    Route::get('dashboard-chart', [DashboardController::class, 'chart']);
 
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);

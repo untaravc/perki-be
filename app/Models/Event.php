@@ -35,4 +35,9 @@ class Event extends Model
         return $this->hasMany(self::class, 'parent_id', 'id')
             ->where('data_type', 'schedule-detail');
     }
+
+    public function schedules(){
+        return $this->hasMany(self::class, 'parent_id', 'id')
+            ->where('data_type', 'schedule');
+    }
 }

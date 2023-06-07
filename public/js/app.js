@@ -5427,18 +5427,9 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/dashboard/Index.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  created: function created() {
-    console.log('ok');
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/untaravivichahya/Project/Perki/perki-be/resources/js/views/dashboard/Index.vue: Missing semicolon. (26:18)\n\n\u001b[0m \u001b[90m 24 |\u001b[39m     }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 25 |\u001b[39m     created() {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 26 |\u001b[39m         loadStat() {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 27 |\u001b[39m             \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mauthGet(\u001b[32m'adm/dashboard-stat'\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m 28 |\u001b[39m         }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 29 |\u001b[39m     }\u001b[0m\n    at instantiate (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:653:32)\n    at constructor (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:946:12)\n    at Parser.raise (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:3270:19)\n    at Parser.semicolon (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:3637:10)\n    at Parser.parseExpressionStatement (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13090:10)\n    at Parser.parseStatementContent (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12687:19)\n    at Parser.parseStatementLike (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12549:17)\n    at Parser.parseStatementListItem (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12529:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13121:61)\n    at Parser.parseBlockBody (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13114:10)\n    at Parser.parseBlock (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13102:10)\n    at Parser.parseFunctionBody (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11924:24)\n    at Parser.parseFunctionBodyAndFinish (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11910:10)\n    at Parser.parseMethod (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11868:31)\n    at Parser.parseObjectMethod (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11767:19)\n    at Parser.parseObjPropValue (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11800:23)\n    at Parser.parsePropertyDefinition (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11734:17)\n    at Parser.parseObjectLike (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11649:21)\n    at Parser.parseExprAtom (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:11159:23)\n    at Parser.parseExprSubscripts (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10872:23)\n    at Parser.parseUpdate (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10855:21)\n    at Parser.parseMaybeUnary (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10831:23)\n    at Parser.parseMaybeUnaryOrPrivate (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10669:61)\n    at Parser.parseExprOps (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10674:23)\n    at Parser.parseMaybeConditional (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10651:23)\n    at Parser.parseMaybeAssign (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10612:21)\n    at /Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10582:39\n    at Parser.allowInAnd (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12252:16)\n    at Parser.parseMaybeAssignAllowIn (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:10582:17)\n    at Parser.parseExportDefaultExpression (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13758:22)\n    at Parser.parseExport (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13663:25)\n    at Parser.parseStatementContent (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12661:27)\n    at Parser.parseStatementLike (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12549:17)\n    at Parser.parseModuleItem (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12526:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13121:36)\n    at Parser.parseBlockBody (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:13114:10)\n    at Parser.parseProgram (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12437:10)\n    at Parser.parseTopLevel (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:12427:25)\n    at Parser.parse (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:14245:10)\n    at parse (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/parser/lib/index.js:14286:38)\n    at parser (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/core/lib/parser/index.js:41:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/core/lib/transformation/normalize-file.js:64:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/core/lib/transformation/index.js:21:50)\n    at run.next (<anonymous>)\n    at transform (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/@babel/core/lib/transform.js:22:41)\n    at transform.next (<anonymous>)\n    at step (/Users/untaravivichahya/Project/Perki/perki-be/node_modules/gensync/index.js:261:32)\n    at /Users/untaravivichahya/Project/Perki/perki-be/node_modules/gensync/index.js:273:13");
 
 /***/ }),
 
@@ -6173,74 +6164,102 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _vm._m(0);
+  return _c("div", {
+    staticClass: "p-4 sm:ml-64"
+  }, [_c("div", {
+    staticClass: "px-4 pt-16 py-6"
+  }, [_c("div", {
+    staticClass: "grid grid-cols-12 gap-2"
+  }, [_c("div", {
+    staticClass: "grid-cols-2 col-span-5 grid gap-2"
+  }, [_c("div", {
+    staticClass: "bg-white rounded-lg p-4 min-h-100px"
+  }, [_c("div", {
+    staticClass: "flex mb-2"
+  }, [_c("div", {
+    staticClass: "bg-yellow-300 rounded-lg flex justify-center items-center p-3 inline-block"
+  }, [_c("unicon", {
+    attrs: {
+      name: "bell",
+      width: "20px",
+      height: "20px"
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "font-bold"
+  }, [_vm._v("\n                        Transaksi Berhasil\n                    ")]), _vm._v(" "), _c("div", {
+    staticClass: "text-lg font-bold"
+  }, [_vm._v("\n                        100\n                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white rounded-lg p-4 min-h-100px"
+  }, [_c("div", {
+    staticClass: "flex mb-2"
+  }, [_c("div", {
+    staticClass: "bg-yellow-300 rounded-lg flex justify-center items-center p-3 inline-block"
+  }, [_c("unicon", {
+    attrs: {
+      name: "bell",
+      width: "20px",
+      height: "20px"
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "font-bold"
+  }, [_vm._v("\n                        Total Pendapatan\n                    ")]), _vm._v(" "), _c("div", {
+    staticClass: "text-lg font-bold"
+  }, [_vm._v("\n                        100\n                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white rounded-lg p-4 min-h-100px"
+  }, [_c("div", {
+    staticClass: "flex mb-2"
+  }, [_c("div", {
+    staticClass: "bg-yellow-300 rounded-lg flex justify-center items-center p-3 inline-block"
+  }, [_c("unicon", {
+    attrs: {
+      name: "bell",
+      width: "20px",
+      height: "20px"
+    }
+  })], 1)]), _vm._v(" "), _c("div", [_vm._v("\n                        Peserta Total\n                    ")]), _vm._v(" "), _c("div", {
+    staticClass: "text-lg font-bold"
+  }, [_vm._v("\n                        100\n                    ")])]), _vm._v(" "), _c("div", {
+    staticClass: "bg-white rounded-lg p-4 min-h-100px"
+  }, [_c("div", {
+    staticClass: "flex mb-2"
+  }, [_c("div", {
+    staticClass: "bg-yellow-300 rounded-lg flex justify-center items-center p-3 inline-block"
+  }, [_c("unicon", {
+    attrs: {
+      name: "bell",
+      width: "20px",
+      height: "20px"
+    }
+  })], 1)]), _vm._v(" "), _c("div", {
+    staticClass: "font-bold"
+  }, [_vm._v("\n                        Peserta Aktif\n                    ")]), _vm._v(" "), _c("div", {
+    staticClass: "text-lg font-bold"
+  }, [_vm._v("\n                        100\n                    ")])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)])])]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "p-4 sm:ml-64"
+    staticClass: "col-span-7"
   }, [_c("div", {
-    staticClass: "p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14"
+    staticClass: "bg-white rounded-xl p-2"
+  }, [_vm._v("\n                    chart\n                ")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col-span-8"
   }, [_c("div", {
-    staticClass: "grid grid-cols-3 gap-4 mb-4"
+    staticClass: "bg-white rounded-xl p-2"
+  }, [_vm._v("\n                    Event Group\n                ")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", {
+    staticClass: "col-span-4"
   }, [_c("div", {
-    staticClass: "flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center h-24 rounded bg-gray-50 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "grid grid-cols-2 gap-4 mb-4"
-  }, [_c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center h-48 mb-4 rounded bg-gray-50 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "grid grid-cols-2 gap-4"
-  }, [_c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])]), _vm._v(" "), _c("div", {
-    staticClass: "flex items-center justify-center rounded bg-gray-50 h-28 dark:bg-gray-800"
-  }, [_c("p", {
-    staticClass: "text-2xl text-gray-400 dark:text-gray-500"
-  }, [_vm._v("+")])])])])]);
+    staticClass: "bg-white rounded-xl p-2"
+  }, [_vm._v("\n                    User Group\n                ")])]);
 }];
 render._withStripped = true;
 
