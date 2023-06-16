@@ -14,4 +14,8 @@ class TransactionDetail extends Model
     public function event(){
         return $this->belongsTo(Event::class);
     }
+
+    public function transaction(){
+        return $this->belongsTo(Transaction::class);
+    }
 }

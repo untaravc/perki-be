@@ -341,4 +341,13 @@ class AuthController extends BaseController
 
         return $this->response;
     }
+
+    public function package_active(Request $request){
+        $user = $request->user();
+
+        $code = job_type_code_map($user['job_type_code']);
+
+        $this->response['result'] = $code;
+        return $this->response;
+    }
 }

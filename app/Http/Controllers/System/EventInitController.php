@@ -14,10 +14,10 @@ class EventInitController extends Controller
         $symposium = $this->symposium();
         $this->insert_event($symposium);
 
-        $full_day = $this->workshop_full_day();
+        $full_day = $this->workshop_afternoon();
         $this->insert_event($full_day);
 
-        $half_day = $this->workshop_half_day();
+        $half_day = $this->workshop_morning();
         $this->insert_event($half_day);
 
         return 'event updated';
@@ -39,11 +39,15 @@ class EventInitController extends Controller
                 "prices"     => [
                     [
                         "job_type_code" => "DRSP",
-                        "price"         => 2750000,
+                        "price"         => 1500000,
                     ],
                     [
                         "job_type_code" => "DRGN",
-                        "price"         => 1500000,
+                        "price"         => 1000000,
+                    ],
+                    [
+                        "job_type_code" => "MHSA",
+                        "price"         => 500000,
                     ],
                 ],
                 "children"   => [
@@ -653,8 +657,14 @@ class EventInitController extends Controller
         ];
     }
 
-    private function workshop_full_day()
+    private function workshop_afternoon()
     {
+        $ws_price = [
+            ["job_type_code" => "DRSP", "price" => 1000000,],
+            ["job_type_code" => "DRGN", "price" => 750000,],
+            ["job_type_code" => "MHSA", "price" => 750000,],
+        ];
+
         return [
             [
                 "name"       => "Workshop 5",
@@ -701,16 +711,7 @@ class EventInitController extends Controller
                     ]
                 ],
                 "has_price"  => 1,
-                "prices"     => [
-                    [
-                        "job_type_code" => "DRSP",
-                        "price"         => 1250000,
-                    ],
-                    [
-                        "job_type_code" => "DRGN",
-                        "price"         => 750000,
-                    ],
-                ],
+                "prices"     => $ws_price,
             ],
             [
                 "name"       => "Workshop 6",
@@ -719,8 +720,8 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-6",
                 "marker"     => "workshop-jcu23-half-day-2",
-                "date_start" => "2023-09-03 09:00:00",
-                "date_end"   => "2023-09-03 15:30:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
                 "children"   => [
                     [
                         "name"       => "Workshop 6 First Session",
@@ -757,16 +758,7 @@ class EventInitController extends Controller
                     ]
                 ],
                 "has_price"  => 1,
-                "prices"     => [
-                    [
-                        "job_type_code" => "DRSP",
-                        "price"         => 1250000,
-                    ],
-                    [
-                        "job_type_code" => "DRGN",
-                        "price"         => 750000,
-                    ],
-                ],
+                "prices"     => $ws_price,
             ],
             [
                 "name"       => "Workshop 7",
@@ -775,8 +767,8 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-7",
                 "marker"     => "workshop-jcu23-half-day-2",
-                "date_start" => "2023-09-03 09:00:00",
-                "date_end"   => "2023-09-03 15:30:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
                 "children"   => [
                     [
                         "name"       => "Workshop 7 First Session",
@@ -813,16 +805,7 @@ class EventInitController extends Controller
                     ]
                 ],
                 "has_price"  => 1,
-                "prices"     => [
-                    [
-                        "job_type_code" => "DRSP",
-                        "price"         => 1250000,
-                    ],
-                    [
-                        "job_type_code" => "DRGN",
-                        "price"         => 750000,
-                    ],
-                ],
+                "prices"     => $ws_price,
             ],
             [
                 "name"       => "Workshop 8",
@@ -831,8 +814,8 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-8",
                 "marker"     => "workshop-jcu23-half-day-2",
-                "date_start" => "2023-09-03 09:00:00",
-                "date_end"   => "2023-09-03 15:30:00",
+                "date_start" => "2023-09-01 13:00:00",
+                "date_end"   => "2023-09-01 16:00:00",
                 "children"   => [
                     [
                         "name"       => "Workshop 8 First Session",
@@ -869,22 +852,19 @@ class EventInitController extends Controller
                     ]
                 ],
                 "has_price"  => 1,
-                "prices"     => [
-                    [
-                        "job_type_code" => "DRSP",
-                        "price"         => 1250000,
-                    ],
-                    [
-                        "job_type_code" => "DRGN",
-                        "price"         => 750000,
-                    ],
-                ],
+                "prices"     => $ws_price,
             ]
         ];
     }
 
-    private function workshop_half_day()
+    private function workshop_morning()
     {
+        $ws_price = [
+            ["job_type_code" => "DRSP", "price" => 1000000,],
+            ["job_type_code" => "DRGN", "price" => 750000,],
+            ["job_type_code" => "MHSA", "price" => 750000,],
+        ];
+
         return [
             [
                 "name"       => "Workshop 1",
@@ -893,8 +873,10 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-1",
                 "marker"     => "workshop-jcu23-half-day-1",
-                "date_start" => "2023-09-01 13:00:00",
-                "date_end"   => "2023-09-01 16:00:00",
+                "date_start" => "2023-09-01 08:00:00",
+                "date_end"   => "2023-09-01 11:00:00",
+                "has_price"  => 1,
+                "prices"     => $ws_price,
                 "children"   => [
                     [
                         "name"       => "Workshop 1 First Session",
@@ -938,8 +920,10 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-2",
                 "marker"     => "workshop-jcu23-half-day-1",
-                "date_start" => "2023-09-01 13:00:00",
-                "date_end"   => "2023-09-01 16:00:00",
+                "date_start" => "2023-09-01 08:00:00",
+                "date_end"   => "2023-09-01 11:00:00",
+                "has_price"  => 1,
+                "prices"     => $ws_price,
                 "children"   => [
                     [
                         "name"       => "Workshop 2 First Session",
@@ -983,8 +967,10 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-3",
                 "marker"     => "workshop-jcu23-half-day-1",
-                "date_start" => "2023-09-01 13:00:00",
-                "date_end"   => "2023-09-01 16:00:00",
+                "date_start" => "2023-09-01 08:00:00",
+                "date_end"   => "2023-09-01 11:00:00",
+                "has_price"  => 1,
+                "prices"     => $ws_price,
                 "children"   => [
                     [
                         "name"       => "Workshop 3 First Session",
@@ -1028,8 +1014,10 @@ class EventInitController extends Controller
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-4",
                 "marker"     => "workshop-jcu23-half-day-1",
-                "date_start" => "2023-09-01 13:00:00",
-                "date_end"   => "2023-09-01 16:00:00",
+                "date_start" => "2023-09-01 08:00:00",
+                "date_end"   => "2023-09-01 11:00:00",
+                "has_price"  => 1,
+                "prices"     => $ws_price,
                 "children"   => [
                     [
                         "name"       => "Workshop 4 First Session",

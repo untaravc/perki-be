@@ -12,3 +12,25 @@ if (!function_exists('prefix_zero')) {
         return $repeat . $int;
     }
 }
+
+/**
+ * membuat id dengan awalan 0 sebanyak minimal $digit
+ */
+if (!function_exists('job_type_code_map')) {
+    function job_type_code_map(string $job_type_code)
+    {
+        switch ($job_type_code){
+            case "DRSP":
+                $code = "DRSP"; break;
+            case "MHSA":
+            case "RSDN":
+            case "COAS":
+            case "ITRS":
+                $code = "MHSA"; break;
+            default:
+                $code = 'DRGN';
+        }
+
+        return $code;
+    }
+}

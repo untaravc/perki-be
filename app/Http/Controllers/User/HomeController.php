@@ -155,43 +155,42 @@ class HomeController extends BaseController
     public function pricing()
     {
         $platinum_desc = "<ul>
-        <li>Symposium: Friday, Sept 1st 2023 (09.00-15.00) - Saturday, Sept 2nd 2023 (08.00-11.30)</li>
-        <li>Friday Workshop: Friday, Sep 1st 2023 (13.00-15.30)</li>
-        <li>Sunday Workshop: Sunday, September 3rd 2023 (09.00-15.30)</li>
+            <li>Morning Workshop: Friday, Sep 1st 2023 (08.00-11.30)</li>
+            <li>Afternoon Workshop: Friday, Sep 1st 2023 (13.00-15.30)</li>
+            <li>Symposium: Saturday, Sept 2nd 2023 (08.00-15.30) - Sunday, Sept 3rd 2023 (08.00-15.30)</li>
         </ul>";
 
         $gold_desc = "<ul>
-        <li>Simposium: Friday, Sept 1st 2023 (09.00-15.00) - Saturday, Sept 2nd 2023 (08.00-11.30)</li>
-        <li>Friday Workshop: Friday, Sept 1nd 2023 (13.00-15.30)</li>
+            <li>Symposium: Saturday, Sept 2nd 2023 (08.00-15.30) - Sunday, Sept 3rd 2023 (08.00-15.30)</li>
         </ul>";
 
         $bronze_desc = "<ul>
-        <li>Sunday Workshop: Sunday, Sept 3rd 2023 (09.00-15.30)</li>
+            <li>Workshop: Friday, Sep 1st 2023 (08.00-11.30) or (13.00-15.30)</li>
         </ul>";
 
         $data["platinum"] = [
             "name"          => "Platinum",
             "desc"          => $platinum_desc,
-            "price_drgn"    => 2000000,
-            "price_drgn_eb" => 1750000,
-            "price_drsp"    => 4000000,
-            "price_drsp_eb" => 3750000,
-
+            "price_drgn"    => 2250000,
+            "price_drgn_eb" => 2000000,
+            "price_drsp"    => 3250000,
+            "price_drsp_eb" => 3000000,
         ];
+
         $data["gold"] = [
             "name"          => "Gold",
             "desc"          => $gold_desc,
-            "price_drgn"    => 1750000,
-            "price_drgn_eb" => 1500000,
-            "price_drsp"    => 3000000,
-            "price_drsp_eb" => 2750000,
+            "price_drsp"    => 1500000,
+            "price_drgn"    => 1000000,
+            "price_stdn"    => 500000,
         ];
+
         $data["bronze"] = [
-            "name"          => "Bronze",
+            "name"          => "Add-On",
             "desc"          => $bronze_desc,
             "price_drgn"    => 750000,
             "price_drgn_eb" => 0,
-            "price_drsp"    => 1250000,
+            "price_drsp"    => 1000000,
             "price_drsp_eb" => 0,
         ];
 

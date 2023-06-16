@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 const DRSP_BUNDLE_PRICE = 3750000;
 const DRGN_BUNDLE_PRICE = 1750000;
@@ -400,4 +401,262 @@ class EvenTransactionController extends BaseController
         return $this->response;
     }
 
+    public function event_list_2(Request $request)
+    {
+        $transaction = Transaction::whereNumber($request->transaction_number)->first();
+
+        if (!$transaction) {
+            $this->sendError(422, 'Transaction number required.');
+        }
+
+        $job_type_code = $transaction->job_type_code === 'DRSP' ? 'DRSP' : 'DRGN';
+
+        $prices = Price::whereModel('event')
+            ->whereSection('jcu23')
+            ->whereJobTypeCode($job_type_code)
+            ->get();
+
+        $symposium = Event::whereSection('jcu23')
+            ->whereMarker('symposium-jcu23')
+            ->orderBy('name')
+            ->select(
+                'id',
+                'name',
+                'title',
+                'marker',
+                'slug',
+                'date_start',
+                'date_end',
+            )->first();
+
+        $symposium_price = $prices->where('model_id', $symposium->id)->first();
+        $symposium['price'] = $symposium_price['price'];
+
+        // Morning workshop
+        $morning_workshop = Event::whereSection('jcu23')
+            ->whereMarker('workshop-jcu23-half-day-1')
+            ->orderBy('name')
+            ->select(
+                'id',
+                'name',
+                'title',
+                'marker',
+                'slug',
+                'date_start',
+                'date_end',
+            )->get();
+
+        foreach ($morning_workshop as $morning) {
+            $price = $prices->where('model_id', $morning->id)->first();
+            $morning->setAttribute('price', $price['price']);
+        }
+
+        // Afternoon workshop
+        $afternoon_workshop = Event::whereSection('jcu23')
+            ->whereMarker('workshop-jcu23-half-day-2')
+            ->orderBy('name')
+            ->select(
+                'id',
+                'name',
+                'title',
+                'marker',
+                'slug',
+                'date_start',
+                'date_end',
+            )->get();
+
+        foreach ($afternoon_workshop as $afternoon) {
+            $price = $prices->where('model_id', $afternoon->id)->first();
+            $afternoon->setAttribute('price', $price['price']);
+        }
+
+        $data['symposium'] = $symposium;
+        $data['morning_workshop'] = $morning_workshop;
+        $data['afternoon_workshop'] = $afternoon_workshop;
+
+        $this->response['result'] = [
+            'items'       => $data,
+            'transaction' => $transaction
+        ];
+        return $this->response;
+    }
+
+    public function calculate_price_2(Request $request)
+    {
+        $user = $request->user();
+        $data = [];
+        $transaction = Transaction::whereNumber($request->transaction_number)
+            ->whereUserId($user['id'])
+            ->first();
+
+        if (!$transaction) {
+            $this->sendError(422, 'Transaction not found.');
+        }
+
+        $items = $request->items;
+
+        // gold
+        if ($request->package === 'gold') {
+            $data[] = $this->get_symposium($items['symposium'], $transaction);
+            $package_discount = 0;
+            $subtotal = collect($data)->sum('price');
+            $total = $subtotal - $package_discount;
+        }
+
+        // platinum
+        if ($request->package == 'platinum') {
+            if (isset($items['symposium'])) {
+                $data[] = $this->get_symposium($items['symposium'], $transaction);
+            }
+
+            if (isset($items['morning_workshop'])) {
+                $data[] = $this->get_symposium($items['morning_workshop'], $transaction);
+            }
+
+            if (isset($items['afternoon_workshop'])) {
+                $data[] = $this->get_symposium($items['afternoon_workshop'], $transaction);
+            }
+
+            $package_discount = 0;
+            if (isset($items['morning_workshop']) && isset($items['afternoon_workshop'])) {
+                $package_discount = 250000;
+                if (now() < '2023-07-31 00:00:00') {
+                    $package_discount = 500000;
+                }
+            }
+
+            $subtotal = collect($data)->sum('price');
+            $total = $subtotal - $package_discount;
+        }
+
+        // add on
+        if ($request->package == 'add-on') {
+            if (isset($items['morning_workshop'])) {
+                $data[] = $this->get_symposium($items['morning_workshop'], $transaction);
+            }
+
+            if (isset($items['afternoon_workshop'])) {
+                $data[] = $this->get_symposium($items['afternoon_workshop'], $transaction);
+            }
+
+            $package_discount = 0;
+            $subtotal = collect($data)->sum('price');
+            $total = $subtotal - $package_discount;
+        }
+
+        $this->response['result'] = [
+            "transaction"      => $transaction,
+            "items"            => $data,
+            "subtotal"         => $subtotal,
+            "package_discount" => $package_discount,
+            "total"            => $total,
+        ];
+
+        return $this->response;
+    }
+
+    private function get_symposium($symposium_id, Transaction $transaction)
+    {
+        $symposium = Event::find($symposium_id);
+
+        if (!$symposium) {
+            $this->sendError(422, "Simposium tidak sesuai.");
+        }
+
+        $job_type_code = job_type_code_map($transaction->job_type_code);
+
+        $price = Price::whereJobTypeCode($job_type_code)
+            ->whereModel('event')
+            ->whereModelId($symposium_id)
+            ->first();
+
+        if (!$price) {
+            $this->sendError(422, "Harga simposium tidak ada.");
+        }
+
+        return [
+            'name'   => $symposium->name,
+            'marker' => $symposium->marker,
+            'price'  => $price['price']
+        ];
+    }
+
+    public function create_payment_2(Request $request)
+    {
+        $items = $request->items;
+        switch ($request->package) {
+            case 'platinum':
+                if (!$items['symposium'] || !$items['morning_workshop'] || !$items['afternoon_workshop']) {
+                    $this->sendError(422, "Silakan pilih workshop");
+                }
+                break;
+            case 'add-on':
+                if (!$items['morning_workshop'] && !$items['afternoon_workshop']) {
+                    $this->sendError(422, "Silakan pilih workshop");
+                }
+                break;
+            case 'gold':
+                if (!$items['symposium']) {
+                    $this->sendError(422, "Silakan pilih simposium");
+                }
+                break;
+        }
+
+        $pricing = $this->calculate_price_2($request)['result'];
+
+        $transaction = Transaction::find($pricing['transaction']['id']);
+
+        $transaction_payload = [
+            'subtotal'       => $pricing['subtotal'],
+//            'voucher_code'     => $voucher_discount ? $request->voucher : null,
+//            'voucher_discount' => $voucher_discount ? $voucher_discount['price'] : null,
+//            'discount_amount'  => $discount ? $discount['price'] : null,
+            'total'          => $pricing['total'],
+            'status'         => 110,
+            'payment_method' => 'manual_transfer',
+        ];
+
+        $transaction->update($transaction_payload);
+
+        $item_ids = [];
+        foreach ($items as $item) {
+            $item_ids[] = $item;
+            $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
+                ->whereEventId($item)
+                ->first();
+
+            $event = Event::find($item);
+            if ($event) {
+                $price = Price::whereModel('event')
+                    ->whereModelId($item)
+                    ->whereJobTypeCode($transaction->job_type_code)
+                    ->first();
+
+                if (!$transaction_detail) {
+                    TransactionDetail::create([
+                        "section"        => $transaction->section,
+                        "transaction_id" => $transaction->id,
+                        "job_type_code"  => $transaction->job_type_code,
+                        "user_id"        => $transaction->user_id,
+                        "event_id"       => $item,
+                        "event_name"     => $event->name,
+                        "price"          => $price ? $price['price'] : 0,
+                        "status"         => $transaction->status,
+                    ]);
+                } else {
+                    $transaction_detail->update([
+                        "price"  => $price ? $price['price'] : 0,
+                        "status" => $transaction->status,
+                    ]);
+                }
+            }
+        }
+
+        // delete unused
+        TransactionDetail::whereTransactionId($transaction->id)
+            ->whereNotIn('event_id', $item_ids)
+            ->delete();
+
+        $this->sendPostResponse();
+    }
 }
