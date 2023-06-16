@@ -105,9 +105,7 @@ export default {
         },
     },
     created() {
-        loadStat() {
-            this.authGet('adm/dashboard-stat')
-        },
+
     }
 }
 </script>
