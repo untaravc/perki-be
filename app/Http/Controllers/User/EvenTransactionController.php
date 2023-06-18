@@ -474,9 +474,22 @@ class EvenTransactionController extends BaseController
         $data['morning_workshop'] = $morning_workshop;
         $data['afternoon_workshop'] = $afternoon_workshop;
 
+        // has symposium
+        $trx_symposium = TransactionDetail::whereUserId($transaction->user_id)
+            ->whereEventId($symposium->id)
+//            ->where('status', '>', 199)
+            ->first();
+
+        if ($trx_symposium) {
+            $has_symposium = true;
+        } else {
+            $has_symposium = false;
+        }
+
         $this->response['result'] = [
-            'items'       => $data,
-            'transaction' => $transaction
+            'items'         => $data,
+            'transaction'   => $transaction,
+            'has_symposium' => $has_symposium,
         ];
         return $this->response;
     }
@@ -495,28 +508,22 @@ class EvenTransactionController extends BaseController
 
         $items = $request->items;
 
-        // gold
-        if ($request->package === 'gold') {
-            $data[] = $this->get_symposium($items['symposium'], $transaction);
-            $package_discount = 0;
-            $subtotal = collect($data)->sum('price');
-            $total = $subtotal - $package_discount;
+        if ($request->package !== 'add-on') {
+            if (isset($items['symposium'])) {
+                $data[] = $this->get_symposium($items['symposium'], $transaction);
+            }
+        }
+
+        if (isset($items['morning_workshop'])) {
+            $data[] = $this->get_symposium($items['morning_workshop'], $transaction);
+        }
+
+        if (isset($items['afternoon_workshop'])) {
+            $data[] = $this->get_symposium($items['afternoon_workshop'], $transaction);
         }
 
         // platinum
         if ($request->package == 'platinum') {
-            if (isset($items['symposium'])) {
-                $data[] = $this->get_symposium($items['symposium'], $transaction);
-            }
-
-            if (isset($items['morning_workshop'])) {
-                $data[] = $this->get_symposium($items['morning_workshop'], $transaction);
-            }
-
-            if (isset($items['afternoon_workshop'])) {
-                $data[] = $this->get_symposium($items['afternoon_workshop'], $transaction);
-            }
-
             $package_discount = 0;
             if (isset($items['morning_workshop']) && isset($items['afternoon_workshop'])) {
                 $package_discount = 250000;
@@ -527,18 +534,8 @@ class EvenTransactionController extends BaseController
 
             $subtotal = collect($data)->sum('price');
             $total = $subtotal - $package_discount;
-        }
 
-        // add on
-        if ($request->package == 'add-on') {
-            if (isset($items['morning_workshop'])) {
-                $data[] = $this->get_symposium($items['morning_workshop'], $transaction);
-            }
-
-            if (isset($items['afternoon_workshop'])) {
-                $data[] = $this->get_symposium($items['afternoon_workshop'], $transaction);
-            }
-
+        } else {
             $package_discount = 0;
             $subtotal = collect($data)->sum('price');
             $total = $subtotal - $package_discount;
@@ -587,17 +584,17 @@ class EvenTransactionController extends BaseController
         switch ($request->package) {
             case 'platinum':
                 if (!$items['symposium'] || !$items['morning_workshop'] || !$items['afternoon_workshop']) {
-                    $this->sendError(422, "Silakan pilih workshop");
+                    $this->sendError(422, "Please select workshop!");
                 }
                 break;
             case 'add-on':
                 if (!$items['morning_workshop'] && !$items['afternoon_workshop']) {
-                    $this->sendError(422, "Silakan pilih workshop");
+                    $this->sendError(422, "Please select workshop!");
                 }
                 break;
             case 'gold':
                 if (!$items['symposium']) {
-                    $this->sendError(422, "Silakan pilih simposium");
+                    $this->sendError(422, "Please select symposium!");
                 }
                 break;
         }

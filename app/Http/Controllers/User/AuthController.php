@@ -38,9 +38,12 @@ class AuthController extends BaseController
 
         // update data user
         $user->update([
-            'name'          => $request->name,
-            'phone'         => $request->phone,
-            "job_type_code" => $request->job_type_code,
+            'name'           => $request->name,
+            'phone'          => $request->phone,
+            'city'           => $request->city,
+            'institution'    => $request->institution,
+            "job_type_code"  => $request->job_type_code,
+            "identity_photo" => $request->identity_photo,
         ]);
 
         // jika sudah ada, langsung buat transaksi, status 100 (pending)
@@ -59,12 +62,15 @@ class AuthController extends BaseController
         // Jika sudah login.
         if (isset($request['logged_user_id'])) {
             $validator = Validator::make($request, [
-                "name"          => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
-                "email"         => "required|email",
-                "phone"         => "required|numeric|digits_between:8,15",
-                "institution"   => "required|string",
-                "city"          => "required|string",
-                "job_type_code" => "required",
+                "name"           => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
+                "email"          => "required|email",
+                "phone"          => "required|numeric|digits_between:8,15",
+                "institution"    => "required|string",
+                "city"           => "required|string",
+                "job_type_code"  => "required",
+                'identity_photo' => 'required_if:job_type_code,MHSA,COAS'
+            ], [
+                "identity_photo.required" => "The identity photo field is required"
             ]);
 
             if ($validator->fails()) {
@@ -72,13 +78,16 @@ class AuthController extends BaseController
             }
         } else {
             $validator = Validator::make($request, [
-                "name"          => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
-                "email"         => "required|email|unique:users",
-                "phone"         => "required|numeric|digits_between:8,15",
-                "institution"   => "required|string",
-                "city"          => "required|string",
-                "job_type_code" => "required",
-                "password"      => "required|min:6|confirmed",
+                "name"           => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
+                "email"          => "required|email|unique:users",
+                "phone"          => "required|numeric|digits_between:8,15",
+                "institution"    => "required|string",
+                "city"           => "required|string",
+                "job_type_code"  => "required",
+                "password"       => "required|min:6|confirmed",
+                'identity_photo' => 'required_if:job_type_code,MHSA,COAS'
+            ], [
+                "identity_photo.required" => "The identity photo field is required"
             ]);
 
             if ($validator->fails()) {
@@ -143,6 +152,7 @@ class AuthController extends BaseController
             'institution',
             'city',
             'job_type_code',
+            'identity_photo',
         ])
             ->find($request->user()['id']);
 
@@ -342,7 +352,8 @@ class AuthController extends BaseController
         return $this->response;
     }
 
-    public function package_active(Request $request){
+    public function package_active(Request $request)
+    {
         $user = $request->user();
 
         $code = job_type_code_map($user['job_type_code']);

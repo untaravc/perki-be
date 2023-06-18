@@ -39,6 +39,7 @@ class User extends Authenticatable
         "status",
         "remember_token",
         "slug",
+        "identity_photo",
     ];
 
     /**

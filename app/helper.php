@@ -23,9 +23,7 @@ if (!function_exists('job_type_code_map')) {
             case "DRSP":
                 $code = "DRSP"; break;
             case "MHSA":
-            case "RSDN":
             case "COAS":
-            case "ITRS":
                 $code = "MHSA"; break;
             default:
                 $code = 'DRGN';
