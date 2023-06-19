@@ -17,6 +17,128 @@ class SpeakerInitController extends Controller
     {
         $data = [
             [
+                'name'  => 'dr. Anggia Endah S, Sp.JP(K)',
+                'slug'  => 'anggia.endah',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/anggia.endah.jpg',
+            ],
+            [
+                'name'  => 'Dr. dr. Anggoro Budi Hartopo.,Ph.D, Sp.PD, Sp.JP',
+                'slug'  => 'anggoro.budi',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/anggoro.budi.jpg',
+            ],
+            [
+                'name'  => 'dr. Arditya Damarkusuma, M.Med(ClinEpi), Sp.JP',
+                'slug'  => 'arditya.damarkusuma',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/arditya.damarkusuma.jpg',
+            ],
+            [
+                'name'  => 'dr. Bagus Andi Pramono, Sp.JP',
+                'slug'  => 'bagus.andi',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/bagus.andi.jpg',
+            ],
+            [
+                'name'  => 'dr. Dini Paramita, Sp.JP',
+                'slug'  => 'dini.paramita',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/dini.paramita.jpg',
+            ],
+            [
+                'name'  => 'Dr. dr. Hariadi Hariawan, Sp.PD(K), Sp.JP(K)',
+                'slug'  => 'hariadi.hariawan',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/hariadi.hariawan.jpg',
+            ],
+            [
+                'name'  => 'Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
+                'slug'  => 'lucia.kris',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.jpg',
+            ],
+            [
+                'name'  => 'Dr. dr. Nahar Taufiq, Sp.JP(K)',
+                'slug'  => 'nahar.taufiq',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/nahar.taufiq.jpg',
+            ],
+            [
+                'name'  => 'dr. Dyah Adhi Kusumastuti, Sp.JP',
+                'slug'  => 'dyah.adhi',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.adhi.jpg',
+            ],
+            [
+                'name'  => 'dr. Dyah Samti Mayasari, PhD, Sp.JP',
+                'slug'  => 'dyah.samti',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.samti.jpg',
+            ],
+            [
+                'name'  => 'dr. Dyah Wulan Anggrahini, Ph.D, Sp.JP(K)',
+                'slug'  => 'dyah.wulan',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.wulan.jpg',
+            ],
+            [
+                'name'  => 'dr. Erika Maharani, SpJP(K)',
+                'slug'  => 'erika.maharani',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.jpeg',
+            ],
+            [
+                'name'  => 'dr. Firandi Saputra, Sp.JP',
+                'slug'  => 'firandi.saputra',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/firandi.saputra.jpg',
+            ],
+            [
+                'name'  => 'dr. Firman Fauzan, Sp.JP',
+                'slug'  => 'firman.fauzan',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/firman.fauzan.jpg',
+            ],
+            [
+                'name'  => 'dr. Gagah Buana Putra, Sp.JP',
+                'slug'  => 'gagah.buana',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/gagah.buana.jpg',
+            ],
+            [
+                'name'  => 'dr. Galuh Retno, Sp.JP',
+                'slug'  => 'galuh.retno',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/galuh.retno.webp',
+            ],
+            [
+                'name'  => 'dr. Hari Yusti L, Sp.JP(K)',
+                'slug'  => 'hari.yusti',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/hari.yusti.jpg',
+            ],
+            [
+                'name'  => 'dr. Hasanah Mumpuni, SpPD, SpJP(K)',
+                'slug'  => 'hasanah.mumpuni',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/hasanah.mumpuni.jpg',
+            ],
+            [
+                'name'  => 'dr. Hendry Purnasidha Bagaswoto Sp.JP(K)',
+                'slug'  => 'hendry.purnasidha',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.jpeg',
+            ],
+            [
+                'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
+                'slug'  => 'irsad.andi',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.jpg',
+            ],
+
+
+            [
                 'name'  => 'Prof. Dr. dr. Budi Yuli Setianto, Sp.PD.KKV, Sp.JP(K)',
                 'slug'  => 'budi.yuli',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
@@ -29,64 +151,10 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/bambang.irawan.jpeg',
             ],
             [
-                'name'  => 'dr. Hasanah Mumpuni, SpPD, SpJP(K)',
-                'slug'  => 'hasanah.mumpuni',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hasanah.mumpuni.jpg',
-            ],
-            [
-                'name'  => 'Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
-                'slug'  => 'lucia.kris',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.jpg',
-            ],
-            [
-                'name'  => 'Dr. dr. Hariadi Hariawan, Sp.PD(K), Sp.JP(K)',
-                'slug'  => 'hariadi.hariawan',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hariadi.hariawan.jpg',
-            ],
-            [
-                'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
-                'slug'  => 'irsad.andi',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.jpg',
-            ],
-            [
-                'name'  => 'Dr. dr. Nahar Taufiq, Sp.JP(K)',
-                'slug'  => 'nahar.taufiq',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/nahar.taufiq.jpg',
-            ],
-            [
-                'name'  => 'dr. Erika Maharani, SpJP(K)',
-                'slug'  => 'erika.maharani',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.jpeg',
-            ],
-            [
                 'name'  => 'Dr.Med dr. Putrika Prastuti Ratna Gharini Sp.JP (K)',
                 'slug'  => 'putrika.prastuti',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/putrika.prastuti.jpg',
-            ],
-            [
-                'name'  => 'dr. Dyah Wulan Anggrahini, Ph.D, Sp.JP(K)',
-                'slug'  => 'dyah.wulan',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.wulan.jpg',
-            ],
-            [
-                'name'  => 'Dr. dr. Anggoro Budi Hartopo.,Ph.D, Sp.PD, Sp.JP',
-                'slug'  => 'anggoro.budi',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/anggoro.budi.jpg',
-            ],
-            [
-                'name'  => 'dr. Hendry Purnasidha Bagaswoto Sp.JP(K)',
-                'slug'  => 'hendry.purnasidha',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.jpeg',
             ],
             [
                 'name'  => 'dr. Real Kusumanjaya Marsam, Sp.JP(K)',
@@ -117,18 +185,6 @@ class SpeakerInitController extends Controller
                 'slug'  => 'gahan.satwiko',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/gahan.satwiko.jpg',
-            ],
-            [
-                'name'  => 'dr. Firandi Saputra, Sp.JP',
-                'slug'  => 'firandi.saputra',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/firandi.saputra.jpg',
-            ],
-            [
-                'name'  => 'dr. Dyah Adhi Kusumastuti, Sp.JP',
-                'slug'  => 'dyah.adhi',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.adhi.jpg',
             ],
         ];
 

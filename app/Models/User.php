@@ -42,21 +42,11 @@ class User extends Authenticatable
         "identity_photo",
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -73,5 +63,10 @@ class User extends Authenticatable
                     return 'Perawat';
             }
         }
+    }
+
+    public function success_transactions(){
+        return $this->hasMany(Transaction::class)->where('status', '>', 199)
+            ->where('status', '<', 299);
     }
 }

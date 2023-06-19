@@ -260,13 +260,8 @@ class AuthController extends BaseController
             ->whereStatus(100)
             ->first();
 
-        if ($trx) {
-            return $trx;
-        }
-
         $payload = [
             "section"       => "jcu23",
-            "number"        => null,
             "user_id"       => $user->id,
             "user_name"     => $request->name,
             "user_phone"    => $request->phone,
@@ -274,6 +269,11 @@ class AuthController extends BaseController
             "job_type_code" => $request->job_type_code,
             "status"        => 100,
         ];
+
+        if ($trx) {
+            $trx->update($payload);
+            return $trx;
+        }
 
         $trx = Transaction::create($payload);
 

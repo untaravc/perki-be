@@ -25,6 +25,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
 
     Route::get('dashboard-stat', [DashboardController::class, 'statistics']);
     Route::get('dashboard-chart', [DashboardController::class, 'chart']);
+    Route::get('dashboard-event-purchase', [DashboardController::class, 'event_purchase']);
 
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);

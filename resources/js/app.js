@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 import 'flowbite';
+
 import Vue from 'vue'
 window.Vue = require('vue').default;
 

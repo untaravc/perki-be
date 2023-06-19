@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Transaction;
+use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,18 +13,15 @@ use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
 {
     public function statistics(){
-        $data['speakers'] = User::where('is_speaker', 1)->count();
-        $data['member'] = User::where('is_speaker', '!==', 1)->count();
         $data['transaction_success'] = Transaction::where('status', '>=', 200)->where('status', '<',300)->count();
-        $data['transaction_pending'] = Transaction::where('status', '>=', 100)->where('status', '<',200)->count();
+        $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)->where('status', '<',300)->sum('total');
 
-        $member = User::where('job_type_code', '!=', null)
-            ->select('job_type_code', DB::raw('count(*) as total'))
-            ->groupBy('job_type_code')
-            ->get();
+        $data['member'] = User::where('is_speaker', '!==', 1)->count();
+        $data['member_purchase'] = User::where('is_speaker', '!==', 1)
+            ->whereHas('success_transactions')
+            ->count();
 
         $this->response['result']['stat'] = $data;
-        $this->response['result']['member'] = $member;
         return $this->response;
     }
 
@@ -73,6 +72,25 @@ class DashboardController extends Controller
 
         $this->response['result'] = $array;
         $this->response['total'] = $trx_day_total;
+        return $this->response;
+    }
+
+    public function event_purchase(){
+        $events = Event::whereDataType('product')
+            ->orderBy('name')
+            ->select(
+                'id',
+                'name',
+            )
+            ->withCount([
+                'transaction_success',
+                'transaction_success_std',
+                'transaction_success_gp',
+                'transaction_success_sp',
+                ])
+            ->get();
+
+        $this->response['result'] = $events;
         return $this->response;
     }
 }

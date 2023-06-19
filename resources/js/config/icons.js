@@ -3,6 +3,9 @@ import {
     uniBell,
     uniClipboardAlt,
     uniCheck,
+    uniChart,
+    uniCheckCircle,
+    uniCreditCard,
     uniDashboard,
     uniDatabaseAlt,
     uniEllipsisH,
@@ -15,7 +18,8 @@ import {
     uniSetting,
     uniSearch,
     uniTimes,
-    uniTrash
+    uniTrash,
+    uniUsersAlt
 } from 'vue-unicons/dist/icons'
 
 export default [
@@ -23,6 +27,9 @@ export default [
     uniBell,
     uniClipboardAlt,
     uniCheck,
+    uniChart,
+    uniCreditCard,
+    uniCheckCircle,
     uniDashboard,
     uniDatabaseAlt,
     uniEllipsisH,
@@ -35,5 +42,6 @@ export default [
     uniSetting,
     uniSearch,
     uniTimes,
-    uniTrash
+    uniTrash,
+    uniUsersAlt
 ]
