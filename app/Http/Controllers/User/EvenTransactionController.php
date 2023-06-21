@@ -394,7 +394,7 @@ class EvenTransactionController extends BaseController
             ->count();
 
         $data['abstracts'] = Post::whereUserId($user['id'])
-            ->whereIn('category', ['case_report', 'research'])
+            ->whereIn('category', ['case_report', 'research', 'systematic_review'])
             ->count();
 
         $this->response['result'] = $data;
