@@ -801,7 +801,7 @@ class EventInitController extends Controller
         return [
             [
                 "name"       => "Workshop 5",
-                "title"      => "OMG My Patient Got Metabolic Acidosis While in Ventilator !! Let's Talk About Acid Base Imbalance and Mechanical Ventilation in ICCU”",
+                "title"      => "Hey, your patient is in acidosis! Don’t you realize it? Take this workshop and I will help you!",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-5",
@@ -811,7 +811,7 @@ class EventInitController extends Controller
                 "children"   => [
                     [
                         "name"       => "Workshop 5 First Session",
-                        "title"      => "Interpreting Blood Gas Analysis and Hemodynamic Consequences of Acid Base Imbalance",
+                        "title"      => "Interpretation of blood gas analysis in ICCU : finally I recognize you acidosis !",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -822,7 +822,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 5 Second Session",
-                        "title"      => "Basic Mechanism in Mechanical ventilation and Intial Settings",
+                        "title"      => "Effect of acidosis on hemodynamics and the cardiovascular system and what are the causes ?",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -833,7 +833,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 5 Third Session",
-                        "title"      => "Tackling the common cause of Acid-Base Imbalance and Optimizing Mechanical ventilation in ICCU",
+                        "title"      => "How to deal with acidosis in ICCU : When do we correct and the role of mechanical ventilation?",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -895,7 +895,7 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 7",
-                "title"      => "Maximizing Cardiovascular Health : A Comprehensive Approach to Outpatient Cardiac Rehabilitation Programs",
+                "title"      => "Excercise Stress Test: How to Session",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-7",
@@ -916,7 +916,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 7 Second Session",
-                        "title"      => "Exercise Stress Test : Right Modality for the Right Person",
+                        "title"      => "Exercise Stress Test: Right Modality for the Right Person",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -927,7 +927,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 7 Third Session",
-                        "title"      => "Treadmill Test : Form A to Z How to Session",
+                        "title"      => "Treadmill Test: Form A to Z How to Session",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -942,7 +942,7 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 8",
-                "title"      => "ECG Courses in Emergency Care",
+                "title"      => "Emerging Trends in Atrial Fibrillation Management : From Stroke Prevention to Latest Method of Ablation",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-8",
@@ -952,7 +952,7 @@ class EventInitController extends Controller
                 "children"   => [
                     [
                         "name"       => "Workshop 8 First Session",
-                        "title"      => "Dealing with Tachyarrhtymias in Clinical Practice : How should we handle it?",
+                        "title"      => "Atrial Fibrillation Management : From Drug, Ablation, to Devices",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -963,7 +963,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 8 Second Session",
-                        "title"      => "Tackling the Bradyarrhytmia in ER",
+                        "title"      => "Effectiveness and Safety of Direct Anticoagulation Therapy in Frail Patients with Atrial Fibrillation",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -974,7 +974,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 8 Third Session",
-                        "title"      => "Identifying ACS and ECG-Mimicking STEMI in Emergency Room",
+                        "title"      => "DOAC: When to Stop or to Re-start ?",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1002,6 +1002,7 @@ class EventInitController extends Controller
             [
                 "name"       => "Workshop 1",
                 "title"      => "Update Management of ACS in 2023: What’s New from the Guideline ?",
+                "subtitle"   => "Acute Coronary Syndrome",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-1",
@@ -1048,7 +1049,7 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 2",
-                "title"      => "Emerging Trends in Atrial Fibrillation Management : From Stroke Prevention to Latest Method of Ablation",
+                "title"      => "ECG Courses in Emergency Care",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-2",
@@ -1060,7 +1061,7 @@ class EventInitController extends Controller
                 "children"   => [
                     [
                         "name"       => "Workshop 2 First Session",
-                        "title"      => "Atrial Fibrillation Management : From Drug, Ablation, to Devices",
+                        "title"      => "Deadly ECG in Tachyarrhytmia and Bradyarrhytmia in Emergency Care : How should we handle it?",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1071,7 +1072,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 2 Second Session",
-                        "title"      => "Effectiveness and Safety of Direct Anticoagulation Therapy in Frail Patients with Atrial Fibrillation",
+                        "title"      => "Identifying ACS and ECG-Mimicking STEMI in Emergency Room",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1082,7 +1083,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 2 Third Session",
-                        "title"      => "DOAC : When to Stop or to Re-start ?",
+                        "title"      => "Miscellaneous ECG in Emergency Care",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1095,7 +1096,7 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 3",
-                "title"      => "Translating Transthoracal Echocardiography into Clinical Practice in Adult and Pediatric Congenital Heart Disease",
+                "title"      => "Late Breaking Science in Adult CHD : Focus on Interatrial Abnormality",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-3",
@@ -1107,7 +1108,7 @@ class EventInitController extends Controller
                 "children"   => [
                     [
                         "name"       => "Workshop 3 First Session",
-                        "title"      => "Understanding Adult and Pediatric Congenital Heart Disease : From A to Z",
+                        "title"      => "Interatrial Abnormalities : Insights into Cardiac Embriology",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1118,7 +1119,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 3 Second Session",
-                        "title"      => "Assesment of Adult and Pediatric CHD : Focus on Echocardiography",
+                        "title"      => "Assesment of Adult CHD : Focus on Echocardiography",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1129,7 +1130,7 @@ class EventInitController extends Controller
                     ],
                     [
                         "name"       => "Workshop 3 Third Session",
-                        "title"      => "DEMO",
+                        "title"      => "PFO in Embolic Stroke of Undetermined Source (ESUS) and Migraine: Imaging and Indication for Closure",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
                         "speakers"   => "",
@@ -1142,7 +1143,7 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 4",
-                "title"      => "All contact-us shock in Emergency Care",
+                "title"      => "All about shock in Emergency Care",
                 "data_type"  => "product",
                 "section"    => "jcu23",
                 "slug"       => "workshop-half-day-4",

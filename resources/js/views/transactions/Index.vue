@@ -109,7 +109,7 @@ export default {
         return {
             data_content: {},
             filters:{
-                page: 2,
+                page: 1,
                 per_page: 10,
                 s: '',
                 status: '',
@@ -127,6 +127,9 @@ export default {
         applyFilter(filter){
             this.filters.status = filter.status
             this.loadDataContent();
+        },
+        loadThisPage(){
+            this.loadDataContent(this.filters.page);
         }
     },
     created() {

@@ -220,7 +220,7 @@ export default {
                 }).then((data) => {
                     if (data.status) {
                         this.modal.hide()
-                        this.$parent.loadDataContent();
+                        this.$parent.loadThisPage();
                     } else {
                         alert(data.message)
                     }
@@ -233,7 +233,7 @@ export default {
                     transaction_id: trx.id
                 }).then((data) => {
                     if (data.status) {
-                        this.$parent.loadDataContent();
+                        this.$parent.loadThisPage();
                     } else {
                         alert(data.message)
                     }
