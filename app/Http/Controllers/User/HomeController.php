@@ -267,7 +267,7 @@ class HomeController extends BaseController
             'users' => [
                 ['user' => 'anggoro.budi', 'position' => 'Chairperson'],
                 ['user' => 'vita.yanti', 'position' => 'Vice chairperson'],
-//                ['user' => 'dyah.samti', 'position' => 'Secretary'],
+                ['user' => 'dyah.samti', 'position' => 'Secretary'],
                 ['user' => 'lucia.kris', 'position' => 'Treasurer'],
                 ['user' => 'hendry.purnasidha', 'position' => 'Sponsorship coordinator'],
             ]
@@ -281,9 +281,8 @@ class HomeController extends BaseController
                 ['user' => 'fera.hidayati', 'position' => 'Coordinator'],
                 ['user' => 'lucia.kris'],
                 ['user' => 'nahar.taufiq'],
-                ['user' => 'putrika.prastuti'],
                 ['user' => 'dyah.wulan'],
-//                ['user' => 'rizky.amalia'],
+                ['user' => 'rizky.amalia'],
             ]
         ];
 
@@ -293,24 +292,24 @@ class HomeController extends BaseController
                 ['user' => 'hendry.purnasidha', 'position' => 'Coordinator'],
                 ['user' => 'hasanah.mumpuni'],
                 ['user' => 'erika.maharani'],
-//                ['user' => 'annisa.tridamayanti'],
+                ['user' => 'annisa.tridamayanti'],
             ]
         ];
 
-//        $names[] = [
-//            'title' => "Registration Section",
-//            'users' => [
-//                ['user' => 'royhan.rozqie', 'position' => 'Coordinator'],
-//                ['user' => 'inggita.hanung'],
-//            ]
-//        ];
+        $names[] = [
+            'title' => "Registration Section",
+            'users' => [
+                ['user' => 'royhan.rozqie', 'position' => 'Coordinator'],
+                ['user' => 'inggita.hanung'],
+            ]
+        ];
 
         $names[] = [
             'title' => "Publication, Website and Documentation Section",
             'users' => [
                 ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
-//                ['user' => 'margono.gatot'],
-//                ['user' => 'firman.fauzan'],
+                ['user' => 'margono.gatot'],
+                ['user' => 'firman.fauzan'],
             ]
         ];
 
@@ -318,8 +317,8 @@ class HomeController extends BaseController
             'title' => "Logistic and Consumption Section",
             'users' => [
                 ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
-//                ['user' => 'indah.paranita'],
-//                ['user' => 'evita.devi'],
+                ['user' => 'indah.paranita'],
+                ['user' => 'evita.devi'],
                 ['user' => 'dyah.adhi'],
             ]
         ];
@@ -327,12 +326,50 @@ class HomeController extends BaseController
         $names[] = [
             'title' => "Free Paper Section (Abstract, Oral Presentation and Proceeding)",
             'users' => [
-                ['user' => 'real.kusumanjaya', 'position' => 'Coordinator'],
-//                ['user' => 'indah.paranita'],
-//                ['user' => 'evita.devi'],
+                ['user' => 'gahan.satwiko', 'position' => 'Coordinator'],
+                ['user' => 'dyah.samti'],
+                ['user' => 'arditya.damarkusuma'],
+                ['user' => 'firandi.saputra'],
                 ['user' => 'dyah.adhi'],
             ]
         ];
+
+        $names[] = [
+            'title' => "Equipment, Exhibition, and Accommodation Section",
+            'users' => [
+                ['user' => 'putrika.prastuti', 'position' => 'Coordinator'],
+                ['user' => 'wahyu.himawan'],
+                ['user' => 'gagah.buana'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "The sixth JINCARTOS 2023",
+            'users' => [
+                ['user' => 'dyah.wulan', 'position' => 'Coordinator'],
+                ['user' => 'royhan.rozqie'],
+                ['user' => 'dyah.samti'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Alumni Gathering",
+            'users' => [
+                ['user' => 'bagus.andi', 'position' => 'Coordinator'],
+                ['user' => 'hari.yusti'],
+            ]
+        ];
+
+//        $names[] = [
+//            'title' => "Secretariat",
+//            'users' => [
+//                ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
+//                ['user' => 'aris.widaryanti'],
+//                ['user' => 'ice.suciati'],
+//                ['user' => 'beti.meitasari'],
+//                ['user' => 'intan.rengganis'],
+//            ]
+//        ];
 
         $user = User::where('is_speaker', 1)
             ->select('image', 'name', 'slug', 'desc')

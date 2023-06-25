@@ -118,7 +118,7 @@ class SpeakerInitController extends Controller
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/hari.yusti.jpg',
             ],
-            [
+            [ // 19
                 'name'  => 'dr. Hasanah Mumpuni, SpPD, SpJP(K)',
                 'slug'  => 'hasanah.mumpuni',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
@@ -130,11 +130,65 @@ class SpeakerInitController extends Controller
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.jpeg',
             ],
-            [
+            [ // 21
                 'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
                 'slug'  => 'irsad.andi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.jpg',
+            ],
+            [ // 22
+                'name'  => 'dr. Lidwina Tarigan, Sp.JP(K)',
+                'slug'  => 'lidwina.tarigan',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/lidwina.tarigan.jpg',
+            ],
+            [ // 23
+                'name'  => 'dr. Lima Peni, Sp.JP',
+                'slug'  => 'lima.peni',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/lima.peni.jpg',
+            ],
+            [ // 24
+                'name'  => 'dr. M Ulil, SpJP',
+                'slug'  => 'm.ulil',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/ulil.jpg',
+            ],
+            [ // 25
+                'name'  => 'dr. Muhammad Gahan Satwiko, Sp.JP, Ph.D',
+                'slug'  => 'gahan.satwiko',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/gahan.satwiko.jpg',
+            ],
+            [ // 26
+                'name'  => 'dr. M. Yulianto Sismoyo, Sp.JP',
+                'slug'  => 'yulianto.sismoyo',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/yulianto.sismoyo.jpg',
+            ],
+            [ // 27
+                'name'  => 'dr. Margono Gatot, Sp.JP(K)',
+                'slug'  => 'margono.gatot',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/margono.gatot.png',
+            ],
+            [ // 28
+                'name'  => 'dr. Muhammad Taufik Ismail, Sp.JP(K)',
+                'slug'  => 'taufik.ismail',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/taufik.ismail.jpeg',
+            ],
+            [ // 29
+                'name'  => 'dr. Pamrayogi Hutomo, SpJP',
+                'slug'  => 'pamrayogi.hutomo',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/pamrayogi.hutomo.jpg',
+            ],
+            [ // 30
+                'name'  => 'dr. Real Kusumanjaya Marsam, Sp.JP(K)',
+                'slug'  => 'real.kusumanjaya',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/real.kusumanjaya.jpg',
             ],
 
 
@@ -157,34 +211,10 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/putrika.prastuti.jpg',
             ],
             [
-                'name'  => 'dr. Real Kusumanjaya Marsam, Sp.JP(K)',
-                'slug'  => 'real.kusumanjaya',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/real.kusumanjaya.jpg',
-            ],
-            [
-                'name'  => 'dr. Muhammad Taufik Ismail, Sp.JP(K)',
-                'slug'  => 'taufik.ismail',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/taufik.ismail.jpeg',
-            ],
-            [
                 'name'  => 'dr. Vita Yanti Anggraeni, Sp.PD, Sp.JP, Ph.D',
                 'slug'  => 'vita.yanti',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/vita.yanti.jpeg',
-            ],
-            [
-                'name'  => 'dr. Fera Hidayati, Sp.JP',
-                'slug'  => 'fera.hidayati',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/fera.hidayati.jpeg',
-            ],
-            [
-                'name'  => 'dr. Muhammad Gahan Satwiko, Sp.JP, Ph.D',
-                'slug'  => 'gahan.satwiko',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/gahan.satwiko.jpg',
             ],
         ];
 
