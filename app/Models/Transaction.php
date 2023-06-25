@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 110 -> sudah memilih event
  * 120 -> sudah upload transfer proof
  * 200 -> sudah bayar
+ * 400 -> deleted
  */
 
 class Transaction extends Model
@@ -43,6 +44,7 @@ class Transaction extends Model
                 case 110: return 'Waiting payment';
                 case 120: return 'Waiting confirmation';
                 case 200: return 'Paid';
+                case 400: return 'Deleted';
             }
         }
     }

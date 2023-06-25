@@ -77,6 +77,7 @@ class DashboardController extends Controller
 
     public function event_purchase(){
         $events = Event::whereDataType('product')
+            ->where('status', 1)
             ->orderBy('name')
             ->select(
                 'id',
@@ -91,6 +92,13 @@ class DashboardController extends Controller
             ->get();
 
         $this->response['result'] = $events;
+        return $this->response;
+    }
+
+    public function sidebar_label(){
+        $data['transactions'] = Transaction::whereStatus(120)->count();
+
+        $this->response['result'] = $data;
         return $this->response;
     }
 }

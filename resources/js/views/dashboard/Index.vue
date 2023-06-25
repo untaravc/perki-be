@@ -1,8 +1,8 @@
 <template>
-    <div class="p-4 sm:ml-64">
-        <div class="px-4 pt-16 py-6">
+    <div class="p-2 md:p-4 sm:ml-64">
+        <div class="px-0 md:px-4 pt-16 py-6">
             <div class="grid grid-cols-12 gap-2">
-                <div class="grid-cols-2 col-span-5 grid gap-2">
+                <div class="grid-cols-2 md:col-span-5 col-span-12 grid gap-2">
                     <div class="bg-white rounded-lg p-4 min-h-100px">
                         <div class="flex mb-2">
                             <div class="bg-teal-500 rounded-lg flex justify-center items-center p-3 inline-block">
@@ -56,19 +56,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-span-7">
+                <div class="md:col-span-7 col-span-12">
                     <div class="bg-white rounded-xl p-2">
-                        chart
+                        <Chart :height="300"></Chart>
                     </div>
                 </div>
-                <div class="col-span-8">
+                <div class="md:col-span-8 col-span-12">
                     <div class="bg-white rounded-xl p-2">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
                                 class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-4 py-3">Event</th>
-                                <th scope="col" class="px-4 py-3">Participants</th>
+                                <th scope="col" class="px-4 py-3 text-center">Participants</th>
                                 <th scope="col" class="px-4 py-3 flex items-center">
                                     <div class="w-3 h-3 bg-blue-300 mx-1"></div>
                                     STD
@@ -81,25 +81,30 @@
                             </thead>
                             <tbody>
                             <tr class="border-b dark:border-gray-700" v-for="event in events">
-                                <td class="px-4 py-3">
+                                <td class="px-2 py-1">
                                     {{ event.name }}
                                 </td>
-                                <td class="px-4 py-3">
+                                <td class="px-2 py-1 text-center">
                                     {{ event.transaction_success_count }}
                                 </td>
-                                <td class="px-2 py-3 relative">
-                                    <div class="overflow-hidden h-4 mb-4 text-xs flex rounded bg-slate-200">
-                                        <div style="width: 10%"
-                                             class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-300">
-                                            {{ event.transaction_success_std_count }}
-                                        </div>
-                                        <div style="width: 15%"
-                                             class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
-                                            {{ event.transaction_success_gp_count }}
-                                        </div>
-                                        <div style="width: 25%"
-                                             class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600">
-                                            {{ event.transaction_success_sp_count }}
+                                <td class="px-2 py-1">
+                                    <div class="relative">
+                                        <div class="overflow-hidden h-4 my-1 text-xs flex rounded bg-slate-200">
+                                            <div v-if="event.transaction_success_std_count > 0"
+                                                 :style="'width: '+ event.transaction_success_std_count / event.transaction_success_count * 100 +'%'"
+                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-300">
+                                                {{ event.transaction_success_std_count }}
+                                            </div>
+                                            <div v-if="event.transaction_success_gp_count > 0"
+                                                 :style="'width: '+ event.transaction_success_gp_count / event.transaction_success_count * 100 +'%'"
+                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                                                {{ event.transaction_success_gp_count }}
+                                            </div>
+                                            <div v-if="event.transaction_success_sp_count > 0"
+                                                 :style="'width: '+ event.transaction_success_sp_count / event.transaction_success_count * 100 +'%'"
+                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600">
+                                                {{ event.transaction_success_sp_count }}
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -108,7 +113,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-span-4">
+                <div class="md:col-span-4 col-span-12">
                     <div class="bg-white rounded-xl p-2">
                         User Group
                     </div>
@@ -118,7 +123,10 @@
     </div>
 </template>
 <script>
+import Chart from './Chart'
+
 export default {
+    components: {Chart},
     data() {
         return {
             stat: {
@@ -139,9 +147,6 @@ export default {
                     this.stat = data.result.stat
                     this.member = data.result.member
                 })
-        },
-        loadChart() {
-            this.authGet('adm/dashboard-chart')
         },
         loadEventPurchase() {
             this.authGet('adm/dashboard-event-purchase')

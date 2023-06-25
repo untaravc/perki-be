@@ -89,8 +89,8 @@ const mixin = {
         },
         async authPost(uri, data) {
             let response = {};
-            let token = localStorage.getItem('user_token')
-            await this.$axios.post(this.base_api + uri, data, {
+            let token = localStorage.getItem('admin_token')
+            await axios.post(this.base_api + uri, data, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
@@ -112,8 +112,8 @@ const mixin = {
             let patchData = Object.assign({}, data)
 
             let response = '';
-            let token = localStorage.getItem('user_token')
-            await this.$axios.patch(this.base_api + uri, patchData, {
+            let token = localStorage.getItem('admin_token')
+            await axios.patch(this.base_api + uri, patchData, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
@@ -133,8 +133,8 @@ const mixin = {
         async authDelete(uri, data) {
             let response = '';
             let deleteData = Object.assign({}, data)
-            let token = localStorage.getItem('user_token')
-            await this.$axios.delete(this.base_api + uri, {
+            let token = localStorage.getItem('admin_token')
+            await axios.delete(this.base_api + uri, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 },

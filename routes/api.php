@@ -26,11 +26,13 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('dashboard-stat', [DashboardController::class, 'statistics']);
     Route::get('dashboard-chart', [DashboardController::class, 'chart']);
     Route::get('dashboard-event-purchase', [DashboardController::class, 'event_purchase']);
+    Route::get('sidebar-label', [DashboardController::class, 'sidebar_label']);
 
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
+    Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
 });
 // =========
 
@@ -59,7 +61,6 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('abstracts', [AbstractController::class, 'abstract_submit']);
     Route::post('abstracts/{id}', [AbstractController::class, 'abstract_update']);
     Route::delete('abstracts/{id}', [AbstractController::class, 'abstract_delete']);
-
 });
 // =========
 
@@ -75,6 +76,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () 
 // PUBLIC API
 Route::group(['prefix' => 'pub'], function () {
     Route::post('login', [UserAuthController::class, 'login']);
+    Route::post('logas', [UserAuthController::class, 'logas']);
     Route::post('login-by-google', [UserAuthController::class, 'login_by_google']);
     Route::post('verify-google', [HomeController::class, 'google']);
 

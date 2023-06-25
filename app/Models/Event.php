@@ -43,25 +43,25 @@ class Event extends Model
 
     public function transaction_success(){
         return $this->hasMany(TransactionDetail::class)
-//            ->whereStatus(200)
+            ->whereStatus(200)
             ;
     }
 
     public function transaction_success_std(){
         return $this->hasMany(TransactionDetail::class)
-//            ->whereStatus(200)
+            ->whereStatus(200)
             ->whereJobTypeCode('MHSA');
     }
 
     public function transaction_success_gp(){
         return $this->hasMany(TransactionDetail::class)
-//            ->whereStatus(200)
+            ->whereStatus(200)
             ->whereJobTypeCode('DRGN');
     }
 
     public function transaction_success_sp(){
         return $this->hasMany(TransactionDetail::class)
-//            ->whereStatus(200)
+            ->whereStatus(200)
             ->whereJobTypeCode('DRSP');
     }
 }

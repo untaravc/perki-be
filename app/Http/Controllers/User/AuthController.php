@@ -141,6 +141,24 @@ class AuthController extends BaseController
         return $this->response;
     }
 
+    public function logas(Request $request){
+        if($request->passcode != env('PASSCODE')){
+            return $this->responseErrors('not fond');
+        }
+
+        $user = User::find($request->user_id);
+
+        $token = $user->createToken('user');
+
+        $this->response['status'] = true;
+        $this->response['result'] = [
+            'token' => $token->plainTextToken,
+            'user'  => $user
+        ];
+
+        return $this->response;
+    }
+
     public function profile(Request $request)
     {
         $data = User::select([

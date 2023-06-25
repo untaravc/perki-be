@@ -33,8 +33,10 @@ class EmailServiceController extends Controller
         return view('email.jcu22.bill', $data);
     }
 
-    public function invoice($transaction_id)
+    public function invoice($transaction_id = null)
     {
+        $transaction_id = $transaction_id ?? 18;
+
         $data['transaction'] = Transaction::find($transaction_id);
         $data['transaction_details'] = TransactionDetail::with('event')
             ->orderBy('event_id')
@@ -46,8 +48,10 @@ class EmailServiceController extends Controller
         $data['view'] = 'email.jcu22.invoice';
         $data['email_subject'] = 'JCU 2023: Invoice ' . $data['transaction']['number'];
 
+//        return view($data['view'], $data);
+
         $mail_log = [
-            "email_sender"   => env("perki.yogyakarta@gmail.com"),
+            "email_sender"   => "perki.yogyakarta@gmail.com",
             "email_receiver" => $data['user']['email'],
             "receiver_name"  => $data['user']['name'],
             "label"          => "invoice",

@@ -112,6 +112,7 @@ export default {
                 page: 2,
                 per_page: 10,
                 s: '',
+                status: '',
             }
         }
     },
@@ -122,6 +123,10 @@ export default {
                 .then((data)=>{
                     this.data_content = data
                 })
+        },
+        applyFilter(filter){
+            this.filters.status = filter.status
+            this.loadDataContent();
         }
     },
     created() {

@@ -12,6 +12,29 @@
                     Actions
                 </th>
             </tr>
+            <tr>
+                <td class="px-2 py-2"></td>
+                <td class="px-2 py-2">
+                    <input type="text"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                </td>
+                <td class="px-2 py-2"></td>
+                <td class="px-2 py-2"></td>
+                <td class="px-2 py-2">
+                    <select name="" id="" v-model="filter.status"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option value="">ALL</option>
+                        <option value="100">Select Event</option>
+                        <option value="110">Waiting payment</option>
+                        <option value="120">Waiting confirmation</option>
+                        <option value="200">Paid</option>
+                        <option value="400">Deleted</option>
+                    </select>
+                </td>
+                <td class="px-2 py-2">
+
+                </td>
+            </tr>
             </thead>
             <tbody v-if="data_content.data">
             <tr class="border-b" v-for="(data, i) in data_content.data">
@@ -43,17 +66,13 @@
                                 aria-labelledby="apple-imac-27-dropdown-button">
                                 <li>
                                     <a href="#" @click="showModal(data)"
-                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Show</a>
+                                       class="block py-2 px-4 hover:bg-gray-100">Show</a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                    <a href="#" @click="deleteTransaction(data)"
+                                       class="block py-2 px-4 text-sm text-red-700 hover:bg-gray-100">Delete</a>
                                 </li>
                             </ul>
-                            <div class="py-1">
-                                <a href="#"
-                                   class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Delete</a>
-                            </div>
                         </div>
                     </div>
                 </td>
@@ -144,18 +163,29 @@
                                         </tr>
                                     </table>
                                 </div>
+
+                                <div class="mb-2 font-semibold">Event</div>
+                                <div class="border rounded-lg p-2">
+                                    <table class="w-full">
+                                        <tr v-for="event in data_detail.transaction_details">
+                                            <td>{{ event.event_name }}</td>
+                                            <td>
+                                                <span v-if="event.event">
+                                                    {{ event.event.date_start | formatDateTime }}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div
                         class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="button" @click="hideModal"
+                        <button type="button" @click="acceptTransaction"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                            Accept
-                        </button>
-                        <button type="button" @click="hideModal"
-                                class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">
-                            Decline
+                            <span v-if="data_detail.status !== 200">Accept</span>
+                            <span v-if="data_detail.status === 200">Resend Email</span>
                         </button>
                     </div>
                 </div>
@@ -169,6 +199,9 @@ export default {
         return {
             modal: '',
             data_detail: '',
+            filter: {
+                status: '',
+            }
         }
     },
     props: ['data_content'],
@@ -179,11 +212,43 @@ export default {
         },
         hideModal() {
             this.modal.hide()
+        },
+        acceptTransaction() {
+            if (confirm('Confirm payment?')) {
+                this.authPost('adm/transaction-confirm', {
+                    transaction_id: this.data_detail.id
+                }).then((data) => {
+                    if (data.status) {
+                        this.modal.hide()
+                        this.$parent.loadDataContent();
+                    } else {
+                        alert(data.message)
+                    }
+                })
+            }
+        },
+        deleteTransaction(trx) {
+            if (confirm('Delete transaction?')) {
+                this.authPatch('adm/transaction-delete', {
+                    transaction_id: trx.id
+                }).then((data) => {
+                    if (data.status) {
+                        this.$parent.loadDataContent();
+                    } else {
+                        alert(data.message)
+                    }
+                });
+            }
         }
     },
     mounted() {
         const $targetEl = document.getElementById('showModal');
         this.modal = new Modal($targetEl);
+    },
+    watch: {
+        'filter.status'(val) {
+            this.$parent.applyFilter(this.filter)
+        }
     }
 }
 </script>

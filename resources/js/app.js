@@ -13,6 +13,7 @@ import Unicon from 'vue-unicons/dist/vue-unicons-vue2.umd'
 import icons from './config/icons'
 Unicon.add(icons)
 
+window.Fire = new Vue();
 
 // router
 import VueRouter from 'vue-router'
