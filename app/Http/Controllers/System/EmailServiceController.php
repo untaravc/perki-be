@@ -11,8 +11,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-const MODE = 'dev'; // dev / prod
-
 class EmailServiceController extends Controller
 {
     public function register()
@@ -64,7 +62,7 @@ class EmailServiceController extends Controller
         ];
 
         try {
-            if (MODE === "prod") {
+            if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
             } else {
                 Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));

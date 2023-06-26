@@ -27,7 +27,8 @@ class PostController extends Controller
         if ($request->type == 'abstract') {
             $data_content = $data_content->whereIn('category', [
                 'case_report',
-                'research'
+                'research',
+                'systematic_review',
             ]);
         }
 
