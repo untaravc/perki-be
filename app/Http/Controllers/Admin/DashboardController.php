@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\Post;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
@@ -12,9 +13,10 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function statistics(){
-        $data['transaction_success'] = Transaction::where('status', '>=', 200)->where('status', '<',300)->count();
-        $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)->where('status', '<',300)->sum('total');
+    public function statistics()
+    {
+        $data['transaction_success'] = Transaction::where('status', '>=', 200)->where('status', '<', 300)->count();
+        $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)->where('status', '<', 300)->sum('total');
 
         $data['member'] = User::where('is_speaker', '!==', 1)->count();
         $data['member_purchase'] = User::where('is_speaker', '!==', 1)
@@ -25,7 +27,8 @@ class DashboardController extends Controller
         return $this->response;
     }
 
-    public function chart(){
+    public function chart()
+    {
         $default_diff = 30;
         $params['date_end'] = $request->end ?? date('Y-m-d');
         $params['date_start'] = $request->start ?? date('Y-m-d', strtotime($params['date_end'] . '-' . $default_diff . ' days'));
@@ -34,7 +37,7 @@ class DashboardController extends Controller
 
         $diff_day = round($datediff / (60 * 60 * 24));
 
-        $date = strtotime( $params['date_end'] . '+1 day');
+        $date = strtotime($params['date_end'] . '+1 day');
         $period = new \DatePeriod(
             new \DateTime(date("Y-m-d", strtotime("-" . $diff_day . " days", $date))),
             new \DateInterval('P1D'),
@@ -75,7 +78,8 @@ class DashboardController extends Controller
         return $this->response;
     }
 
-    public function event_purchase(){
+    public function event_purchase()
+    {
         $events = Event::whereDataType('product')
             ->where('status', 1)
             ->orderBy('name')
@@ -88,14 +92,42 @@ class DashboardController extends Controller
                 'transaction_success_std',
                 'transaction_success_gp',
                 'transaction_success_sp',
-                ])
+            ])
             ->get();
 
         $this->response['result'] = $events;
         return $this->response;
     }
 
-    public function sidebar_label(){
+    public function user_stat()
+    {
+        $user['register'] = User::where('is_speaker', 0)->whereType('user')->count();
+        $user['register_paid'] = User::whereHas('success_transactions')->count();
+
+        $user_job_type = User::select('job_type_code', DB::raw('count(*) as total'))
+            ->whereHas('success_transactions')
+            ->groupBy('job_type_code')
+            ->get();
+
+        $abstracts = Post::whereIn('category', [
+            'case_report',
+            'research',
+            'systematic_review',
+        ])->select('category', DB::raw('count(*) as total'))
+            ->groupBy('category')
+            ->get();
+
+        $this->response['result'] = [
+            "users"     => $user,
+            "abstracts" => $abstracts,
+            "type_code" => $user_job_type,
+        ];
+
+        return $this->response;
+    }
+
+    public function sidebar_label()
+    {
         $data['transactions'] = Transaction::whereStatus(120)->count();
 
         $this->response['result'] = $data;

@@ -6,7 +6,7 @@
                     <div class="bg-white rounded-lg p-4 min-h-100px">
                         <div class="flex mb-2">
                             <div class="bg-teal-500 rounded-lg flex justify-center items-center p-3 inline-block">
-                                <unicon name="check-circle" width="30px" fill="white" height="30px"></unicon>
+                                <unicon name="check-circle" width="20px" fill="white" height="20px"></unicon>
                             </div>
                         </div>
                         <div>
@@ -19,7 +19,7 @@
                     <div class="bg-white rounded-lg p-4 min-h-100px">
                         <div class="flex mb-2">
                             <div class="bg-blue-800 rounded-lg flex justify-center items-center p-3 inline-block">
-                                <unicon name="credit-card" width="30px" fill="white" height="30px"></unicon>
+                                <unicon name="credit-card" width="20px" fill="white" height="20px"></unicon>
                             </div>
                         </div>
                         <div>
@@ -32,11 +32,11 @@
                     <div class="bg-white rounded-lg p-4 min-h-100px">
                         <div class="flex mb-2">
                             <div class="bg-yellow-300 rounded-lg flex justify-center items-center  p-3 inline-block">
-                                <unicon name="users-alt" width="30px" height="30px"></unicon>
+                                <unicon name="users-alt" width="20px" height="20px"></unicon>
                             </div>
                         </div>
                         <div>
-                            Peserta Terdaftar
+                            Akun Terdaftar
                         </div>
                         <div class="text-lg font-semibold">
                             {{ stat.member }}
@@ -45,11 +45,11 @@
                     <div class="bg-white rounded-lg p-4 min-h-100px">
                         <div class="flex mb-2">
                             <div class="bg-blue-700 rounded-lg flex justify-center items-center  p-3 inline-block">
-                                <unicon name="chart" width="30px" fill="white" height="30px"></unicon>
+                                <unicon name="chart" width="20px" fill="white" height="20px"></unicon>
                             </div>
                         </div>
                         <div>
-                            Peserta Event
+                            Peserta Acara
                         </div>
                         <div class="text-lg font-semibold">
                             {{ stat.member_purchase }}
@@ -58,10 +58,10 @@
                 </div>
                 <div class="md:col-span-7 col-span-12">
                     <div class="bg-white rounded-xl p-2">
-                        <Chart :height="300"></Chart>
+                        <TransactionChart :height="300"></TransactionChart>
                     </div>
                 </div>
-                <div class="md:col-span-8 col-span-12">
+                <div class="md:col-span-6 col-span-12">
                     <div class="bg-white rounded-xl p-2">
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead
@@ -113,9 +113,24 @@
                         </table>
                     </div>
                 </div>
-                <div class="md:col-span-4 col-span-12">
+                <div class="md:col-span-3 col-span-12">
                     <div class="bg-white rounded-xl p-2">
-                        User Group
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold">
+                                Job Type
+                            </h4>
+                            <UserChart></UserChart>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-3 col-span-12">
+                    <div class="bg-white rounded-xl p-2">
+                        <div class="mb-4">
+                            <h4 class="text-lg font-semibold">
+                                Abstract
+                            </h4>
+                            <AbstractChart></AbstractChart>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,10 +138,12 @@
     </div>
 </template>
 <script>
-import Chart from './Chart'
+import TransactionChart from './TransactionChart'
+import UserChart from './UserChart'
+import AbstractChart from './AbstractChart'
 
 export default {
-    components: {Chart},
+    components: {TransactionChart, UserChart, AbstractChart},
     data() {
         return {
             stat: {

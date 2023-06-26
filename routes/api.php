@@ -25,6 +25,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
 
     Route::get('dashboard-stat', [DashboardController::class, 'statistics']);
     Route::get('dashboard-chart', [DashboardController::class, 'chart']);
+    Route::get('dashboard-user-stat', [DashboardController::class, 'user_stat']);
     Route::get('dashboard-event-purchase', [DashboardController::class, 'event_purchase']);
     Route::get('sidebar-label', [DashboardController::class, 'sidebar_label']);
 

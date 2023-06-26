@@ -60,8 +60,20 @@ class User extends Authenticatable
                 case 'DRGN':
                     return 'Dokter Umum';
                 case 'NURS':
-                    return 'Perawat';
+                    return 'Nurse';
+                case 'ITRS':
+                    return 'Internship';
+                case 'RSDN':
+                    return 'Resident';
+                case 'COAS':
+                    return 'Co-Ass';
+                case 'MHSA':
+                    return 'Medical Student';
+                default:
+                    return 'none';
             }
+        } else {
+            return 'None';
         }
     }
 

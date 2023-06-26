@@ -1,7 +1,7 @@
 <script>
-import { Line } from 'vue-chartjs'
+import { Bar } from 'vue-chartjs'
 export default {
-    extends: Line,
+    extends: Bar,
     props:['chartData'],
     data () {
         return {
@@ -10,19 +10,11 @@ export default {
                     yAxes: [{
                         ticks: {
                             beginAtZero: true
-                        },
-                        gridLines: {
-                            display: true
-                        }
-                    }],
-                    xAxes: [ {
-                        gridLines: {
-                            display: false
                         }
                     }]
                 },
                 legend: {
-                    display: true
+                    display: false
                 },
                 responsive: true,
                 maintainAspectRatio: false
@@ -30,13 +22,9 @@ export default {
         }
     },
     mounted () {
-        Fire.$on('render-chart', ()=>{
-            console.log('render')
+        Fire.$on('render-chart-bar', ()=>{
             this.renderChart(this.chartData, this.options)
         })
-    },
-    created() {
-
     }
 }
 </script>

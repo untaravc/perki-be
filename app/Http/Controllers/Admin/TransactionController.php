@@ -75,9 +75,16 @@ class TransactionController extends Controller
             return $this->responseErrors('transaksi tidak dapat di hapus.');
         }
 
-        $transaction->update([
-            'status' => 400,
-        ]);
+        DB::transaction(function () use ($transaction) {
+            $transaction->update([
+                'status'  => 400,
+            ]);
+
+            TransactionDetail::whereTransactionId($transaction->id)
+                ->update([
+                    'status' => 400
+                ]);
+        });
 
         return $this->responseUpdate($transaction);
     }

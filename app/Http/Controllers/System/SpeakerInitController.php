@@ -190,13 +190,65 @@ class SpeakerInitController extends Controller
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/real.kusumanjaya.jpg',
             ],
-
-
-            [
-                'name'  => 'Prof. Dr. dr. Budi Yuli Setianto, Sp.PD.KKV, Sp.JP(K)',
-                'slug'  => 'budi.yuli',
+            [ // 31
+                'name'  => 'dr. Rendi Asmara, Sp.JP(K)',
+                'slug'  => 'rendi.asmara',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/rendi.asmara.jpg',
+            ],
+            [ // 32
+                'name'  => 'dr. Rizki Amalia, Sp.JP',
+                'slug'  => 'riski.amalia',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/riski.amalia.jpeg.jpg',
+            ],
+            [ // 33
+                'name'  => 'dr. RM Arjono, SP.JP(K)',
+                'slug'  => 'rm.arjono',
+                'desc'  => "",
+                'image' => '',
+            ],
+            [ // 34
+                'name'  => 'dr. Royhan Rozqie, PhD, Sp.JP',
+                'slug'  => 'royhan.rozqie',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/royhan.rozqie.jpeg',
+            ],
+            [ // 35
+                'name'  => 'dr. Suryo Prabowo, Sp.JP',
+                'slug'  => 'suryo.prabowo',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/suryo.prabowo.jpeg',
+            ],
+            [ // 36
+                'name'  => 'dr. Vita Yanti Anggraeni, Sp.PD, Sp.JP, Ph.D',
+                'slug'  => 'vita.yanti',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/budi.yuli.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/vita.yanti.jpeg',
+            ],
+            [ // 37
+                'name'  => 'dr. Wahyu Himawan, Sp.JP',
+                'slug'  => 'wahyu.himawan',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/wahyu.himawan.jpeg',
+            ],
+            [ // 38
+                'name'  => 'dr. Yuli Astuti, Sp.PD, Sp.JP',
+                'slug'  => 'yuli.astuti',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/yuli.astuti.jpg',
+            ],
+            [ // 39
+                'name'  => 'dr. Fera Hidayati,Sp.JP(K)',
+                'slug'  => 'fera.hidayati',
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/fera.hidayati.jpeg',
+            ],
+            [ // 40
+                'name'  => 'Dr.Med dr. Putrika Prastuti Ratna Gharini Sp.JP (K)',
+                'slug'  => 'putrika.prastuti',
+                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image' => 'https://src.perki-jogja.com/assets/photo/putrika.prastuti.jpg',
             ],
             [
                 'name'  => 'Prof. Dr. dr. Bambang Irawan, Sp.PD(K), Sp.JP',
@@ -205,16 +257,10 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/bambang.irawan.jpeg',
             ],
             [
-                'name'  => 'Dr.Med dr. Putrika Prastuti Ratna Gharini Sp.JP (K)',
-                'slug'  => 'putrika.prastuti',
+                'name'  => 'Prof. Dr. dr. Budi Yuli Setianto, Sp.PD.KKV, Sp.JP(K)',
+                'slug'  => 'budi.yuli',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/putrika.prastuti.jpg',
-            ],
-            [
-                'name'  => 'dr. Vita Yanti Anggraeni, Sp.PD, Sp.JP, Ph.D',
-                'slug'  => 'vita.yanti',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/vita.yanti.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/budi.yuli.jpg',
             ],
         ];
 
