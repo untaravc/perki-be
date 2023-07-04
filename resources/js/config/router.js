@@ -2,6 +2,7 @@ import Layout from "../views/Layout";
 import Login from "../views/login/Index";
 import Dashboard from "../views/dashboard/Index";
 import Posts from "../views/posts/Index";
+import Users from "../views/users/Index";
 import Abstract from "../views/abstracts/Index";
 import Transactions from "../views/transactions/Index";
 import Scanner from "../views/scanner/Index";
@@ -24,8 +25,8 @@ const routes = [
                 meta: {protected: true},
             },
             {
-                path: 'posts',
-                component: Posts,
+                path: 'users',
+                component: Users,
                 meta: {protected: true},
             },
             {

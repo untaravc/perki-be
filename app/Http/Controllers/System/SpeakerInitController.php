@@ -250,18 +250,126 @@ class SpeakerInitController extends Controller
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/putrika.prastuti.jpg',
             ],
-            [
+            [ // 41
                 'name'  => 'Prof. Dr. dr. Bambang Irawan, Sp.PD(K), Sp.JP',
                 'slug'  => 'bambang.irawan',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/bambang.irawan.jpeg',
             ],
-            [
+            [ //42
                 'name'  => 'Prof. Dr. dr. Budi Yuli Setianto, Sp.PD.KKV, Sp.JP(K)',
                 'slug'  => 'budi.yuli',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/budi.yuli.jpg',
             ],
+//            [ // 43
+//                'name'  => "dr. Aninditha Muthmainah, Sp.JP",
+//                'slug'  => "aninditha.muthmainah",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 44
+//                'name'  => "dr. Erdiansyah, Sp.JP",
+//                'slug'  => "erdiansyah",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 45
+//                'name'  => "dr. Evita Devi Noor Rahmawati, Sp.JP",
+//                'slug'  => "evita.devi",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+            [ // 46
+                'name'  => "Prof. Salvatore Di Somma, MD, Ph.D",
+                'slug'  => "salvatore.disomma",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/salfatore.disomma.jpg',
+            ],
+//            [ // 47
+//                'name'  => "Amin Al-ahmad, MD",
+//                'slug'  => "amin.alahmad",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 48
+//                'name'  => "Sofian Johar, MD",
+//                'slug'  => "sofian.johar",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 49
+//                'name'  => "Azlan Husain, MD",
+//                'slug'  => "sofian.johar",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 50
+//                'name'  => "Prof. Dr. Hamed Oemar, Ph.D, Sp.JP(K)",
+//                'slug'  => "hamed.oemar",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 51
+//                'name'  => "Prof. Yoga Yuniadi",
+//                'slug'  => "yoga.tuniadi",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+            [ // 52
+                'name'  => "dr. Muhammad Munawar, Sp.JP(K)",
+                'slug'  => "muhammad.munawar",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/muhammad.munawar.jpg',
+            ],
+//            [ // 53
+//                'name'  => "dr. Ismail, Sp.S(K)",
+//                'slug'  => "ismail",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/muhammad.munawar.jpg',
+//            ],
+//            [ // 54
+//                'name'  => "dr. Rano, Sp.JP",
+//                'slug'  => "rano",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 55
+//                'name'  => "dr. Johan Kurnianda, Sp.PD-KHOM",
+//                'slug'  => "johan.kurnianda",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 56
+//                'name'  => "dr. Siska Suridanda, Sp.JP(K)",
+//                'slug'  => "siska.suridanda",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 57
+//                'name'  => "dr. Hanif, Sp.KN",
+//                'slug'  => "siska.suridanda",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 58
+//                'name'  => "dr. Indah, Sp.JP",
+//                'slug'  => "indah",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 59
+//                'name'  => "dr. Bowo, Sp.PD-KEMD",
+//                'slug'  => "bowo",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
+//            [ // 60
+//                'name'  => "dr. hemi Sinorita, Sp.PD-KEMD",
+//                'slug'  => "hemi.sinorita",
+//                'desc'  => "",
+//                'image' => 'https://src.perki-jogja.com/assets/photo/',
+//            ],
         ];
 
         foreach ($data as $datum) {

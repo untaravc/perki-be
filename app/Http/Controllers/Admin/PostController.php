@@ -38,4 +38,24 @@ class PostController extends Controller
 
         return $data_content;
     }
+
+    public function printPost(Request $request){
+        $data_content = Post::orderByDesc('id')
+            ->with(['user', 'authors'])
+            ->where('file', null)
+            ->whereIn('category', [
+            'case_report',
+            'research',
+            'systematic_review',
+        ])
+            ->get();
+
+        $type = $request->type ?? 'review';
+
+        if($request->json == 1){
+            return $data_content;
+        }
+
+        return view('print.posts.abstracts', compact('data_content', 'type'));
+    }
 }

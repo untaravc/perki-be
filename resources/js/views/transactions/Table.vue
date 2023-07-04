@@ -60,7 +60,7 @@
                             type="button">
                             <unicon name="ellipsis-h"></unicon>
                         </button>
-                        <div :class="i > 7 ? '-top-36' : ''"
+                        <div :class="i > 7 ? '-top-24' : ''"
                              class="dropdown-menu absolute hidden block group-hover:visible -left-32 z-100 w-44 bg-white rounded divide-y divide-gray-100 shadow">
                             <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="apple-imac-27-dropdown-button">

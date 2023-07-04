@@ -13,8 +13,8 @@ export default {
                 datasets: [
                     {
                         backgroundColor: [
-                            '#ff1414',
-                            '#7c1e09',
+                            '#813703',
+                            '#1c0d0a',
                             '#d2750a',
                             '#ffe158',
                             '#23dd16',

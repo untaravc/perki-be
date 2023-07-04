@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\System\EmailServiceController;
 use App\Models\Transaction;
 use App\Models\User;
 use GuzzleHttp\Client;
@@ -100,7 +101,7 @@ class AuthController extends BaseController
     {
         $this->response['status'] = false;
 
-        $message = 'Email atau password salah.';
+        $message = 'Wrong email or password.';
         $validator = Validator::make($request->all(), [
             'email'    => 'required|string',
             'password' => 'required|string',
@@ -141,8 +142,9 @@ class AuthController extends BaseController
         return $this->response;
     }
 
-    public function logas(Request $request){
-        if($request->passcode != env('PASSCODE')){
+    public function logas(Request $request)
+    {
+        if ($request->passcode != env('PASSCODE')) {
             return $this->responseErrors('not fond');
         }
 
@@ -378,6 +380,94 @@ class AuthController extends BaseController
         $code = job_type_code_map($user['job_type_code']);
 
         $this->response['result'] = $code;
+        return $this->response;
+    }
+
+    public function send_new_password(Request $request)
+    {
+        $this->response['status'] = false;
+
+        $message = 'No email registered';
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            $this->response['message'] = $message . ' 01';
+            return $this->response;
+        }
+
+        $user = User::whereEmail($request->email)
+            ->where('type', 'user')
+            ->first();
+
+        if (!$user) {
+            $this->response['message'] = $message . ' 02';
+            return $this->response;
+        }
+
+        $new_password = $this->generate_new_password($user);
+
+        $user->update([
+            'forgot_password_token'                   => $new_password,
+        ]);
+
+        // send email
+
+        // kirim invoice
+        $email = new EmailServiceController();
+        return $email->send_new_password($user);
+
+        $this->response['message'] = "Check your email in book";
+        return $this->response;
+    }
+
+    private function generate_new_password(User $user)
+    {
+        if($user->forgot_password_token != null){
+            return $user->forgot_password_token;
+        }
+
+        $new_password_token = strtoupper(Str::random(20));
+
+        $exist = User::where('forgot_password_token', $new_password_token)
+            ->where('id', '!=', $user->id)
+            ->first();
+
+        if ($exist) {
+            return $this->generate_new_password($user);
+        }
+
+        return $new_password_token;
+    }
+
+    public function check_otp_reset_password(Request $request){
+        $reset_user = User::whereEmail($request->email)
+            ->where('forgot_password_token',$request->token)
+            ->first();
+
+        if(!$reset_user){
+            $this->response['message'] = "Invalid link address";
+            $this->response['status'] = false;
+            return $this->response;
+        }
+
+        $reset_user->update([
+            'forgot_password_token' => null,
+        ]);
+
+        $token = $reset_user->createToken('user');
+
+        $reset_user->update([
+            'last_login' => now(),
+        ]);
+
+        $this->response['status'] = true;
+        $this->response['result'] = [
+            'token' => $token->plainTextToken,
+            'user'  => $reset_user,
+        ];
+
         return $this->response;
     }
 }

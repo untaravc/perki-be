@@ -72,7 +72,7 @@
                                 <th scope="col" class="px-4 py-3 flex items-center">
                                     <div class="w-3 h-3 bg-blue-300 mx-1"></div>
                                     STD
-                                    <div class="w-3 h-3 bg-red-500 mx-1"></div>
+                                    <div class="w-3 h-3 bg-blue-800 mx-1"></div>
                                     GP
                                     <div class="w-3 h-3 bg-green-600 mx-1"></div>
                                     SP
@@ -83,6 +83,7 @@
                             <tr class="border-b dark:border-gray-700" v-for="event in events">
                                 <td class="px-2 py-1">
                                     {{ event.name }}
+                                    <br> <small>{{ event.title | truncate(50) }}</small>
                                 </td>
                                 <td class="px-2 py-1 text-center">
                                     {{ event.transaction_success_count }}
@@ -97,7 +98,7 @@
                                             </div>
                                             <div v-if="event.transaction_success_gp_count > 0"
                                                  :style="'width: '+ event.transaction_success_gp_count / event.transaction_success_count * 100 +'%'"
-                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                                                 class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-800">
                                                 {{ event.transaction_success_gp_count }}
                                             </div>
                                             <div v-if="event.transaction_success_sp_count > 0"

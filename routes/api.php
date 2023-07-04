@@ -1,18 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Event\RegisterController as EventRegisterController;
 
 use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\HomeController;
-use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\User\EvenTransactionController;
-use App\Http\Controllers\System\UploadFileController;
 use App\Http\Controllers\User\EventController;
 use App\Http\Controllers\User\AbstractController;
+
+use App\Http\Controllers\System\DataInitController;
+use App\Http\Controllers\System\UploadFileController;
 
 // ADMIN API
 Route::post('/', function (){
@@ -31,13 +37,16 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
 
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);
+    Route::resource('users', AdminUserController::class);
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
+
+    Route::post('scan-event', [AdminEventController::class, 'scan_event']);
 });
 // =========
 
-// PUBLIC AUTH API
+// AUTH API
 Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [UserAuthController::class, 'logout']);
 
@@ -71,6 +80,9 @@ Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () 
 
     Route::post('register', [UserAuthController::class, 'register']);
     Route::post('upload-file', [UploadFileController::class, 'store']);
+
+    // register event
+    Route::get('register-event', [EventRegisterController::class, 'register_event']);
 });
 // =========
 
@@ -80,6 +92,8 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('logas', [UserAuthController::class, 'logas']);
     Route::post('login-by-google', [UserAuthController::class, 'login_by_google']);
     Route::post('verify-google', [HomeController::class, 'google']);
+    Route::post('send-new-password', [UserAuthController::class, 'send_new_password']);
+    Route::post('check-otp-reset-password', [UserAuthController::class, 'check_otp_reset_password']);
 
     Route::get('get-job-types', [HomeController::class, 'job_types']);
     Route::get('speakers', [HomeController::class, 'speakers']);

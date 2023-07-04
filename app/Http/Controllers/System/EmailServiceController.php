@@ -76,4 +76,39 @@ class EmailServiceController extends Controller
             MailLog::create($mail_log);
         }
     }
+
+    public function send_new_password(User $user){
+        $data['user'] = $user;
+
+        $data['view'] = 'email.set_new_password';
+        $data['email_subject'] = 'JCU 2023: Set New Password';
+
+        $mail_log = [
+            "email_sender"   => "perki.yogyakarta@gmail.com",
+            "email_receiver" => $data['user']['email'],
+            "receiver_name"  => $data['user']['name'],
+            "label"          => "send_new_password",
+            "category"       => null,
+            "title"          => $data['email_subject'],
+            "model"          => "user",
+            "model_id"       => $user->id,
+            "status"         => 1,
+            "sent_at"        => now(),
+        ];
+
+        try {
+            if (env('APP_ENV') == "prod") {
+                Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
+            } else {
+                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+            }
+
+            MailLog::create($mail_log);
+        } catch (\Exception $exception) {
+            $mail_log['sent_at'] = null;
+            $mail_log['status'] = 2;
+
+            MailLog::create($mail_log);
+        }
+    }
 }

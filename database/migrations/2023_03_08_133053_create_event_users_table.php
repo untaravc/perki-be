@@ -15,9 +15,12 @@ class CreateEventUsersTable extends Migration
     {
         Schema::create('event_users', function (Blueprint $table) {
             $table->id();
+            $table->integer('scanner_id');
             $table->integer('user_id');
             $table->integer('event_id');
+            $table->mediumInteger('status')->default(100);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

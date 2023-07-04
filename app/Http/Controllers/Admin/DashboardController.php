@@ -86,6 +86,7 @@ class DashboardController extends Controller
             ->select(
                 'id',
                 'name',
+                'title',
             )
             ->withCount([
                 'transaction_success',
