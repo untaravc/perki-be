@@ -42,13 +42,11 @@ class PostController extends Controller
     public function printPost(Request $request){
         $data_content = Post::orderByDesc('id')
             ->with(['user', 'authors'])
-            ->where('file', null)
             ->whereIn('category', [
             'case_report',
             'research',
             'systematic_review',
-        ])
-            ->get();
+        ])->get();
 
         $type = $request->type ?? 'review';
 

@@ -416,7 +416,7 @@ class AuthController extends BaseController
 
         // kirim invoice
         $email = new EmailServiceController();
-        return $email->send_new_password($user);
+        $email->send_new_password($user);
 
         $this->response['message'] = "Check your email in book";
         return $this->response;

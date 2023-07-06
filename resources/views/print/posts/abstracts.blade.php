@@ -81,6 +81,13 @@
     <div>
         Keywords: <i>{{$data['subtitle']}}</i>
     </div>
+    @if($data['file'])
+        <div style="text-align: center">
+            <img src="{{$data['file']}}" alt="">
+            <br>
+            <a target="_blank" href="{{$data['file']}}">{{$data['file']}}</a>
+        </div>
+    @endif
     <div style="border-bottom: 1px solid darkgrey; margin-top: 5px; margin-bottom: 10px"></div>
 @endforeach
 </body>
