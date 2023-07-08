@@ -20,5 +20,12 @@ class PostAuthor extends Model
         "type",
         "institution",
         "order",
+        "is_presenter",
+        "is_corresponding",
+    ];
+
+    protected $casts = [
+        'is_presenter' => 'boolean',
+        'is_corresponding' => 'boolean',
     ];
 }

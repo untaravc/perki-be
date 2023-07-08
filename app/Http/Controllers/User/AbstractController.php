@@ -15,7 +15,12 @@ class AbstractController extends BaseController
         $user = $request->user();
 
         $data = Post::whereUserId($user['id'])
-            ->whereIn('category', ['research', 'case_report', 'systematic_review'])
+            ->whereIn('category', [
+                'research',
+                'case_report',
+                'systematic_review',
+                'meta_analysis',
+            ])
             ->with('authors')
             ->get();
 
@@ -51,7 +56,7 @@ class AbstractController extends BaseController
     public function abstract_submit(Request $request)
     {
         $request->merge([
-            'body' => $this->toJsonBody($request),
+            'body' => json_encode($request->body),
         ]);
 
         $validator = Validator::make($request->all(), [
@@ -94,7 +99,7 @@ class AbstractController extends BaseController
     public function abstract_update(Request $request, $id)
     {
         $request->merge([
-            'body' => $this->toJsonBody($request),
+            'body' => json_encode($request->body),
         ]);
 
         $user = $request->user();
@@ -155,14 +160,16 @@ class AbstractController extends BaseController
         $ids = [];
         foreach ($authors as $author) {
             $payload = [
-                "post_id"     => $post->id,
-                "status"      => 1,
-                "title"       => $author['title'] ?? null,
-                "first_name"  => $author['first_name'] ?? null,
-                "surname"     => $author['surname'] ?? null,
-                "institution" => $author['institution'] ?? null,
-                "email"       => $author['email'] ?? null,
-                "type"        => $author['type'] ?? null,
+                "post_id"          => $post->id,
+                "status"           => 1,
+                "title"            => $author['title'] ?? null,
+                "first_name"       => $author['first_name'] ?? null,
+                "surname"          => $author['surname'] ?? null,
+                "institution"      => $author['institution'] ?? null,
+                "email"            => $author['email'] ?? null,
+                "type"             => $author['type'] ?? null,
+                "is_presenter"     => $author['is_presenter'] ?? false,
+                "is_corresponding" => $author['is_corresponding'] ?? false,
             ];
 
             $post_author = PostAuthor::wherePostId($post->id)

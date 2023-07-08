@@ -6,6 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Abstract Submission</title>
+    <style>
+        @media print {
+            .pagebreak {
+                clear: both;
+                page-break-after: always;
+            }
+        }
+    </style>
 </head>
 <body>
 @foreach($data_content as $data)
@@ -88,7 +96,7 @@
             <a target="_blank" href="{{$data['file']}}">{{$data['file']}}</a>
         </div>
     @endif
-    <div style="border-bottom: 1px solid darkgrey; margin-top: 5px; margin-bottom: 10px"></div>
+    <div class="pagebreak" style="border-bottom: 1px solid darkgrey; margin-top: 5px; margin-bottom: 10px"></div>
 @endforeach
 </body>
 </html>

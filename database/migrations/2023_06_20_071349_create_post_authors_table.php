@@ -23,6 +23,8 @@ class CreatePostAuthorsTable extends Migration
             $table->string('email')->nullable();
             $table->string('institution')->nullable();
             $table->string('type')->nullable();
+            $table->boolean('is_presenter')->default(false);
+            $table->boolean('is_corresponding')->default(false);
             $table->integer('order')->nullable();
             $table->timestamps();
             $table->softDeletes();
