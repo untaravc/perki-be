@@ -46,46 +46,14 @@
             @endforeach
         @endif
     </div>
-    <div style="margin-bottom: 5px">
-        <b>Background:</b>
-        @if($data['body_parsed'])
-            @if(isset($data['body_parsed']['body_background']))
-                {{$data['body_parsed']['body_background']}}
-            @endif
-        @endif
-    </div>
-    <div style="margin-bottom: 5px">
-        <b>Aim:</b>
-        @if($data['body_parsed'])
-            @if(isset($data['body_parsed']['body_aim']))
-                {{$data['body_parsed']['body_aim']}}
-            @endif
-        @endif
-    </div>
-    <div style="margin-bottom: 5px">
-        <b>Method:</b>
-        @if($data['body_parsed'])
-            @if(isset($data['body_parsed']['body_method']))
-                {{$data['body_parsed']['body_method']}}
-            @endif
-        @endif
-    </div>
-    <div style="margin-bottom: 5px">
-        <b>Results:</b>
-        @if($data['body_parsed'])
-            @if(isset($data['body_parsed']['body_results']))
-                {{$data['body_parsed']['body_results']}}
-            @endif
-        @endif
-    </div>
-    <div style="margin-bottom: 10px">
-        <b>Conclusions:</b>
-        @if($data['body_parsed'])
-            @if(isset($data['body_parsed']['body_conclusions']))
-                {{$data['body_parsed']['body_conclusions']}}
-            @endif
-        @endif
-    </div>
+
+    @foreach($data['body_parsed'] as $section)
+        <div style="margin-bottom: 10px">
+            <b>{{$section['title']}}:</b>
+            {{$section['content']}}
+        </div>
+    @endforeach
+
     <div>
         Keywords: <i>{{$data['subtitle']}}</i>
     </div>

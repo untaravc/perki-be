@@ -341,8 +341,12 @@ class EvenTransactionController extends BaseController
     {
         $user = $request->user();
         $data = Transaction::whereNumber($transaction_number)
-            ->with('transaction_details')
-//            ->whereUserId($user['id'])
+            ->with([
+                'transaction_details' => function($q) {
+                    $q->with('event');
+                }
+            ])
+            ->whereUserId($user['id'])
             ->first();
 
         if (!$data) {
@@ -357,7 +361,9 @@ class EvenTransactionController extends BaseController
         $user = $request->user();
 
         $data = Transaction::whereUserId($user['id'])
-            ->with('transaction_details')
+            ->with(['transaction_details' => function($q) {
+                $q->with('event');
+            }])
             ->get();
 
         $this->response['result'] = $data;

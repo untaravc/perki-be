@@ -16,46 +16,67 @@ class AuthController extends BaseController
 {
     public $dev_token = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImFjZGEzNjBmYjM2Y2QxNWZmODNhZjgzZTE3M2Y0N2ZmYzM2ZDExMWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2ODEyNjMwNTEsImF1ZCI6IjkxNTU3MDQ3Nzc2Mi1uc3RsYW9kOXRxNWZiZnN1bmNodWkyMXVsZzlvZ3BoMC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNTgwMDg1NDc1NzIzOTM0NzQ5NCIsImVtYWlsIjoidnl2eTE3NzdAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjkxNTU3MDQ3Nzc2Mi1uc3RsYW9kOXRxNWZiZnN1bmNodWkyMXVsZzlvZ3BoMC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJVbnRhcmEgVml2aSBDaGFoeWEiLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUdObXl4WVotdzY4YVBxai16U2NuUkl4NUoySW9teS1YQmZxNHp3RWxNQkNFUT1zOTYtYyIsImdpdmVuX25hbWUiOiJVbnRhcmEiLCJmYW1pbHlfbmFtZSI6IlZpdmkgQ2hhaHlhIiwiaWF0IjoxNjgxMjYzMzUxLCJleHAiOjE2ODEyNjY5NTEsImp0aSI6ImYzNzFkZjhiNTFiNTYwMTgwMWE3ZTc5NzExOWExYjYxNzdjMDk0OTYifQ.edBxFuPcVVu8Rsne0AwsdcYMm5sir3Q-U8umWT21sBgjKjawtyVsy2Dluz_AkWytaTLJcIXBVt3a5ZeXotU4hBT_RVP2FNrJQn6-vLIh44d354nSrBv4sXUpzVziGuO9pmE3-uEJDlAtWDcE-T34y8qRQ5v3mza0lQPp0vMI5bMhiU87YEfftQtqTVU7uLetMvKhNYb7DygMeCPlCN4fG8l9wwU-JC9RKXVR2Q7LqSxHGUD71MsrYByiJV7-4WxXLzbefF1OOgfhAqi0nUySOUiUuYcg4arbIr7737fX8GFGlXF4dGiAb8tygle4IHMxdk9t6qwiBfK7dfjVK1gAyA";
 
-    // Register Event
+    /*
+     * Logic multi register
+     * - belum login
+     *   - email sudah digunakan -> false
+     *   - email belum digunakan -> true, register user, register transaction, return login
+     *
+     * - sudah login
+     *   - email sama dengan yg di register -> true
+     *      - pengeceken apakah ada transaksi belum upload bukti trf
+     *          -> jika belum upload, update data
+     *          -> jika sudah upload, create transaksi
+     *   - email beda dengan yg di register, sudeh terdaftar -> false, email telah digunakan
+     *   - email beda dengan yg di register, belum terdaftar -> true
+     *      - pengeceken apakah ada transaksi belum upload bukti trf
+     *          - jika ada -> false (transaksi tunda masih ada)
+     *          - jika tidak ada -> register
+     */
     public function register(Request $request)
     {
         $this->validate_register($request->all());
-        $user = User::whereEmail($request->email)->first();
+        $user_exist = User::whereEmail($request->email)->first();
 
-        // jika email sudah ada, beda dengan logged_user_id, return false, silakan login
-        if (isset($request->logged_user_id) && $user && $user->id != $request->logged_user_id) {
-            $this->sendError(403);
+        // - belum login
+        if(!isset($request->logged_user_id)){
+            // - email sudah digunakan -> false
+            if($user_exist){
+                $this->response['status'] = false;
+                $this->response['message'] = 'Email has been registered';
+                return $this->response;
+            }
+            // - email belum digunakan -> true, register user, register transaction, return login
+            else{
+                $new_user = $this->create_user($request);
+                $transaction = $this->draft_transaction($new_user, $request);
+                $token = $new_user->createToken('user');
+
+                $this->sendPostResponse('Registration success.', [
+                    'transaction' => $transaction,
+                    'token'       => $token->plainTextToken
+                ]);
+            }
         }
+        // sudah login
+        else{
+            $user_login = User::find($request->logged_user_id);
 
-        // email sudah digunakan
-        if ($user && $request->logged_user_id == null) {
-            $this->sendError(422, 'Email telah digunakan.');
+            // email beda dengan yg di register && email terdaftar
+            if($user_login->email !== $request->email && $user_exist){
+                $this->response['status'] = false;
+                $this->response['message'] = 'Email has been registered';
+                return $this->response;
+            }
+
+            // email sama dengan yg di register || email beda tp belum terdaftar
+            else {
+                $transaction = $this->draft_transaction($user_login, $request);
+                $this->sendPostResponse('Registration success.', [
+                    'transaction' => $transaction,
+                ]);
+            }
         }
-
-        // jika email belum ada register
-        if (!$user) {
-            $user = $this->create_user($request);
-        }
-
-        // update data user
-        $user->update([
-            'name'           => $request->name,
-            'phone'          => $request->phone,
-            'city'           => $request->city,
-            'institution'    => $request->institution,
-            "job_type_code"  => $request->job_type_code,
-            "identity_photo" => $request->identity_photo,
-        ]);
-
-        // jika sudah ada, langsung buat transaksi, status 100 (pending)
-        $transaction = $this->draft_transaction($user, $request);
-
-        $token = $user->createToken('user');
-        // return data transaksi
-        $this->sendPostResponse('Pendaftaran berhasil', [
-            'transaction' => $transaction,
-            'token'       => $token->plainTextToken
-        ]);
     }
 
     private function validate_register($request)
@@ -274,11 +295,10 @@ class AuthController extends BaseController
         return $user;
     }
 
-    private function draft_transaction($user, $request)
+    private function draft_transaction(User $user, $request)
     {
         $trx = Transaction::whereUserId($user->id)
-//            ->whereStatus(100)
-            ->where('status', '<', 200)
+            ->where('status', '<', 120)
             ->first();
 
         $payload = [
@@ -293,14 +313,29 @@ class AuthController extends BaseController
 
         if ($trx) {
             $trx->update($payload);
-            return $trx;
+        } else {
+            $trx = Transaction::create($payload);
+
+            $trx->update([
+                'number' => 'JCU23' . prefix_zero($trx->id),
+            ]);
         }
 
-        $trx = Transaction::create($payload);
+        // update data user ketika transaksi pertama
+        $transaction_count = Transaction::whereSection('jcu23')
+            ->whereUserId($user->id)
+            ->count();
 
-        $trx->update([
-            'number' => 'JCU23' . prefix_zero($trx->id),
-        ]);
+        if($transaction_count < 2){
+            $user->update([
+                'name'           => $request->name,
+                'phone'          => $request->phone,
+                'city'           => $request->city,
+                'institution'    => $request->institution,
+                "job_type_code"  => $request->job_type_code,
+                "identity_photo" => $request->identity_photo,
+            ]);
+        }
 
         return $trx;
     }

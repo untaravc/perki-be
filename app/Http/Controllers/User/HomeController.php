@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
 use App\Models\Event;
+use App\Models\GuestLog;
 use App\Models\JobType;
 use App\Models\Price;
 use App\Models\User;
@@ -127,11 +128,11 @@ class HomeController extends BaseController
         ];
 
         $data["gold"] = [
-            "name"          => "Gold",
-            "desc"          => $gold_desc,
-            "price_drsp"    => 1500000,
-            "price_drgn"    => 1000000,
-            "price_stdn"    => 500000,
+            "name"       => "Gold",
+            "desc"       => $gold_desc,
+            "price_drsp" => 1500000,
+            "price_drgn" => 1000000,
+            "price_stdn" => 500000,
         ];
 
         $data["bronze"] = [
@@ -193,13 +194,13 @@ class HomeController extends BaseController
                 "buttons"  => [
                     [
                         "theme" => "light",
-                        "text" => "Schedule",
-                        "link" => "/#schedule",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
                     ],
                     [
                         "theme" => "dark",
-                        "text" => "Register",
-                        "link" => "/register",
+                        "text"  => "Register",
+                        "link"  => "/register",
                     ]
                 ]
             ],
@@ -211,8 +212,8 @@ class HomeController extends BaseController
                 "buttons"  => [
                     [
                         "theme" => "dark",
-                        "text" => "Submit Now",
-                        "link" => "/abstracts",
+                        "text"  => "Submit Now",
+                        "link"  => "/abstracts",
                     ]
                 ]
             ],
@@ -230,13 +231,13 @@ class HomeController extends BaseController
                 "buttons"  => [
                     [
                         "theme" => "light",
-                        "text" => "Schedule",
-                        "link" => "/#schedule",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
                     ],
                     [
                         "theme" => "dark",
-                        "text" => "Register",
-                        "link" => "/register",
+                        "text"  => "Register",
+                        "link"  => "/register",
                     ]
                 ]
             ]
@@ -397,6 +398,30 @@ class HomeController extends BaseController
 
         $this->response['result']['photos'] = $data;
         $this->response['result']['name'] = $names;
+        return $this->response;
+    }
+
+    public function guest_log(Request $request)
+    {
+        if (!$request->perki_app_guest_token) {
+            return '';
+        }
+
+        $visited = GuestLog::whereToken($request->perki_app_guest_token)
+            ->whereDate('date', date('Y-m-d'))
+            ->first();
+
+        if ($visited) {
+            $visited->increment('hits');
+        } else {
+            GuestLog::create([
+                "token"   => $request->perki_app_guest_token,
+                "user_id" => $request->logged_user_id,
+                "date"    => date('Y-m-d'),
+                "hits"    => 1
+            ]);
+        }
+
         return $this->response;
     }
 }

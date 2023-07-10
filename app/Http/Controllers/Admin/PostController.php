@@ -39,18 +39,23 @@ class PostController extends Controller
         return $data_content;
     }
 
-    public function printPost(Request $request){
+    public function printPost(Request $request)
+    {
         $data_content = Post::orderByDesc('id')
             ->with(['user', 'authors'])
+            ->whereDate('created_at', '>', '2023-07-07')
+            ->when($request->category, function ($q) use ($request) {
+                $q->where('category', $request->category);
+            })
             ->whereIn('category', [
-            'case_report',
-            'research',
-            'systematic_review',
-        ])->get();
+                'case_report',
+                'research',
+                'systematic_review',
+            ])->get();
 
         $type = $request->type ?? 'review';
 
-        if($request->json == 1){
+        if ($request->json == 1) {
             return $data_content;
         }
 

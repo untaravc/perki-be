@@ -26,6 +26,7 @@ Route::post('/', function (){
 });
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
+
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('profile', [AdminAuthController::class, 'profile']);
 
@@ -83,6 +84,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () 
 
     // register event
     Route::get('register-event', [EventRegisterController::class, 'register_event']);
+    Route::post('guest', [HomeController::class, 'guest_log']);
 });
 // =========
 
