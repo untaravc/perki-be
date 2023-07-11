@@ -13,7 +13,7 @@ class EventController extends BaseController
 
         $transaction_details = TransactionDetail::whereUserId($user['id'])
             ->whereHas('transaction', function ($q){
-                $q->where('status', '>', 199);
+                $q->where('status', 200);
             })
             ->with('event')
             ->get();

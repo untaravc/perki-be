@@ -361,6 +361,8 @@ class EvenTransactionController extends BaseController
         $user = $request->user();
 
         $data = Transaction::whereUserId($user['id'])
+            ->orderByDesc('id')
+            ->where('status', '<', 300)
             ->with(['transaction_details' => function($q) {
                 $q->with('event');
             }])

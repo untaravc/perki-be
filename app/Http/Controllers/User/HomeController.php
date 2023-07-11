@@ -14,11 +14,11 @@ class HomeController extends BaseController
 {
     public function speakers(Request $request)
     {
-        $data = User::orderBy('name')
-            ->where('is_speaker', 1)
+        $data = User::where('is_speaker', 1)
             ->when($request->limit, function ($q) use ($request) {
                 $q->limit($request->limit);
             })
+            ->inRandomOrder()
             ->select('id', 'name', 'desc', 'image')
             ->get();
 
@@ -412,7 +412,10 @@ class HomeController extends BaseController
             ->first();
 
         if ($visited) {
-            $visited->increment('hits');
+            $visited->update([
+                "user_id" => $request->logged_user_id,
+                "hits"    => $visited->hits + 1
+            ]);
         } else {
             GuestLog::create([
                 "token"   => $request->perki_app_guest_token,

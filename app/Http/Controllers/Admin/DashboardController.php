@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Event;
+use App\Models\GuestLog;
 use App\Models\Post;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -61,6 +62,15 @@ class DashboardController extends Controller
                 DB::raw("COUNT(*) as 'total'"),
             ));
 
+        $visitors = GuestLog::where('date', '>=', $params['date_start'])
+            ->where('date', '<=', $params['date_end'])
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get(array(
+                DB::raw("date"),
+                DB::raw("COUNT(*) as 'total'"),
+            ));
+
         $trx_day_total = Transaction::where('created_at', '>=', $params['date_start'])
             ->where('created_at', '<', $params['date_end'])
             ->sum('total');
@@ -69,6 +79,14 @@ class DashboardController extends Controller
             foreach ($trx_day as $trx) {
                 if (date('Y-m-d', strtotime($trx['date'])) === $array[$i]['date']) {
                     $array[$i]['count'] = $trx['total'];
+                }
+            }
+        }
+
+        for ($i = 1; $i <= count($array); $i++) {
+            foreach ($visitors as $visitor) {
+                if (date('Y-m-d', strtotime($visitor['date'])) === $array[$i]['date']) {
+                    $array[$i]['visitor'] = $visitor['total'];
                 }
             }
         }
