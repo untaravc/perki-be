@@ -172,9 +172,10 @@ class AbstractController extends BaseController
                 "is_corresponding" => $author['is_corresponding'] ?? false,
             ];
 
-            $post_author = PostAuthor::wherePostId($post->id)
-                ->whereEmail($author['email'])
-                ->first();
+            $post_author = null;
+            if(isset($author['id'])){
+                $post_author = PostAuthor::find($author['id']);
+            }
 
             if (!$post_author) {
                 $post_author = PostAuthor::create($payload);
@@ -186,6 +187,8 @@ class AbstractController extends BaseController
         }
 
         // delete non used
-        PostAuthor::whereNotIn('id', $ids)->delete();
+        PostAuthor::whereNotIn('id', $ids)
+            ->wherePostId($post->id)
+            ->delete();
     }
 }
