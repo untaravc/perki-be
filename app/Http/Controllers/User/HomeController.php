@@ -427,4 +427,38 @@ class HomeController extends BaseController
 
         return $this->response;
     }
+
+    public function cta_event()
+    {
+        $data = [
+            "title"    => "Join Our Webinar Pre-JCU",
+            "subtitle" => "Free & Full Certificate",
+            "image"    => "",
+            "link"     => "",
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function events()
+    {
+        $data = [];
+        $data[] = [
+            "title"    => "Free & Full Certificate",
+            "subtitle" => "August 11, 2023",
+            "image"    => "/storage/img/abstract_jcu.jpeg",
+            "link"     => "#",
+        ];
+
+        $data[] = [
+            "title"    => "Beta Blocker for Cardioprotection in Heart Failure and Hypertension",
+            "subtitle" => "August 21, 2023",
+            "image"    => "/storage/img/abstract_jcu.jpeg",
+            "link"     => "#",
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
 }

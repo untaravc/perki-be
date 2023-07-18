@@ -46,6 +46,8 @@ class PostController extends Controller
             ->whereDate('created_at', '>', '2023-07-07')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
+            })->when($request->post_id, function ($q) use ($request) {
+                $q->where('id', $request->post_id);
             })
             ->whereIn('category', [
                 'case_report',
@@ -53,7 +55,7 @@ class PostController extends Controller
                 'systematic_review',
             ])->get();
 
-        $type = $request->type ?? 'review';
+        $type = $request->type ?? 'review'; // full_text
 
         if ($request->json == 1) {
             return $data_content;

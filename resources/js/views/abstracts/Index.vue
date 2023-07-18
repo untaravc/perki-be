@@ -17,7 +17,8 @@
                                             class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <unicon name="search"></unicon>
                                         </div>
-                                        <input type="text" id="simple-search" v-model="filters.s" @keyup.enter="loadDataContent"
+                                        <input type="text" id="simple-search" v-model="filters.s"
+                                               @keyup.enter="loadDataContent"
                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                placeholder="Search" required="">
                                     </div>
@@ -25,18 +26,18 @@
                             </div>
                             <div
                                 class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
-<!--                                <button type="button"-->
-<!--                                        class="flex items-center justify-center text-white bg-primary hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">-->
-<!--                                    <unicon name="plus" fill="white"></unicon>-->
-<!--                                    Add product-->
-<!--                                </button>-->
+                                <!--                                <button type="button"-->
+                                <!--                                        class="flex items-center justify-center text-white bg-primary hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 focus:outline-none">-->
+                                <!--                                    <unicon name="plus" fill="white"></unicon>-->
+                                <!--                                    Add product-->
+                                <!--                                </button>-->
                                 <div class="flex items-center space-x-3 w-full md:w-auto">
-<!--                                    <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"-->
-<!--                                            class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"-->
-<!--                                            type="button">-->
-<!--                                        <unicon name="angle-down"></unicon>-->
-<!--                                        Actions-->
-<!--                                    </button>-->
+                                    <!--                                    <button id="actionsDropdownButton" data-dropdown-toggle="actionsDropdown"-->
+                                    <!--                                            class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"-->
+                                    <!--                                            type="button">-->
+                                    <!--                                        <unicon name="angle-down"></unicon>-->
+                                    <!--                                        Actions-->
+                                    <!--                                    </button>-->
                                     <div id="actionsDropdown"
                                          class="hidden z-10 w-44 m-0 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
                                         <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -48,13 +49,16 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <button id="filterDropdownButton" data-dropdown-toggle="filterDropdown"
-                                            class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-                                            type="button">
-                                        <unicon name="filter"></unicon>
-                                        Filter
-                                        <unicon name="angle-down"></unicon>
-                                    </button>
+                                    <div class="flex">
+                                        <a href="/panel/print-abstract?type=full_text" target="_blank"
+                                           class="py-2 px-4 mx-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 ">
+                                            Print Full Text
+                                        </a>
+                                        <a href="/panel/print-abstract" target="_blank"
+                                           class="py-2 px-4 mx-1 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 ">
+                                            Print Review
+                                        </a>
+                                    </div>
                                     <div id="filterDropdown"
                                          class="z-10 hidden m-0 w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700">
                                         <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
@@ -77,18 +81,19 @@
                         <div class="overflow-x-auto" style="min-height: 600px;">
                             <Table :data_content="data_content"></Table>
                         </div>
-                        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                        <nav
+                            class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
                             aria-label="Table navigation">
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                 Showing
                                 <span class="font-semibold text-gray-900 dark:text-white">
-                                    {{(data_content.current_page - 1) * data_content.per_page + 1}}
+                                    {{ (data_content.current_page - 1) * data_content.per_page + 1 }}
                                     -
-                                    {{data_content.to}}
+                                    {{ data_content.to }}
                                 </span>
                                 of
                                 <span class="font-semibold text-gray-900 dark:text-white">
-                                    {{data_content.total}}
+                                    {{ data_content.total }}
                                 </span>
                             </span>
                             <div>
@@ -108,10 +113,10 @@ import Table from "./Table";
 
 export default {
     components: {Table},
-    data(){
+    data() {
         return {
             data_content: {},
-            filters:{
+            filters: {
                 page: 2,
                 per_page: 10,
                 s: '',
@@ -119,11 +124,11 @@ export default {
             }
         }
     },
-    methods:{
-        loadDataContent(page = 1){
+    methods: {
+        loadDataContent(page = 1) {
             this.filters.page = page
             this.authGet('adm/posts', this.filters)
-                .then((data)=>{
+                .then((data) => {
                     this.data_content = data
                 })
         }

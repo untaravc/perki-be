@@ -97,6 +97,8 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('send-new-password', [UserAuthController::class, 'send_new_password']);
     Route::post('check-otp-reset-password', [UserAuthController::class, 'check_otp_reset_password']);
 
+    Route::get('events', [HomeController::class, 'events']);
+    Route::get('cta-event', [HomeController::class, 'cta_event']);
     Route::get('get-job-types', [HomeController::class, 'job_types']);
     Route::get('speakers', [HomeController::class, 'speakers']);
     Route::get('committee', [HomeController::class, 'committee']);

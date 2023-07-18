@@ -59,7 +59,7 @@
     </div>
     @if($data['file'])
         <div style="text-align: center">
-            <img src="{{$data['file']}}" alt="">
+            <img style="max-width: 100%" src="{{$data['file']}}" alt="">
             <br>
             <a target="_blank" href="{{$data['file']}}">{{$data['file']}}</a>
         </div>
