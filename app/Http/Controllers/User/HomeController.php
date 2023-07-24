@@ -190,7 +190,7 @@ class HomeController extends BaseController
                 "title"    => "Jogja Cardiology Update",
                 "subtitle" => "Integrating Technology In Cardiovascular Disease Management: Towards A Harmonic Fusion",
                 "date"     => "Yogyakarta, 1-3 September 2023",
-                "poster"   => '/storage/img/1st_announcement.jpg',
+                "poster"   => '/assets/posters/1st_announ.png',
                 "buttons"  => [
                     [
                         "theme" => "light",
@@ -207,8 +207,8 @@ class HomeController extends BaseController
             [
                 "title"    => "Call for Abstracts",
                 "subtitle" => "For Cardiologist, Resident, GP, Medical Student, and Researcher",
-                "date"     => "Submit before: 17 July 2023",
-                "poster"   => '/storage/img/abstract_jcu.jpeg',
+                "date"     => "Submit before: 31 July 2023",
+                "poster"   => '/assets/posters/extended_poster_31jul23.jpg',
                 "buttons"  => [
                     [
                         "theme" => "dark",
@@ -217,17 +217,11 @@ class HomeController extends BaseController
                     ]
                 ]
             ],
-//            [
-//                "title"    => "12 Symposium and 8 Workshop",
-//                "subtitle" => "Jogja Cardiology Update 2023 in Conjunction with the Sixth Jogja INternational CARdiovascular TOpic Series 2023",
-//                "date"     => "Tentrem Hotel, Yogyakarta",
-//                "poster"   => '/storage/img/1st_announcement.jpg',
-//            ],
             [
                 "title"    => "The Sixth JINCARTOS",
                 "subtitle" => "Jogja International Cardiovascular Topic Series: Scientific Breakthrough in Hearth Rhythm Disorder",
                 "date"     => "12 Symposium & 8 Workshop",
-                "poster"   => '/storage/img/1st_announcement.jpg',
+                "poster"   => '/assets/posters/1st_announ.png',
                 "buttons"  => [
                     [
                         "theme" => "light",
@@ -445,17 +439,17 @@ class HomeController extends BaseController
     {
         $data = [];
         $data[] = [
-            "title"    => "Free & Full Certificate",
+            "title"    => "Cardiogenic Shock: not only the Heart, We also Need to Protect the Kidney",
             "subtitle" => "August 11, 2023",
-            "image"    => "/storage/img/abstract_jcu.jpeg",
-            "link"     => "#",
+            "image"    => "/assets/posters/webinar_11ags23.jpg",
+            "link"     => "https://bit.ly/PreJCU1",
         ];
 
         $data[] = [
-            "title"    => "Beta Blocker for Cardioprotection in Heart Failure and Hypertension",
-            "subtitle" => "August 21, 2023",
-            "image"    => "/storage/img/abstract_jcu.jpeg",
-            "link"     => "#",
+            "title"    => "Tackling the Difficulty for Management of Uncontrolled Hypertension in Daily Practise: any Hope from Device Therapy",
+            "subtitle" => "August 26, 2023",
+            "image"    => "/assets/posters/webinar_26ags23.jpg",
+            "link"     => "https://bit.ly/PreJCU2",
         ];
 
         $this->response['result'] = $data;
