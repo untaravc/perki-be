@@ -134,7 +134,7 @@ class AuthController extends BaseController
         }
 
         $user = User::whereEmail($request->email)
-            ->where('type', 'user')
+//            ->where('type', 'user')
 //            ->whereStatus(1)
             ->first();
 

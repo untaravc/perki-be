@@ -26,13 +26,13 @@ class SpeakerInitController extends Controller
                 'name'  => 'Dr. dr. Anggoro Budi Hartopo.,Ph.D, Sp.PD, Sp.JP',
                 'slug'  => 'anggoro.budi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/anggoro.budi.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/anggoro.budi.hartopo.png',
             ],
             [
                 'name'  => 'dr. Arditya Damarkusuma, M.Med(ClinEpi), Sp.JP',
                 'slug'  => 'arditya.damarkusuma',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/arditya.damarkusuma.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/arditya.damarkusuma.png',
             ],
             [
                 'name'  => 'dr. Bagus Andi Pramono, Sp.JP',
@@ -56,7 +56,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
                 'slug'  => 'lucia.kris',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.dinarti.png',
             ],
             [
                 'name'  => 'Dr. dr. Nahar Taufiq, Sp.JP(K)',
@@ -80,13 +80,13 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Dyah Wulan Anggrahini, Ph.D, Sp.JP(K)',
                 'slug'  => 'dyah.wulan',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.wulan.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/dyah.wulan.anggrahini.png',
             ],
             [
                 'name'  => 'dr. Erika Maharani, SpJP(K)',
                 'slug'  => 'erika.maharani',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.png',
             ],
             [
                 'name'  => 'dr. Firandi Saputra, Sp.JP',
@@ -98,7 +98,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Firman Fauzan, Sp.JP',
                 'slug'  => 'firman.fauzan',
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/firman.fauzan.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/firman.fauzan.png',
             ],
             [
                 'name'  => 'dr. Gagah Buana Putra, Sp.JP',
@@ -113,28 +113,28 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/galuh.retno.webp',
             ],
             [
-                'name'  => 'dr. Hari Yusti L, Sp.JP(K)',
+                'name'  => 'dr. Hari Yusti Laksono, Sp.JP(K)',
                 'slug'  => 'hari.yusti',
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hari.yusti.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/hari.yusti.laksono.png',
             ],
             [ // 19
                 'name'  => 'dr. Hasanah Mumpuni, SpPD, SpJP(K)',
                 'slug'  => 'hasanah.mumpuni',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hasanah.mumpuni.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/hasanah.mumpuni.png',
             ],
             [
                 'name'  => 'dr. Hendry Purnasidha Bagaswoto Sp.JP(K)',
                 'slug'  => 'hendry.purnasidha',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.png',
             ],
             [ // 21
                 'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
                 'slug'  => 'irsad.andi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.arso.png',
             ],
             [ // 22
                 'name'  => 'dr. Lidwina Tarigan, Sp.JP(K)',
@@ -158,7 +158,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Muhammad Gahan Satwiko, Sp.JP, Ph.D',
                 'slug'  => 'gahan.satwiko',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/gahan.satwiko.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/muhammad.gahan.satwiko.png',
             ],
             [ // 26
                 'name'  => 'dr. M. Yulianto Sismoyo, Sp.JP',
@@ -188,7 +188,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Real Kusumanjaya Marsam, Sp.JP(K)',
                 'slug'  => 'real.kusumanjaya',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/real.kusumanjaya.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/real.kusumanjaya.marsam.png',
             ],
             [ // 31
                 'name'  => 'dr. Rendi Asmara, Sp.JP(K)',
@@ -242,7 +242,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Fera Hidayati,Sp.JP(K)',
                 'slug'  => 'fera.hidayati',
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/fera.hidayati.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/fera.hidayati.png',
             ],
             [ // 40
                 'name'  => 'Dr.Med dr. Putrika Prastuti Ratna Gharini Sp.JP (K)',

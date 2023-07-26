@@ -1017,7 +1017,7 @@ class EventInitController extends Controller
                         "title"      => "Management ACS Patient ind Daily Practice : When we should Send the Patient to CL?",
                         "data_type"  => "schedule",
                         "section"    => "jcu23",
-                        "speakers"   => "",
+                        "speakers"   => "nahar.taufiq",
                         "marker"     => "workshop-half-day-1",
                         "slug"       => "workshop-half-day-1-1",
                         "date_start" => "2023-09-01 08:00:00",
@@ -1202,12 +1202,15 @@ class EventInitController extends Controller
                 $datum['parent_id'] = $parent_id;
                 try {
                     $event = Event::create($datum);
-
                 } catch (\Exception $exception) {
                     return $datum;
                 }
             } else {
-                $event->update($datum);
+                try {
+                    $event->update($datum);
+                } catch (\Exception $exception) {
+                    return $datum;
+                }
             }
 
             if (isset($datum['children'])) {

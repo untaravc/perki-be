@@ -81,4 +81,13 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class)->where('status', '>', 199)
             ->where('status', '<', 299);
     }
+
+    public function getImageAttribute(){
+        if(env('APP_ENV') === 'local'){
+            $img = $this->attributes['image'];
+            return str_replace('https://src.perki-jogja.com/', 'http://127.0.0.1:8000/', $img);
+        } else {
+            return $this->attributes['image'];
+        }
+    }
 }

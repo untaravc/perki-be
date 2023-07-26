@@ -558,7 +558,7 @@
                                         </table>
                                         <h1>Invoice</h1>
                                         <!-- TODO: Change this name -->
-                                        <p>Hello <strong>{{$name}}</strong></p>
+                                        <p>Hello <b>{{$user['name']}}</b></p>
                                         <p>
                                             You just made an event purchase with the following details:
                                         </p>
@@ -571,7 +571,7 @@
                                             border="0"
                                             cellpadding="0"
                                             cellspacing="0"
-                                            class="transaction"
+                                            class="transaction mb-6"
                                         >
                                             <tbody>
                                             <tr>
@@ -584,26 +584,31 @@
                                                     >
                                                         <tbody>
                                                         <tr>
-                                                            <td>ID</td>
-                                                            <td>Event</td>
-                                                            <td>Total</td>
-                                                        </tr>
-                                                        <tr>
+                                                            <td>ID Transaksi</td>
                                                             <td>
                                                                 <strong class="text-primary">
-                                                                    0734580734562
+                                                                    {{$transaction['number']}}
                                                                 </strong>
                                                             </td>
-                                                            <td>
-                                                                <strong>
-                                                                    JCU 2023
-                                                                </strong>
-                                                            </td>
-                                                            <td>
-                                                                <strong> Rp 96.000 </strong>
-                                                            </td>
+                                                            <td></td>
                                                         </tr>
                                                         </tbody>
+                                                    </table>
+                                                    <table style="width: 100%">
+                                                        <tr>
+                                                            <th style="text-align: center">Name</th>
+                                                            <th style="text-align: center; width: 50%">Schedule</th>
+                                                            <th>
+                                                                Time
+                                                            </th>
+                                                        </tr>
+                                                        @foreach($transaction_details as $detail)
+                                                            <tr>
+                                                                <td style="text-align: center">{{$detail['event_name']}}</td>
+                                                                <td style="text-align: center">{{date( 'l, jS M Y',strtotime($detail['event']['date_start']))}}</td>
+                                                                <td style="text-align: center">{{date( 'H:i',strtotime($detail['event']['date_start']))}}</td>
+                                                            </tr>
+                                                        @endforeach
                                                     </table>
                                                 </td>
                                             </tr>
@@ -637,7 +642,7 @@
                                                             <td>Amount</td>
                                                             <td>
                                                                 <strong class="text-primary">
-                                                                    Rp 100.000
+                                                                    Rp {{number_format($transaction->total,0,',','.')}}
                                                                 </strong>
                                                             </td>
                                                         </tr>

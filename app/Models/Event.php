@@ -31,6 +31,10 @@ class Event extends Model
         "body",
     ];
 
+    public function speaker(){
+        return $this->belongsTo(User::class, 'speakers','slug');
+    }
+
     public function schedule_details(){
         return $this->hasMany(self::class, 'parent_id', 'id')
             ->where('data_type', 'schedule-detail');
@@ -38,7 +42,7 @@ class Event extends Model
 
     public function schedules(){
         return $this->hasMany(self::class, 'parent_id', 'id')
-            ->where('data_type', 'schedule');
+            ->where('data_type', 'schedule')->with('speaker');
     }
 
     public function transaction_success(){

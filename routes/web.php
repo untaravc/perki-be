@@ -14,6 +14,6 @@ Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where( 'path
 
 Route::get('login', [AuthController::class, 'login_view']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('test-view', [\App\Http\Controllers\User\AuthController::class, 'send_new_password']);
+Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::class, 'bill']);
 
 Route::get('event-init', [\App\Http\Controllers\System\EventInitController::class, 'event_init']);

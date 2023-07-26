@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\System\EmailServiceController;
 use App\Models\Event;
 use App\Models\Post;
 use App\Models\Price;
@@ -661,6 +662,9 @@ class EvenTransactionController extends BaseController
         TransactionDetail::whereTransactionId($transaction->id)
             ->whereNotIn('event_id', $item_ids)
             ->delete();
+
+        $email_service = new EmailServiceController();
+        $email_service->bill($transaction->id);
 
         $this->sendPostResponse();
     }
