@@ -15,7 +15,7 @@
             <tr>
                 <td class="px-2 py-2"></td>
                 <td class="px-2 py-2">
-                    <input type="text"
+                    <input type="text" v-model="filter.name" @keyup.enter="applyFilter"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </td>
                 <td class="px-2 py-2"></td>
@@ -38,10 +38,10 @@
             </thead>
             <tbody v-if="data_content.data">
             <tr class="border-b" v-for="(data, i) in data_content.data">
-                <td class="px-4 py-3">
+                <td class="px-4 py-3" :title="data.id">
                     {{ (data_content.current_page - 1) * data_content.per_page + i + 1 }}
                 </td>
-                <td class="px-4 py-3">
+                <td class="px-4 py-3" :title="data.user_id">
                     {{ data.user_name }}
                 </td>
                 <td class="px-4 py-3">
@@ -105,6 +105,7 @@
                                     <div>
                                         <a :href="data_detail.transfer_proof" target="_blank">
                                             <img :src="data_detail.transfer_proof" class="w-full" alt="">
+                                            <span class="text-blue-600 hover:text-blue-800">View File</span>
                                         </a>
                                     </div>
                                 </div>
@@ -201,6 +202,7 @@ export default {
             data_detail: '',
             filter: {
                 status: '',
+                name: '',
             }
         }
     },
@@ -239,6 +241,10 @@ export default {
                     }
                 });
             }
+        },
+        applyFilter(){
+            this.$parent.applyFilter(this.filter)
+            console.log('this')
         }
     },
     mounted() {

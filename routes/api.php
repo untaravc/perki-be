@@ -44,6 +44,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
 
     Route::post('scan-event', [AdminEventController::class, 'scan_event']);
+    Route::get('posts-stat', [AdminPostController::class, 'stats']);
 });
 // =========
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -29,11 +30,16 @@ class PostController extends Controller
                 'case_report',
                 'research',
                 'systematic_review',
+                'meta_analysis',
             ]);
         }
 
         if ($request->category) {
             $data_content = $data_content->where('category', $request->category);
+        }
+
+        if ($request->status !== null) {
+            $data_content = $data_content->where('status', $request->status);
         }
 
         return $data_content;
@@ -62,5 +68,34 @@ class PostController extends Controller
         }
 
         return view('print.posts.abstracts', compact('data_content', 'type'));
+    }
+
+    public function stats(){
+        $data['pending'] = Post::whereIn('category', [
+                'case_report',
+                'research',
+                'systematic_review',
+                'meta_analysis',
+            ])->where('status', 0)
+            ->count();
+
+        $data['accept'] = Post::whereIn('category', [
+                'case_report',
+                'research',
+                'systematic_review',
+                'meta_analysis',
+            ])->where('status', 1)
+            ->count();
+
+        $data['reject'] = Post::whereIn('category', [
+                'case_report',
+                'research',
+                'systematic_review',
+                'meta_analysis',
+            ])->where('status', 2)
+            ->count();
+
+        $this->response['result'] = $data;
+        return $this->response;
     }
 }
