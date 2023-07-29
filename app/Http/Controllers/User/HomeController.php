@@ -33,7 +33,9 @@ class HomeController extends BaseController
 
     public function schedule()
     {
-        $events = Event::with('schedule_details', 'schedules', 'speaker')
+        $events = Event::with(['schedule_details' => function($q){
+            $q->with('speaker');
+        }, 'schedules'])
             ->whereSection('jcu23')
             ->get();
 

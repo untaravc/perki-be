@@ -19,6 +19,10 @@ class DataInitController extends BaseController
                 $speakers = new SpeakerInitController();
                 $speakers->init_speaker();
                 break;
+            case 'users':
+                $speakers = new UserInitController();
+                $speakers->user_init();
+                break;
             default:
                 return [
                     'message' => 'section required'

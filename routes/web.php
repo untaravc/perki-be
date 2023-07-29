@@ -11,9 +11,11 @@ Route::get('/', function (){
 Route::get('/panel/print-abstract', [PostController::class, 'printPost']);
 Route::get('/panel', [AuthController::class, 'adminPanel']);
 Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where( 'path' , '([A-z\d\-\/_.]+)?' );
+Route::get('/scanner', [AuthController::class, 'scannerPanel']);
 
 Route::get('login', [AuthController::class, 'login_view']);
 Route::post('login', [AuthController::class, 'login']);
 Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::class, 'bill']);
 
 Route::get('event-init', [\App\Http\Controllers\System\EventInitController::class, 'event_init']);
+Route::get('sample-qrcode', [\App\Http\Controllers\TestController::class, 'sample_qrcode']);

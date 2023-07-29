@@ -33,7 +33,9 @@ class Transaction extends Model
 
     public function getLastTimeAttribute()
     {
-        return date('Y-m-d H:i:s', strtotime($this->attributes['updated_at'] . '+24 hours'));
+        if(isset($this->attributes['updated_at'])){
+            return date('Y-m-d H:i:s', strtotime($this->attributes['updated_at'] . '+24 hours'));
+        }
     }
 
     public function getStatusLabelAttribute()

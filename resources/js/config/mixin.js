@@ -35,7 +35,7 @@ const mixin = {
     methods: {
         async apiGet(uri, params) {
             let response = '';
-            await this.$axios.get(this.base_api + uri, {
+            await axios.get(this.base_api + uri, {
                 params: params,
             }).then(({data}) => {
                 response = data;

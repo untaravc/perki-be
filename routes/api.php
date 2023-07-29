@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EventPresenceController;
 
 use App\Http\Controllers\Event\RegisterController as EventRegisterController;
 
@@ -39,6 +40,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);
     Route::resource('users', AdminUserController::class);
+    Route::resource('event-presence', EventPresenceController::class);
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
@@ -107,5 +109,10 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('pricing', [HomeController::class, 'pricing']);
     Route::get('hero-banner', [HomeController::class, 'hero_banner']);
     Route::get('sponsor-slider', [HomeController::class, 'sponsor_slider']);
+
+    // Presensi Event
+    Route::get('scan-params', [EventPresenceController::class, 'scan_params']);
+    Route::get('scan-qrcode-event', [EventPresenceController::class, 'check_qrcode_data']);
+    Route::post('scan-qrcode-event', [EventPresenceController::class, 'record_qrcode_data']);
 });
 // =========

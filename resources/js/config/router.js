@@ -1,11 +1,11 @@
 import Layout from "../views/Layout";
 import Login from "../views/login/Index";
 import Dashboard from "../views/dashboard/Index";
-import Posts from "../views/posts/Index";
 import Users from "../views/users/Index";
 import Abstract from "../views/abstracts/Index";
 import Transactions from "../views/transactions/Index";
 import Scanner from "../views/scanner/Index";
+import EventPresence from "../views/event-presence/Index";
 import VueRouter from "vue-router";
 
 const routes = [
@@ -35,8 +35,8 @@ const routes = [
                 meta: {protected: true},
             },
             {
-                path: 'scanner',
-                component: Scanner,
+                path: 'event-presence',
+                component: EventPresence,
                 meta: {protected: true},
             },
         ]
@@ -44,6 +44,10 @@ const routes = [
     {
         path: '/panel/login',
         component: Login,
+    },
+    {
+        path: '/scanner',
+        component: Scanner,
     }
 ]
 

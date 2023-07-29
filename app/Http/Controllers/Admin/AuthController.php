@@ -73,4 +73,8 @@ class AuthController extends BaseController
     {
         return view('404');
     }
+
+    public function scannerPanel(){
+        return view('admin.Scanner');
+    }
 }

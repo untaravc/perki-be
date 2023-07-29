@@ -244,7 +244,6 @@ export default {
         },
         applyFilter(){
             this.$parent.applyFilter(this.filter)
-            console.log('this')
         }
     },
     mounted() {
