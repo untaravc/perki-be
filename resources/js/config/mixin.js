@@ -3,6 +3,7 @@ const mixin = {
     data() {
         return {
             base_api: '',
+            admin_profile: {},
             logged_in: false,
             page_loader_config: {
                 loader: 'bars',

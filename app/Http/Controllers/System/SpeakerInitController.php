@@ -377,6 +377,7 @@ class SpeakerInitController extends Controller
                 ->first();
 
             $datum['is_speaker'] = 1;
+            $datum['type'] = 'speaker';
             if ($user) {
                 $user->update($datum);
             } else {

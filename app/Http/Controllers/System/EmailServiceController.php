@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class EmailServiceController extends Controller
 {
@@ -57,7 +59,7 @@ class EmailServiceController extends Controller
             if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
             } else {
-                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+//                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
             }
 
             MailLog::create($mail_log);
@@ -116,7 +118,8 @@ class EmailServiceController extends Controller
         }
     }
 
-    public function send_new_password(User $user){
+    public function send_new_password(User $user)
+    {
         $data['user'] = $user;
 
         $data['view'] = 'email.set_new_password';
@@ -134,6 +137,56 @@ class EmailServiceController extends Controller
             "status"         => 1,
             "sent_at"        => now(),
         ];
+
+        try {
+            if (env('APP_ENV') == "prod") {
+                Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
+            } else {
+                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+            }
+
+            MailLog::create($mail_log);
+        } catch (\Exception $exception) {
+            $mail_log['sent_at'] = null;
+            $mail_log['status'] = 2;
+
+            MailLog::create($mail_log);
+        }
+    }
+
+    public function qr_code_access($transaction_id = null)
+    {
+        $transaction_id = $transaction_id ?? 64;
+
+        $data['transaction'] = Transaction::find($transaction_id);
+        $data['transaction_details'] = TransactionDetail::with('event')
+            ->orderBy('event_id')
+            ->whereTransactionId($transaction_id)
+            ->get();
+
+        $data['user'] = User::find($data['transaction']['user_id']);
+
+        $data['view'] = 'email.jcu22.qr_code';
+        $data['email_subject'] = 'JCU 2023: Code Access ' . $data['transaction']['number'];
+        $data['path'] = 'assets/qr_code/'.$data['transaction']['number'].'.svg';
+        $data['qr_link'] = env('APP_URL') . '/' . $data['path'];
+
+        $mail_log = [
+            "email_sender"   => "perki.yogyakarta@gmail.com",
+            "email_receiver" => $data['user']['email'],
+            "receiver_name"  => $data['user']['name'],
+            "label"          => "access_code",
+            "category"       => null,
+            "title"          => $data['email_subject'],
+            "model"          => "transaction",
+            "model_id"       => $transaction_id,
+            "status"         => 1,
+            "sent_at"        => now(),
+        ];
+
+        QrCode::size(500)
+            ->errorCorrection('H')
+            ->generate($data['transaction']['number'], public_path($data['path']));
 
         try {
             if (env('APP_ENV') == "prod") {

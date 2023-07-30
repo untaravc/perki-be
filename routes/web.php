@@ -15,7 +15,7 @@ Route::get('/scanner', [AuthController::class, 'scannerPanel']);
 
 Route::get('login', [AuthController::class, 'login_view']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::class, 'bill']);
+Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::class, 'qr_code_access']);
 
 Route::get('event-init', [\App\Http\Controllers\System\EventInitController::class, 'event_init']);
 Route::get('sample-qrcode', [\App\Http\Controllers\TestController::class, 'sample_qrcode']);

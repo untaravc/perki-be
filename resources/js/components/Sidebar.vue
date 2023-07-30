@@ -16,7 +16,7 @@
                         <span class="ml-3">Dashboards</span>
                     </router-link>
                 </li>
-                <li>
+                <li v-if="admin_type === 'admin'">
                     <router-link to="/panel/users"
                                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <unicon name="angle-right-b"></unicon>
@@ -30,7 +30,7 @@
                         <span class="flex-1 ml-3 whitespace-nowrap">Abstracts</span>
                     </router-link>
                 </li>
-                <li>
+                <li v-if="admin_type === 'admin'">
                     <router-link to="/panel/transactions"
                                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <unicon name="angle-right-b"></unicon>
@@ -41,11 +41,11 @@
                         </span>
                     </router-link>
                 </li>
-                <li>
+                <li v-if="admin_type === 'admin'">
                     <router-link to="/panel/event-presence"
                                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <unicon name="angle-right-b"></unicon>
-                        <span class="flex-1 ml-3 whitespace-nowrap">Event Presence</span>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Events Presence</span>
                     </router-link>
                 </li>
             </ul>
@@ -56,6 +56,7 @@
 export default {
     data() {
         return {
+            admin_type: 'author',
             label: {
                 transactions: 0,
             }
@@ -67,10 +68,22 @@ export default {
                 .then((data) => {
                     this.label.transactions = data.result.transactions
                 })
+        },
+        setAdminType(){
+            let type = localStorage.getItem('admin_type')
+
+            if(!type){
+                setTimeout(()=>{
+                    this.setAdminType()
+                }, 2000)
+            } else {
+                this.admin_type = type;
+            }
         }
     },
     created() {
         this.loadLabel()
+        this.setAdminType()
 
         Fire.$on('reload-sidebar-label', () => {
             this.loadLabel()

@@ -36,6 +36,8 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('dashboard-user-stat', [DashboardController::class, 'user_stat']);
     Route::get('dashboard-event-purchase', [DashboardController::class, 'event_purchase']);
     Route::get('sidebar-label', [DashboardController::class, 'sidebar_label']);
+    Route::get('reviewer-list', [AdminPostController::class, 'reviewer_list']);
+    Route::get('posts-stat', [AdminPostController::class, 'stats']);
 
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);
@@ -44,9 +46,8 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
-
     Route::post('scan-event', [AdminEventController::class, 'scan_event']);
-    Route::get('posts-stat', [AdminPostController::class, 'stats']);
+    Route::post('post-set-reviewer/{post_id}', [AdminPostController::class, 'set_reviewer']);
 });
 // =========
 

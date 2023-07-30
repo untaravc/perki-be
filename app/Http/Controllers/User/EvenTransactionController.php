@@ -343,7 +343,7 @@ class EvenTransactionController extends BaseController
         $user = $request->user();
         $data = Transaction::whereNumber($transaction_number)
             ->with([
-                'transaction_details' => function($q) {
+                'transaction_details' => function ($q) {
                     $q->with('event');
                 }
             ])
@@ -364,7 +364,7 @@ class EvenTransactionController extends BaseController
         $data = Transaction::whereUserId($user['id'])
             ->orderByDesc('id')
             ->where('status', '<', 300)
-            ->with(['transaction_details' => function($q) {
+            ->with(['transaction_details' => function ($q) {
                 $q->with('event');
             }])
             ->get();
@@ -536,7 +536,7 @@ class EvenTransactionController extends BaseController
             $package_discount = 0;
             if (isset($items['morning_workshop']) && isset($items['afternoon_workshop'])) {
                 $package_discount = 250000;
-                if (now() < '2023-07-31 00:00:00') {
+                if (now() < '2023-08-01 00:00:00') {
                     $package_discount = 500000;
                 }
             }
@@ -550,12 +550,22 @@ class EvenTransactionController extends BaseController
             $total = $subtotal - $package_discount;
         }
 
+        $voucher_discount = $this->calculate_discount($data, $request->voucher);
+
+        if ($voucher_discount['discount_amount'] > 0) {
+            $total -= $voucher_discount['discount_amount'];
+        }
+
         $this->response['result'] = [
-            "transaction"      => $transaction,
-            "items"            => $data,
-            "subtotal"         => $subtotal,
-            "package_discount" => $package_discount,
-            "total"            => $total,
+            "transaction"        => $transaction,
+            "items"              => $data,
+            "subtotal"           => $subtotal,
+            "voucher_code"       => $voucher_discount['voucher'],
+            "voucher_validation" => $voucher_discount['voucher_validation'],
+            "voucher_discount"   => $voucher_discount['voucher_discount'],
+            "discount_amount"    => $voucher_discount['discount_amount'],
+            "package_discount"   => $package_discount,
+            "total"              => $total,
         ];
 
         return $this->response;
@@ -613,13 +623,13 @@ class EvenTransactionController extends BaseController
         $transaction = Transaction::find($pricing['transaction']['id']);
 
         $transaction_payload = [
-            'subtotal'       => $pricing['subtotal'],
-//            'voucher_code'     => $voucher_discount ? $request->voucher : null,
-//            'voucher_discount' => $voucher_discount ? $voucher_discount['price'] : null,
-//            'discount_amount'  => $discount ? $discount['price'] : null,
-            'total'          => $pricing['total'],
-            'status'         => 110,
-            'payment_method' => 'manual_transfer',
+            'subtotal'         => $pricing['subtotal'],
+            'voucher_code'     => $pricing['voucher_code'],
+            'voucher_discount' => $pricing['voucher_discount'],
+            'discount_amount'  => $pricing['discount_amount'],
+            'total'            => $pricing['total'],
+            'status'           => 110,
+            'payment_method'   => 'manual_transfer',
         ];
 
         $transaction->update($transaction_payload);
@@ -667,5 +677,69 @@ class EvenTransactionController extends BaseController
         $email_service->bill($transaction->id);
 
         $this->sendPostResponse();
+    }
+
+    protected function calculate_discount($data, $voucher_code)
+    {
+
+        if ($voucher_code) {
+            $symposium = collect($data)->where('marker', 'symposium-jcu23')->first();
+
+            if (!$symposium) {
+                return [
+                    "voucher"            => '',
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Symposium not selected.',
+                ];
+            }
+
+            $voucher = Voucher::whereCode($voucher_code)
+                ->first();
+            if (!$voucher) {
+                return [
+                    "voucher"            => '',
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Invalid Voucher Code.',
+                ];
+            }
+
+            if($voucher->qty != 0){
+                $used_voucher = Transaction::where('voucher_code', $voucher_code)
+                    ->count();
+
+                if($used_voucher >= $voucher->qty){
+                    return [
+                        "voucher"            => $voucher_code,
+                        "voucher_discount"   => 0,
+                        "discount_amount"    => 0,
+                        "voucher_validation" => 'Voucher Out of Stock',
+                    ];
+                }
+            }
+        } else {
+            return [
+                "voucher"            => '',
+                "voucher_discount"   => 0,
+                "discount_amount"    => 0,
+                "voucher_validation" => '',
+            ];
+        }
+
+
+        $discount_amount = 0;
+        if ($voucher->type == 'amount') {
+            $discount_amount = $voucher->value;
+        } else if ('percent') {
+            $discount_amount = $symposium['price'] * ($voucher->value / 100);
+        }
+
+        return [
+            "voucher"            => $voucher_code,
+            "voucher_discount"   => $voucher->value,
+            "discount_amount"    => $discount_amount,
+            "voucher_validation" => '',
+        ];
     }
 }

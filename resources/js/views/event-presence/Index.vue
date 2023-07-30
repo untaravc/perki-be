@@ -72,8 +72,6 @@ export default {
             this.loadDataContent(this.filters.page);
         },
         reloadData(){
-            console.log('hehk')
-            console.log(this.filters.status)
             if(this.filters.status == 100){
                 this.loadDataContent()
             }

@@ -88,6 +88,9 @@ export default {
             this.authGet('adm/profile')
                 .then(data => {
                     this.profile = data.result
+                    this.admin_profile = data.result
+
+                    localStorage.setItem('admin_type', data.result.type)
                 })
         }
     },
