@@ -56,6 +56,7 @@ export default {
             this.authGet('adm/transactions', this.filters)
                 .then((data)=>{
                     this.data_content = data
+                    Fire.$emit('reload-sidebar-label')
                 })
         },
         applyFilter(filter){

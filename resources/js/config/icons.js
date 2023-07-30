@@ -1,5 +1,6 @@
 import {
     uniAngleDown,
+    uniAngleRightB,
     uniBell,
     uniClipboardAlt,
     uniCheck,
@@ -15,6 +16,7 @@ import {
     uniMapPin,
     uniParcel,
     uniPlus,
+    uniPrint,
     uniSetting,
     uniSearch,
     uniTimes,
@@ -24,6 +26,7 @@ import {
 
 export default [
     uniAngleDown,
+    uniAngleRightB,
     uniBell,
     uniClipboardAlt,
     uniCheck,
@@ -39,6 +42,7 @@ export default [
     uniMapPin,
     uniParcel,
     uniPlus,
+    uniPrint,
     uniSetting,
     uniSearch,
     uniTimes,

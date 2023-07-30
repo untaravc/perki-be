@@ -35,8 +35,10 @@ class EventPresenceController extends Controller
 
         if ($request->status) {
             $data_content = $data_content->where('status', $request->status);
-        } else {
-            $data_content = $data_content->where('status', '!=', 400);
+        }
+
+        if ($request->name) {
+            $data_content = $data_content->where('user_name', "LIKE", "%" . $request->name . "%");
         }
         return $data_content;
     }
@@ -162,5 +164,15 @@ class EventPresenceController extends Controller
 
         $this->response['result'] = $data;
         return $this->response;
+    }
+
+    public function print_event_presence($event_user_id){
+        $event_user = EventUser::find($event_user_id);
+
+        if(!$event_user){
+            return 'invalid';
+        }
+
+        return view('print.event_user.nametag', compact('event_user'));
     }
 }

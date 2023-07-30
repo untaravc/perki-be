@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class EventUser extends Model
 {
     use HasFactory;
+    protected $appends = ['status_label'];
     protected $guarded = [];
 
     public function scanner(){
@@ -20,5 +21,15 @@ class EventUser extends Model
 
     public function event(){
         return $this->belongsTo(Event::class);
+    }
+
+    public function getStatusLabelAttribute()
+    {
+        if (isset($this->attributes['status'])) {
+            switch ($this->attributes['status']) {
+                case 100: return 'New';
+                case 200: return 'Recorded';
+            }
+        }
     }
 }

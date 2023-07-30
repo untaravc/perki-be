@@ -19,3 +19,4 @@ Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::cl
 
 Route::get('event-init', [\App\Http\Controllers\System\EventInitController::class, 'event_init']);
 Route::get('sample-qrcode', [\App\Http\Controllers\TestController::class, 'sample_qrcode']);
+Route::get('print/event-presence/{event_user_id}', [\App\Http\Controllers\Admin\EventPresenceController::class, 'print_event_presence']);

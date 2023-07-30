@@ -19,23 +19,24 @@
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </td>
                 <td class="px-2 py-2">
-                    <select type="text" v-model="filter.name" @keyup.enter="applyFilter"
+                    <select type="text" v-model="filter.event_id" @change="applyFilter"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                        <option value="100">NEW</option>
-                        <option value="200">Recorded</option>
+                        <option value="">All</option>
+                        <option :value="evn.id" v-for="evn in params.events">{{evn.name}}</option>
                     </select>
                 </td>
                 <td class="px-2 py-2">
-                    <select type="text" v-model="filter.name" @keyup.enter="applyFilter"
+                    <select type="text" v-model="filter.scanner_id" @change="applyFilter"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                        <option value="100">NEW</option>
-                        <option value="200">Recorded</option>
+                        <option value="">All</option>
+                        <option :value="adm.id" v-for="adm in params.admin">{{adm.name}}</option>
                     </select>
                 </td>
                 <td class="px-2 py-2">
-                    <select type="text" v-model="filter.name" @keyup.enter="applyFilter"
+                    <select type="text" v-model="filter.status" @change="applyFilter"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                        <option value="100">NEW</option>
+                        <option value="">All</option>
+                        <option value="100">New</option>
                         <option value="200">Recorded</option>
                     </select>
                 </td>
@@ -56,33 +57,16 @@
                     <span v-if="data.event">{{ data.event.name }}</span>
                 </td>
                 <td class="px-4 py-3">
-                    <span v-if="data.scanner">{{ data.event.name }}</span>
+                    <span v-if="data.scanner">{{ data.scanner.name }}</span>
                 </td>
                 <td>
                     {{ data.status_label }}
                 </td>
                 <td class="px-4 py-3 flex items-center justify-end">
-                    <div class="dropdown relative group">
-                        <button
-                            class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                            type="button">
-                            <unicon name="ellipsis-h"></unicon>
-                        </button>
-                        <div :class="i > 7 ? '-top-24' : ''"
-                             class="dropdown-menu absolute hidden block group-hover:visible -left-32 z-100 w-44 bg-white rounded divide-y divide-gray-100 shadow">
-                            <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                                aria-labelledby="apple-imac-27-dropdown-button">
-                                <li>
-                                    <a href="#" @click="showModal(data)"
-                                       class="block py-2 px-4 hover:bg-gray-100">Show</a>
-                                </li>
-                                <li>
-                                    <a href="#" @click="deleteTransaction(data)"
-                                       class="block py-2 px-4 text-sm text-red-700 hover:bg-gray-100">Delete</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <a :href="'/print/event-presence/' + data.id" target="_blank"
+                       class="block py-2 px-4 hover:bg-gray-100">
+                        <unicon name="print"></unicon>
+                    </a>
                 </td>
             </tr>
             </tbody>
@@ -100,7 +84,7 @@
                         </h3>
                         <button type="button" @click="hideModal"
                                 class="text-gray-400 bg-transparent text-sm p-1.5 ml-auto inline-flex items-center">
-                            <unicon name="times"></unicon>
+                            <unicon name="times" fill="black"></unicon>
                         </button>
                     </div>
                     <div class="p-6 space-y-6">
@@ -211,6 +195,8 @@ export default {
             filter: {
                 status: '',
                 name: '',
+                event_id: '',
+                scanner_id: '',
             },
             params:{
                 admin:[],
@@ -263,7 +249,7 @@ export default {
         },
         applyFilter(){
             this.$parent.applyFilter(this.filter)
-        }
+        },
     },
     mounted() {
         const $targetEl = document.getElementById('showModal');
@@ -271,12 +257,13 @@ export default {
     },
     created() {
         this.loadParams()
+
     },
     watch: {
         'filter.status'(val) {
             this.$parent.applyFilter(this.filter)
         }
-    }
+    },
 }
 </script>
 <style>

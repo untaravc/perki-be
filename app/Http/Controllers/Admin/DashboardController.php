@@ -132,6 +132,7 @@ class DashboardController extends Controller
             'case_report',
             'research',
             'systematic_review',
+            'meta_analysis',
         ])->select('category', DB::raw('count(*) as total'))
             ->groupBy('category')
             ->get();

@@ -47,6 +47,9 @@ export default {
                 per_page: 10,
                 s: '',
                 status: '',
+                name: '',
+                event_id: '',
+                scanner_id: '',
             }
         }
     },
@@ -60,15 +63,28 @@ export default {
         },
         applyFilter(filter){
             this.filters.status = filter.status
-            this.filters.s = filter.name
+            this.filters.name = filter.name
+            this.filters.event_id = filter.event_id
+            this.filters.scanner_id = filter.scanner_id
             this.loadDataContent();
         },
         loadThisPage(){
             this.loadDataContent(this.filters.page);
+        },
+        reloadData(){
+            console.log('hehk')
+            console.log(this.filters.status)
+            if(this.filters.status == 100){
+                this.loadDataContent()
+            }
         }
     },
     created() {
         this.loadDataContent()
+
+        setInterval(()=>{
+            this.reloadData()
+        }, 2000)
     },
 }
 </script>
