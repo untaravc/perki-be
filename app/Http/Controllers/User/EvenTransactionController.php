@@ -556,6 +556,10 @@ class EvenTransactionController extends BaseController
             $total -= $voucher_discount['discount_amount'];
         }
 
+        if(collect($request->users)->count() === 5){
+            $total = 5000000;
+        }
+
         $this->response['result'] = [
             "transaction"        => $transaction,
             "items"              => $data,
