@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 110 -> sudah memilih event
  * 120 -> sudah upload transfer proof
  * 200 -> sudah bayar
+ * 300 -> Sub Transaction
  * 400 -> deleted
  */
 
@@ -24,6 +25,10 @@ class Transaction extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function users(){
+        return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
     public function transaction_details()
@@ -46,6 +51,7 @@ class Transaction extends Model
                 case 110: return 'Waiting payment';
                 case 120: return 'Waiting confirmation';
                 case 200: return 'Paid';
+                case 300: return 'Sub Transaction';
                 case 400: return 'Deleted';
             }
         }

@@ -54,7 +54,7 @@ class DashboardController extends Controller
         }
 
         $trx_day = Transaction::where('created_at', '>=', $params['date_start'])
-            ->where('created_at', '<', $params['date_end'])
+            ->where('created_at', '<=', $params['date_end'])
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get(array(
@@ -72,7 +72,7 @@ class DashboardController extends Controller
             ));
 
         $trx_day_total = Transaction::where('created_at', '>=', $params['date_start'])
-            ->where('created_at', '<', $params['date_end'])
+            ->where('created_at', '<=', $params['date_end'])
             ->sum('total');
 
         for ($i = 1; $i <= count($array); $i++) {

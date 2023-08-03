@@ -42,7 +42,9 @@
                     {{ (data_content.current_page - 1) * data_content.per_page + i + 1 }}
                 </td>
                 <td class="px-4 py-3" :title="data.user_id">
-                    {{ data.user_name }}
+                    <b>{{ data.user_name }}</b>
+                    <br>
+                    {{data.job_type_code}}
                 </td>
                 <td class="px-4 py-3">
                     {{ data.total | currency }}
@@ -106,6 +108,12 @@
                                         <a :href="data_detail.transfer_proof" target="_blank">
                                             <img :src="data_detail.transfer_proof" class="w-full" alt="">
                                             <span class="text-blue-600 hover:text-blue-800">View File</span>
+                                        </a>
+                                    </div>
+                                    <div v-if="data_detail.user && data_detail.user.identity_photo">
+                                        Photo ID
+                                        <a :href="data_detail.user.identity_photo" target="_blank">
+                                            <img :src="data_detail.user.identity_photo" class="w-full" alt="">
                                         </a>
                                     </div>
                                 </div>
@@ -178,15 +186,27 @@
                                         </tr>
                                     </table>
                                 </div>
+
+                                <div class="mb-2 font-semibold">Children</div>
+                                <div class="border rounded-lg p-2">
+                                    <table class="w-full">
+                                        <tr v-for="(user, i) in data_detail.users">
+                                            <td>{{ i + 1 }}</td>
+                                            <td>{{ user.user_name }}</td>
+                                            <td>{{ user.user_email }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div
                         class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                        <button type="button" @click="acceptTransaction"
+                        <button type="button" @click="acceptTransaction" :disabled="disabled"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                             <span v-if="data_detail.status !== 200">Accept</span>
                             <span v-if="data_detail.status === 200">Resend Email</span>
+                            <span v-if="disabled">...</span>
                         </button>
                     </div>
                 </div>
@@ -198,6 +218,7 @@
 export default {
     data() {
         return {
+            disabled: '',
             modal: '',
             data_detail: '',
             filter: {
@@ -217,6 +238,7 @@ export default {
         },
         acceptTransaction() {
             if (confirm('Confirm payment?')) {
+                this.disabled = true;
                 this.authPost('adm/transaction-confirm', {
                     transaction_id: this.data_detail.id
                 }).then((data) => {
@@ -226,6 +248,7 @@ export default {
                     } else {
                         alert(data.message)
                     }
+                    this.disabled = false;
                 })
             }
         },
@@ -242,7 +265,7 @@ export default {
                 });
             }
         },
-        applyFilter(){
+        applyFilter() {
             this.$parent.applyFilter(this.filter)
         }
     },

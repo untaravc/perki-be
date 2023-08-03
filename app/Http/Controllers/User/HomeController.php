@@ -33,7 +33,7 @@ class HomeController extends BaseController
 
     public function schedule()
     {
-        $events = Event::with(['schedule_details' => function($q){
+        $events = Event::with(['schedule_details' => function ($q) {
             $q->with('speaker');
         }, 'schedules'])
             ->whereSection('jcu23')
@@ -209,8 +209,8 @@ class HomeController extends BaseController
             [
                 "title"    => "Call for Abstracts",
                 "subtitle" => "For Cardiologist, Resident, GP, Medical Student, and Researcher",
-                "date"     => "Submit before: 31 July 2023",
-                "poster"   => '/assets/posters/extended_poster_31jul23.jpg',
+                "date"     => "Submit before: August 7th 2023",
+                "poster"   => '/assets/posters/extended_poster_7ags23.jpg',
                 "buttons"  => [
                     [
                         "theme" => "dark",
@@ -442,9 +442,16 @@ class HomeController extends BaseController
         $data = [];
         $data[] = [
             "title"    => "Cardiogenic Shock: not only the Heart, We also Need to Protect the Kidney",
-            "subtitle" => "August 11, 2023",
+            "subtitle" => "August 12, 2023",
             "image"    => "/assets/posters/webinar_11ags23.jpg",
             "link"     => "https://bit.ly/PreJCU1",
+        ];
+
+        $data[] = [
+            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry copy",
+            "subtitle" => "August 19, 2023",
+            "image"    => "/assets/posters/webinar_19ags23.jpg",
+            "link"     => "https://bit.ly/PreJCU2",
         ];
 
         $data[] = [
@@ -453,6 +460,7 @@ class HomeController extends BaseController
             "image"    => "/assets/posters/webinar_26ags23.jpg",
             "link"     => "https://bit.ly/PreJCU2",
         ];
+
 
         $this->response['result'] = $data;
         return $this->response;

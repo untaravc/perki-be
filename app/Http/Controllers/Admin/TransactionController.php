@@ -13,9 +13,13 @@ class TransactionController extends Controller
 {
     public function index(Request $request)
     {
-        $data_content = Transaction::orderByDesc('id')->with(['transaction_details' => function ($q) {
-            $q->with('event');
-        }]);
+        $data_content = Transaction::orderByDesc('id')->with([
+            'transaction_details' => function ($q) {
+                $q->with('event');
+            },
+            'users',
+            'user'
+        ])->whereParentId(0);
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
@@ -77,7 +81,7 @@ class TransactionController extends Controller
 
         DB::transaction(function () use ($transaction) {
             $transaction->update([
-                'status'  => 400,
+                'status' => 400,
             ]);
 
             TransactionDetail::whereTransactionId($transaction->id)

@@ -345,7 +345,8 @@ class EvenTransactionController extends BaseController
             ->with([
                 'transaction_details' => function ($q) {
                     $q->with('event');
-                }
+                },
+                'users'
             ])
             ->whereUserId($user['id'])
             ->first();
@@ -412,7 +413,9 @@ class EvenTransactionController extends BaseController
 
     public function event_list_2(Request $request)
     {
-        $transaction = Transaction::whereNumber($request->transaction_number)->first();
+        $transaction = Transaction::whereNumber($request->transaction_number)
+            ->with('users')
+            ->first();
 
         if (!$transaction) {
             $this->sendError(422, 'Transaction number required.');
@@ -517,9 +520,21 @@ class EvenTransactionController extends BaseController
 
         $items = $request->items;
 
+        $additional_user = collect($request->users);
+        $count = 0;
+        foreach ($additional_user as $user) {
+            if ($user['email'] != null && $user['name'] != null) {
+                $count++;
+            }
+        }
+
         if ($request->package !== 'add-on') {
             if (isset($items['symposium'])) {
-                $data[] = $this->get_symposium($items['symposium'], $transaction);
+                if ($count === 5) {
+                    $data[] = $this->get_symposium($items['symposium'], $transaction, 5000000);
+                } else {
+                    $data[] = $this->get_symposium($items['symposium'], $transaction);
+                }
             }
         }
 
@@ -556,10 +571,6 @@ class EvenTransactionController extends BaseController
             $total -= $voucher_discount['discount_amount'];
         }
 
-        if(collect($request->users)->count() === 5){
-            $total = 5000000;
-        }
-
         $this->response['result'] = [
             "transaction"        => $transaction,
             "items"              => $data,
@@ -575,7 +586,7 @@ class EvenTransactionController extends BaseController
         return $this->response;
     }
 
-    private function get_symposium($symposium_id, Transaction $transaction)
+    private function get_symposium($symposium_id, Transaction $transaction, $force_price = null)
     {
         $symposium = Event::find($symposium_id);
 
@@ -597,7 +608,7 @@ class EvenTransactionController extends BaseController
         return [
             'name'   => $symposium->name,
             'marker' => $symposium->marker,
-            'price'  => $price['price']
+            'price'  => $force_price != null ? $force_price : $price['price']
         ];
     }
 
@@ -640,7 +651,9 @@ class EvenTransactionController extends BaseController
 
         $item_ids = [];
         foreach ($items as $item) {
-            $item_ids[] = $item;
+            if($item){
+                $item_ids[] = $item;
+            }
             $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
                 ->whereEventId($item)
                 ->first();
@@ -672,13 +685,22 @@ class EvenTransactionController extends BaseController
             }
         }
 
+        if ($request->users) {
+            $this->record_child_transaction($transaction, $request->users);
+        }
+
+//        return $item_ids;
         // delete unused
         TransactionDetail::whereTransactionId($transaction->id)
             ->whereNotIn('event_id', $item_ids)
             ->delete();
 
-        $email_service = new EmailServiceController();
-        $email_service->bill($transaction->id);
+        try {
+            $email_service = new EmailServiceController();
+            $email_service->bill($transaction->id);
+        } catch (\Exception $e){
+
+        }
 
         $this->sendPostResponse();
     }
@@ -709,11 +731,11 @@ class EvenTransactionController extends BaseController
                 ];
             }
 
-            if($voucher->qty != 0){
+            if ($voucher->qty != 0) {
                 $used_voucher = Transaction::where('voucher_code', $voucher_code)
                     ->count();
 
-                if($used_voucher >= $voucher->qty){
+                if ($used_voucher >= $voucher->qty) {
                     return [
                         "voucher"            => $voucher_code,
                         "voucher_discount"   => 0,
@@ -745,5 +767,83 @@ class EvenTransactionController extends BaseController
             "discount_amount"    => $discount_amount,
             "voucher_validation" => '',
         ];
+    }
+
+    protected function record_child_transaction(Transaction $transaction, $users)
+    {
+        $validate_users = 0;
+
+        foreach ($users as $user){
+            if($user['email'] != '' && $user['name'] != ''){
+                $validate_users++;
+            }
+        }
+
+        if($validate_users < 5){
+            return '';
+        }
+
+        $trx_child_ids = [];
+        foreach ($users as $user) {
+            if (!isset($user['id'])) {
+                $payload = [
+                    "section"          => "jcu23",
+                    "number"           => $this->generate_child_number($transaction->number),
+                    "parent_id"        => $transaction->id,
+                    "user_id"          => $transaction->id,
+                    "user_name"        => $user['name'],
+                    "user_phone"       => null,
+                    "user_email"       => $user['email'],
+                    "job_type_code"    => "DRGN",
+                    "subtotal"         => 0,
+                    "voucher_code"     => 0,
+                    "voucher_discount" => 0,
+                    "discount_amount"  => 0,
+                    "service_fee"      => 0,
+                    "tax"              => 0,
+                    "total"            => 0,
+                    "status"           => 110,
+                    "payment_method"   => "manual_transfer",
+                ];
+
+                $trx_child = Transaction::create($payload);
+                $trx_child_ids[] = $trx_child->id;
+
+                $payload_detail = [
+                    "section"        => "jcu23",
+                    "transaction_id" => $trx_child->id,
+                    "job_type_code"  => $payload['job_type_code'],
+                    "user_id"        => $payload['user_id'],
+                    "event_id"       => 1,
+                    "event_name"     => "Symposium",
+                    "price"          => 1000000,
+                    "status"         => 110,
+                ];
+
+                TransactionDetail::create($payload_detail);
+            } else {
+                $trx_child_ids[] = $user['id'];
+            }
+        }
+
+        // delete unused
+        Transaction::whereUserId($transaction->user_id)
+            ->whereParentId($transaction->id)
+            ->whereNotIn("id", $trx_child_ids)
+            ->delete();
+    }
+
+    protected function generate_child_number($parent_number, $add = 1)
+    {
+        $parent = Transaction::where('number', 'LIKE', $parent_number . "%")->count();
+
+        $number = $parent_number . '-' . $parent;
+        $exist = Transaction::whereNumber($number)->first();
+
+        if ($exist) {
+            return $this->generate_child_number($parent_number, $add + 1);
+        }
+
+        return $number;
     }
 }
