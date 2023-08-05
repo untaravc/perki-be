@@ -32,14 +32,12 @@ export default {
 
                     let ln = Object.keys(data.result.abstracts).length;
                     for (let i = 0; i < ln; i++) {
-                        console.log(data.result.abstracts[i])
                         let label = data.result.abstracts[i].category
                         let total = data.result.abstracts[i].total
                         this.chartData.labels.push(label + " (" + total +")")
 
                         this.chartData.datasets[0].data.push(total)
                     }
-                    console.log('bar')
                     Fire.$emit('render-chart-bar')
                 })
         },

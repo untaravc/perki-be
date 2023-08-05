@@ -37,7 +37,6 @@ export default {
 
                     let ln = Object.keys(data.result.type_code).length;
                     for (let i = 0; i < ln; i++) {
-                        console.log(data.result.type_code[i])
                         let job_label = data.result.type_code[i].job_label
                         let total = data.result.type_code[i].total
                         this.chartData.labels.push(job_label + " (" + total +")")

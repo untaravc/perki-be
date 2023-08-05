@@ -8,7 +8,9 @@ use App\Models\MailLog;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Dompdf\Dompdf as PDF;
 
@@ -186,14 +188,17 @@ class EmailServiceController extends Controller
             ->errorCorrection('H')
             ->generate($data['transaction']['number'], public_path($data['path']));
 
-//        return $data['qr_link'] = public_path('assets/qr_code/JCU23000054.svg');
-
         $get_img = file_get_contents($data['path']);
         $data['qr_link'] = base64_encode($get_img);
 
 //        return view($data['view'], $data);
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view'], $data);
-        return $pdf->download($transaction_id . '.pdf');
+        $content = $pdf->download()->getOriginalContent();
+
+        $data['pdf_path'] = 'qr_pdf/' .  $data['transaction']['number'] .'.pdf';
+        Storage::disk('local')->put('qr_pdf/' .  $data['transaction']['number'] .'.pdf', $content) ;
+
+        $data['attach'] = Storage::path($data['pdf_path']);
 
         try {
             if (env('APP_ENV') == "prod") {
@@ -203,11 +208,13 @@ class EmailServiceController extends Controller
             }
 
             MailLog::create($mail_log);
+            return 'sent';
         } catch (\Exception $exception) {
             $mail_log['sent_at'] = null;
             $mail_log['status'] = 2;
 
             MailLog::create($mail_log);
+            return 'failed';
         }
     }
 

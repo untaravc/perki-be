@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +22,19 @@ class PostController extends Controller
             })->with('user');
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
+
+        if($request->with_transaction == 1){
+            $user_ids = $data_content->pluck('user_id');
+
+            $transaction_details = TransactionDetail::whereIn('user_id', $user_ids)
+                ->where('event_id', 1)
+                ->get();
+
+            foreach ($data_content as $data){
+                $trx = $transaction_details->where('user_id', $data->user_id)->first();
+                $data->setAttribute('transaction', $trx);
+            }
+        }
 
         $collect = collect($this->response);
         return $collect->merge($data_content);
@@ -117,8 +131,7 @@ class PostController extends Controller
     }
 
     public function reviewer_list(){
-        $ids = [1];
-        $data = User::whereIn('id', $ids)
+        $data = User::whereType('reviewer')
             ->orderBy('name')
             ->get();
 
@@ -132,6 +145,20 @@ class PostController extends Controller
         if($data){
             $data->update([
                 'reviewer_id' => $request->reviewer_id
+            ]);
+        }
+
+        return $this->response;
+    }
+
+    public function post_review(Request $request, $post_id){
+        $post = Post::find($post_id);
+
+        if($post){
+            $post->update([
+                'status' => $request->status,
+                'score' => $request->score,
+                'comment' => $request->comment,
             ]);
         }
 

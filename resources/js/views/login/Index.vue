@@ -53,7 +53,7 @@ export default {
             }).then((data)=>{
                 if(data.status){
                     localStorage.setItem('admin_token', data.result.token)
-                    this.$router.push('/panel/dashboard')
+                    window.location = '/panel/dashboard'
                 } else {
                     alert(data.message)
                 }

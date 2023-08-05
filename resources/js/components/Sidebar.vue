@@ -56,7 +56,7 @@
 export default {
     data() {
         return {
-            admin_type: 'author',
+            admin_type: 'admin',
             label: {
                 transactions: 0,
             }

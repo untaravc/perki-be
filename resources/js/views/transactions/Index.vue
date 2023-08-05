@@ -47,12 +47,14 @@ export default {
                 per_page: 10,
                 s: '',
                 status: '',
+                id:'',
             }
         }
     },
     methods:{
         loadDataContent(page = 1){
             this.filters.page = page
+            this.getUrlQuery()
             this.authGet('adm/transactions', this.filters)
                 .then((data)=>{
                     this.data_content = data
@@ -66,6 +68,12 @@ export default {
         },
         loadThisPage(){
             this.loadDataContent(this.filters.page);
+        },
+        getUrlQuery(){
+            let id = this.$route.query.id
+            if(id){
+                this.filters.id = id
+            }
         }
     },
     created() {

@@ -85,6 +85,7 @@ export default {
             window.location = '/panel/login'
         },
         loadProfile() {
+            localStorage.removeItem('admin_type')
             this.authGet('adm/profile')
                 .then(data => {
                     this.profile = data.result

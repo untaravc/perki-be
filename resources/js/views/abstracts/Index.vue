@@ -40,15 +40,15 @@
                         </div>
                         <div class="flex justify-center mb-2">
                             <div class="inline-flex rounded-md shadow-sm" role="group">
-                                <button type="button" @click="filters.status = 0" :class="filters.status === 0 ? 'ring-blue-700' : '' "
-                                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
+                                <button type="button" @click="filters.status = 0" :class="filters.status === 0 ? 'ring-2 ring-blue-700 text-blue-700 z-10' : ''"
+                                        class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700">
                                     Pending {{ stats.pending }}
                                 </button>
-                                <button type="button" @click="filters.status = 1" :class="filters.status === 1 ? 'ring-blue-700' : '' "
+                                <button type="button" @click="filters.status = 1" :class="filters.status === 1 ? 'ring-2 ring-blue-700 text-blue-700 z-10' : '' "
                                         class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
                                     Accept {{ stats.accept }}
                                 </button>
-                                <button type="button" @click="filters.status = 2" :class="filters.status === 2 ? 'ring-blue-700' : '' "
+                                <button type="button" @click="filters.status = 2" :class="filters.status === 2 ? 'ring-2 ring-blue-700 text-blue-700 z-10' : '' "
                                         class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-r-md hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700">
                                     Decline {{ stats.reject }}
                                 </button>
@@ -103,6 +103,7 @@ export default {
                 s: '',
                 status: '',
                 type: 'abstract',
+                with_transaction: 1,
             }
         }
     },
@@ -112,6 +113,8 @@ export default {
             this.authGet('adm/posts', this.filters)
                 .then((data) => {
                     this.data_content = data
+
+                    this.loadStat()
                 })
         },
         loadStat() {

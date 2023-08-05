@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends BaseController
 {
-    public function login_view(){
+    public function login_view()
+    {
         return view('admin.Login');
     }
 
@@ -30,7 +31,10 @@ class AuthController extends BaseController
         }
 
         $user = User::whereEmail($request->email)
-            ->where('type', 'admin')
+            ->whereIn('type', [
+                'admin',
+                'reviewer'
+            ])
             ->first();
 
         if (!$user) {
@@ -65,7 +69,8 @@ class AuthController extends BaseController
         $this->sendGetResponse($data);
     }
 
-    public function adminPanel(){
+    public function adminPanel()
+    {
         return view('admin.Layout');
     }
 
@@ -74,7 +79,8 @@ class AuthController extends BaseController
         return view('404');
     }
 
-    public function scannerPanel(){
+    public function scannerPanel()
+    {
         return view('admin.Scanner');
     }
 }

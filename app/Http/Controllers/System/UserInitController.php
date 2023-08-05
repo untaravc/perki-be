@@ -30,6 +30,13 @@ class UserInitController extends Controller
                 "status"                => 100,
             ],
             [
+                "name"                  => 'Review',
+                "email"                 => "reviewer@perki-jogja.com",
+                "password"              => Hash::make('password'),
+                "type"                  => 'reviewer',
+                "status"                => 100,
+            ],
+            [
                 "name"                  => 'Room 1',
                 "email"                 => "room1@perki-jogja.com",
                 "type"                  => 'room',

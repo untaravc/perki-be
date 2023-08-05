@@ -634,7 +634,6 @@
                                                     <div
                                                         style="width: 100%; display: flex; justify-content: center; margin: 20px 2px">
                                                         <div style="max-width: 300px; text-align: center">
-                                                            {{--                                                        <img src="{{$qr_link}}" alt="">--}}
                                                             <img
                                                                 src="data:image/svg+xml;base64,{{$qr_link}}"
                                                                 alt="">

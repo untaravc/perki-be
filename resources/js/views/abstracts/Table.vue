@@ -8,6 +8,7 @@
                 <th scope="col" class="px-4 py-3">Category</th>
                 <th scope="col" class="px-4 py-3" v-if="admin_type === 'admin'">Reviewer</th>
                 <th scope="col" class="px-4 py-3">Status</th>
+                <th scope="col" class="px-4 py-3">Review</th>
                 <th scope="col" class="px-4 py-3">
                     Actions
                 </th>
@@ -24,6 +25,20 @@
                     {{ data.title }}
                     <br>
                     <b v-if="data.user">{{ data.user.name }}</b>
+                    <br>
+                    <i v-if="data.transaction">
+                        <router-link :to="'/panel/transactions?id=' + data.transaction.transaction_id" class="font-semibold text-slate-400"
+                                     v-if="data.transaction.status !== 200">
+                            Pending Transaction
+                        </router-link>
+                        <router-link :to="'/panel/transactions?id=' + data.transaction.transaction_id" class="font-semibold text-green-400"
+                                     v-if="data.transaction.status === 200">
+                            Paid Transaction
+                        </router-link>
+                    </i>
+                    <i v-if="!data.transaction">
+                        <span class="font-semibold text-red-400">No transaction</span>
+                    </i>
                 </td>
                 <td class="px-4 py-3">
                     {{ data.category }}
@@ -36,6 +51,10 @@
                 </td>
                 <td class="px-4 py-3">
                     {{ data.status_label }}
+                </td>
+                <td class="px-4 py-3">
+                    Score: {{data.score}} <br>
+                    Comment: {{data.comment}}
                 </td>
                 <td class="px-4 py-3 flex items-center justify-end">
                     <div class="dropdown relative group">
@@ -93,8 +112,36 @@
                         </div>
                         <div>
                             <b>Attachment:</b>
-                            <a :href="data_detail.file" target="_blank">{{ data_detail.file }}</a>
+                            <br>
+                            <a :href="data_detail.file" class="text-blue-700 hover:text-blue-900" target="_blank">{{ data_detail.file }}</a>
                         </div>
+                    </div>
+                    <div class="p-6 space-y-6">
+                        <div>
+                            <label>Comment</label>
+                            <textarea v-model="form.comment"
+                                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5"></textarea>
+                        </div>
+                        <div>
+                            <label>Score</label>
+                            <input type="number" v-model="form.score"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                        </div>
+                        <div>
+                            <label>Status</label>
+                            <select v-model="form.status"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
+                                <option value="0">Pending</option>
+                                <option value="1">Accepted</option>
+                                <option value="2">Rejected</option>
+                            </select>
+                        </div>
+
+                        <button type="button" @click="updateData" :disabled="disabled"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            <span>Update</span>
+                            <span v-if="disabled">...</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -107,6 +154,7 @@ export default {
     props: ['data_content'],
     data() {
         return {
+            disabled: false,
             modal: '',
             admin_type: 'reviewer',
             data_detail: {},
@@ -118,7 +166,7 @@ export default {
                 score: '',
                 status: '',
                 comment: '',
-            }
+            },
         }
     },
     methods: {
@@ -149,7 +197,23 @@ export default {
         },
         reviewModal(data) {
             this.data_detail = data;
+
+            this.form.score = this.data_detail.score
+            this.form.post_id = this.data_detail.id
+            this.form.comment = this.data_detail.comment
+            this.form.status = this.data_detail.status
+
             this.modal.show()
+        },
+        updateData(){
+            this.disabled = true
+            this.authPost('adm/post-review/' + this.form.post_id, this.form)
+                .then(()=>{
+                    this.disabled = false
+                    this.$parent.loadDataContent()
+
+                    this.modal.hide()
+                })
         }
     },
     mounted() {

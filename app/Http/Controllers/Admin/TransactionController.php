@@ -33,6 +33,10 @@ class TransactionController extends Controller
             $data_content = $data_content->where('user_name', 'LIKE', '%' . $request->s . '%');
         }
 
+        if ($request->id) {
+            $data_content = $data_content->where('id', $request->id);
+        }
+
         if ($request->status) {
             $data_content = $data_content->where('status', $request->status);
         } else {
