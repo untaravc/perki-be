@@ -218,7 +218,7 @@
 export default {
     data() {
         return {
-            disabled: '',
+            disabled: false,
             modal: '',
             data_detail: '',
             filter: {

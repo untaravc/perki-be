@@ -8,11 +8,9 @@ use App\Models\MailLog;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Dompdf\Dompdf as PDF;
 
 class EmailServiceController extends Controller
 {
@@ -168,8 +166,8 @@ class EmailServiceController extends Controller
 
         $data['view'] = 'email.jcu22.qr_code';
         $data['email_subject'] = 'JCU 2023: Code Access ' . $data['transaction']['number'];
-        $data['path'] = 'assets/qr_code/'.$data['transaction']['number'].'.svg';
-        $data['qr_link'] = env('APP_URL') . '/' . $data['path'];
+        $data['path'] = 'assets/qr_code/' . $data['transaction']['number'] . '.svg';
+//        $data['qr_link'] = env('APP_URL') . $data['path'];
 
         $mail_log = [
             "email_sender"   => "perki.yogyakarta@gmail.com",
@@ -188,6 +186,15 @@ class EmailServiceController extends Controller
             ->errorCorrection('H')
             ->generate($data['transaction']['number'], public_path($data['path']));
 
+//        return $data['qr_link'] = public_path('assets/qr_code/JCU23000054.svg');
+
+        $get_img = file_get_contents($data['path']);
+        $data['qr_link'] = base64_encode($get_img);
+
+//        return view($data['view'], $data);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view'], $data);
+        return $pdf->download($transaction_id . '.pdf');
+
         try {
             if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
@@ -202,5 +209,12 @@ class EmailServiceController extends Controller
 
             MailLog::create($mail_log);
         }
+    }
+
+    private function svg_to_png()
+    {
+        $inputFile = public_path('assets/qr_code/JCU23000054.svg');
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('email.jcu22.qr_code', );
+        return $pdf->download('invoice.pdf');
     }
 }

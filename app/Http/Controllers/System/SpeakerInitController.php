@@ -370,6 +370,18 @@ class SpeakerInitController extends Controller
 //                'desc'  => "",
 //                'image' => 'https://src.perki-jogja.com/assets/photo/',
 //            ],
+            [
+                'name'  => "dr. Dewi Suprobo, Sp.JP(K)",
+                'slug'  => "dewi.suprobo",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/dewi.hapsari.jpeg',
+            ],
+            [
+                'name'  => "dr. Ade Meidian Ambari, Sp.JP(K)",
+                'slug'  => "ade.meidian",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/ade.meidian.jpeg',
+            ],
         ];
 
         foreach ($data as $datum) {

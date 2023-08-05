@@ -451,7 +451,7 @@ class HomeController extends BaseController
             "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry copy",
             "subtitle" => "August 19, 2023",
             "image"    => "/assets/posters/webinar_19ags23.jpg",
-            "link"     => "https://bit.ly/PreJCU2",
+            "link"     => "https://docs.google.com/forms/d/1c7fjjNYtY6srR1HBfRSyMXO4eyhlSpUUcfGU5QGHzmA/viewform?edit_requested=true",
         ];
 
         $data[] = [

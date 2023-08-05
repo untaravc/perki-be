@@ -7,7 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
-        "calcinai/php-imagick": "^0.1.2",
+        "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "google/apiclient": "^2.13",
         "guzzlehttp/guzzle": "^7.5",

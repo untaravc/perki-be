@@ -84,7 +84,7 @@ class AuthController extends BaseController
         // Jika sudah login.
         if (isset($request['logged_user_id'])) {
             $validator = Validator::make($request, [
-                "name"           => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
+                "name"           => "required|string|max:100",
                 "email"          => "required|email",
                 "phone"          => "required|numeric|digits_between:8,15",
                 "institution"    => "required|string",
@@ -100,7 +100,7 @@ class AuthController extends BaseController
             }
         } else {
             $validator = Validator::make($request, [
-                "name"           => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
+                "name"           => "required|string|max:100",
                 "email"          => "required|email|unique:users",
                 "phone"          => "required|numeric|digits_between:8,15",
                 "institution"    => "required|string",

@@ -631,13 +631,18 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <div style="width: 100%; display: flex; justify-content: center; margin: 20px 2px">
-                                                    <div style="max-width: 300px; text-align: center">
-                                                        <img src="{{$qr_link}}" alt="">
-                                                        <div style="text-align: center; font-size: 20px; letter-spacing: 4px; font-weight: bold">
-                                                            {{$transaction['number']}}
+                                                    <div
+                                                        style="width: 100%; display: flex; justify-content: center; margin: 20px 2px">
+                                                        <div style="max-width: 300px; text-align: center">
+                                                            {{--                                                        <img src="{{$qr_link}}" alt="">--}}
+                                                            <img
+                                                                src="data:image/svg+xml;base64,{{$qr_link}}"
+                                                                alt="">
+                                                            <div
+                                                                style="text-align: center; font-size: 20px; letter-spacing: 4px; font-weight: bold">
+                                                                {{$transaction['number']}}
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -699,7 +704,8 @@
                                         <p class="mb-0">
                                             Get Special Room Prices for JCU 2023 participants.
                                             For more detailed information
-                                            <a target="_blank" href="https://wa.me/628112925147?text=Special Room Prices for JCU 2023 - Perki Jogja participants. Nomor Transaksi: {{$transaction['number']}}">https://wa.me/628112925147</a>
+                                            <a target="_blank"
+                                               href="https://wa.me/628112925147?text=Special Room Prices for JCU 2023 - Perki Jogja participants. Nomor Transaksi: {{$transaction['number']}}">https://wa.me/628112925147</a>
                                         </p>
                                     </td>
                                 </tr>
