@@ -80,6 +80,7 @@ class PostController extends Controller
                 'case_report',
                 'research',
                 'systematic_review',
+                'meta_analysis',
             ])->get();
 
         $type = $request->type ?? 'review'; // full_text
@@ -163,5 +164,26 @@ class PostController extends Controller
         }
 
         return $this->response;
+    }
+
+    public function previewAbstract(Request $request){
+        $data_content = Post::with(['user', 'authors'])
+//            ->whereDate('created_at', '>', '2023-07-07')
+            ->when($request->category, function ($q) use ($request) {
+                $q->where('category', $request->category);
+            })
+            ->when($request->post_id, function ($q) use ($request) {
+                $q->where('id', $request->post_id);
+            })
+            ->whereIn('category', [
+                'case_report',
+                'research',
+                'systematic_review',
+                'meta_analysis',
+            ])
+            ->orderBy('category')->get();
+//        return '';
+
+        return view('print.posts.abstract_preview', compact('data_content'));
     }
 }

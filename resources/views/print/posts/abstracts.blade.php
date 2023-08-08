@@ -49,8 +49,12 @@
 
     @foreach($data['body_parsed'] as $section)
         <div style="margin-bottom: 10px">
-            <b>{{$section['title']}}:</b>
-            {{$section['content']}}
+            @if(isset($section['title']))
+                <b>{{$section['title']}}:</b>
+            @endif
+            @if(isset($section['content']))
+                {{$section['content']}}
+            @endif
         </div>
     @endforeach
 

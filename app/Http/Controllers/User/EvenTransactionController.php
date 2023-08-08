@@ -566,7 +566,7 @@ class EvenTransactionController extends BaseController
             $total = $subtotal - $package_discount;
         }
 
-        $voucher_discount = $this->calculate_discount($data, $request->voucher);
+        $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
         if ($voucher_discount['discount_amount'] > 0) {
             $total -= $voucher_discount['discount_amount'];
@@ -652,7 +652,7 @@ class EvenTransactionController extends BaseController
 
         $item_ids = [];
         foreach ($items as $item) {
-            if($item){
+            if ($item) {
                 $item_ids[] = $item;
             }
             $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
@@ -699,19 +699,18 @@ class EvenTransactionController extends BaseController
         try {
             $email_service = new EmailServiceController();
             $email_service->bill($transaction->id);
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
 
         }
 
         $this->sendPostResponse();
     }
 
-    protected function calculate_discount($data, $voucher_code)
+    protected function calculate_discount($data, $voucher_code, $job_type_code = 'DRGN')
     {
 
         if ($voucher_code) {
             $symposium = collect($data)->where('marker', 'symposium-jcu23')->first();
-
             if (!$symposium) {
                 return [
                     "voucher"            => '',
@@ -729,6 +728,15 @@ class EvenTransactionController extends BaseController
                     "voucher_discount"   => 0,
                     "discount_amount"    => 0,
                     "voucher_validation" => 'Invalid Voucher Code.',
+                ];
+            }
+
+            if ($job_type_code == "DRSP") {
+                return [
+                    "voucher"            => '',
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Invalid Job Type',
                 ];
             }
 
@@ -774,13 +782,13 @@ class EvenTransactionController extends BaseController
     {
         $validate_users = 0;
 
-        foreach ($users as $user){
-            if($user['email'] != '' && $user['name'] != ''){
+        foreach ($users as $user) {
+            if ($user['email'] != '' && $user['name'] != '') {
                 $validate_users++;
             }
         }
 
-        if($validate_users < 5){
+        if ($validate_users < 5) {
             return '';
         }
 
