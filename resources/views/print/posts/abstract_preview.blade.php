@@ -3,6 +3,7 @@
         <td>No</td>
         <td>Category</td>
         <td>Author</td>
+        <td>Type</td>
         <td>Title</td>
     </tr>
     @foreach($data_content as $key => $data)
@@ -13,6 +14,18 @@
             </td>
             <td>
                 @if($data['user']) {{$data['user']['name']}} @endif
+            </td>
+            <td>
+                @if($data['user'])
+                    @switch($data['user']['job_type_code'])
+                        @case('DRGN')General Practitioner @break
+                        @case('COAS')Coass @break
+                        @case('ITRS')Interenship @break
+                        @case('RSDN')Residen @break
+                        @case('DRSP')Spesialis @break
+                        @default {{$data['user']['job_type_code']}} @break
+                    @endswitch
+                @endif
             </td>
             <td>
                 {{$data['title']}}

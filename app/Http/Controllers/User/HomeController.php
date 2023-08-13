@@ -440,12 +440,12 @@ class HomeController extends BaseController
     public function events()
     {
         $data = [];
-        $data[] = [
-            "title"    => "Cardiogenic Shock: not only the Heart, We also Need to Protect the Kidney",
-            "subtitle" => "August 12, 2023",
-            "image"    => "/assets/posters/webinar_11ags23.jpg",
-            "link"     => "https://bit.ly/PreJCU1",
-        ];
+//        $data[] = [
+//            "title"    => "Cardiogenic Shock: not only the Heart, We also Need to Protect the Kidney",
+//            "subtitle" => "August 12, 2023",
+//            "image"    => "/assets/posters/webinar_11ags23.jpg",
+//            "link"     => "https://bit.ly/PreJCU1",
+//        ];
 
         $data[] = [
             "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry copy",

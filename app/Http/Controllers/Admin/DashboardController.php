@@ -54,7 +54,7 @@ class DashboardController extends Controller
         }
 
         $trx_day = Transaction::where('created_at', '>=', $params['date_start'])
-            ->where('created_at', '<=', $params['date_end'])
+            ->whereDate('created_at', '<=', $params['date_end'])
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get(array(
