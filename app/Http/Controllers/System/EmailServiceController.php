@@ -167,9 +167,9 @@ class EmailServiceController extends Controller
         $data['user'] = User::find($data['transaction']['user_id']);
 
         $data['view'] = 'email.jcu22.qr_code';
+        $data['view_pdf'] = 'print.transaction.qr_code';
         $data['email_subject'] = 'JCU 2023: Code Access ' . $data['transaction']['number'];
         $data['path'] = 'assets/qr_code/' . $data['transaction']['number'] . '.svg';
-//        $data['qr_link'] = env('APP_URL') . $data['path'];
 
         $mail_log = [
             "email_sender"   => "perki.yogyakarta@gmail.com",
@@ -191,13 +191,15 @@ class EmailServiceController extends Controller
         $get_img = file_get_contents($data['path']);
         $data['qr_link'] = base64_encode($get_img);
 
-//        return view($data['view'], $data);
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view'], $data);
+//        return view($data['view_pdf'], $data);
+        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view_pdf'], $data)
+            ->setPaper([0,0,420,595]);;
         $content = $pdf->download()->getOriginalContent();
 
         $data['pdf_path'] = 'qr_pdf/' .  $data['transaction']['number'] .'.pdf';
         Storage::disk('local')->put('qr_pdf/' .  $data['transaction']['number'] .'.pdf', $content) ;
 
+//        return 'created';
         $data['attach'] = Storage::path($data['pdf_path']);
 
         try {

@@ -21,7 +21,7 @@ class Transaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $appends = ['last_time', 'status_label'];
+    protected $appends = ['last_time', 'status_label','user_phone_wa'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -40,6 +40,16 @@ class Transaction extends Model
     {
         if(isset($this->attributes['updated_at'])){
             return date('Y-m-d H:i:s', strtotime($this->attributes['updated_at'] . '+24 hours'));
+        }
+    }
+
+    public function getUserPhoneWaAttribute()
+    {
+        if(isset($this->attributes['user_phone']) && $this->attributes['user_phone']){
+            $number = $this->attributes['user_phone'][0];
+            if($number === '0'){
+                return "62" . substr($this->attributes['user_phone'], 1);
+            }
         }
     }
 

@@ -16,6 +16,7 @@ Route::get('/scanner', [AuthController::class, 'scannerPanel']);
 
 Route::get('login', [AuthController::class, 'login_view']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('/send-qr-code/{transaction_id}', [\App\Http\Controllers\System\EmailServiceController::class, 'qr_code_access']);
 Route::get('test-view', [\App\Http\Controllers\System\EmailServiceController::class, 'qr_code_access']);
 Route::get('send-qrcode-email/{transaction_id}', [\App\Http\Controllers\System\EmailServiceController::class, 'qr_code_access']);
 

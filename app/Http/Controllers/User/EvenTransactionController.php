@@ -623,8 +623,8 @@ class EvenTransactionController extends BaseController
                 }
                 break;
             case 'add-on':
-                if (!$items['morning_workshop'] && !$items['afternoon_workshop']) {
-                    $this->sendError(422, "Please select workshop!");
+                if (!$items['morning_workshop'] || !$items['afternoon_workshop']) {
+                    $this->sendError(422, "Please select two workshops!");
                 }
                 break;
             case 'gold':

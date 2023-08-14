@@ -45,6 +45,9 @@
                     <b>{{ data.user_name }}</b>
                     <br>
                     {{data.job_type_code}}
+                    <br>
+                    <a target="_blank" class="text-blue-600 hover:text-blue-800"
+                       :href="'https://wa.me/' + data.user_phone_wa">{{data.user_phone_wa}}</a>
                 </td>
                 <td class="px-4 py-3">
                     {{ data.total | currency }}
@@ -208,6 +211,9 @@
                             <span v-if="data_detail.status === 200">Resend Email</span>
                             <span v-if="disabled">...</span>
                         </button>
+                        <a target="_blank" v-if="data_detail.status === 200" :href="'/send-qr-code/' + data_detail.id">
+                            Send QrCode
+                        </a>
                     </div>
                 </div>
             </div>

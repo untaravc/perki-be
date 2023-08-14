@@ -618,102 +618,14 @@
                                         <p>Hello <strong>{{$user['name']}}</strong></p>
                                         <p class="mb-0">
                                             Thank you for joining JCU 2023 in conjunction with the 6th Jincartos.
-                                            Following is the code for re-registration access
-                                        </p>
-
-                                        <table
-                                            role="presentation"
-                                            border="0"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                            class="payment-method"
-                                        >
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div
-                                                        style="width: 100%; display: flex; justify-content: center; margin: 20px 2px">
-                                                        <div style="max-width: 300px; text-align: center">
-                                                            <img
-                                                                src="data:image/svg+xml;base64,{{$qr_link}}"
-                                                                alt="">
-                                                            <div
-                                                                style="text-align: center; font-size: 20px; letter-spacing: 4px; font-weight: bold">
-                                                                {{$transaction['number']}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
-                                        <!-- TODO: change this transaction info content -->
-                                        <!-- transaction detail -->
-                                        <h2>Schedule</h2>
-
-                                        <table
-                                            role="presentation"
-                                            border="0"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                            class="transaction mb-6"
-                                        >
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <table
-                                                        role="presentation"
-                                                        border="0"
-                                                        cellpadding="0"
-                                                        cellspacing="0"
-                                                    >
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>ID Transaksi</td>
-                                                            <td>
-                                                                <strong class="text-primary">
-                                                                    {{$transaction['number']}}
-                                                                </strong>
-                                                            </td>
-                                                            <td></td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <table style="width: 100%">
-                                                        <tr>
-                                                            <th style="text-align: center">Name</th>
-                                                            <th style="text-align: center; width: 50%">Schedule</th>
-                                                            <th>
-                                                                Time
-                                                            </th>
-                                                        </tr>
-                                                        @foreach($transaction_details as $detail)
-                                                            <tr>
-                                                                <td style="text-align: center">{{$detail['event_name']}}</td>
-                                                                <td style="text-align: center">{{date( 'l, jS M Y',strtotime($detail['event']['date_start']))}}</td>
-                                                                <td style="text-align: center">{{date( 'H:i',strtotime($detail['event']['date_start']))}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p class="mb-0">
-                                            Get Special Room Prices for JCU 2023 participants.
-                                            For more detailed information
-                                            <a target="_blank"
-                                               href="https://wa.me/628112925147?text=Special Room Prices for JCU 2023 - Perki Jogja participants. Nomor Transaksi: {{$transaction['number']}}">https://wa.me/628112925147</a>
+                                            Please download this following (PDF) document to get QR pass code.
                                         </p>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
-                    <!-- END MAIN CONTENT AREA -->
                 </table>
-                <!-- END CENTERED WHITE CONTAINER -->
             </div>
         </td>
         <td>&nbsp;</td>
