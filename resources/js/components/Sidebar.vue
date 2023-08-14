@@ -41,11 +41,18 @@
                         </span>
                     </router-link>
                 </li>
-                <li v-if="admin_type === 'admin'">
+                <li>
                     <router-link to="/panel/event-presence"
                                  class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <unicon name="angle-right-b"></unicon>
                         <span class="flex-1 ml-3 whitespace-nowrap">Events Presence</span>
+                    </router-link>
+                </li>
+                <li>
+                    <router-link to="/panel/mail-logs"
+                                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <unicon name="angle-right-b"></unicon>
+                        <span class="flex-1 ml-3 whitespace-nowrap">Mail Log</span>
                     </router-link>
                 </li>
             </ul>

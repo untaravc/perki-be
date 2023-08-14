@@ -43,7 +43,11 @@ class PostController extends Controller
     public function withFilter($data_content, $request)
     {
         if ($request->s) {
-            $data_content = $data_content->where('title', 'LIKE', '%' . $request->s . '%');
+            $data_content = $data_content->where(function ($q) use ($request){
+                $q->whereHas('user', function ($q2) use ($request){
+                    $q2->where('name', 'LIKE', '%' . $request->s . '%');
+                })->orWhere('title', 'LIKE', '%' . $request->s . '%');
+            });
         }
 
         if ($request->type == 'abstract') {

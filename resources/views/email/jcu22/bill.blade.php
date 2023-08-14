@@ -616,7 +616,7 @@
                                         </table>
 
                                         <p class="mb-0">
-                                            Please transfer to Legal2Us account via ATM,
+                                            Please transfer to PERKI Yogyakarta account via ATM,
                                             internet banking, or mobile banking with the
                                             following amount:
                                         </p>

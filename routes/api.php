@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventPresenceController;
+use App\Http\Controllers\Admin\MailLogController;
 
 use App\Http\Controllers\Event\RegisterController as EventRegisterController;
 
@@ -43,6 +44,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('posts', AdminPostController::class);
     Route::resource('users', AdminUserController::class);
     Route::resource('event-presence', EventPresenceController::class);
+    Route::resource('mail-logs', MailLogController::class);
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
