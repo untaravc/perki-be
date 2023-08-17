@@ -90,4 +90,8 @@ class User extends Authenticatable
             return $this->attributes['image'];
         }
     }
+
+    public function voucher_code(){
+        return $this->hasOne(Voucher::class, 'name', 'name');
+    }
 }

@@ -731,7 +731,7 @@ class EvenTransactionController extends BaseController
                 ];
             }
 
-            if ($job_type_code == "DRSP") {
+            if ($job_type_code == "DRSP" && $voucher_code != "PERJOG23") {
                 return [
                     "voucher"            => '',
                     "voucher_discount"   => 0,

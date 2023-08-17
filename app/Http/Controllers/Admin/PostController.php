@@ -72,8 +72,8 @@ class PostController extends Controller
 
     public function printPost(Request $request)
     {
-        $data_content = Post::orderByDesc('id')
-            ->with(['user', 'authors'])
+        $data_content = Post::with(['user', 'authors'])
+            ->groupBy('user_id')
             ->whereDate('created_at', '>', '2023-07-07')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
@@ -85,13 +85,21 @@ class PostController extends Controller
                 'research',
                 'systematic_review',
                 'meta_analysis',
-            ])->get();
+            ])->get()->sortBy('user.name');
 
         $type = $request->type ?? 'review'; // full_text
 
         if ($request->json == 1) {
             return $data_content;
         }
+
+        $users = [];
+        if($request->user_name == 1){
+            foreach ($data_content as $item){
+                $users[] = $item['user']['name'];
+            }
+        }
+//        return $users;
 
         return view('print.posts.abstracts', compact('data_content', 'type'));
     }
@@ -171,7 +179,9 @@ class PostController extends Controller
     }
 
     public function previewAbstract(Request $request){
-        $data_content = Post::with(['user', 'authors'])
+        $data_content = Post::with(['user'=>function($q){
+            $q->with('voucher_code');
+        }, 'authors'])
 //            ->whereDate('created_at', '>', '2023-07-07')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
@@ -186,7 +196,8 @@ class PostController extends Controller
                 'meta_analysis',
             ])
             ->orderBy('category')->get();
-//        return '';
+
+//        return $data_content;
 
         return view('print.posts.abstract_preview', compact('data_content'));
     }

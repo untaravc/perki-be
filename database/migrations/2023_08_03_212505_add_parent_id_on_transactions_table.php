@@ -15,6 +15,7 @@ class AddParentIdOnTransactionsTable extends Migration
     {
         Schema::table('transactions', function ($table) {
             $table->integer('parent_id')->after('number')->default(0);
+            $table->string('note')->after('transfer_proof')->nullable();
         });
     }
 
@@ -28,6 +29,7 @@ class AddParentIdOnTransactionsTable extends Migration
         Schema::table('transactions', function ($table) {
             $table->dropColumn([
                 'parent_id',
+                'note',
             ]);
         });
     }
