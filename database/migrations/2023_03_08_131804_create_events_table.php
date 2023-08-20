@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('data_type');
             $table->integer('parent_id')->default(0);
             $table->string('slug');
+            $table->integer('quota')->nullable();
 
             $table->string('name');
             $table->string('title')->nullable();

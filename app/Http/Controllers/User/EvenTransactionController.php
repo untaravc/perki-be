@@ -446,40 +446,32 @@ class EvenTransactionController extends BaseController
 
         // Morning workshop
         $morning_workshop = Event::whereSection('jcu23')
+            ->withCount('transactions')
             ->whereMarker('workshop-jcu23-half-day-1')
             ->orderBy('name')
-            ->select(
-                'id',
-                'name',
-                'title',
-                'marker',
-                'slug',
-                'date_start',
-                'date_end',
-            )->get();
+            ->get();
 
         foreach ($morning_workshop as $morning) {
             $price = $prices->where('model_id', $morning->id)->first();
             $morning->setAttribute('price', $price['price']);
+
+            $available = $morning->quota > $morning->transactions_count;
+            $morning->setAttribute('available', $available);
         }
 
         // Afternoon workshop
         $afternoon_workshop = Event::whereSection('jcu23')
+            ->withCount('transactions')
             ->whereMarker('workshop-jcu23-half-day-2')
             ->orderBy('name')
-            ->select(
-                'id',
-                'name',
-                'title',
-                'marker',
-                'slug',
-                'date_start',
-                'date_end',
-            )->get();
+            ->get();
 
         foreach ($afternoon_workshop as $afternoon) {
             $price = $prices->where('model_id', $afternoon->id)->first();
             $afternoon->setAttribute('price', $price['price']);
+
+            $available = $afternoon->quota > $afternoon->transactions_count;
+            $afternoon->setAttribute('available', $available);
         }
 
         $data['symposium'] = $symposium;
@@ -489,7 +481,6 @@ class EvenTransactionController extends BaseController
         // has symposium
         $trx_symposium = TransactionDetail::whereUserId($transaction->user_id)
             ->whereEventId($symposium->id)
-//            ->where('status', '>', 199)
             ->first();
 
         if ($trx_symposium) {

@@ -86,23 +86,23 @@
                                     <br> <small>{{ event.title | truncate(50) }}</small>
                                 </td>
                                 <td class="px-2 py-1 text-center">
-                                    {{ event.transaction_success_count }}
+                                    {{ event.transaction_success_count }} / {{ event.quota }}
                                 </td>
                                 <td class="px-2 py-1">
                                     <div class="relative">
                                         <div class="overflow-hidden h-4 my-1 text-xs flex rounded bg-slate-200">
                                             <div v-if="event.transaction_success_std_count > 0"
-                                                 :style="'width: '+ event.transaction_success_std_count / event.transaction_success_count * 100 +'%'"
+                                                 :style="'width: '+ event.transaction_success_std_count / event.quota * 100 +'%'"
                                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-300">
                                                 {{ event.transaction_success_std_count }}
                                             </div>
                                             <div v-if="event.transaction_success_gp_count > 0"
-                                                 :style="'width: '+ event.transaction_success_gp_count / event.transaction_success_count * 100 +'%'"
+                                                 :style="'width: '+ event.transaction_success_gp_count / event.quota * 100 +'%'"
                                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-800">
                                                 {{ event.transaction_success_gp_count }}
                                             </div>
                                             <div v-if="event.transaction_success_sp_count > 0"
-                                                 :style="'width: '+ event.transaction_success_sp_count / event.transaction_success_count * 100 +'%'"
+                                                 :style="'width: '+ event.transaction_success_sp_count / event.quota * 100 +'%'"
                                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600">
                                                 {{ event.transaction_success_sp_count }}
                                             </div>

@@ -7,6 +7,7 @@ import Transactions from "../views/transactions/Index";
 import Scanner from "../views/scanner/Index";
 import EventPresence from "../views/event-presence/Index";
 import MailLogs from "../views/mail-logs/Index";
+import Vouchers from "../views/vouchers/Index";
 import VueRouter from "vue-router";
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
             {
                 path: 'mail-logs',
                 component: MailLogs,
+                meta: {protected: true},
+            },
+            {
+                path: 'vouchers',
+                component: Vouchers,
                 meta: {protected: true},
             },
         ]

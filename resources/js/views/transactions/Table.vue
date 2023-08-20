@@ -44,10 +44,10 @@
                 <td class="px-4 py-3" :title="data.user_id">
                     <b>{{ data.user_name }}</b>
                     <br>
-                    {{data.job_type_code}}
+                    {{ data.job_type_code }}
                     <br>
                     <a target="_blank" class="text-blue-600 hover:text-blue-800"
-                       :href="'https://wa.me/' + data.user_phone_wa">{{data.user_phone_wa}}</a>
+                       :href="'https://wa.me/' + data.user_phone_wa">{{ data.user_phone_wa }}</a>
                 </td>
                 <td class="px-4 py-3">
                     {{ data.total | currency }}
@@ -153,6 +153,11 @@
                                             <td>:</td>
                                             <td>{{ data_detail.created_at | formatDateTime }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Voucher</td>
+                                            <td>:</td>
+                                            <td>{{ data_detail.voucher_code }}</td>
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="mb-2 font-semibold">Transaksi</div>
@@ -190,15 +195,17 @@
                                     </table>
                                 </div>
 
-                                <div class="mb-2 font-semibold">Children</div>
-                                <div class="border rounded-lg p-2">
-                                    <table class="w-full">
-                                        <tr v-for="(user, i) in data_detail.users">
-                                            <td>{{ i + 1 }}</td>
-                                            <td>{{ user.user_name }}</td>
-                                            <td>{{ user.user_email }}</td>
-                                        </tr>
-                                    </table>
+                                <div v-if="data_detail.users.length > 0">
+                                    <div class="mb-2 font-semibold">Children</div>
+                                    <div class="border rounded-lg p-2">
+                                        <table class="w-full">
+                                            <tr v-for="(user, i) in data_detail.users">
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ user.user_name }}</td>
+                                                <td>{{ user.user_email }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +233,9 @@ export default {
         return {
             disabled: false,
             modal: '',
-            data_detail: '',
+            data_detail: {
+                users: []
+            },
             filter: {
                 status: '',
                 name: '',

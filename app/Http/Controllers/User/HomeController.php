@@ -447,12 +447,12 @@ class HomeController extends BaseController
 //            "link"     => "https://bit.ly/PreJCU1",
 //        ];
 
-        $data[] = [
-            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry copy",
-            "subtitle" => "August 19, 2023",
-            "image"    => "/assets/posters/webinar_19ags23a.jpg",
-            "link"     => "https://docs.google.com/forms/d/1c7fjjNYtY6srR1HBfRSyMXO4eyhlSpUUcfGU5QGHzmA/viewform?edit_requested=true",
-        ];
+//        $data[] = [
+//            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry copy",
+//            "subtitle" => "August 19, 2023",
+//            "image"    => "/assets/posters/webinar_19ags23a.jpg",
+//            "link"     => "https://docs.google.com/forms/d/1c7fjjNYtY6srR1HBfRSyMXO4eyhlSpUUcfGU5QGHzmA/viewform?edit_requested=true",
+//        ];
 
         $data[] = [
             "title"    => "Tackling the Difficulty for Management of Uncontrolled Hypertension in Daily Practise: any Hope from Device Therapy",
@@ -461,6 +461,34 @@ class HomeController extends BaseController
             "link"     => "https://bit.ly/PreJCU2",
         ];
 
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function guidance()
+    {
+        $data = [];
+        $data[] = [
+            "title"    => "Final Announcement",
+            "image"    => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.png",
+            "link"     => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.pdf",
+        ];
+        $data[] = [
+            "title"    => "Jincartos",
+            "image"    => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.png",
+            "link"     => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.pdf",
+        ];
+        $data[] = [
+            "title"    => "Symposium Day 1",
+            "image"    => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.png",
+            "link"     => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.pdf",
+        ];
+        $data[] = [
+            "title"    => "Symposium Day 2",
+            "image"    => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.png",
+            "link"     => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.pdf",
+        ];
 
         $this->response['result'] = $data;
         return $this->response;

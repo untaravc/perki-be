@@ -47,8 +47,12 @@ class Event extends Model
 
     public function transaction_success(){
         return $this->hasMany(TransactionDetail::class)
-            ->whereStatus(200)
-            ;
+            ->whereStatus(200);
+    }
+
+    public function transactions(){
+        return $this->hasMany(TransactionDetail::class)
+            ->where('status','<',400);
     }
 
     public function transaction_success_std(){
