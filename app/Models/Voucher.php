@@ -18,4 +18,8 @@ class Voucher extends Model
         "qty_rest",
         "status",
     ];
+
+    public function redeem(){
+        return $this->hasMany(Transaction::class, 'voucher_code', 'code');
+    }
 }

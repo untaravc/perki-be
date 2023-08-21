@@ -163,6 +163,11 @@
                                             <td>:</td>
                                             <td>{{ data_detail.created_at | formatDateTime }}</td>
                                         </tr>
+                                        <tr>
+                                            <td>Voucher</td>
+                                            <td>:</td>
+                                            <td>{{ data_detail.voucher_code }}</td>
+                                        </tr>
                                     </table>
                                 </div>
                                 <div class="mb-2 font-semibold">Transaksi</div>
@@ -246,7 +251,7 @@ export default {
             disabled: false,
             modal: '',
             data_detail: {
-                users:[]
+                users: []
             },
             filter: {
                 status: '',

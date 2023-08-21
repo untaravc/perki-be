@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\Admin\MailLogController;
+use App\Http\Controllers\Admin\VoucherController;
 
 use App\Http\Controllers\Event\RegisterController as EventRegisterController;
 
@@ -40,6 +41,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('reviewer-list', [AdminPostController::class, 'reviewer_list']);
     Route::get('posts-stat', [AdminPostController::class, 'stats']);
 
+    Route::resource('vouchers', VoucherController::class);
     Route::resource('transactions', AdminTransactionController::class);
     Route::resource('posts', AdminPostController::class);
     Route::resource('users', AdminUserController::class);
@@ -105,6 +107,7 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('check-otp-reset-password', [UserAuthController::class, 'check_otp_reset_password']);
 
     Route::get('events', [HomeController::class, 'events']);
+    Route::get('guidance', [HomeController::class, 'guidance']);
     Route::get('cta-event', [HomeController::class, 'cta_event']);
     Route::get('get-job-types', [HomeController::class, 'job_types']);
     Route::get('speakers', [HomeController::class, 'speakers']);
