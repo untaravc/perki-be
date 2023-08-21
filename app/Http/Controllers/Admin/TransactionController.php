@@ -37,6 +37,10 @@ class TransactionController extends Controller
             $data_content = $data_content->where('id', $request->id);
         }
 
+        if ($request->job_type_code) {
+            $data_content = $data_content->where('job_type_code', $request->job_type_code);
+        }
+
         if ($request->status) {
             $data_content = $data_content->where('status', $request->status);
         } else {
@@ -55,8 +59,14 @@ class TransactionController extends Controller
             return $this->responseErrors('transaksi tidak dapat di proses.');
         }
 
-        DB::transaction(function () use ($transaction) {
+        DB::transaction(function () use ($transaction, $request) {
+            if ($request->total) {
+                $total = $request->total;
+            } else {
+                $total = $transaction->total;
+            }
             $transaction->update([
+                'total'   => $total,
                 'status'  => 200,
                 'paid_at' => now()
             ]);

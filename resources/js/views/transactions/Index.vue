@@ -48,6 +48,7 @@ export default {
                 s: '',
                 status: '',
                 id:'',
+                job_type_code:'',
             }
         }
     },
@@ -64,6 +65,7 @@ export default {
         applyFilter(filter){
             this.filters.status = filter.status
             this.filters.s = filter.name
+            this.filters.job_type_code = filter.job_type_code
             this.loadDataContent();
         },
         loadThisPage(){
