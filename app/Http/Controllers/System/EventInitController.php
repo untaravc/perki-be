@@ -376,10 +376,10 @@ class EventInitController extends Controller
                             ],
                             [
                                 "name"       => "Symposium 7 Second Session",
-                                "title"      => "The Role of ARNI in the Treatment of Heart Failure",
+                                "title"      => "The Role of ARNI in the Treatment of Heart Failure with Reduced EF",
                                 "data_type"  => "schedule-detail",
                                 "section"    => "jcu23",
-                                "speakers"   => "nahar.taufiq",
+                                "speakers"   => "anggoro.budi",
                                 "marker"     => "symposium-jcu23-a7",
                                 "slug"       => "symposium-jcu23-a7-2",
                                 "date_start" => "2023-09-02 14:35:00",

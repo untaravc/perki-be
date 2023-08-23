@@ -154,10 +154,8 @@ class EmailServiceController extends Controller
         }
     }
 
-    public function qr_code_access($transaction_id = null)
+    public function qr_code_access($transaction_id)
     {
-        $transaction_id = $transaction_id ?? 64;
-
         $data['transaction'] = Transaction::find($transaction_id);
         $data['transaction_details'] = TransactionDetail::with('event')
             ->orderBy('event_id')
@@ -171,19 +169,6 @@ class EmailServiceController extends Controller
         $data['email_subject'] = 'JCU 2023: Code Access ' . $data['transaction']['number'];
         $data['path'] = 'assets/qr_code/' . $data['transaction']['number'] . '.svg';
 
-        $mail_log = [
-            "email_sender"   => "perki.yogyakarta@gmail.com",
-            "email_receiver" => $data['user']['email'],
-            "receiver_name"  => $data['user']['name'],
-            "label"          => "access_code",
-            "category"       => null,
-            "title"          => $data['email_subject'],
-            "model"          => "transaction",
-            "model_id"       => $transaction_id,
-            "status"         => 1,
-            "sent_at"        => now(),
-        ];
-
         QrCode::size(500)
             ->errorCorrection('H')
             ->generate($data['transaction']['number'], public_path($data['path']));
@@ -191,32 +176,20 @@ class EmailServiceController extends Controller
         $get_img = file_get_contents($data['path']);
         $data['qr_link'] = base64_encode($get_img);
 
-//        return view($data['view_pdf'], $data);
+//        return view($data['view'], $data);
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view_pdf'], $data)
-            ->setPaper([0,0,420,595]);;
+            ->setPaper([0,0,420,595]);
         $content = $pdf->download()->getOriginalContent();
 
         $data['pdf_path'] = 'qr_pdf/' .  $data['transaction']['number'] .'.pdf';
         Storage::disk('local')->put('qr_pdf/' .  $data['transaction']['number'] .'.pdf', $content) ;
 
-//        return 'created';
         $data['attach'] = Storage::path($data['pdf_path']);
 
-        try {
-            if (env('APP_ENV') == "prod") {
-                Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
-            } else {
-                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
-            }
-
-            MailLog::create($mail_log);
-            return 'sent';
-        } catch (\Exception $exception) {
-            $mail_log['sent_at'] = null;
-            $mail_log['status'] = 2;
-
-            MailLog::create($mail_log);
-            return 'failed';
+        if (env('APP_ENV') == "prod") {
+            Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
+        } else {
+            Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
         }
     }
 

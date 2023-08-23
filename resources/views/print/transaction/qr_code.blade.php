@@ -52,7 +52,6 @@
                 </tr>
             </table>
         </div>
-
         <div style="border: 1px solid grey; padding: 10px; border-radius: 10px">
             <table style="width: 100%">
                 @foreach($transaction_details as $detail)

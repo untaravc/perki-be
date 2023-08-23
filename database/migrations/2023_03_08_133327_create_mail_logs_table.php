@@ -22,9 +22,10 @@ class CreateMailLogsTable extends Migration
             $table->string('category')->nullable();
             $table->string('title')->nullable();
             $table->string('model')->nullable();
-            $table->string('model_id')->nullable();
+            $table->integer('model_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamp('sent_at')->nullable();
+            $table->text('log')->nullable();
             $table->timestamps();
         });
     }

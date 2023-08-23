@@ -550,7 +550,7 @@
 <body>
 <!-- TODO: Change this title -->
 <!-- This is preheader text. Some clients will show this text as a preview. -->
-<span class="preheader">Pembelian Berhasil</span>
+<span class="preheader">Download Your Access Code. </span>
 <table
     role="presentation"
     border="0"
@@ -615,9 +615,9 @@
                                         </table>
                                         <h1>Access Code</h1>
                                         <!-- TODO: Change this name -->
-                                        <p>Hello <strong>{{$user['name']}}</strong></p>
+                                        <p><strong>{{$transaction['user_name']}},</strong></p>
                                         <p class="mb-0">
-                                            Thank you for joining JCU 2023 in conjunction with the 6th Jincartos.
+                                            thank you for joining JCU 2023 in conjunction with the 6th Jincartos.
                                             Please download this following (PDF) document to get QR pass code.
                                         </p>
                                     </td>
