@@ -134,12 +134,14 @@ class TransactionController extends Controller
         return view('print.transaction.list', compact('transactions'));
     }
 
-    public function invoice_pdf($transaction_id)
+    public function invoice_pdf($transaction_id, Request $request)
     {
         $data['transaction'] = Transaction::with(['transaction_details' => function ($q) {
             $q->with('event');
         }, 'user'])
             ->find($transaction_id);
+
+        $data['note'] = $request->note ?? '';
 
         return view('email.jcu22.invoice_pdf', $data);
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('', $data)

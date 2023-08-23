@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice #{{$transaction['number']}}</title>
+    <title>Invoice #{{$transaction['number']}} {{$transaction['user_name']}}</title>
     <style>
         body {
             font-size: 12px;
@@ -47,6 +47,9 @@
         <div style="margin-bottom: 5px"><b><small>BILL TO</small></b></div>
         <div>
             <h3>{{$transaction['user_name']}}</h3>
+            @if($note != '')
+                <div>({{$note}})</div>
+            @endif
             <div>{{$transaction['user_phone']}}</div>
             <div>{{$transaction['user']['institution']}}</div>
             <div>{{$transaction['user']['city']}}</div>

@@ -32,4 +32,8 @@ class CronController extends Controller
             }
         }
     }
+
+    public function create_qr_mail_log(){
+//        $transaction_success =
+    }
 }

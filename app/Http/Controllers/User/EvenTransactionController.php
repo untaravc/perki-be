@@ -615,7 +615,7 @@ class EvenTransactionController extends BaseController
                 break;
             case 'add-on':
                 if (!$items['morning_workshop'] || !$items['afternoon_workshop']) {
-                    $this->sendError(422, "Please select two workshops!");
+//                    $this->sendError(422, "Please select two workshops!");
                 }
                 break;
             case 'gold':
@@ -656,6 +656,13 @@ class EvenTransactionController extends BaseController
                     ->whereModelId($item)
                     ->whereJobTypeCode($transaction->job_type_code)
                     ->first();
+
+                if(!$price){
+                    $price = Price::whereModel('event')
+                        ->whereModelId($item)
+                        ->whereJobTypeCode('DRGN')
+                        ->first();
+                }
 
                 if (!$transaction_detail) {
                     TransactionDetail::create([

@@ -1222,7 +1222,7 @@ class EventInitController extends Controller
             ],
             [
                 "name"       => "Workshop 4",
-                "title"      => "All about shock in Emergency Care",
+                "title"      => "Dealing with Cardiogenic Shock: Cultivate Confidence",
                 "subtitle"   => "Cardiovascular Emergency Care",
                 "data_type"  => "product",
                 "section"    => "jcu23",
