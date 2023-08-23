@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\EventUser;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -81,5 +82,25 @@ class EventController extends Controller
         $this->response['message'] = $message;
         $this->response['result'] = $event_user;
         return $this->response;
+    }
+
+    public function event_member($slug){
+        $exclude_user_ids = [182];
+        $event = Event::whereSlug($slug)->first();
+
+        if(!$event){
+            return abort(404);
+        }
+
+        $transaction_details = TransactionDetail::whereEventId($event->id)
+            ->whereHas('transaction')
+            ->with('transaction')
+            ->orderByRaw("FIELD(status, 200) DESC")
+            ->orderBy('created_at')
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->where('status', '!=', 400)
+            ->get();
+
+        return view('print.event_user.list', compact('event', 'transaction_details'));
     }
 }

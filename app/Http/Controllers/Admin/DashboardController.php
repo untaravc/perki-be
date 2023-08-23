@@ -106,14 +106,13 @@ class DashboardController extends Controller
                 'name',
                 'title',
                 'quota',
-            )
-            ->withCount([
+            )->withCount([
                 'transaction_success',
                 'transaction_success_std',
                 'transaction_success_gp',
                 'transaction_success_sp',
-            ])
-            ->get();
+                'transaction_success_pending',
+            ])->get();
 
         $this->response['result'] = $events;
         return $this->response;

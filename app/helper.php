@@ -24,6 +24,7 @@ if (!function_exists('job_type_code_map')) {
                 $code = "DRSP"; break;
             case "MHSA":
             case "COAS":
+            case "NURS":
                 $code = "MHSA"; break;
             default:
                 $code = 'DRGN';

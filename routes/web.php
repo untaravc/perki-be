@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PostController;
-use App\Http\Controllers\System\EmailServiceController;
+use App\Http\Controllers\Admin\EventController;
+use App\Http\Controllers\Admin\TransactionController;
 
 Route::get('/', function (){
     return 'perki-src';
@@ -13,6 +14,9 @@ Route::get('/panel/preview-abstract', [PostController::class, 'previewAbstract']
 Route::get('/panel', [AuthController::class, 'adminPanel']);
 Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where( 'path' , '([A-z\d\-\/_.]+)?' );
 Route::get('/scanner', [AuthController::class, 'scannerPanel']);
+
+Route::get('/event-member/{slug}', [EventController::class, 'event_member']);
+Route::get('/transaction-recap', [TransactionController::class, 'transaction_recap']);
 
 Route::get('login', [AuthController::class, 'login_view']);
 Route::post('login', [AuthController::class, 'login']);

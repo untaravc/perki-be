@@ -72,4 +72,9 @@ class Event extends Model
             ->whereStatus(200)
             ->whereJobTypeCode('DRSP');
     }
+
+    public function transaction_success_pending(){
+        return $this->hasMany(TransactionDetail::class)
+            ->where('status', '<', 200);
+    }
 }
