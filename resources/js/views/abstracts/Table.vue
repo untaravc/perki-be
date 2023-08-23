@@ -6,9 +6,8 @@
                 <th scope="col" class="px-4 py-3">No</th>
                 <th scope="col" class="px-4 py-3">Title</th>
                 <th scope="col" class="px-4 py-3">Category</th>
-                <th scope="col" class="px-4 py-3" v-if="admin_type === 'admin'">Reviewer</th>
+                <th scope="col" class="px-4 py-3">Transaction</th>
                 <th scope="col" class="px-4 py-3">Status</th>
-                <th scope="col" class="px-4 py-3">Review</th>
                 <th scope="col" class="px-4 py-3">
                     Actions
                 </th>
@@ -25,36 +24,30 @@
                     {{ data.title }}
                     <br>
                     <b v-if="data.user">{{ data.user.name }}</b>
-                    <br>
-                    <i v-if="data.transaction">
-                        <router-link :to="'/panel/transactions?id=' + data.transaction.transaction_id" class="font-semibold text-slate-400"
-                                     v-if="data.transaction.status !== 200">
-                            Pending Transaction
-                        </router-link>
-                        <router-link :to="'/panel/transactions?id=' + data.transaction.transaction_id" class="font-semibold text-green-400"
-                                     v-if="data.transaction.status === 200">
-                            Paid Transaction
-                        </router-link>
-                    </i>
-                    <i v-if="!data.transaction">
-                        <span class="font-semibold text-red-400">No transaction</span>
-                    </i>
                 </td>
                 <td class="px-4 py-3">
                     {{ data.category }}
                 </td>
-                <td v-if="admin_type === 'admin'">
-                    <select type="text" v-model="data.reviewer_id" @change="setReviewer(data, $event)"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
-                        <option :value="rev.id" v-for="rev in data_raw.reviewers">{{ rev.name }}</option>
-                    </select>
-                </td>
                 <td class="px-4 py-3">
                     {{ data.status_label }}
                 </td>
-                <td class="px-4 py-3">
-                    Score: {{data.score}} <br>
-                    Comment: {{data.comment}}
+                <td>
+                    <i v-if="data.transaction">
+                        <a target="_blank" :href="'/panel/transactions?id=' + data.transaction.transaction_id" class="font-semibold text-slate-400"
+                                     v-if="data.transaction.status !== 200">
+                            Pending Transaction
+                        </a>
+                        <a target="_blank" :href="'/panel/transactions?id=' + data.transaction.transaction_id" class="font-semibold text-green-400"
+                                     v-if="data.transaction.status === 200">
+                            Paid Transaction :
+                            <span v-if="data.transaction && data.transaction.transaction">
+                                {{data.transaction.transaction.total}}
+                            </span>
+                        </a>
+                    </i>
+                    <i v-if="!data.transaction">
+                        <span class="font-semibold text-red-400">No transaction</span>
+                    </i>
                 </td>
                 <td class="px-4 py-3 flex items-center justify-end">
                     <div class="dropdown relative group">

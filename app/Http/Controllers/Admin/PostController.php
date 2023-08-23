@@ -27,6 +27,7 @@ class PostController extends Controller
             $user_ids = $data_content->pluck('user_id');
 
             $transaction_details = TransactionDetail::whereIn('user_id', $user_ids)
+                ->with('transaction')
                 ->where('event_id', 1)
                 ->get();
 

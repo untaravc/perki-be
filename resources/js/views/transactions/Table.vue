@@ -5,8 +5,7 @@
             <tr>
                 <th scope="col" class="px-4 py-3">No</th>
                 <th scope="col" class="px-4 py-3">User Name</th>
-                <th scope="col" class="px-4 py-3">Nominal</th>
-                <th scope="col" class="px-4 py-3">Date</th>
+                <th scope="col" class="px-4 py-3">Type/Nominal</th>
                 <th scope="col" class="px-4 py-3">Status</th>
                 <th scope="col" class="px-4 py-3">
                     Actions
@@ -18,8 +17,20 @@
                     <input type="text" v-model="filter.name" @keyup.enter="applyFilter"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                 </td>
-                <td class="px-2 py-2"></td>
-                <td class="px-2 py-2"></td>
+                <td class="px-2 py-2">
+                    <select name="" id="" v-model="filter.job_type_code"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <option value="">ALL</option>
+                        <option value="MHSA">Medical student</option>
+                        <option value="COAS">Co-ass</option>
+                        <option value="ITRS">Internship</option>
+                        <option value="RSDN">Residency</option>
+                        <option value="DRGN">General Practitioner</option>
+                        <option value="DRSP">Specialist</option>
+                        <option value="NURS">Nurse</option>
+                        <option value="OTHR">Other Healthcare Provider</option>
+                    </select>
+                </td>
                 <td class="px-2 py-2">
                     <select name="" id="" v-model="filter.status"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
@@ -44,16 +55,15 @@
                 <td class="px-4 py-3" :title="data.user_id">
                     <b>{{ data.user_name }}</b>
                     <br>
-                    {{ data.job_type_code }}
+                    <i>{{ data.created_at | formatDateTime }}</i>
                     <br>
                     <a target="_blank" class="text-blue-600 hover:text-blue-800"
                        :href="'https://wa.me/' + data.user_phone_wa">{{ data.user_phone_wa }}</a>
                 </td>
                 <td class="px-4 py-3">
+                    {{ data.job_type_code }}
+                    <br>
                     {{ data.total | currency }}
-                </td>
-                <td class="px-4 py-3">
-                    {{ data.created_at | formatDateTime }}
                 </td>
                 <td>
                     {{ data.status_label }}
@@ -164,6 +174,11 @@
                                 <div class="border rounded-lg p-2">
                                     <table class="w-full">
                                         <tr>
+                                            <td>Voucher Code</td>
+                                            <td>:</td>
+                                            <td class="text-right">{{ data_detail.voucher_code }}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Subtotal</td>
                                             <td>:</td>
                                             <td class="text-right">{{ data_detail.subtotal | currency }}</td>
@@ -194,7 +209,6 @@
                                         </tr>
                                     </table>
                                 </div>
-
                                 <div v-if="data_detail.users.length > 0">
                                     <div class="mb-2 font-semibold">Children</div>
                                     <div class="border rounded-lg p-2">
@@ -207,6 +221,9 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="mb-2 font-semibold">Update Price</div>
+                                <input type="number" v-model="data_detail.total"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
                             </div>
                         </div>
                     </div>
@@ -239,6 +256,7 @@ export default {
             filter: {
                 status: '',
                 name: '',
+                job_type_code: '',
             }
         }
     },
@@ -255,7 +273,8 @@ export default {
             if (confirm('Confirm payment?')) {
                 this.disabled = true;
                 this.authPost('adm/transaction-confirm', {
-                    transaction_id: this.data_detail.id
+                    transaction_id: this.data_detail.id,
+                    total: this.data_detail.total,
                 }).then((data) => {
                     if (data.status) {
                         this.modal.hide()
@@ -290,6 +309,9 @@ export default {
     },
     watch: {
         'filter.status'(val) {
+            this.$parent.applyFilter(this.filter)
+        },
+        'filter.job_type_code'(val) {
             this.$parent.applyFilter(this.filter)
         }
     }

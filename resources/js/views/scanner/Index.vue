@@ -186,4 +186,8 @@ export default {
 #html5-qrcode-anchor-scan-type-change {
     display: none !important;
 }
+
+#qr-code-full-region__scan_region img {
+    margin: auto;
+}
 </style>
