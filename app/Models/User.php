@@ -78,7 +78,10 @@ class User extends Authenticatable
     }
 
     public function success_transactions(){
-        return $this->hasMany(Transaction::class)->where('status', '>', 199)
+        $exclude_user_ids = exclude_user_ids();
+        return $this->hasMany(Transaction::class)
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->where('status', '>', 199)
             ->where('status', '<', 299);
     }
 

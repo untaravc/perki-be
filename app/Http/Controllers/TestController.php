@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\System\EmailServiceController;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
     public function test_view(){
-        return view();
+        $ctrl = new EmailServiceController();
+        return $ctrl->qr_code_access(124);
     }
 
-    public function sample_qrcode(Request $request){
-        return view('email.jcu22.qr_code', compact('qr_link'));
-    }
+    public function sample_qrcode(Request $request){}
 }

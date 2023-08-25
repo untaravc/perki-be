@@ -521,7 +521,7 @@ class EvenTransactionController extends BaseController
 
         if ($request->package !== 'add-on') {
             if (isset($items['symposium'])) {
-                if ($count === 5) {
+                if ($count >= 5) {
                     $force_price = $transaction->job_type_code === 'DRSP' ? 7500000 : 5000000;
                     $data[] = $this->get_symposium($items['symposium'], $transaction, $force_price);
                 } else {

@@ -85,7 +85,7 @@ class EventController extends Controller
     }
 
     public function event_member($slug){
-        $exclude_user_ids = [182];
+        $exclude_user_ids = exclude_user_ids();
         $event = Event::whereSlug($slug)->first();
 
         if(!$event){

@@ -66,4 +66,21 @@ class Transaction extends Model
             }
         }
     }
+
+    public function getJobTypeCodeLabelAttribute()
+    {
+        if (isset($this->attributes['job_type_code'])) {
+            switch ($this->attributes['job_type_code']) {
+                case 'MHSA': return 'Medical student';
+                case 'COAS': return 'Co-ass';
+                case 'NURS': return 'Nurse';
+                case 'ITRS': return 'Internship';
+                case 'RSDN': return 'Residency';
+                case 'DRGN': return 'General Practitioner';
+                case 'DRSP': return 'Specialist';
+                case 'OTHR': return 'Healthcare Provider';
+                default: return $this->attributes['job_type_code'];
+            }
+        }
+    }
 }

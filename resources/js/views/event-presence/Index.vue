@@ -8,18 +8,19 @@
                         <div class="overflow-x-auto" style="min-height: 600px;">
                             <DataTable :data_content="data_content"></DataTable>
                         </div>
-                        <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
+                        <nav
+                            class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4"
                             aria-label="Table navigation">
                             <span class="text-sm font-normal text-gray-500 dark:text-gray-400">
                                 Showing
                                 <span class="font-semibold text-gray-900 dark:text-white">
-                                    {{(data_content.current_page - 1) * data_content.per_page + 1}}
+                                    {{ (data_content.current_page - 1) * data_content.per_page + 1 }}
                                     -
-                                    {{data_content.to}}
+                                    {{ data_content.to }}
                                 </span>
                                 of
                                 <span class="font-semibold text-gray-900 dark:text-white">
-                                    {{data_content.total}}
+                                    {{ data_content.total }}
                                 </span>
                             </span>
                             <div>
@@ -39,10 +40,10 @@ import DataTable from "./Table";
 
 export default {
     components: {DataTable},
-    data(){
+    data() {
         return {
             data_content: {},
-            filters:{
+            filters: {
                 page: 1,
                 per_page: 10,
                 s: '',
@@ -53,36 +54,51 @@ export default {
             }
         }
     },
-    methods:{
-        loadDataContent(page = 1){
+    methods: {
+        async loadDataContent(page = 1) {
             this.filters.page = page
-            this.authGet('adm/event-presence', this.filters)
-                .then((data)=>{
+            await this.authGet('adm/event-presence', this.filters)
+                .then((data) => {
                     this.data_content = data
+                    try {
+                        data.data.forEach(item => {
+                            if (item.status === 100) {
+                                window.open("http://src.perki-jogja.com/print/event-presence/" + item.id, '_blank');
+                                this.updateData(item.id)
+                                console.log('window location')
+                                throw new Error("stop")
+                            }
+                        })
+                    } catch (error) {
+                        console.log('done')
+                    }
                 })
         },
-        applyFilter(filter){
+        applyFilter(filter) {
             this.filters.status = filter.status
             this.filters.name = filter.name
             this.filters.event_id = filter.event_id
             this.filters.scanner_id = filter.scanner_id
             this.loadDataContent();
         },
-        loadThisPage(){
+        loadThisPage() {
             this.loadDataContent(this.filters.page);
         },
-        reloadData(){
-            if(this.filters.status == 100){
+        reloadData() {
+            if (this.filters.status == 100) {
                 this.loadDataContent()
             }
+        },
+        updateData(id) {
+            this.authPatch('adm/event-presence/' + id, {
+                status: 200
+            })
         }
     },
     created() {
-        this.loadDataContent()
-
-        setInterval(()=>{
+        setInterval(() => {
             this.reloadData()
-        }, 2000)
+        }, 5000)
     },
 }
 </script>

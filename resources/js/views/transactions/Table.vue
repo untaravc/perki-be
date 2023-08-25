@@ -84,6 +84,10 @@
                                        class="block py-2 px-4 hover:bg-gray-100">Show</a>
                                 </li>
                                 <li>
+                                    <a target="_blank" :href="'/print/invoice-pdf/' + data.id"
+                                       class="block py-2 px-4 hover:bg-gray-100">Invoice</a>
+                                </li>
+                                <li>
                                     <a href="#" @click="deleteTransaction(data)"
                                        class="block py-2 px-4 text-sm text-red-700 hover:bg-gray-100">Delete</a>
                                 </li>

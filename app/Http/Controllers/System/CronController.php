@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\MailLog;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class CronController extends Controller
@@ -17,23 +18,42 @@ class CronController extends Controller
             ->get();
 
         $email_service = new EmailServiceController();
-        foreach ($pending_email as $mail){
+        foreach ($pending_email as $mail) {
             try {
                 $email_service->qr_code_access($mail->model_id);
                 $mail->update([
-                    'status' => 1,
+                    'status'  => 1,
                     'sent_at' => now(),
                 ]);
             } catch (\Exception $e) {
                 $mail->update([
-                   'status' => 2,
-                   'log' => $e->getMessage(),
+                    'status' => 2,
+                    'log'    => $e->getMessage(),
                 ]);
             }
         }
     }
 
-    public function create_qr_mail_log(){
-//        $transaction_success =
+    public function create_qr_mail_log()
+    {
+        $transaction_success = Transaction::whereStatus(200)
+            ->get();
+
+        foreach ($transaction_success as $transaction) {
+            $mail_log = MailLog::whereLabel('jcu_23_qr_access')
+                ->whereModelId($transaction->id)
+                ->first();
+
+            if (!$mail_log) {
+                MailLog::create([
+                    "email_receiver" => $transaction->user_email,
+                    "receiver_name"  => $transaction->user_name,
+                    "label"          => "jcu_23_qr_access",
+                    "model"          => "transaction",
+                    "model_id"       => $transaction->id,
+                    "status"         => 0,
+                ]);
+            }
+        }
     }
 }

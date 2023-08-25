@@ -63,7 +63,7 @@ class TransactionController extends Controller
         }
 
         DB::transaction(function () use ($transaction, $request) {
-            if ($request->total) {
+            if (isset($request->total)) {
                 $total = $request->total;
             } else {
                 $total = $transaction->total;
@@ -144,30 +144,5 @@ class TransactionController extends Controller
         $data['note'] = $request->note ?? '';
 
         return view('email.jcu22.invoice_pdf', $data);
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('', $data)
-            ->setPaper([0, 0, 420, 595]);
-        $content = $pdf->download()->getOriginalContent();
-
-        $data['pdf_path'] = 'invoice_pdf/' . $data['transaction']['number'] . '.pdf';
-        Storage::disk('local')->put('invoice_pdf/' . $data['transaction']['number'] . '.pdf', $content);
-
-        $data['attach'] = Storage::path($data['pdf_path']);
-
-        try {
-            if (env('APP_ENV') == "prod") {
-                Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
-            } else {
-                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
-            }
-
-//            MailLog::create($mail_log);
-            return 'sent';
-        } catch (\Exception $exception) {
-            $mail_log['sent_at'] = null;
-            $mail_log['status'] = 2;
-
-            MailLog::create($mail_log);
-            return 'failed';
-        }
     }
 }

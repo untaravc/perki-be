@@ -16,8 +16,13 @@ class DashboardController extends Controller
 {
     public function statistics()
     {
-        $data['transaction_success'] = Transaction::where('status', '>=', 200)->where('status', '<', 300)->count();
-        $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)->where('status', '<', 300)->sum('total');
+        $exclude_user_ids = exclude_user_ids();
+        $data['transaction_success'] = Transaction::where('status', '>=', 200)
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->where('status', '<', 300)->count();
+        $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->where('status', '<', 300)->sum('total');
 
         $data['member'] = User::where('is_speaker', '!==', 1)->count();
         $data['member_purchase'] = User::where('is_speaker', '!==', 1)

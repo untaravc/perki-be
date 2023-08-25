@@ -46,35 +46,47 @@ class Event extends Model
     }
 
     public function transaction_success(){
+        $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(TransactionDetail::class)
+            ->whereNotIn('user_id', $exclude_user_ids)
             ->whereStatus(200);
     }
 
     public function transactions(){
+        $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(TransactionDetail::class)
+            ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status','<',400);
     }
 
     public function transaction_success_std(){
+        $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(TransactionDetail::class)
             ->whereStatus(200)
+            ->whereNotIn('user_id', $exclude_user_ids)
             ->whereIn('job_type_code',['MHSA','COAS']);
     }
 
     public function transaction_success_gp(){
+        $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(TransactionDetail::class)
             ->whereStatus(200)
+            ->whereNotIn('user_id', $exclude_user_ids)
             ->whereIn('job_type_code',['DRGN','ITRS','RSDN','NURS']);
     }
 
     public function transaction_success_sp(){
+        $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(TransactionDetail::class)
             ->whereStatus(200)
+            ->whereNotIn('user_id', $exclude_user_ids)
             ->whereJobTypeCode('DRSP');
     }
 
     public function transaction_success_pending(){
+        $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(TransactionDetail::class)
+            ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 200);
     }
 }

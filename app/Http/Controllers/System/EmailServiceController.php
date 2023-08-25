@@ -105,6 +105,9 @@ class EmailServiceController extends Controller
         try {
             if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
+                if($data['user']['email'] != $data['transaction']['user_email']){
+                    Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
+                }
             } else {
                 Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
             }
@@ -167,13 +170,13 @@ class EmailServiceController extends Controller
         $data['view'] = 'email.jcu22.qr_code';
         $data['view_pdf'] = 'print.transaction.qr_code';
         $data['email_subject'] = 'JCU 2023: Code Access ' . $data['transaction']['number'];
-        $data['path'] = 'assets/qr_code/' . $data['transaction']['number'] . '.svg';
+        $data['path'] = '/assets/qr_code/' . $data['transaction']['number'] . '.svg';
 
         QrCode::size(500)
             ->errorCorrection('H')
             ->generate($data['transaction']['number'], public_path($data['path']));
 
-        $get_img = file_get_contents($data['path']);
+        $get_img = file_get_contents(public_path($data['path']));
         $data['qr_link'] = base64_encode($get_img);
 
 //        return view($data['view'], $data);
@@ -191,6 +194,8 @@ class EmailServiceController extends Controller
         } else {
             Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
         }
+
+        return true;
     }
 
     private function svg_to_png()

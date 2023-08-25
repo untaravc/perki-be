@@ -40,7 +40,7 @@
                         <div>
                             <b>{{$transaction['user_name']}}</b>
                         </div>
-                        <i>{{$transaction['job_type_code']}}</i>
+                        <i>{{$transaction['job_type_code_label']}}</i>
                     </td>
                     <td style="border-left: 1px solid grey; font-size: 0.8em; padding-left: 20px">
                         @if($transaction['status'] === 200)

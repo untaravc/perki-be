@@ -86,11 +86,11 @@ class EventPresenceController extends Controller
             ->whereUserId($payload['user_id'])
             ->first();
 
-        if($event_user){
-            // sudah absen
-            $this->response['message'] = "Sudah presensi.";
-            return $this->response;
-        }
+//        if($event_user){
+//            // sudah absen
+//            $this->response['message'] = "Sudah presensi.";
+//            return $this->response;
+//        }
 
         EventUser::create($payload);
 
