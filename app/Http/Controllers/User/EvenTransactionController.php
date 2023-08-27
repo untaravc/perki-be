@@ -560,6 +560,8 @@ class EvenTransactionController extends BaseController
         $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
         if ($voucher_discount['discount_amount'] > 0) {
+            $package_discount = 0;
+            $total = $subtotal;
             $total -= $voucher_discount['discount_amount'];
         }
 
@@ -580,9 +582,9 @@ class EvenTransactionController extends BaseController
 
     private function get_symposium($symposium_id, Transaction $transaction, $force_price = null)
     {
-        $symposium = Event::find($symposium_id);
+        $event = Event::find($symposium_id);
 
-        if (!$symposium) {
+        if (!$event) {
             $this->sendError(422, "Simposium tidak sesuai.");
         }
 
@@ -598,8 +600,9 @@ class EvenTransactionController extends BaseController
         }
 
         return [
-            'name'   => $symposium->name,
-            'marker' => $symposium->marker,
+            'name'   => $event->name,
+            'marker' => $event->marker,
+            'slug'   => $event->slug,
             'price'  => $force_price != null ? $force_price : $price['price']
         ];
     }
@@ -657,7 +660,7 @@ class EvenTransactionController extends BaseController
                     ->whereJobTypeCode($transaction->job_type_code)
                     ->first();
 
-                if(!$price){
+                if (!$price) {
                     $price = Price::whereModel('event')
                         ->whereModelId($item)
                         ->whereJobTypeCode('DRGN')
@@ -706,52 +709,7 @@ class EvenTransactionController extends BaseController
 
     protected function calculate_discount($data, $voucher_code, $job_type_code = 'DRGN')
     {
-
-        if ($voucher_code) {
-            $symposium = collect($data)->where('marker', 'symposium-jcu23')->first();
-            if (!$symposium) {
-                return [
-                    "voucher"            => '',
-                    "voucher_discount"   => 0,
-                    "discount_amount"    => 0,
-                    "voucher_validation" => 'Symposium not selected.',
-                ];
-            }
-
-            $voucher = Voucher::whereCode($voucher_code)
-                ->first();
-            if (!$voucher) {
-                return [
-                    "voucher"            => '',
-                    "voucher_discount"   => 0,
-                    "discount_amount"    => 0,
-                    "voucher_validation" => 'Invalid Voucher Code.',
-                ];
-            }
-
-            if ($job_type_code == "DRSP" && $voucher_code != "PERJOG23") {
-                return [
-                    "voucher"            => '',
-                    "voucher_discount"   => 0,
-                    "discount_amount"    => 0,
-                    "voucher_validation" => 'Invalid Job Type',
-                ];
-            }
-
-            if ($voucher->qty != 0) {
-                $used_voucher = Transaction::where('voucher_code', $voucher_code)
-                    ->count();
-
-                if ($used_voucher >= $voucher->qty) {
-                    return [
-                        "voucher"            => $voucher_code,
-                        "voucher_discount"   => 0,
-                        "discount_amount"    => 0,
-                        "voucher_validation" => 'Voucher Out of Stock',
-                    ];
-                }
-            }
-        } else {
+        if (!$voucher_code) {
             return [
                 "voucher"            => '',
                 "voucher_discount"   => 0,
@@ -760,12 +718,83 @@ class EvenTransactionController extends BaseController
             ];
         }
 
+        $voucher = Voucher::whereCode($voucher_code)
+            ->first();
+
+        if (!$voucher) {
+            return [
+                "voucher"            => '',
+                "voucher_discount"   => 0,
+                "discount_amount"    => 0,
+                "voucher_validation" => 'Invalid Voucher Code.',
+            ];
+        }
+
+        $slugs = explode(',', $voucher->role);
+        $voucher_included = 'true';
+        foreach ($data as $datum) {
+            if (!in_array($datum['slug'], $slugs)) {
+                $voucher_included = 'false ' . $datum['marker'];
+            }
+        }
+
+        if (!$voucher_included) {
+            return [
+                "voucher"            => '',
+                "voucher_discount"   => 0,
+                "discount_amount"    => 0,
+                "voucher_validation" => 'Event not selected.',
+            ];
+        }
+
+        if ($voucher->job_type_scope != null) {
+            $job_type_scopes = explode(',', $voucher->job_type_scope);
+
+            if (!in_array($job_type_code, $job_type_scopes)) {
+                return [
+                    "voucher"            => '',
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Invalid Job Type',
+                ];
+            }
+        }
+
+        if ($voucher->qty != 0) {
+            $used_voucher = Transaction::where('voucher_code', $voucher_code)
+                ->count();
+
+            if ($used_voucher >= $voucher->qty) {
+                return [
+                    "voucher"            => $voucher_code,
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Voucher Out of Stock',
+                ];
+            }
+        }
 
         $discount_amount = 0;
-        if ($voucher->type == 'amount') {
-            $discount_amount = $voucher->value;
-        } else if ('percent') {
-            $discount_amount = $symposium['price'] * ($voucher->value / 100);
+        $events = Event::whereIn('slug', $slugs)->get();
+
+        foreach ($slugs as $slug) {
+            $applied = collect($data)->pluck('slug')->toArray();
+            if (in_array($slug, $applied)) {
+                $event = $events->where('slug', $slug)->first();
+                $price = Price::whereModelId($event['id'])
+                    ->whereJobTypeCode($job_type_code)
+                    ->first();
+                if (!$price) {
+                    $price = Price::whereModelId($event['id'])
+                        ->whereJobTypeCode('DRGN')
+                        ->first();
+                }
+                if ($voucher->type == 'amount') {
+                    $discount_amount += $voucher->value;
+                } else if ('percent') {
+                    $discount_amount += $price['price'] * ($voucher->value / 100);
+                }
+            }
         }
 
         return [

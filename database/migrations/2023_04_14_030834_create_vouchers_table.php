@@ -18,6 +18,7 @@ class CreateVouchersTable extends Migration
             $table->string('name');
             $table->string('code');
             $table->string('role')->nullable();
+            $table->string('job_type_scope')->nullable();
             $table->enum('type', ['percent','amount'])->default('amount');
             $table->integer('value');
             $table->integer('qty')->nullable();

@@ -53,7 +53,7 @@
                     {{ (data_content.current_page - 1) * data_content.per_page + i + 1 }}
                 </td>
                 <td class="px-4 py-3" :title="data.user_id">
-                    <b>{{ data.user_name }}</b>
+                    <a target="_blank" :href="'https://jcu.perki-jogja.com/logas?passcode=JCU23OKE&user_id=' + data.user_id">{{ data.user_name }}</a>
                     <br>
                     <i>{{ data.created_at | formatDateTime }}</i>
                     <br>

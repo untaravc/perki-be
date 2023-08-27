@@ -37,6 +37,6 @@ if (!function_exists('job_type_code_map')) {
 if (!function_exists('exclude_user_ids')) {
     function exclude_user_ids()
     {
-        return [42,182,790,791,792];
+        return [42,182,790,791,792,1];
     }
 }

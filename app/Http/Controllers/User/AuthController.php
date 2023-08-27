@@ -298,7 +298,7 @@ class AuthController extends BaseController
     private function draft_transaction(User $user, $request)
     {
         $trx = Transaction::whereUserId($user->id)
-            ->where('status', '<', 120)
+            ->where('status', '<', 110)
             ->first();
 
         $payload = [
