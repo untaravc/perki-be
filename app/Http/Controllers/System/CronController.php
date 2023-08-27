@@ -34,6 +34,11 @@ class CronController extends Controller
         }
     }
 
+    public function send_certificate_email(){
+        $email_service = new EmailServiceController();
+        $email_service->send_certificate();
+    }
+
     public function create_qr_mail_log()
     {
         $transaction_success = Transaction::whereStatus(200)

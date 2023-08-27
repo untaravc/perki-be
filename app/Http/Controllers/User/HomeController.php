@@ -448,18 +448,18 @@ class HomeController extends BaseController
 //        ];
 
 //        $data[] = [
-//            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry copy",
+//            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry",
 //            "subtitle" => "August 19, 2023",
 //            "image"    => "/assets/posters/webinar_19ags23a.jpg",
 //            "link"     => "https://docs.google.com/forms/d/1c7fjjNYtY6srR1HBfRSyMXO4eyhlSpUUcfGU5QGHzmA/viewform?edit_requested=true",
 //        ];
 
-        $data[] = [
-            "title"    => "Tackling the Difficulty for Management of Uncontrolled Hypertension in Daily Practise: any Hope from Device Therapy",
-            "subtitle" => "August 26, 2023",
-            "image"    => "/assets/posters/webinar_26ags23.jpg",
-            "link"     => "https://bit.ly/PreJCU2",
-        ];
+//        $data[] = [
+//            "title"    => "Tackling the Difficulty for Management of Uncontrolled Hypertension in Daily Practise: any Hope from Device Therapy",
+//            "subtitle" => "August 26, 2023",
+//            "image"    => "/assets/posters/webinar_26ags23.jpg",
+//            "link"     => "https://bit.ly/PreJCU2",
+//        ];
 
 
         $this->response['result'] = $data;

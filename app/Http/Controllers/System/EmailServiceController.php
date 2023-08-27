@@ -4,15 +4,15 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendDefaultMail;
+use App\Models\Event;
 use App\Models\MailLog;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
-use Dompdf\Dompdf as PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class EmailServiceController extends Controller
 {
@@ -198,10 +198,66 @@ class EmailServiceController extends Controller
         return true;
     }
 
-    private function svg_to_png()
+    public function send_certificate()
     {
-        $inputFile = public_path('assets/qr_code/JCU23000054.svg');
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('email.jcu22.qr_code', );
-        return $pdf->download('invoice.pdf');
+        $models = ['certi_webinar_26ags23'];
+        $mail_logs = MailLog::whereIn('label',$models)
+            ->whereStatus(0)
+            ->where('email_receiver','vyvy1777@gmail.com') // tester email
+            ->limit(3)
+            ->get();
+
+        foreach ($mail_logs as $mail) {
+            $event = Event::find($mail->model_id);
+            $file = public_path('assets/certificates/' . $event->certificate);
+
+            $mail_data['img'] = base64_encode(file_get_contents($file));
+            $mail_data['name'] = $mail['receiver_name'];
+            $mail_data['name_top'] = $event->certificate_space_top;
+            $mail_data['name_left'] = $event->certificate_space_left;
+
+//            return view('print.events.certificate', $mail_data);
+            $pdf = Pdf::setOptions([
+                'dpi'             => 200,
+                'defaultFont'     => 'sans-serif',
+                'isRemoteEnabled' => true,
+            ])->loadView('print.events.certificate', $mail_data)
+                ->setPaper('a4', 'landscape');
+
+            $file_name = preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
+            $content = $pdf->download()->getOriginalContent();
+            $file_path = 'certificates/' . $mail->label . "/" . $file_name;
+            Storage::disk('local')->put($file_path, $content);
+
+            $data['email_receiver'] = $mail->email_receiver;
+            $data['receiver_name'] = $mail->receiver_name;
+            $data['title'] = $mail->title;
+            $data['email_subject'] = "Certificate";
+            $data['view'] = 'email.certificate';
+            $data['attach'] = public_path('storage/' . $file_path);
+            $data['content'] = $mail->content;
+
+//            return view('email.certificate', $mail);
+            try {
+                Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
+                    ->send(new SendDefaultMail($data));
+
+                MailLog::find($mail->id)
+                    ->update([
+                        'status'       => 1,
+                        'sent_at'      => now()
+                    ]);
+            } catch (\Exception $e) {
+                MailLog::find($mail->id)
+                    ->update([
+                        'status'       => 2,
+                        'log'         => $e->getMessage(),
+                    ]);
+                return $e->getMessage();
+            }
+
+        }
+
+        return $mail_logs;
     }
 }
