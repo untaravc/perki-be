@@ -5,6 +5,15 @@
             <section class="bg-gray-50 dark:bg-gray-900">
                 <div class="mx-auto max-w-screen-xl">
                     <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+                        <div class="p-2 flex justify-content-end">
+                            <div class="flex items-center">
+                                <input checked id="checked-checkbox" type="checkbox" value="1" v-model="auto_print"
+                                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="checked-checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Auto Print
+                                </label>
+                            </div>
+                        </div>
                         <div class="overflow-x-auto" style="min-height: 600px;">
                             <DataTable :data_content="data_content"></DataTable>
                         </div>
@@ -43,6 +52,7 @@ export default {
     data() {
         return {
             data_content: {},
+            auto_print: false,
             filters: {
                 page: 1,
                 per_page: 10,
@@ -60,19 +70,22 @@ export default {
             await this.authGet('adm/event-presence', this.filters)
                 .then((data) => {
                     this.data_content = data
-                    try {
-                        data.data.forEach(item => {
-                            if (item.status === 100) {
-                                window.open("http://src.perki-jogja.com/print/event-presence/" + item.id, '_blank');
-                                this.updateData(item.id)
-                                console.log('window location')
-                                throw new Error("stop")
-                            }
-                        })
-                    } catch (error) {
-                        console.log('done')
+                    this.autoPrint()
+                })
+        },
+        autoPrint(){
+            try {
+                this.data_content.data.forEach(item => {
+                    if (item.status === 100 && this.auto_print) {
+                        window.open("http://src.perki-jogja.com/print/event-presence/" + item.id, '_blank');
+                        console.log('PRINT', item.id)
+                        this.updateData(item.id)
+                        throw new Error("stop")
                     }
                 })
+            } catch (error) {
+                console.log('done')
+            }
         },
         applyFilter(filter) {
             this.filters.status = filter.status
@@ -81,11 +94,8 @@ export default {
             this.filters.scanner_id = filter.scanner_id
             this.loadDataContent();
         },
-        loadThisPage() {
-            this.loadDataContent(this.filters.page);
-        },
         reloadData() {
-            if (this.filters.status == 100) {
+            if (this.auto_print) {
                 this.loadDataContent()
             }
         },

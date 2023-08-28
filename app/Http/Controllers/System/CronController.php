@@ -44,13 +44,14 @@ class CronController extends Controller
         $transaction_success = Transaction::whereStatus(200)
             ->get();
 
+        $created = [];
         foreach ($transaction_success as $transaction) {
             $mail_log = MailLog::whereLabel('jcu_23_qr_access')
                 ->whereModelId($transaction->id)
                 ->first();
 
             if (!$mail_log) {
-                MailLog::create([
+                $created[] = MailLog::create([
                     "email_receiver" => $transaction->user_email,
                     "receiver_name"  => $transaction->user_name,
                     "label"          => "jcu_23_qr_access",
@@ -60,5 +61,7 @@ class CronController extends Controller
                 ]);
             }
         }
+
+        return $created;
     }
 }

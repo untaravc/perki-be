@@ -138,7 +138,7 @@ class HomeController extends BaseController
         ];
 
         $data["bronze"] = [
-            "name"          => "Add-On",
+            "name"          => "Silver",
             "desc"          => $bronze_desc,
             "price_drgn"    => 750000,
             "price_drgn_eb" => 0,

@@ -76,6 +76,8 @@
                                     GP
                                     <div class="w-3 h-3 bg-green-600 mx-1"></div>
                                     SP
+                                    <div class="w-3 h-3 bg-yellow-200 mx-1"></div>
+                                    (pndg)
                                 </th>
                             </tr>
                             </thead>
@@ -105,6 +107,11 @@
                                                  :style="'width: '+ event.transaction_success_sp_count / event.quota * 100 +'%'"
                                                  class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-green-600">
                                                 {{ event.transaction_success_sp_count }}
+                                            </div>
+                                            <div v-if="event.transaction_pending_count > 0"
+                                                 :style="'width: '+ event.transaction_pending_count / event.quota * 100 +'%'"
+                                                 class="shadow-none flex flex-col text-center whitespace-nowrap justify-center bg-yellow-200">
+                                                ({{ event.transaction_pending_count }})
                                             </div>
                                         </div>
                                     </div>

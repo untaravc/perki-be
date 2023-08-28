@@ -105,6 +105,7 @@ class DashboardController extends Controller
     {
         $events = Event::whereDataType('product')
             ->where('status', 1)
+            ->whereSection('jcu23')
             ->orderBy('name')
             ->select(
                 'id',
@@ -116,7 +117,7 @@ class DashboardController extends Controller
                 'transaction_success_std',
                 'transaction_success_gp',
                 'transaction_success_sp',
-                'transaction_success_pending',
+                'transaction_pending',
             ])->get();
 
         $this->response['result'] = $events;
