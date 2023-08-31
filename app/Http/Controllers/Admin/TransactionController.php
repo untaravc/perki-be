@@ -127,9 +127,11 @@ class TransactionController extends Controller
         $transactions = Transaction::where('status', '!=', 400)
             ->where('status', '>', 100)
             ->orderByDesc('status')
+            ->orderBy('id')
             ->with(['transaction_details' => function ($q) {
                 $q->orderBy('event_id');
-            }])->get();
+            }])
+            ->get();
 
         return view('print.transaction.list', compact('transactions'));
     }

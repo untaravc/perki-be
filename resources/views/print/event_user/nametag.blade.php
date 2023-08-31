@@ -26,9 +26,13 @@
 <body onload="window.print()">
 {{--<body>--}}
 <div style="width: 100%; height: 900px;">
-    <div style="width: 50%; height: 50%; display: flex; justify-content: center; background-size: cover; background-image: url('/assets/images/nametag.png')">
-        <div style="margin-top: 300px">
+{{--    <div style="width: 50%; height: 50%; display: flex; justify-content: center; background-size: cover; background-image: url('/assets/images/nametag.png')">--}}
+    <div style="width: 42%; height: 50%; display: flex; justify-content: center; position: relative;">
+        <div style="top: 300px; position: absolute; width: 200px; text-align: center; color: #010148;">
             {{$event_user->user_name}}
+        </div>
+        <div style="color: #010148; position: absolute; top: 390px;">
+            PARTICIPANT
         </div>
     </div>
 </div>

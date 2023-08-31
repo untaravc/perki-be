@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Event Member</title>
     <style>
-        body{
+        body {
             font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
         }
 
@@ -27,7 +27,8 @@
             border-collapse: collapse;
             border-color: blue;
         }
-        h4, h5{
+
+        h4, h5 {
             margin: 0 0 5px 0;
         }
     </style>
@@ -44,6 +45,7 @@
         <td>No</td>
         <td>Register</td>
         <td>Name</td>
+        <td>Phone</td>
         <td>Job Type</td>
         <td>Payment Status</td>
     </tr>
@@ -52,12 +54,17 @@
     @foreach($transaction_details as $key => $detail)
         <tr>
             <td>{{$key + 1}}</td>
-            <td>
+            <td title=>
                 {{$detail['created_at']}}
             </td>
             <td>
                 @if(isset($detail['transaction']))
                     {{$detail['transaction']['user_name']}}
+                @endif
+            </td>
+            <td>
+                @if(isset($detail['transaction']))
+                    {{$detail['transaction']['user_phone']}}
                 @endif
             </td>
             <td>

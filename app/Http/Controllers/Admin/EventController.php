@@ -93,7 +93,7 @@ class EventController extends Controller
         }
 
         $transaction_details = TransactionDetail::whereEventId($event->id)
-            ->whereHas('transaction')
+//            ->whereHas('transaction')
             ->with('transaction')
             ->orderByRaw("FIELD(status, 200) DESC")
             ->orderBy('created_at')

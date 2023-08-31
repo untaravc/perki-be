@@ -77,6 +77,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('transaction-transfer-proof', [EvenTransactionController::class, 'transfer_proof']);
     Route::get('event-schedules', [EventController::class, 'event_schedule']);
 
+
     Route::get('abstracts', [AbstractController::class, 'abstract_list']);
     Route::post('abstracts', [AbstractController::class, 'abstract_submit']);
     Route::post('abstracts/{id}', [AbstractController::class, 'abstract_update']);

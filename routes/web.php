@@ -32,5 +32,5 @@ Route::get('print/event-presence/{event_user_id}', [\App\Http\Controllers\Admin\
 Route::get('print/invoice-pdf/{transaction_id}', [TransactionController::class, 'invoice_pdf']);
 
 // TEST
-Route::get('test', [\App\Http\Controllers\System\EmailServiceController::class, 'send_certificate']);
+Route::get('test', [\App\Http\Controllers\TestController::class, 'check_transaction_status']);
 Route::get('create_qr_mail_log', [\App\Http\Controllers\System\CronController::class, 'create_qr_mail_log']);
