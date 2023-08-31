@@ -84,13 +84,15 @@ class EventPresenceController extends Controller
 
         $event_user = EventUser::whereTransactionId($payload['transaction_id'])
             ->whereUserId($payload['user_id'])
+            ->whereEventId($payload['event_id'])
             ->first();
 
-//        if($event_user){
-//            // sudah absen
-//            $this->response['message'] = "Sudah presensi.";
-//            return $this->response;
-//        }
+        if($event_user){
+            // sudah absen
+            $this->response['message'] = "Sudah presensi.";
+
+            return $this->response;
+        }
 
         EventUser::create($payload);
 
