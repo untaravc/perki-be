@@ -128,9 +128,12 @@ class TransactionController extends Controller
             ->where('status', '>', 100)
             ->orderByDesc('status')
             ->orderBy('id')
-            ->with(['transaction_details' => function ($q) {
-                $q->orderBy('event_id');
-            }])
+            ->with([
+                'transaction_details' => function ($q) {
+                    $q->orderBy('event_id');
+                },
+                'user'
+            ])
             ->get();
 
         return view('print.transaction.list', compact('transactions'));

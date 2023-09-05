@@ -3,6 +3,8 @@
         <td>No</td>
         <td>Category</td>
         <td>Author</td>
+        <td>City</td>
+        <td>Institution</td>
         <td>Email</td>
         <td>Voucher Code</td>
         <td>Type</td>
@@ -16,6 +18,12 @@
             </td>
             <td>
                 @if($data['user']) {{$data['user']['name']}} @endif
+            </td>
+            <td>
+                @if($data['user']) {{$data['user']['city']}} @endif
+            </td>
+            <td>
+                @if($data['user']) {{$data['user']['institution']}} @endif
             </td>
             <td>@if($data['user']) {{$data['user']['email']}} @endif</td>
             <td>@if($data['user'] && $data['user']['voucher_code']) {{$data['user']['voucher_code']['code']}} @endif</td>

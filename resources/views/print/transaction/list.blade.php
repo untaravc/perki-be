@@ -44,6 +44,7 @@
         <td>Transaction Number</td>
         <td>Name</td>
         <td>Job Type</td>
+        <td>City</td>
         <td>Total</td>
         <td>Status</td>
         <td>Note</td>
@@ -61,6 +62,11 @@
             <td>{{$transaction['number']}}</td>
             <td>{{$transaction['user_name']}}</td>
             <td>{{$transaction['job_type_code']}}</td>
+            <td>
+                @if($transaction['user'])
+                    {{$transaction['user']['city']}}
+                @endif
+            </td>
             <td>{{$transaction['total']}}</td>
             <td>
                 @if($transaction['status'] === 200)

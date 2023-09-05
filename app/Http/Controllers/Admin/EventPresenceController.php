@@ -15,9 +15,23 @@ class EventPresenceController extends Controller
 {
     public function index(Request $request)
     {
-        $data_content = EventUser::orderByDesc('id')->with('scanner', 'event');
+        $data_content = EventUser::orderByDesc('updated_at')
+            ->with('scanner', 'event');
+
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
+
+        foreach ($data_content as $data){
+            $transaction_detail = TransactionDetail::whereUserId($data->user_id)
+                ->whereIn('event_id', [20, 21, 22, 23, 68, 72, 76, 80])
+                ->first();
+
+            if($transaction_detail){
+                $data->setAttribute('has_ws', true);
+            } else {
+                $data->setAttribute('has_ws', false);
+            }
+        }
 
         $collect = collect($this->response);
         return $collect->merge($data_content);
@@ -163,6 +177,7 @@ class EventPresenceController extends Controller
     {
         $data['events'] = Event::whereDataType('product')
             ->orderBy('name')
+            ->whereStatus(1)
             ->get();
 
         $data['admin'] = User::whereType('room')
@@ -176,14 +191,24 @@ class EventPresenceController extends Controller
     {
         $event_user = EventUser::find($event_user_id);
 
-        if(!$event_user){
-            $trx = Transaction::find($event_user_id);
+        if (!$event_user) {
+            return 'not found';
+//
+//            $trx = Transaction::find($event_user_id);
+//
+//            if($trx){
+//                $event_user['user_name'] = $trx['user_name'];
+//            }else{
+//            }
+        }
 
-            if($trx){
-                $event_user['user_name'] = $trx['user_name'];
-            }else{
-                return 'not found';
-            }
+        return view('print.event_user.nametag', compact('event_user'));
+    }
+
+    public function print_transaction_presence($transaction_id){
+        $event_user = Transaction::find($transaction_id);
+        if (!$event_user) {
+            return 'not found';
         }
 
         return view('print.event_user.nametag', compact('event_user'));

@@ -60,6 +60,8 @@
             <td>
                 @if(isset($detail['transaction']))
                     {{$detail['transaction']['user_name']}}
+                @else
+                    {{$detail['transaction_id']}}
                 @endif
             </td>
             <td>
@@ -84,3 +86,4 @@
 </body>
 </html>
 
+{{--id in (360, 172, 337, 311)--}}
