@@ -103,4 +103,16 @@ class EventController extends Controller
 
         return view('print.event_user.list', compact('event', 'transaction_details'));
     }
+
+    public function event_presence($slug){
+        $exclude_user_ids = exclude_user_ids();
+        $event = Event::whereSlug($slug)->first();
+
+        if(!$event){
+            return abort(404);
+        }
+
+        $event_user = EventUser::whereEventId($event->id)
+            ->orderBy();
+    }
 }

@@ -88,7 +88,7 @@
                                        class="block py-2 px-4 hover:bg-gray-100">Invoice</a>
                                 </li>
                                 <li>
-                                    <a :href="'/print/event-presence/' + data.id" target="_blank"
+                                    <a :href="'/print/transaction-presence/' + data.id" target="_blank"
                                        class="block py-2 px-4 hover:bg-gray-100">
                                         Print Name
                                     </a>

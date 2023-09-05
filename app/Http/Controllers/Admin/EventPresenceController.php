@@ -15,9 +15,23 @@ class EventPresenceController extends Controller
 {
     public function index(Request $request)
     {
-        $data_content = EventUser::orderByDesc('id')->with('scanner', 'event');
+        $data_content = EventUser::orderByDesc('updated_at')
+            ->with('scanner', 'event');
+
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
+
+        foreach ($data_content as $data){
+            $transaction_detail = TransactionDetail::whereUserId($data->user_id)
+                ->whereIn('event_id', [20, 21, 22, 23, 68, 72, 76, 80])
+                ->first();
+
+            if($transaction_detail){
+                $data->setAttribute('has_ws', true);
+            } else {
+                $data->setAttribute('has_ws', false);
+            }
+        }
 
         $collect = collect($this->response);
         return $collect->merge($data_content);
@@ -43,10 +57,11 @@ class EventPresenceController extends Controller
         return $data_content;
     }
 
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
         $event_user = EventUser::find($id);
 
-        if($event_user){
+        if ($event_user) {
             $event_user->update([
                 'status' => 200
             ]);
@@ -80,6 +95,7 @@ class EventPresenceController extends Controller
             "user_email"            => $transaction->user_email,
             "event_id"              => $transaction_detail->event_id,
             "status"                => 100,
+            "hits"                  => 1,
         ];
 
         $event_user = EventUser::whereTransactionId($payload['transaction_id'])
@@ -87,10 +103,11 @@ class EventPresenceController extends Controller
             ->whereEventId($payload['event_id'])
             ->first();
 
-        if($event_user){
-            // sudah absen
+        if ($event_user) {
+            $event_user->update([
+                'hits' => $event_user->hits + 1
+            ]);
             $this->response['message'] = "Sudah presensi.";
-
             return $this->response;
         }
 
@@ -156,9 +173,11 @@ class EventPresenceController extends Controller
         return $this->response;
     }
 
-    public function scan_params(){
+    public function scan_params()
+    {
         $data['events'] = Event::whereDataType('product')
             ->orderBy('name')
+            ->whereStatus(1)
             ->get();
 
         $data['admin'] = User::whereType('room')
@@ -168,11 +187,28 @@ class EventPresenceController extends Controller
         return $this->response;
     }
 
-    public function print_event_presence($event_user_id){
+    public function print_event_presence($event_user_id)
+    {
         $event_user = EventUser::find($event_user_id);
 
-        if(!$event_user){
-            return 'invalid';
+        if (!$event_user) {
+            return 'not found';
+//
+//            $trx = Transaction::find($event_user_id);
+//
+//            if($trx){
+//                $event_user['user_name'] = $trx['user_name'];
+//            }else{
+//            }
+        }
+
+        return view('print.event_user.nametag', compact('event_user'));
+    }
+
+    public function print_transaction_presence($transaction_id){
+        $event_user = Transaction::find($transaction_id);
+        if (!$event_user) {
+            return 'not found';
         }
 
         return view('print.event_user.nametag', compact('event_user'));

@@ -882,4 +882,16 @@ class EvenTransactionController extends BaseController
 
         return $number;
     }
+
+    public function update_transaction_name(Request $request){
+        $trx = Transaction::find($request->id);
+
+        if($trx){
+            $trx->update([
+               'user_name' => $request->user_name
+            ]);
+        }
+
+        return $this->response;
+    }
 }

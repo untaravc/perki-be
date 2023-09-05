@@ -46,12 +46,14 @@
             </tr>
             </thead>
             <tbody v-if="data_content.data">
-            <tr class="border-b" v-for="(data, i) in data_content.data">
+            <tr class="border-b" :class="data.has_ws ? 'bg-red-50' : ''"  v-for="(data, i) in data_content.data">
                 <td class="px-4 py-3" :title="data.id">
                     {{ (data_content.current_page - 1) * data_content.per_page + i + 1 }}
                 </td>
                 <td class="px-4 py-3" :title="data.user_id">
                     {{ data.user_name }}
+                    <br>
+                    {{ data.created_at | formatDateTime }}
                 </td>
                 <td class="px-4 py-3">
                     <span v-if="data.event">{{ data.event.name }}</span>
@@ -60,7 +62,7 @@
                     <span v-if="data.scanner">{{ data.scanner.name }}</span>
                 </td>
                 <td>
-                    {{ data.status_label }}
+                    {{ data.status_label }} ({{data.hits}})
                 </td>
                 <td class="px-4 py-3 flex items-center justify-end">
                     <a :href="'/print/event-presence/' + data.id" target="_blank"
