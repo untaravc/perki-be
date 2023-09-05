@@ -200,11 +200,11 @@ class EmailServiceController extends Controller
 
     public function send_certificate()
     {
-        $models = ['certi_webinar_26ags23'];
+        $models = ['certi_webinar_19ags23'];
         $mail_logs = MailLog::whereIn('label',$models)
             ->whereStatus(0)
-            ->where('email_receiver','vyvy1777@gmail.com') // tester email
-            ->limit(3)
+//            ->where('email_receiver','vyvy1777@gmail.com') // tester email
+            ->limit(2)
             ->get();
 
         foreach ($mail_logs as $mail) {

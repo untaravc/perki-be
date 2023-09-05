@@ -43,10 +43,11 @@ class EventPresenceController extends Controller
         return $data_content;
     }
 
-    public function update($id, Request $request){
+    public function update($id, Request $request)
+    {
         $event_user = EventUser::find($id);
 
-        if($event_user){
+        if ($event_user) {
             $event_user->update([
                 'status' => 200
             ]);
@@ -80,17 +81,21 @@ class EventPresenceController extends Controller
             "user_email"            => $transaction->user_email,
             "event_id"              => $transaction_detail->event_id,
             "status"                => 100,
+            "hits"                  => 1,
         ];
 
         $event_user = EventUser::whereTransactionId($payload['transaction_id'])
             ->whereUserId($payload['user_id'])
+            ->whereEventId($payload['event_id'])
             ->first();
 
-//        if($event_user){
-//            // sudah absen
-//            $this->response['message'] = "Sudah presensi.";
-//            return $this->response;
-//        }
+        if ($event_user) {
+            $event_user->update([
+                'hits' => $event_user->hits + 1
+            ]);
+            $this->response['message'] = "Sudah presensi.";
+            return $this->response;
+        }
 
         EventUser::create($payload);
 
@@ -154,7 +159,8 @@ class EventPresenceController extends Controller
         return $this->response;
     }
 
-    public function scan_params(){
+    public function scan_params()
+    {
         $data['events'] = Event::whereDataType('product')
             ->orderBy('name')
             ->get();
@@ -166,11 +172,18 @@ class EventPresenceController extends Controller
         return $this->response;
     }
 
-    public function print_event_presence($event_user_id){
+    public function print_event_presence($event_user_id)
+    {
         $event_user = EventUser::find($event_user_id);
 
         if(!$event_user){
-            return 'invalid';
+            $trx = Transaction::find($event_user_id);
+
+            if($trx){
+                $event_user['user_name'] = $trx['user_name'];
+            }else{
+                return 'not found';
+            }
         }
 
         return view('print.event_user.nametag', compact('event_user'));

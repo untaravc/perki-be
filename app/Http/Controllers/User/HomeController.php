@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\GuestLog;
 use App\Models\JobType;
 use App\Models\Price;
+use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -470,27 +471,49 @@ class HomeController extends BaseController
     {
         $data = [];
         $data[] = [
-            "title"    => "Final Announcement",
-            "image"    => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.png",
-            "link"     => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.pdf",
+            "title" => "Final Announcement",
+            "image" => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.pdf",
         ];
         $data[] = [
-            "title"    => "Jincartos",
-            "image"    => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.png",
-            "link"     => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.pdf",
+            "title" => "Jincartos",
+            "image" => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.pdf",
         ];
         $data[] = [
-            "title"    => "Symposium Day 1",
-            "image"    => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.png",
-            "link"     => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.pdf",
+            "title" => "Symposium Day 1",
+            "image" => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.pdf",
         ];
         $data[] = [
-            "title"    => "Symposium Day 2",
-            "image"    => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.png",
-            "link"     => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.pdf",
+            "title" => "Symposium Day 2",
+            "image" => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.pdf",
         ];
 
         $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function video_on_demand(Request $request)
+    {
+        $transaction_details = TransactionDetail::whereUserId($request->logged_user_id)
+            ->whereEventId(1)
+            ->first();
+
+        if (!$transaction_details) {
+            $this->response['status'] = false;
+            $this->response['message'] = "You are not registered as a symposium participant";
+            return $this->response;
+        }
+
+        $event = Event::with(['schedules' => function ($q) {
+            $q->with('schedule_details');
+        }])
+            ->select('id', 'title', 'record_link')
+            ->find(1);
+
+        $this->response['result'] = $event['schedules'];
         return $this->response;
     }
 }

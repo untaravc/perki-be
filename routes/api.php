@@ -95,6 +95,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () 
     // register event
     Route::get('register-event', [EventRegisterController::class, 'register_event']);
     Route::post('guest', [HomeController::class, 'guest_log']);
+    Route::get('video-on-demand', [HomeController::class, 'video_on_demand']);
 });
 // =========
 

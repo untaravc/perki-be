@@ -28,18 +28,18 @@
 <div style="width: 100%; height: 900px;">
 {{--    <div style="width: 50%; height: 50%; display: flex; justify-content: center; background-size: cover; background-image: url('/assets/images/nametag.png')">--}}
     <div style="width: 42%; height: 50%; display: flex; justify-content: center; position: relative;">
-        <div style="top: 300px; position: absolute; width: 200px; text-align: center; color: #010148;">
-            {{$event_user->user_name}}
+        <div style="top: 310px; position: absolute; width: 200px; text-align: center; color: #010148;">
+            {{$event_user['user_name']}}
         </div>
-        <div style="color: #010148; position: absolute; top: 390px;">
+        <div style="color: #010148; position: absolute; top: 400px;">
             PARTICIPANT
         </div>
     </div>
 </div>
 <script>
-    // setTimeout(()=>{
-    //     window.close();
-    // }, 5000)
+    setTimeout(()=>{
+        window.close();
+    }, 5000)
 </script>
 </body>
 </html>
