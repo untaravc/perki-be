@@ -105,7 +105,7 @@ class EmailServiceController extends Controller
         try {
             if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
-                if($data['user']['email'] != $data['transaction']['user_email']){
+                if ($data['user']['email'] != $data['transaction']['user_email']) {
                     Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
                 }
             } else {
@@ -181,11 +181,11 @@ class EmailServiceController extends Controller
 
 //        return view($data['view'], $data);
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view_pdf'], $data)
-            ->setPaper([0,0,420,595]);
+            ->setPaper([0, 0, 420, 595]);
         $content = $pdf->download()->getOriginalContent();
 
-        $data['pdf_path'] = 'qr_pdf/' .  $data['transaction']['number'] .'.pdf';
-        Storage::disk('local')->put('qr_pdf/' .  $data['transaction']['number'] .'.pdf', $content) ;
+        $data['pdf_path'] = 'qr_pdf/' . $data['transaction']['number'] . '.pdf';
+        Storage::disk('local')->put('qr_pdf/' . $data['transaction']['number'] . '.pdf', $content);
 
         $data['attach'] = Storage::path($data['pdf_path']);
 
@@ -200,15 +200,26 @@ class EmailServiceController extends Controller
 
     public function send_certificate()
     {
-        $models = ['certi_webinar_19ags23'];
-        $mail_logs = MailLog::whereIn('label',$models)
+        $models = ['jcu23_certificate'];
+        $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
+            ->count();
+
+        if($email_sent > 400){
+            return '';
+        }
+
+        $mail_logs = MailLog::whereIn('label', $models)
             ->whereStatus(0)
-//            ->where('email_receiver','vyvy1777@gmail.com') // tester email
-            ->limit(2)
+//            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
+            ->limit(1)
             ->get();
 
         foreach ($mail_logs as $mail) {
-            $event = Event::find($mail->model_id);
+            $event = Event::whereSlug($mail->category)->first();
+            if (!$event) {
+                continue;
+            }
+
             $file = public_path('assets/certificates/' . $event->certificate);
 
             $mail_data['img'] = base64_encode(file_get_contents($file));
@@ -224,7 +235,7 @@ class EmailServiceController extends Controller
             ])->loadView('print.events.certificate', $mail_data)
                 ->setPaper('a4', 'landscape');
 
-            $file_name = preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
+            $file_name = $event->name . ' ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
             $content = $pdf->download()->getOriginalContent();
             $file_path = 'certificates/' . $mail->label . "/" . $file_name;
             Storage::disk('local')->put($file_path, $content);
@@ -232,30 +243,30 @@ class EmailServiceController extends Controller
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
             $data['title'] = $mail->title;
-            $data['email_subject'] = "Certificate";
+            $data['email_subject'] = "Certificate " . $event['name'];
             $data['view'] = 'email.certificate';
             $data['attach'] = public_path('storage/' . $file_path);
             $data['content'] = $mail->content;
 
-//            return view('email.certificate', $mail);
+            // return view('email.certificate', $mail);
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
                     ->send(new SendDefaultMail($data));
 
                 MailLog::find($mail->id)
                     ->update([
+                        'email_sender' => env('MAIL_USERNAME'),
                         'status'       => 1,
                         'sent_at'      => now()
                     ]);
             } catch (\Exception $e) {
                 MailLog::find($mail->id)
                     ->update([
-                        'status'       => 2,
-                        'log'         => $e->getMessage(),
+                        'status' => 2,
+                        'log'    => $e->getMessage(),
                     ]);
                 return $e->getMessage();
             }
-
         }
 
         return $mail_logs;

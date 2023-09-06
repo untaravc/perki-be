@@ -22,11 +22,9 @@
 </style>
 
 <body style="position: relative;">
-{{--	<div style=" width: 2270px;">--}}
 <img src="data:image/jpg;base64, {{$img}}" style="width: 100%; top:0;left: 0">
 <div class="text-name" style="position: absolute;">
     {{$name}}
 </div>
-{{--	</div>--}}
 </body>
 </html>
