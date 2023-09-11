@@ -497,23 +497,32 @@ class HomeController extends BaseController
 
     public function video_on_demand(Request $request)
     {
-        $transaction_details = TransactionDetail::whereUserId($request->logged_user_id)
-            ->whereEventId(1)
-            ->first();
-
-        if (!$transaction_details) {
-            $this->response['status'] = false;
-            $this->response['message'] = "You are not registered as a symposium participant";
-            return $this->response;
-        }
+//        $transaction_details = TransactionDetail::whereUserId($request->logged_user_id)
+//            ->whereEventId(1)
+//            ->first();
+//
+//        if (!$transaction_details) {
+//            $this->response['status'] = false;
+//            $this->response['message'] = "You are not registered as a symposium participant";
+//            return $this->response;
+//        }
 
         $event = Event::with(['schedules' => function ($q) {
-            $q->with('schedule_details');
+            $q->with(['schedule_details'=>function($q2){
+                $q2->with('speaker');
+            }]);
         }])
             ->select('id', 'title', 'record_link')
             ->find(1);
 
-        $this->response['result'] = $event['schedules'];
+        $schedule = collect($event['schedules']);
+
+        $data['day_1_a'] = $schedule->whereIn('id', [2,4,6,8]);
+        $data['day_1_b'] = $schedule->whereIn('id', [3,5,7,9]);
+        $data['day_2_a'] = $schedule->whereIn('id', [12,14,58,60]);
+        $data['day_2_b'] = $schedule->whereIn('id', [13,15,59,64]);
+
+        $this->response['result'] = $data;
         return $this->response;
     }
 }

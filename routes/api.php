@@ -123,5 +123,6 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);
     Route::get('scan-qrcode-event', [EventPresenceController::class, 'check_qrcode_data']);
     Route::post('scan-qrcode-event', [EventPresenceController::class, 'record_qrcode_data']);
+
 });
 // =========
