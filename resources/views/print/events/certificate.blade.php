@@ -1,10 +1,13 @@
 <html>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
-
-<link href="https://fonts.googleapis.com/css2?family=Oleo+Script&display=swap" rel="stylesheet">
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+</style>
+<style>
+    /*@font-face {*/
+    /*    font-family: 'Oleo Script';*/
+    /*    src: url('/fonts/OleoScript-Regular.ttf');*/
+    /*}*/
+
     html, body {
         margin: 0
     }
@@ -12,7 +15,7 @@
     .text-name {
         top: {{$name_top}}px;
         left: {{$name_left}}px;
-        font-family: 'Oleo Script', cursive;!important;
+        font-family: 'Lobster', cursive; !important;
         font-size: 80px;
         width: 1850px;
         text-align: center;

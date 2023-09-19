@@ -31,13 +31,20 @@ class SendDefaultMail extends Mailable
         $subject = $data['email_subject'] ?? 'Information';
         $view = $data['view'] ?? 'templates.email.default';
         $attach = $data['attach'] ?? null;
+        $attach2 = $data['attach2'] ?? null;
 
-        if ($attach != null) {
+        if ($attach2 != null) {
+            $this->from($sender_email, $sender_name)
+                ->subject($subject)
+                ->attach($attach)
+                ->attach($attach2)
+                ->view($view, $data);
+        } else if($attach != null){
             $this->from($sender_email, $sender_name)
                 ->subject($subject)
                 ->attach($attach)
                 ->view($view, $data);
-        } else {
+        } else{
             $this->from($sender_email, $sender_name)
                 ->subject($subject)
                 ->view($view, $data);

@@ -21,7 +21,7 @@ class TestController extends Controller
     public function test_view()
     {
         $ctrl = new EmailServiceController();
-        return $ctrl->qr_code_access(124);
+        return $ctrl->send_abstract_certificate();
     }
 
     public function sample_qrcode(Request $request)

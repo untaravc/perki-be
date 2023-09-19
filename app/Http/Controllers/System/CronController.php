@@ -36,7 +36,12 @@ class CronController extends Controller
 
     public function send_certificate_email(){
         $email_service = new EmailServiceController();
-        $email_service->send_certificate();
+        $email_service->send_event_certificate();
+    }
+
+    public function send_abstract_certificate(){
+        $email_service = new EmailServiceController();
+        $email_service->send_abstract_certificate();
     }
 
     public function create_qr_mail_log()

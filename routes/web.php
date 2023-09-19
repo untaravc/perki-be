@@ -33,7 +33,7 @@ Route::get('print/transaction-presence/{transaction_id}', [\App\Http\Controllers
 Route::get('print/invoice-pdf/{transaction_id}', [TransactionController::class, 'invoice_pdf']);
 
 // TEST
-Route::get('test', [\App\Http\Controllers\TestController::class, 'check_transaction_status']);
+Route::get('test', [\App\Http\Controllers\TestController::class, 'test_view']);
 Route::get('print-by-name', [\App\Http\Controllers\TestController::class, 'print_by_name']);
 Route::get('create_certy_mail_log', [\App\Http\Controllers\TestController::class, 'create_certy_mail_log']);
 //Route::get('reset-presensi-1', [\App\Http\Controllers\TestController::class, 'reset_presensi_1']);
