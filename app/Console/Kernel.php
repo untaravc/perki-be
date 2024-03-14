@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
              $cron = new CronController();
 //             $cron->send_qr_email();
 //             $cron->send_certificate_email();
-             $cron->send_abstract_certificate();
+             $cron->send_event_certificate();
          })->everyMinute();
     }
 

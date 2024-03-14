@@ -198,9 +198,14 @@ class EmailServiceController extends Controller
         return true;
     }
 
-    public function send_abstract_certificate()
+    public function send_event_certificate()
     {
-        $models = ['abstract_certificate'];
+        // setup
+        $models = ['sympo_ph_23'];
+        $file = public_path('assets/certificates/sympo_ph_23.png');
+        $data['email_subject'] = "Perki Jogja - Symposium Pulmonary Hypertension";
+        // --- end setup
+
         $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
             ->count();
 
@@ -215,16 +220,14 @@ class EmailServiceController extends Controller
             ->get();
 
         foreach ($mail_logs as $mail) {
-            $user = User::find($mail['model_id']);
-            if (!$user) {
-                continue;
-            }
-
-            $file = public_path('assets/certificates/eposter_finalist.png');
+//            $user = User::find($mail['model_id']);
+//            if (!$user) {
+//                continue;
+//            }
 
             $mail_data['img'] = base64_encode(file_get_contents($file));
             $mail_data['name'] = $mail['receiver_name'];
-            $mail_data['name_top'] = 380;
+            $mail_data['name_top'] = 480;
             $mail_data['name_left'] = 260;
 
             $pdf = Pdf::setOptions([
@@ -234,7 +237,7 @@ class EmailServiceController extends Controller
             ])->loadView('print.events.certificate', $mail_data)
                 ->setPaper('a4', 'landscape');
 
-            $file_name = 'e-poster ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
+            $file_name = 'Certificate Sympo PH ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
             $content = $pdf->download()->getOriginalContent();
             $file_path = 'certificates/' . $mail->label . "/" . $file_name;
             Storage::disk('local')->put($file_path, $content);
@@ -242,13 +245,13 @@ class EmailServiceController extends Controller
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
             $data['title'] = $mail->title;
-            $data['email_subject'] = "Full Paper Submission Request - Jogja Cardiology Update 2023";
-            $data['view'] = 'email.request-submission';
+            $data['view'] = 'email.sympo_ph_certy';
             $data['attach'] = public_path('storage/' . $file_path);
-            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
+//            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
             $data['content'] = $mail->content;
 
 //            return view($data['view'], $mail);
+
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
                     ->send(new SendDefaultMail($data));
@@ -268,79 +271,5 @@ class EmailServiceController extends Controller
                 return $e->getMessage();
             }
         }
-    }
-
-    public function send_event_certificate()
-    {
-        $models = ['abstract_certificate'];
-        $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
-            ->count();
-
-        if ($email_sent > 400) {
-            return '';
-        }
-
-        $mail_logs = MailLog::whereIn('label', $models)
-            ->whereStatus(0)
-            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
-            ->limit(1)
-            ->get();
-
-        foreach ($mail_logs as $mail) {
-            $event = Event::whereSlug($mail->category)->first();
-            if (!$event) {
-                continue;
-            }
-
-            $file = public_path('assets/certificates/' . $event->certificate);
-
-            $mail_data['img'] = base64_encode(file_get_contents($file));
-            $mail_data['name'] = $mail['receiver_name'];
-            $mail_data['name_top'] = $event->certificate_space_top;
-            $mail_data['name_left'] = $event->certificate_space_left;
-
-//            return view('print.events.certificate', $mail_data);
-            $pdf = Pdf::setOptions([
-                'dpi'             => 200,
-                'defaultFont'     => 'sans-serif',
-                'isRemoteEnabled' => true,
-            ])->loadView('print.events.certificate', $mail_data)
-                ->setPaper('a4', 'landscape');
-
-            $file_name = $event->name . ' ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
-            $content = $pdf->download()->getOriginalContent();
-            $file_path = 'certificates/' . $mail->label . "/" . $file_name;
-            Storage::disk('local')->put($file_path, $content);
-
-            $data['email_receiver'] = $mail->email_receiver;
-            $data['receiver_name'] = $mail->receiver_name;
-            $data['title'] = $mail->title;
-            $data['email_subject'] = "Certificate " . $event['name'];
-            $data['view'] = 'email.certificate';
-            $data['attach'] = public_path('storage/' . $file_path);
-            $data['content'] = $mail->content;
-
-            // return view('email.certificate', $mail);
-            try {
-                Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
-                    ->send(new SendDefaultMail($data));
-
-                MailLog::find($mail->id)
-                    ->update([
-                        'email_sender' => env('MAIL_USERNAME'),
-                        'status'       => 1,
-                        'sent_at'      => now()
-                    ]);
-            } catch (\Exception $e) {
-                MailLog::find($mail->id)
-                    ->update([
-                        'status' => 2,
-                        'log'    => $e->getMessage(),
-                    ]);
-                return $e->getMessage();
-            }
-        }
-
-        return $mail_logs;
     }
 }
