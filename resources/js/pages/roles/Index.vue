@@ -9,7 +9,7 @@
                     <Breadcrumb :list="breadcrumb_list"></Breadcrumb>
                 </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <router-link to="/admin/roles/add" class="btn btn-sm fw-bold btn-primary">
+                    <router-link to="/panel/roles/add" class="btn btn-sm fw-bold btn-primary">
                         Tambah Data
                     </router-link>
                 </div>
@@ -18,7 +18,8 @@
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container container-xxl">
                 <div class="card card-flush">
-                    <div class="card-header align-items-center py-5 gap-2 gap-md-5" data-select2-id="select2-data-124-lq0k">
+                    <div class="card-header align-items-center py-5 gap-2 gap-md-5"
+                        data-select2-id="select2-data-124-lq0k">
                         <div class="card-title">
                             <div class="d-flex align-items-center position-relative my-1">
                                 <span class="svg-icon svg-icon-1 position-absolute ms-4">
@@ -33,7 +34,8 @@
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        <div id="kt_ecommerce_products_table_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div id="kt_ecommerce_products_table_wrapper"
+                            class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="table-responsive">
                                 <Loading :active="is_loading" :loader="'dots'" :is-full-page="false" />
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
@@ -52,7 +54,7 @@
                                         <tr v-for="(data, d) in response.data_content.data">
                                             <td>
                                                 {{ response.data_content.per_page *
-                                                    (response.data_content.current_page - 1) + d + 1 }}
+                            (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
                                             <td>{{ data.name }}</td>
                                             <td class="text-end">
@@ -62,7 +64,8 @@
                                                         Aksi
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <router-link :to="'/admin/roles/' + data.id" class="dropdown-item">
+                                                        <router-link :to="'/panel/roles/' + data.id"
+                                                            class="dropdown-item">
                                                             Edit
                                                         </router-link>
                                                         <button class="dropdown-item text-danger"

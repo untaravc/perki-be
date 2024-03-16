@@ -53,14 +53,16 @@
                                     <div class="mb-5 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Url</label>
                                         <input type="text" class="form-control mb-2" v-model="form.url">
-                                        <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('url')">
+                                        <div class="fv-plugins-message-container invalid-feedback"
+                                            v-if="getStatus('url')">
                                             {{ getMessage('url') }}
                                         </div>
                                     </div>
                                     <div class="mb-5 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Icon</label>
                                         <input type="text" class="form-control mb-2" v-model="form.icon">
-                                        <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('icon')">
+                                        <div class="fv-plugins-message-container invalid-feedback"
+                                            v-if="getStatus('icon')">
                                             {{ getMessage('icon') }}
                                         </div>
                                     </div>
@@ -76,7 +78,7 @@
                                         <label class="form-label">Parent Menu</label>
                                         <select class="form-control mb-2" v-model="form.parent_id">
                                             <option :value="menu.id" :key="menu.id" v-for="menu in form_props.menus">{{
-                                                menu.title }}
+                            menu.title }}
                                             </option>
                                         </select>
                                         <div class="fv-plugins-message-container invalid-feedback"
@@ -87,7 +89,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <router-link to="/admin/menus" class="btn btn-light me-5">Batal</router-link>
+                            <router-link to="/panel/menus" class="btn btn-light me-5">Batal</router-link>
                             <button id="kt_ecommerce_add_product_submit" v-if="!form_props.edit_mode"
                                 :disabled="form_props.is_loading" @click="createData" class="btn btn-primary">
                                 <span v-if="!form_props.is_loading">Tambah</span>
@@ -166,7 +168,7 @@ export default {
             postData('menus', form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/menus')
+                    router.push('/panel/menus')
                     resetErrors()
                 } else {
                     setErrors(data.errors)
@@ -179,7 +181,7 @@ export default {
             patchData('menus/' + param_id, form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/menus')
+                    router.push('/panel/menus')
                     resetErrors()
                 } else {
                     setErrors(data.errors)

@@ -6,14 +6,17 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\TransactionController;
 
-Route::get('/', function (){
+Route::get('/', function () {
     return 'perki-src';
 });
 Route::get('/panel/print-abstract', [PostController::class, 'printPost']);
 Route::get('/panel/preview-abstract', [PostController::class, 'previewAbstract']);
 Route::get('/panel', [AuthController::class, 'adminPanel']);
-Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where( 'path' , '([A-z\d\-\/_.]+)?' );
+Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where('path', '([A-z\d\-\/_.]+)?');
 Route::get('/scanner', [AuthController::class, 'scannerPanel']);
+
+Route::get('/auth/{path}', [AuthController::class, 'auth'])
+    ->where('path', '([A-z\d\-\/_.]+)?');
 
 // Report
 Route::get('/event-member/{slug}', [EventController::class, 'event_member']);

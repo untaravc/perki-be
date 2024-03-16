@@ -23,7 +23,8 @@
                                         <option value="1">Aktif</option>
                                         <option value="0">Non Aktif</option>
                                     </select>
-                                    <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('status')">
+                                    <div class="fv-plugins-message-container invalid-feedback"
+                                        v-if="getStatus('status')">
                                         {{ getMessage('status') }}
                                     </div>
                                 </div>
@@ -64,7 +65,8 @@
                                         </div>
                                     </div>
                                     <div class="mb-5 fv-row fv-plugins-icon-container">
-                                        <ckeditor :editor="editor" v-model="form.body_content" :config="editor_data.config">
+                                        <ckeditor :editor="editor" v-model="form.body_content"
+                                            :config="editor_data.config">
                                         </ckeditor>
                                         <div class="fv-plugins-message-container invalid-feedback"
                                             v-if="getStatus('body_content')">
@@ -84,7 +86,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <router-link to="/admin/posts" class="btn btn-light me-5">Batal</router-link>
+                            <router-link to="/panel/posts" class="btn btn-light me-5">Batal</router-link>
                             <button id="kt_ecommerce_add_product_submit" v-if="!form_props.edit_mode"
                                 :disabled="form_props.is_loading" @click="createData" class="btn btn-primary">
                                 <span v-if="!form_props.is_loading">Tambah</span>
@@ -172,7 +174,7 @@ export default {
             postData('posts', form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/posts')
+                    router.push('/panel/posts')
                     resetErrors()
                 } else {
                     setErrors(data.errors)
@@ -185,7 +187,7 @@ export default {
             patchData('posts/' + param_id, form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/posts')
+                    router.push('/panel/posts')
                     resetErrors()
                 } else {
                     setErrors(data.errors)

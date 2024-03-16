@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Models\Menu;
+use App\Models\MenuRole;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +20,7 @@ class AuthController extends BaseController
 
     public function login(Request $request)
     {
-        $this->response['status'] = false;
+        $this->response['success'] = false;
 
         $message = 'Email atau password salah.';
         $validator = Validator::make($request->all(), [
@@ -54,7 +57,7 @@ class AuthController extends BaseController
             'last_login' => now(),
         ]);
 
-        $this->response['status'] = true;
+        $this->response['success'] = true;
         $this->response['result'] = [
             'token' => $token->plainTextToken,
             'user'  => $user
@@ -82,5 +85,38 @@ class AuthController extends BaseController
     public function scannerPanel()
     {
         return view('admin.Scanner');
+    }
+
+    public function auth()
+    {
+        return view('admin.auth');
+    }
+
+    public function authJson(Request $request)
+    {
+        $user = $request->user();
+
+        $result = User::with(['role'])->find($user['id']);
+
+        $this->response['result'] = $result;
+        return $this->response;
+    }
+
+    public function menu(Request $request)
+    {
+        $user = $request->user();
+
+        $role_id = $user['role_id'];
+        $menu_ids = MenuRole::whereRoleId($role_id)->pluck('menu_id');
+
+        $menus = Menu::whereIn('id', $menu_ids)
+            ->orderBy('order')
+            ->get()->toArray();
+
+        $menu_ctrl = new MenuController();
+        $menu_tree = $menu_ctrl->buildTree($menus);
+
+        $this->response['result'] = $menu_tree;
+        return $this->response;
     }
 }

@@ -50,21 +50,24 @@
                                             <option value="round">Round</option>
                                             <option value="match_type">Match Type</option>
                                         </select>
-                                        <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('type')">
+                                        <div class="fv-plugins-message-container invalid-feedback"
+                                            v-if="getStatus('type')">
                                             {{ getMessage('type') }}
                                         </div>
                                     </div>
                                     <div class="mb-5 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Nama</label>
                                         <input type="text" class="form-control mb-2" v-model="form.name">
-                                        <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('name')">
+                                        <div class="fv-plugins-message-container invalid-feedback"
+                                            v-if="getStatus('name')">
                                             {{ getMessage('name') }}
                                         </div>
                                     </div>
                                     <div class="mb-5 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Kode</label>
                                         <input type="text" class="form-control mb-2" v-model="form.code">
-                                        <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('code')">
+                                        <div class="fv-plugins-message-container invalid-feedback"
+                                            v-if="getStatus('code')">
                                             {{ getMessage('code') }}
                                         </div>
                                     </div>
@@ -72,7 +75,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <router-link to="/admin/categories" class="btn btn-light me-5">Batal</router-link>
+                            <router-link to="/panel/categories" class="btn btn-light me-5">Batal</router-link>
                             <button id="kt_ecommerce_add_product_submit" v-if="!form_props.edit_mode"
                                 :disabled="form_props.is_loading" @click="createData" class="btn btn-primary">
                                 <span v-if="!form_props.is_loading">Tambah</span>
@@ -151,7 +154,7 @@ export default {
             postData('categories', form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/categories')
+                    router.push('/panel/categories')
                     resetErrors()
                 } else {
                     setErrors(data.errors)
@@ -164,7 +167,7 @@ export default {
             patchData('categories/' + param_id, form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/categories')
+                    router.push('/panel/categories')
                     resetErrors()
                 } else {
                     setErrors(data.errors)

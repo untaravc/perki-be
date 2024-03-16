@@ -24,13 +24,15 @@ use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
 
 // ADMIN API
-Route::post('/', function (){
+Route::post('/', function () {
     return 'app';
 });
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('auth', [AdminAuthController::class, 'authJson']);
+    Route::get('menu', [AdminAuthController::class, 'menu']);
     Route::get('profile', [AdminAuthController::class, 'profile']);
 
     Route::get('dashboard-stat', [DashboardController::class, 'statistics']);
@@ -123,6 +125,5 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);
     Route::get('scan-qrcode-event', [EventPresenceController::class, 'check_qrcode_data']);
     Route::post('scan-qrcode-event', [EventPresenceController::class, 'record_qrcode_data']);
-
 });
 // =========

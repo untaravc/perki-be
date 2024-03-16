@@ -17,5 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         $initCtrl = new UserInitController();
         $initCtrl->user_init();
+
+        $this->call(MenuSeed::class);
+        $this->call(RoleSeed::class);
     }
 }

@@ -3,16 +3,16 @@
         data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="225px"
         data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_app_sidebar_mobile_toggle">
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
-            <router-link to="/admin/dashboard">
+            <router-link to="/panel/dashboard">
                 <div class="app-sidebar-logo-default">
                     <div class="d-flex align-items-center">
-                        <img alt="Logo" src="/assets/logo/logo-tenis-demo.png" class="h-35px app-sidebar-logo-default">
+                        <img alt="Logo" src="/assets/logo/jcu_color.png" class="h-35px app-sidebar-logo-default">
                         <div class="text-white fw-bold ms-3 text-lg">
-                            <span class="text-white">Tenis</span><span class="text-danger">Indo</span>
+                            <span class="text-white">JCU</span> <span class="text-danger">2024</span>
                         </div>
                     </div>
                 </div>
-                <img alt="Logo" src="/assets/logo/logo-tenis-demo.png" class="h-20px app-sidebar-logo-minimize">
+                <img alt="Logo" src="/assets/logo/jcu_color.png" class="h-20px app-sidebar-logo-minimize">
             </router-link>
             <div id="kt_app_sidebar_toggle"
                 class="app-sidebar-toggle btn btn-icon btn-shadow btn-sm btn-color-muted btn-active-color-primary body-bg h-30px w-30px position-absolute top-50 start-100 translate-middle rotate"
@@ -43,8 +43,8 @@
             <div id="kt_app_sidebar_menu_wrapper" class="app-sidebar-wrapper hover-scroll-overlay-y my-5"
                 data-kt-scroll="true" data-kt-scroll-activate="true" data-kt-scroll-height="auto"
                 data-kt-scroll-dependencies="#kt_app_sidebar_logo, #kt_app_sidebar_footer"
-                data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px" data-kt-scroll-save-state="true"
-                style="height: 771px;">
+                data-kt-scroll-wrappers="#kt_app_sidebar_menu" data-kt-scroll-offset="5px"
+                data-kt-scroll-save-state="true" style="height: 771px;">
                 <!--begin::Menu-->
                 <div class="menu menu-column menu-rounded menu-sub-indention px-3" id="#kt_app_sidebar_menu"
                     data-kt-menu="true" data-kt-menu-expand="false">

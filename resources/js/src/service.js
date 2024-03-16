@@ -1,4 +1,4 @@
-import {ref} from 'vue';
+import { ref } from 'vue';
 import axios from 'axios'
 
 export default function useAxios() {
@@ -8,7 +8,7 @@ export default function useAxios() {
         result: null,
     });
 
-    const base_url = '/api/'
+    const base_url = '/api/adm/'
 
     function setHeader() {
         const token = localStorage.getItem('user_token');
@@ -37,8 +37,8 @@ export default function useAxios() {
     }
 
     async function getData(url, params) {
-        await axios.get(base_url + url, {params: params, headers: setHeader()})
-            .then(({data}) => {
+        await axios.get(base_url + url, { params: params, headers: setHeader() })
+            .then(({ data }) => {
                 result.value = data
             }).catch((e) => {
                 handleError(e);
@@ -54,7 +54,7 @@ export default function useAxios() {
     async function postData(url, data) {
         await axios.post(base_url + url, data, {
             headers: setHeader()
-        }).then(({data}) => {
+        }).then(({ data }) => {
             result.value = data
         }).catch((e) => {
             handleError(e);
@@ -70,7 +70,7 @@ export default function useAxios() {
     async function patchData(url, data) {
         await axios.patch(base_url + url, data, {
             headers: setHeader()
-        }).then(({data}) => {
+        }).then(({ data }) => {
             result.value = data
         }).catch((e) => {
             handleError(e);
@@ -87,7 +87,7 @@ export default function useAxios() {
         await axios.delete(base_url + url, {
             headers: setHeader(),
             data: data
-        }).then(({data}) => {
+        }).then(({ data }) => {
             result.value = data
         }).catch((e) => {
             handleError(e);

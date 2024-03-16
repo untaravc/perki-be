@@ -9,7 +9,7 @@
                     <Breadcrumb :list="breadcrumb_list"></Breadcrumb>
                 </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <router-link to="/admin/categories/add" class="btn btn-sm fw-bold btn-primary">
+                    <router-link to="/panel/categories/add" class="btn btn-sm fw-bold btn-primary">
                         Tambah Data
                     </router-link>
                 </div>
@@ -60,7 +60,7 @@
                                         <tr v-for="(data, d) in response.data_content.data">
                                             <td>
                                                 {{ response.data_content.per_page *
-                                                                                                (response.data_content.current_page - 1) + d + 1 }}
+                            (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
                                             <td>{{ data.type }}</td>
                                             <td>
@@ -79,7 +79,7 @@
                                                         Aksi
                                                     </button>
                                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <router-link :to="'/admin/categories/' + data.id"
+                                                        <router-link :to="'/panel/categories/' + data.id"
                                                             class="dropdown-item">
                                                             Edit
                                                         </router-link>

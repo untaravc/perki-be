@@ -240,7 +240,7 @@ class HomeController extends BaseController
             ]
         ];
 
-//        return $request->ip();
+        //        return $request->ip();
 
         $this->response['result'] = $data;
         return $this->response;
@@ -254,7 +254,7 @@ class HomeController extends BaseController
             'users' => [
                 ['user' => 'bambang.irawan'],
                 ['user' => 'budi.yuli'],
-//                ['user' => 'arjono'],
+                //                ['user' => 'arjono'],
                 ['user' => 'hariadi.hariawan'],
                 ['user' => 'irsad.andi'],
             ],
@@ -358,16 +358,16 @@ class HomeController extends BaseController
             ]
         ];
 
-//        $names[] = [
-//            'title' => "Secretariat",
-//            'users' => [
-//                ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
-//                ['user' => 'aris.widaryanti'],
-//                ['user' => 'ice.suciati'],
-//                ['user' => 'beti.meitasari'],
-//                ['user' => 'intan.rengganis'],
-//            ]
-//        ];
+        //        $names[] = [
+        //            'title' => "Secretariat",
+        //            'users' => [
+        //                ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
+        //                ['user' => 'aris.widaryanti'],
+        //                ['user' => 'ice.suciati'],
+        //                ['user' => 'beti.meitasari'],
+        //                ['user' => 'intan.rengganis'],
+        //            ]
+        //        ];
 
         $user = User::where('is_speaker', 1)
             ->select('image', 'name', 'slug', 'desc')
@@ -441,26 +441,26 @@ class HomeController extends BaseController
     public function events()
     {
         $data = [];
-//        $data[] = [
-//            "title"    => "Cardiogenic Shock: not only the Heart, We also Need to Protect the Kidney",
-//            "subtitle" => "August 12, 2023",
-//            "image"    => "/assets/posters/webinar_11ags23.jpg",
-//            "link"     => "https://bit.ly/PreJCU1",
-//        ];
+        //        $data[] = [
+        //            "title"    => "Cardiogenic Shock: not only the Heart, We also Need to Protect the Kidney",
+        //            "subtitle" => "August 12, 2023",
+        //            "image"    => "/assets/posters/webinar_11ags23.jpg",
+        //            "link"     => "https://bit.ly/PreJCU1",
+        //        ];
 
-//        $data[] = [
-//            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry",
-//            "subtitle" => "August 19, 2023",
-//            "image"    => "/assets/posters/webinar_19ags23a.jpg",
-//            "link"     => "https://docs.google.com/forms/d/1c7fjjNYtY6srR1HBfRSyMXO4eyhlSpUUcfGU5QGHzmA/viewform?edit_requested=true",
-//        ];
+        //        $data[] = [
+        //            "title"    => "Update on atrial-septal defect related pulmonary artery hypertension fresh research from COHARD PH registry",
+        //            "subtitle" => "August 19, 2023",
+        //            "image"    => "/assets/posters/webinar_19ags23a.jpg",
+        //            "link"     => "https://docs.google.com/forms/d/1c7fjjNYtY6srR1HBfRSyMXO4eyhlSpUUcfGU5QGHzmA/viewform?edit_requested=true",
+        //        ];
 
-//        $data[] = [
-//            "title"    => "Tackling the Difficulty for Management of Uncontrolled Hypertension in Daily Practise: any Hope from Device Therapy",
-//            "subtitle" => "August 26, 2023",
-//            "image"    => "/assets/posters/webinar_26ags23.jpg",
-//            "link"     => "https://bit.ly/PreJCU2",
-//        ];
+        //        $data[] = [
+        //            "title"    => "Tackling the Difficulty for Management of Uncontrolled Hypertension in Daily Practise: any Hope from Device Therapy",
+        //            "subtitle" => "August 26, 2023",
+        //            "image"    => "/assets/posters/webinar_26ags23.jpg",
+        //            "link"     => "https://bit.ly/PreJCU2",
+        //        ];
 
 
         $this->response['result'] = $data;
@@ -497,18 +497,18 @@ class HomeController extends BaseController
 
     public function video_on_demand(Request $request)
     {
-//        $transaction_details = TransactionDetail::whereUserId($request->logged_user_id)
-//            ->whereEventId(1)
-//            ->first();
-//
-//        if (!$transaction_details) {
-//            $this->response['status'] = false;
-//            $this->response['message'] = "You are not registered as a symposium participant";
-//            return $this->response;
-//        }
+        //        $transaction_details = TransactionDetail::whereUserId($request->logged_user_id)
+        //            ->whereEventId(1)
+        //            ->first();
+        //
+        //        if (!$transaction_details) {
+        //            $this->response['success'] = false;
+        //            $this->response['message'] = "You are not registered as a symposium participant";
+        //            return $this->response;
+        //        }
 
         $event = Event::with(['schedules' => function ($q) {
-            $q->with(['schedule_details'=>function($q2){
+            $q->with(['schedule_details' => function ($q2) {
                 $q2->with('speaker');
             }]);
         }])
@@ -517,10 +517,10 @@ class HomeController extends BaseController
 
         $schedule = collect($event['schedules']);
 
-        $data['day_1_a'] = $schedule->whereIn('id', [2,4,6,8]);
-        $data['day_1_b'] = $schedule->whereIn('id', [3,5,7,9]);
-        $data['day_2_a'] = $schedule->whereIn('id', [12,14,58,60]);
-        $data['day_2_b'] = $schedule->whereIn('id', [13,15,59,64]);
+        $data['day_1_a'] = $schedule->whereIn('id', [2, 4, 6, 8]);
+        $data['day_1_b'] = $schedule->whereIn('id', [3, 5, 7, 9]);
+        $data['day_2_a'] = $schedule->whereIn('id', [12, 14, 58, 60]);
+        $data['day_2_b'] = $schedule->whereIn('id', [13, 15, 59, 64]);
 
         $this->response['result'] = $data;
         return $this->response;

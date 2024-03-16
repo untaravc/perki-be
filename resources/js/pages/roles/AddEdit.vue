@@ -20,7 +20,8 @@
                                     <div class="mb-5 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Nama</label>
                                         <input type="text" class="form-control mb-2" v-model="form.name">
-                                        <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('name')">
+                                        <div class="fv-plugins-message-container invalid-feedback"
+                                            v-if="getStatus('name')">
                                             {{ getMessage('name') }}
                                         </div>
                                     </div>
@@ -28,7 +29,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
-                            <router-link to="/admin/roles" class="btn btn-light me-5">Batal</router-link>
+                            <router-link to="/panel/roles" class="btn btn-light me-5">Batal</router-link>
                             <button id="kt_ecommerce_add_product_submit" v-if="!form_props.edit_mode"
                                 :disabled="form_props.is_loading" @click="createData" class="btn btn-primary">
                                 <span v-if="!form_props.is_loading">Tambah</span>
@@ -96,7 +97,7 @@ export default {
             postData('roles', form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/roles')
+                    router.push('/panel/roles')
                     resetErrors()
                 } else {
                     setErrors(data.errors)
@@ -109,7 +110,7 @@ export default {
             patchData('roles/' + param_id, form).then((data) => {
                 form_props.is_loading = false;
                 if (data.success) {
-                    router.push('/admin/roles')
+                    router.push('/panel/roles')
                     resetErrors()
                 } else {
                     setErrors(data.errors)
