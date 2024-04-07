@@ -11,11 +11,14 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\Admin\MailLogController;
 use App\Http\Controllers\Admin\VoucherController;
-
+use App\Http\Controllers\Event\CommitteeController;
+use App\Http\Controllers\Event\PricingController;
 use App\Http\Controllers\Event\RegisterController as EventRegisterController;
-
+use App\Http\Controllers\Event\ScheduleController;
+use App\Http\Controllers\Event\SpeakerController;
+use App\Http\Controllers\Event\SponsorController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
-use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\EvenTransactionController;
 use App\Http\Controllers\User\EventController;
 use App\Http\Controllers\User\AbstractController;
@@ -114,12 +117,12 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('guidance', [HomeController::class, 'guidance']);
     Route::get('cta-event', [HomeController::class, 'cta_event']);
     Route::get('get-job-types', [HomeController::class, 'job_types']);
-    Route::get('speakers', [HomeController::class, 'speakers']);
-    Route::get('committee', [HomeController::class, 'committee']);
-    Route::get('schedule', [HomeController::class, 'schedule']);
-    Route::get('pricing', [HomeController::class, 'pricing']);
+    Route::get('speakers', [SpeakerController::class, 'speakers']);
+    Route::get('committee', [CommitteeController::class, 'committee']);
+    Route::get('schedule', [ScheduleController::class, 'schedule']);
+    Route::get('pricing', [PricingController::class, 'pricing']);
     Route::get('hero-banner', [HomeController::class, 'hero_banner']);
-    Route::get('sponsor-slider', [HomeController::class, 'sponsor_slider']);
+    Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']);
 
     // Presensi Event
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);

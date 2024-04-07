@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableConfig2024 extends Migration
+class CreateReferencesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AlterTableConfig2024 extends Migration
      */
     public function up()
     {
-        Schema::table('users', function ($table) {
-            $table->integer('role_id')->nullable()->after('type');
+        Schema::create('references', function (Blueprint $table) {
+            $table->id();
+            $table->string('reference');
+            $table->string('model');
+            $table->integer('model_id');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,10 +30,6 @@ class AlterTableConfig2024 extends Migration
      */
     public function down()
     {
-        Schema::table('users', function ($table) {
-            $table->dropColumn([
-                'role_id',
-            ]);
-        });
+        Schema::dropIfExists('references');
     }
 }
