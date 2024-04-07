@@ -18,66 +18,6 @@ class HomeController extends BaseController
         $this->sendGetResponse($data);
     }
 
-    public function hero_banner(Request $request)
-    {
-        $data = [
-            [
-                "title"    => "Jogja Cardiology Update",
-                "subtitle" => "Integrating Technology In Cardiovascular Disease Management: Towards A Harmonic Fusion",
-                "date"     => "Yogyakarta, 1-3 September 2023",
-                "poster"   => '/assets/posters/1st_announ.png',
-                "buttons"  => [
-                    [
-                        "theme" => "light",
-                        "text"  => "Schedule",
-                        "link"  => "/#schedule",
-                    ],
-                    [
-                        "theme" => "dark",
-                        "text"  => "Register",
-                        "link"  => "/register",
-                    ]
-                ]
-            ],
-            [
-                "title"    => "Call for Abstracts",
-                "subtitle" => "For Cardiologist, Resident, GP, Medical Student, and Researcher",
-                "date"     => "Submit before: August 7th 2023",
-                "poster"   => '/assets/posters/extended_poster_7ags23.jpg',
-                "buttons"  => [
-                    [
-                        "theme" => "dark",
-                        "text"  => "Submit Now",
-                        "link"  => "/abstracts",
-                    ]
-                ]
-            ],
-            [
-                "title"    => "The Sixth JINCARTOS",
-                "subtitle" => "Jogja International Cardiovascular Topic Series: Scientific Breakthrough in Hearth Rhythm Disorder",
-                "date"     => "12 Symposium & 8 Workshop",
-                "poster"   => '/assets/posters/1st_announ.png',
-                "buttons"  => [
-                    [
-                        "theme" => "light",
-                        "text"  => "Schedule",
-                        "link"  => "/#schedule",
-                    ],
-                    [
-                        "theme" => "dark",
-                        "text"  => "Register",
-                        "link"  => "/register",
-                    ]
-                ]
-            ]
-        ];
-
-        //        return $request->ip();
-
-        $this->response['result'] = $data;
-        return $this->response;
-    }
-
     public function guest_log(Request $request)
     {
         if (!$request->perki_app_guest_token) {
@@ -105,14 +45,23 @@ class HomeController extends BaseController
         return $this->response;
     }
 
-    public function cta_event()
+    public function cta_event(Request $request)
     {
-        $data = [
-            "title"    => "Join Our Webinar Pre-JCU",
-            "subtitle" => "Free & Full Certificate",
-            "image"    => "",
-            "link"     => "",
-        ];
+        if($request->ref == 2024){
+            $data = [
+                "title"    => "Join Our Webinar JCU",
+                "subtitle" => "Free & Full Certificate",
+                "image"    => "",
+                "link"     => "",
+            ];
+        } else {
+            $data = [
+                "title"    => "Join Our Webinar Pre-JCU",
+                "subtitle" => "Free & Full Certificate",
+                "image"    => "",
+                "link"     => "",
+            ];
+        }
 
         $this->response['result'] = $data;
         return $this->response;
@@ -142,34 +91,6 @@ class HomeController extends BaseController
         //            "link"     => "https://bit.ly/PreJCU2",
         //        ];
 
-
-        $this->response['result'] = $data;
-        return $this->response;
-    }
-
-    public function guidance()
-    {
-        $data = [];
-        $data[] = [
-            "title" => "Final Announcement",
-            "image" => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.png",
-            "link"  => "https://src.perki-jogja.com/assets/posters/ANNOUNCMNT_JCU_2023_1.pdf",
-        ];
-        $data[] = [
-            "title" => "Jincartos",
-            "image" => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.png",
-            "link"  => "https://src.perki-jogja.com/assets/posters/JINCARTOS_1.pdf",
-        ];
-        $data[] = [
-            "title" => "Symposium Day 1",
-            "image" => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.png",
-            "link"  => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_1_1.pdf",
-        ];
-        $data[] = [
-            "title" => "Symposium Day 2",
-            "image" => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.png",
-            "link"  => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.pdf",
-        ];
 
         $this->response['result'] = $data;
         return $this->response;

@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\Admin\MailLogController;
 use App\Http\Controllers\Admin\VoucherController;
+use App\Http\Controllers\Event\BannerController;
 use App\Http\Controllers\Event\CommitteeController;
+use App\Http\Controllers\Event\GuidanceController;
 use App\Http\Controllers\Event\PricingController;
 use App\Http\Controllers\Event\RegisterController as EventRegisterController;
 use App\Http\Controllers\Event\ScheduleController;
@@ -114,15 +116,15 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('check-otp-reset-password', [UserAuthController::class, 'check_otp_reset_password']);
 
     Route::get('events', [HomeController::class, 'events']);
-    Route::get('guidance', [HomeController::class, 'guidance']);
-    Route::get('cta-event', [HomeController::class, 'cta_event']);
-    Route::get('get-job-types', [HomeController::class, 'job_types']);
-    Route::get('speakers', [SpeakerController::class, 'speakers']);
-    Route::get('committee', [CommitteeController::class, 'committee']);
-    Route::get('schedule', [ScheduleController::class, 'schedule']);
-    Route::get('pricing', [PricingController::class, 'pricing']);
-    Route::get('hero-banner', [HomeController::class, 'hero_banner']);
-    Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']);
+    Route::get('guidance', [GuidanceController::class, 'guidance']); //
+    Route::get('cta-event', [HomeController::class, 'cta_event']); //
+    Route::get('get-job-types', [HomeController::class, 'job_types']); // 
+    Route::get('speakers', [SpeakerController::class, 'speakers']); //
+    Route::get('committee', [CommitteeController::class, 'committee']); //
+    Route::get('schedule', [ScheduleController::class, 'schedule']); //
+    Route::get('pricing', [PricingController::class, 'pricing']); //
+    Route::get('hero-banner', [BannerController::class, 'banner']); //
+    Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']); //
 
     // Presensi Event
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);
