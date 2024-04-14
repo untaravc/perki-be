@@ -26,4 +26,12 @@ class UserController extends Controller
 
         return $data_content;
     }
+
+    public function show($id)
+    {
+        $data = User::find($id);
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
 }

@@ -39,15 +39,15 @@ class AuthController extends BaseController
         $user_exist = User::whereEmail($request->email)->first();
 
         // - belum login
-        if(!isset($request->logged_user_id)){
+        if (!isset($request->logged_user_id)) {
             // - email sudah digunakan -> false
-            if($user_exist){
-                $this->response['status'] = false;
+            if ($user_exist) {
+                $this->response['success'] = false;
                 $this->response['message'] = 'Email has been registered';
                 return $this->response;
             }
             // - email belum digunakan -> true, register user, register transaction, return login
-            else{
+            else {
                 $new_user = $this->create_user($request);
                 $transaction = $this->draft_transaction($new_user, $request);
                 $token = $new_user->createToken('user');
@@ -59,12 +59,12 @@ class AuthController extends BaseController
             }
         }
         // sudah login
-        else{
+        else {
             $user_login = User::find($request->logged_user_id);
 
             // email beda dengan yg di register && email terdaftar
-            if($user_login->email !== $request->email && $user_exist){
-                $this->response['status'] = false;
+            if ($user_login->email !== $request->email && $user_exist) {
+                $this->response['success'] = false;
                 $this->response['message'] = 'Email has been registered';
                 return $this->response;
             }
@@ -120,7 +120,7 @@ class AuthController extends BaseController
 
     public function login(Request $request)
     {
-        $this->response['status'] = false;
+        $this->response['success'] = false;
 
         $message = 'Wrong email or password.';
         $validator = Validator::make($request->all(), [
@@ -134,8 +134,8 @@ class AuthController extends BaseController
         }
 
         $user = User::whereEmail($request->email)
-//            ->where('type', 'user')
-//            ->whereStatus(1)
+            //            ->where('type', 'user')
+            //            ->whereStatus(1)
             ->first();
 
         if (!$user) {
@@ -154,7 +154,7 @@ class AuthController extends BaseController
             'last_login' => now(),
         ]);
 
-        $this->response['status'] = true;
+        $this->response['success'] = true;
         $this->response['result'] = [
             'token' => $token->plainTextToken,
             'user'  => $user
@@ -173,7 +173,7 @@ class AuthController extends BaseController
 
         $token = $user->createToken('user');
 
-        $this->response['status'] = true;
+        $this->response['success'] = true;
         $this->response['result'] = [
             'token' => $token->plainTextToken,
             'user'  => $user
@@ -267,7 +267,7 @@ class AuthController extends BaseController
         if ($request->logged_user_id) {
             return $this->response;
         }
-        $this->response['status'] = false;
+        $this->response['success'] = false;
         return $this->response;
     }
 
@@ -326,7 +326,7 @@ class AuthController extends BaseController
             ->whereUserId($user->id)
             ->count();
 
-        if($transaction_count < 2){
+        if ($transaction_count < 2) {
             $user->update([
                 'name'           => $request->name,
                 'phone'          => $request->phone,
@@ -420,7 +420,7 @@ class AuthController extends BaseController
 
     public function send_new_password(Request $request)
     {
-        $this->response['status'] = false;
+        $this->response['success'] = false;
 
         $message = 'No email registered';
         $validator = Validator::make($request->all(), [
@@ -433,7 +433,7 @@ class AuthController extends BaseController
         }
 
         $user = User::whereEmail($request->email)
-//            ->where('type', 'user')
+            //            ->where('type', 'user')
             ->first();
 
         if (!$user) {
@@ -459,7 +459,7 @@ class AuthController extends BaseController
 
     private function generate_new_password(User $user)
     {
-        if($user->forgot_password_token != null){
+        if ($user->forgot_password_token != null) {
             return $user->forgot_password_token;
         }
 
@@ -476,14 +476,15 @@ class AuthController extends BaseController
         return $new_password_token;
     }
 
-    public function check_otp_reset_password(Request $request){
+    public function check_otp_reset_password(Request $request)
+    {
         $reset_user = User::whereEmail($request->email)
-            ->where('forgot_password_token',$request->token)
+            ->where('forgot_password_token', $request->token)
             ->first();
 
-        if(!$reset_user){
+        if (!$reset_user) {
             $this->response['message'] = "Invalid link address";
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             return $this->response;
         }
 
@@ -497,7 +498,7 @@ class AuthController extends BaseController
             'last_login' => now(),
         ]);
 
-        $this->response['status'] = true;
+        $this->response['success'] = true;
         $this->response['result'] = [
             'token' => $token->plainTextToken,
             'user'  => $reset_user,

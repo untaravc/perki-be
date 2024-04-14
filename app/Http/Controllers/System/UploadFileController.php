@@ -48,7 +48,7 @@ class UploadFileController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             $this->response['errors'] = $validator->errors();
             $this->response['message'] = $validator->errors()->first();
             abort(response($this->response, 422));

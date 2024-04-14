@@ -1,7 +1,14 @@
 /node_modules
 /public/hot
 /public/assets/qr_code/
-/public/storage
+/public/storage/
+/public/css/app-*.css
+/public/css/app.css
+/public/js/app.js
+/public/js/app-*.js
+/public/js/app-*.js
+/resources/views/admin/css_version.blade.php
+/resources/views/admin/js_version.blade.php
 /storage/*.key
 /vendor
 .env

@@ -28,6 +28,10 @@ class VoucherController extends Controller
         if($request->type){
             $data_content = $data_content->where('type', $request->type);
         }
+        
+        if($request->year){
+            $data_content = $data_content->whereYear('created_at', $request->year);
+        }
 
         return $data_content;
     }

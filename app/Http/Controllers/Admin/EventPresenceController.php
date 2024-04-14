@@ -21,12 +21,12 @@ class EventPresenceController extends Controller
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
-        foreach ($data_content as $data){
+        foreach ($data_content as $data) {
             $transaction_detail = TransactionDetail::whereUserId($data->user_id)
                 ->whereIn('event_id', [20, 21, 22, 23, 68, 72, 76, 80])
                 ->first();
 
-            if($transaction_detail){
+            if ($transaction_detail) {
                 $data->setAttribute('has_ws', true);
             } else {
                 $data->setAttribute('has_ws', false);
@@ -126,7 +126,7 @@ class EventPresenceController extends Controller
         ]);
 
         if ($validator->fails()) {
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             $this->response['message'] = "Invalid Parameters";
             return $this->response;
         }
@@ -134,14 +134,14 @@ class EventPresenceController extends Controller
         $user = User::whereType('room')
             ->find($request->admin_id);
         if (!$user) {
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             $this->response['message'] = "Invalid parameters: Admin";
             return $this->response;
         }
 
         $event = Event::where('data_type', 'product')->find($request->event_id);
         if (!$event) {
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             $this->response['message'] = "Invalid parameters: Event";
             return $this->response;
         }
@@ -150,7 +150,7 @@ class EventPresenceController extends Controller
             ->first();
 
         if (!$transaction) {
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             $this->response['message'] = "Invalid parameters: Transaction";
             return $this->response;
         }
@@ -161,7 +161,7 @@ class EventPresenceController extends Controller
             ->first();
 
         if (!$transaction_detail) {
-            $this->response['status'] = false;
+            $this->response['success'] = false;
             $this->response['message'] = "Peserta tidak terdaftar pada: " . $event->name;
             return $this->response;
         }
@@ -193,19 +193,20 @@ class EventPresenceController extends Controller
 
         if (!$event_user) {
             return 'not found';
-//
-//            $trx = Transaction::find($event_user_id);
-//
-//            if($trx){
-//                $event_user['user_name'] = $trx['user_name'];
-//            }else{
-//            }
+            //
+            //            $trx = Transaction::find($event_user_id);
+            //
+            //            if($trx){
+            //                $event_user['user_name'] = $trx['user_name'];
+            //            }else{
+            //            }
         }
 
         return view('print.event_user.nametag', compact('event_user'));
     }
 
-    public function print_transaction_presence($transaction_id){
+    public function print_transaction_presence($transaction_id)
+    {
         $event_user = Transaction::find($transaction_id);
         if (!$event_user) {
             return 'not found';
@@ -214,42 +215,3 @@ class EventPresenceController extends Controller
         return view('print.event_user.nametag', compact('event_user'));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

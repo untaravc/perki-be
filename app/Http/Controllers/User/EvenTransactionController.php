@@ -42,7 +42,7 @@ class EvenTransactionController extends BaseController
 
         $full_day_prices = Price::whereModel('event')
             ->whereSection('jcu23')
-//            ->whereIn('model_id', $full_day->pluck('id')->toArray())
+            //            ->whereIn('model_id', $full_day->pluck('id')->toArray())
             ->whereJobTypeCode($job_type_code)
             ->get();
 
@@ -176,7 +176,7 @@ class EvenTransactionController extends BaseController
             }
         }
 
-        $discount = isset($bundle_price) ? -($subtotal - $bundle_price) : 0;
+        $discount = isset($bundle_price) ? - ($subtotal - $bundle_price) : 0;
 
         $data['discount'] = [
             'name'   => "Bundle Discount",
@@ -206,7 +206,7 @@ class EvenTransactionController extends BaseController
     private function redeem_voucher($request, $data)
     {
         $voucher = Voucher::whereCode($request->voucher)
-//            ->where('qty_rest', '>', 0)
+            //            ->where('qty_rest', '>', 0)
             ->where('status', 1)
             ->first();
 
@@ -258,7 +258,7 @@ class EvenTransactionController extends BaseController
 
     public function create_payment(Request $request)
     {
-        $this->response['status'] = false;
+        $this->response['success'] = false;
         $this->response['message'] = "Registration on review. Will be available in the next few days.";
         return $this->response;
 
@@ -379,7 +379,7 @@ class EvenTransactionController extends BaseController
         $user = $request->user();
 
         $transaction = Transaction::whereUserId($user['id'])
-//            ->whereIn('status', [100,110])
+            //            ->whereIn('status', [100,110])
             ->find($request->transaction_id);
 
         if (!$transaction) {
@@ -392,7 +392,6 @@ class EvenTransactionController extends BaseController
         ]);
 
         return $this->response;
-
     }
 
     public function pending_transaction_count(Request $request)
@@ -550,7 +549,6 @@ class EvenTransactionController extends BaseController
 
             $subtotal = collect($data)->sum('price');
             $total = $subtotal - $package_discount;
-
         } else {
             $package_discount = 0;
             $subtotal = collect($data)->sum('price');
@@ -618,7 +616,7 @@ class EvenTransactionController extends BaseController
                 break;
             case 'add-on':
                 if (!$items['morning_workshop'] || !$items['afternoon_workshop']) {
-//                    $this->sendError(422, "Please select two workshops!");
+                    //                    $this->sendError(422, "Please select two workshops!");
                 }
                 break;
             case 'gold':
@@ -691,7 +689,7 @@ class EvenTransactionController extends BaseController
             $this->record_child_transaction($transaction, $request->users);
         }
 
-//        return $item_ids;
+        //        return $item_ids;
         // delete unused
         TransactionDetail::whereTransactionId($transaction->id)
             ->whereNotIn('event_id', $item_ids)
@@ -701,7 +699,6 @@ class EvenTransactionController extends BaseController
             $email_service = new EmailServiceController();
             $email_service->bill($transaction->id);
         } catch (\Exception $e) {
-
         }
 
         $this->sendPostResponse();
@@ -883,12 +880,13 @@ class EvenTransactionController extends BaseController
         return $number;
     }
 
-    public function update_transaction_name(Request $request){
+    public function update_transaction_name(Request $request)
+    {
         $trx = Transaction::find($request->id);
 
-        if($trx){
+        if ($trx) {
             $trx->update([
-               'user_name' => $request->user_name
+                'user_name' => $request->user_name
             ]);
         }
 

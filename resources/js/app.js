@@ -1,36 +1,33 @@
 require('./bootstrap');
 
-import 'flowbite';
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './src/router'
+import VueSweetalert2 from 'vue-sweetalert2';
+import { createPinia } from 'pinia'
+import mitt from 'mitt';
+import filter from './src/filter'
+import registerIcon from "./src/oh_icon";
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
+import registerComponents from './src/components';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 
-import Vue from 'vue'
-window.Vue = require('vue').default;
+const app = createApp(App);
+const pinia = createPinia()
 
-require('./config/filter');
-require('./config/components');
+app.use(VueSweetalert2)
+window.Swal = app.config.globalProperties.$swal;
 
-// Icon
-import Unicon from 'vue-unicons/dist/vue-unicons-vue2.umd'
-import icons from './config/icons'
-Unicon.add(icons)
+const emitter = mitt();
+app.config.globalProperties.emitter = emitter;
+window.emitter = emitter
 
-window.Fire = new Vue();
+app.config.globalProperties.$filter = filter
 
-// router
-import VueRouter from 'vue-router'
-import router from './config/router'
+registerIcon(app)
+registerComponents(app)
 
-import mixin from './config/mixin'
-
-// Register plugin
-Vue.use(VueRouter)
-    .mixin(mixin)
-    .use(Unicon,{
-        height: 20,
-        width: 20
-    })
-
-const app = new Vue({
-    el: '#__perki_app',
-    router,
-    mixins: mixin
-});
+app.use(CKEditor)
+app.use(pinia)
+app.use(router)
+    .mount('#app')

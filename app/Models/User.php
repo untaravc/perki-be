@@ -51,6 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     public function getJobLabelAttribute()
     {
         if (isset($this->attributes['job_type_code'])) {
@@ -77,7 +82,18 @@ class User extends Authenticatable
         }
     }
 
-    public function success_transactions(){
+    public function getPhoneAttribute(){
+        if(isset($this->attributes['phone'])){
+            $phone = $this->attributes['phone'];
+            if($phone[0] == 0){
+                return '62' . substr($phone, 1);
+            }
+            return $phone;
+        }
+    }
+
+    public function success_transactions()
+    {
         $exclude_user_ids = exclude_user_ids();
         return $this->hasMany(Transaction::class)
             ->whereNotIn('user_id', $exclude_user_ids)
@@ -85,8 +101,9 @@ class User extends Authenticatable
             ->where('status', '<', 299);
     }
 
-    public function getImageAttribute(){
-        if(env('APP_ENV') === 'local'){
+    public function getImageAttribute()
+    {
+        if (env('APP_ENV') === 'local') {
             $img = $this->attributes['image'];
             return str_replace('https://src.perki-jogja.com/', 'http://127.0.0.1:8000/', $img);
         } else {
@@ -94,7 +111,8 @@ class User extends Authenticatable
         }
     }
 
-    public function voucher_code(){
+    public function voucher_code()
+    {
         return $this->hasOne(Voucher::class, 'name', 'name');
     }
 }
