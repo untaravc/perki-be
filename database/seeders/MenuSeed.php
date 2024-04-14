@@ -25,7 +25,7 @@ class MenuSeed extends Seeder
             ],
             [
                 'title'    => "Transactions",
-                'icon'     => "bi-cursor",
+                'icon'     => "bi-list-check",
                 'url'      => "/panel/transactions--",
                 'type'     => "menu",
                 'children' => [
@@ -39,26 +39,44 @@ class MenuSeed extends Seeder
             ],
             [
                 'title'    => "Post",
-                'icon'     => "bi-cursor",
+                'icon'     => "bi-file-earmark-post",
                 'url'      => "/panel/posts--",
                 'type'     => "menu",
                 'children' => [
                     [
-                        'title' => "Submission",
+                        'title' => "Add New",
+                        'icon'  => "",
+                        'url'   => "/panel/posts/add",
+                        'type'  => "submenu",
+                    ],
+                    [
+                        'title' => "Data",
                         'icon'  => "",
                         'url'   => "/panel/posts",
+                        'type'  => "submenu",
+                    ],
+                    [
+                        'title' => "Submission",
+                        'icon'  => "",
+                        'url'   => "/panel/posts?type=submission",
                         'type'  => "submenu",
                     ],
                 ]
             ],
             [
                 'title'    => "Pages",
-                'icon'     => "bi-cursor",
+                'icon'     => "bi-file-post",
                 'url'      => "/panel/pages--",
                 'type'     => "menu",
                 'children' => [
                     [
-                        'title' => "Submission",
+                        'title' => "Add New",
+                        'icon'  => "",
+                        'url'   => "/panel/pages/add",
+                        'type'  => "submenu",
+                    ],
+                    [
+                        'title' => "Data",
                         'icon'  => "",
                         'url'   => "/panel/pages",
                         'type'  => "submenu",
@@ -74,7 +92,7 @@ class MenuSeed extends Seeder
             ],
             [
                 'title'    => "Event",
-                'icon'     => "bi-people",
+                'icon'     => "bi-camera-video",
                 'url'      => "/panel/events--",
                 'type'     => "menu",
                 'children' => [
@@ -94,7 +112,7 @@ class MenuSeed extends Seeder
             ],
             [
                 'title'    => "Setting",
-                'icon'     => "bi-people",
+                'icon'     => "bi-gear",
                 'url'      => "/panel/settings--",
                 'type'     => "menu",
                 'children' => [
@@ -114,7 +132,7 @@ class MenuSeed extends Seeder
             ],
             [
                 'title'    => "Voucher",
-                'icon'     => "bi-people",
+                'icon'     => "bi-tags",
                 'url'      => "/panel/vouchers--",
                 'type'     => "menu",
                 'children' => [

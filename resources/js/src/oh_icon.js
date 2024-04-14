@@ -1,30 +1,42 @@
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import {
+  BiArchive,
+  BiBezier2,
+  BiBookmarkStar,
+  BiCameraVideo,
   BiColumnsGap,
   BiCursor,
-  BiVectorPen,
-  BiPeople,
-  BiNewspaper,
-  BiBookmarkStar,
-  BiArchive,
-  BiShieldCheck,
-  BiBezier2,
+  BiFilePost,
+  BiFileEarmarkPost,
+  BiGear,
+  BiListCheck,
   BiMenuButtonWide,
+  BiNewspaper,
+  BiPeople,
   BiSearch,
+  BiShieldCheck,
+  BiTags,
+  BiVectorPen,
 } from "oh-vue-icons/icons/bi";
 
 addIcons(
-  BiColumnsGap, // Dashboars
-  BiCursor, // Point
-  BiVectorPen, // Pertandingan
-  BiPeople, // player
-  BiNewspaper, // berita
-  BiBookmarkStar, // Kompetisi
-  BiArchive, // Kategori
-  BiShieldCheck, // admin
-  BiBezier2, // role
-  BiMenuButtonWide, // menu
-  BiSearch,// search
+  BiArchive,
+  BiBezier2,
+  BiBookmarkStar,
+  BiCameraVideo,
+  BiColumnsGap,
+  BiCursor,
+  BiFilePost,
+  BiFileEarmarkPost,
+  BiGear,
+  BiListCheck,
+  BiMenuButtonWide,
+  BiNewspaper,
+  BiPeople,
+  BiSearch,
+  BiShieldCheck,
+  BiTags,
+  BiVectorPen,
 );
 
 // register components
