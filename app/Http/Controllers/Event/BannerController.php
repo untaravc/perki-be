@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-    public function banner(Request $request){
-        if($request->ref == 2024){
+    public function banner(Request $request)
+    {
+        if ($request->ref == 2024) {
             return $this->banner2024();
         } else {
             return $this->banner2023();
@@ -20,9 +21,9 @@ class BannerController extends Controller
         $data = [
             [
                 "title"    => "Jogja Cardiology Update",
-                "subtitle" => "Integrating Technology In Cardiovascular Disease Management: Towards A Harmonic Fusion",
-                "date"     => "Yogyakarta, 10-11 October 2024",
-                "poster"   => '/assets/posters/1st_announ.png',
+                "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
+                "date"     => "Yogyakarta, 18-24 October 2024",
+                "poster"   => '/assets24/posters/1st_announcement.jpeg',
                 "buttons"  => [
                     [
                         "theme" => "light",
