@@ -10,12 +10,19 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\Admin\MailLogController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\VoucherController;
-
+use App\Http\Controllers\Event\BannerController;
+use App\Http\Controllers\Event\CommitteeController;
+use App\Http\Controllers\Event\GuidanceController;
+use App\Http\Controllers\Event\PricingController;
 use App\Http\Controllers\Event\RegisterController as EventRegisterController;
-
+use App\Http\Controllers\Event\ScheduleController;
+use App\Http\Controllers\Event\SpeakerController;
+use App\Http\Controllers\Event\SponsorController;
 use App\Http\Controllers\User\AuthController as UserAuthController;
-use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\EvenTransactionController;
 use App\Http\Controllers\User\EventController;
 use App\Http\Controllers\User\AbstractController;
@@ -24,13 +31,15 @@ use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
 
 // ADMIN API
-Route::post('/', function (){
+Route::post('/', function () {
     return 'app';
 });
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
+    Route::get('auth', [AdminAuthController::class, 'authJson']);
+    Route::get('menu', [AdminAuthController::class, 'menu']);
     Route::get('profile', [AdminAuthController::class, 'profile']);
 
     Route::get('dashboard-stat', [DashboardController::class, 'statistics']);
@@ -40,6 +49,9 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('sidebar-label', [DashboardController::class, 'sidebar_label']);
     Route::get('reviewer-list', [AdminPostController::class, 'reviewer_list']);
     Route::get('posts-stat', [AdminPostController::class, 'stats']);
+    Route::get('menus-list', [MenuController::class, 'list']);
+    Route::get('roles-list', [RoleController::class, 'list']);
+    Route::get('menu-role', [MenuController::class, 'menuRole']);
 
     Route::resource('vouchers', VoucherController::class);
     Route::resource('transactions', AdminTransactionController::class);
@@ -47,9 +59,12 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('users', AdminUserController::class);
     Route::resource('event-presence', EventPresenceController::class);
     Route::resource('mail-logs', MailLogController::class);
+    Route::resource('menus', MenuController::class);
+    Route::resource('roles', RoleController::class);
+
+    Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
-    Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
     Route::post('scan-event', [AdminEventController::class, 'scan_event']);
     Route::post('post-set-reviewer/{post_id}', [AdminPostController::class, 'set_reviewer']);
     Route::post('post-review/{post_id}', [AdminPostController::class, 'post_review']);
@@ -109,20 +124,19 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('check-otp-reset-password', [UserAuthController::class, 'check_otp_reset_password']);
 
     Route::get('events', [HomeController::class, 'events']);
-    Route::get('guidance', [HomeController::class, 'guidance']);
-    Route::get('cta-event', [HomeController::class, 'cta_event']);
-    Route::get('get-job-types', [HomeController::class, 'job_types']);
-    Route::get('speakers', [HomeController::class, 'speakers']);
-    Route::get('committee', [HomeController::class, 'committee']);
-    Route::get('schedule', [HomeController::class, 'schedule']);
-    Route::get('pricing', [HomeController::class, 'pricing']);
-    Route::get('hero-banner', [HomeController::class, 'hero_banner']);
-    Route::get('sponsor-slider', [HomeController::class, 'sponsor_slider']);
+    Route::get('guidance', [GuidanceController::class, 'guidance']); //
+    Route::get('cta-event', [HomeController::class, 'cta_event']); //
+    Route::get('get-job-types', [HomeController::class, 'job_types']); // 
+    Route::get('speakers', [SpeakerController::class, 'speakers']); //
+    Route::get('committee', [CommitteeController::class, 'committee']); //
+    Route::get('schedule', [ScheduleController::class, 'schedule']); //
+    Route::get('pricing', [PricingController::class, 'pricing']); //
+    Route::get('hero-banner', [BannerController::class, 'banner']); //
+    Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']); //
 
     // Presensi Event
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);
     Route::get('scan-qrcode-event', [EventPresenceController::class, 'check_qrcode_data']);
     Route::post('scan-qrcode-event', [EventPresenceController::class, 'record_qrcode_data']);
-
 });
 // =========

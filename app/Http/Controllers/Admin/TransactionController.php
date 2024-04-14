@@ -33,12 +33,16 @@ class TransactionController extends Controller
 
     public function withFilter($data_content, $request)
     {
-        if ($request->s) {
-            $data_content = $data_content->where('user_name', 'LIKE', '%' . $request->s . '%');
+        if ($request->user_name) {
+            $data_content = $data_content->where('user_name', 'LIKE', '%' . $request->user_name . '%');
         }
 
         if ($request->id) {
             $data_content = $data_content->where('id', $request->id);
+        }
+        
+        if ($request->section) {
+            $data_content = $data_content->where('section', $request->section);
         }
 
         if ($request->job_type_code) {

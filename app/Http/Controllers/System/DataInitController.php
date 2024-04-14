@@ -14,7 +14,6 @@ class DataInitController extends BaseController
                 $event = new EventInitController();
                 $event->event_init();
                 break;
-
             case 'speakers':
                 $speakers = new SpeakerInitController();
                 $speakers->init_speaker();
@@ -28,9 +27,6 @@ class DataInitController extends BaseController
                     'message' => 'section required'
                 ];
         }
-
-//        return '';
-
 
         $user = new UserInitController();
         $user->user_init();
@@ -46,6 +42,4 @@ class DataInitController extends BaseController
 
         return $this->response;
     }
-
-
 }
