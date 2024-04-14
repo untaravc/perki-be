@@ -13,7 +13,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="/css/app.css" rel="stylesheet" type="text/css" />
+    @if (ENV('APP_ENV') == 'local')
+        <link href="/css/app.css" rel="stylesheet" type="text/css" />
+    @else
+        @include('admin.css_version')
+    @endif
 </head>
 
 <body data-kt-name="metronic" id="kt_app_body" data-kt-app-layout="dark-sidebar" data-kt-app-header-fixed="true"
@@ -32,7 +36,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
-    <script src="/js/app.js"></script>
+    @if (ENV('APP_ENV') == 'local')
+        @include('admin.js_version')
+    @else
+        <script src="/js/app.js"></script>
+    @endif
     <script src="/assets/plugins/global/plugins.bundle.js"></script>
     <script src="/assets/js/scripts.bundle.js"></script>
     <!--end::Global Javascript Bundle-->
