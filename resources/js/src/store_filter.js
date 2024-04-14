@@ -17,17 +17,29 @@ export const useFilterStore = defineStore('filter', () => {
         page: 1,
         type: '',
     })
+    
+    const transaction_store = reactive({
+        page: 1,
+        per_page: 25,
+        user_name: '',
+        section: 'jcu24',
+        status: '',
+    })
+    
+    const voucher_store = reactive({
+        page: 1,
+        per_page: 25,
+        year: '2024',
+    })
+    
+    const user_store = reactive({
+        page: 1,
+        per_page: 25,
+        type: 'user',
+    })
 
     const role_store = reactive({
         page: 1
-    })
-
-    const match_store = reactive({
-        page: 1,
-        player_id: '',
-        competition_id: '',
-        player_category_code: '',
-        round_category_id: '',
     })
 
     const config_ctk = reactive({
@@ -43,6 +55,8 @@ export const useFilterStore = defineStore('filter', () => {
         category_store,
         app_store,
         config_ctk,
-        match_store,
+        transaction_store,
+        voucher_store,
+        user_store,
     }
 })

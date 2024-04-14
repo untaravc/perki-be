@@ -82,6 +82,16 @@ class User extends Authenticatable
         }
     }
 
+    public function getPhoneAttribute(){
+        if(isset($this->attributes['phone'])){
+            $phone = $this->attributes['phone'];
+            if($phone[0] == 0){
+                return '62' . substr($phone, 1);
+            }
+            return $phone;
+        }
+    }
+
     public function success_transactions()
     {
         $exclude_user_ids = exclude_user_ids();

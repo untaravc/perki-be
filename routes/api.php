@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\Admin\MailLogController;
+use App\Http\Controllers\Admin\MenuController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Event\BannerController;
 use App\Http\Controllers\Event\CommitteeController;
@@ -47,6 +49,9 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('sidebar-label', [DashboardController::class, 'sidebar_label']);
     Route::get('reviewer-list', [AdminPostController::class, 'reviewer_list']);
     Route::get('posts-stat', [AdminPostController::class, 'stats']);
+    Route::get('menus-list', [MenuController::class, 'list']);
+    Route::get('roles-list', [RoleController::class, 'list']);
+    Route::get('menu-role', [MenuController::class, 'menuRole']);
 
     Route::resource('vouchers', VoucherController::class);
     Route::resource('transactions', AdminTransactionController::class);
@@ -54,9 +59,12 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('users', AdminUserController::class);
     Route::resource('event-presence', EventPresenceController::class);
     Route::resource('mail-logs', MailLogController::class);
+    Route::resource('menus', MenuController::class);
+    Route::resource('roles', RoleController::class);
+
+    Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
 
     Route::post('transaction-confirm', [AdminTransactionController::class, 'confirm']);
-    Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
     Route::post('scan-event', [AdminEventController::class, 'scan_event']);
     Route::post('post-set-reviewer/{post_id}', [AdminPostController::class, 'set_reviewer']);
     Route::post('post-review/{post_id}', [AdminPostController::class, 'post_review']);

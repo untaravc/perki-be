@@ -18,19 +18,19 @@
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container container-xxl">
                 <div class="card card-flush">
-                    <div class="card-header align-items-center py-5 gap-2 gap-md-5"
-                        data-select2-id="select2-data-124-lq0k">
-                        <div class="card-title">
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                    <v-icon name="bi-search" />
-                                </span>
-                                <input type="text" v-model="filter.name" @keyup.enter="loadDataContent"
-                                    class="form-control form-control-solid w-250px ps-14" placeholder="Cari..">
+                    <div class="py-6 px-8">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="Cari.." 
+                                    @keyup.enter="loadDataContent()" v-model="user_store.name" >
                             </div>
-                        </div>
-                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
-                            data-select2-id="select2-data-123-4p2n">
+                            <div class="col-md-3">
+                                <select class="form-control" @change="loadDataContent()" v-model="user_store.type">
+                                    <option value="speaker">Speaker</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body pt-0">
@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div
                                     class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <PerPage :value="filter.per_page" @change-per-page="changePerPage" />
+                                    <PerPage :value="user_store.per_page" @change-per-page="changePerPage" />
                                 </div>
                                 <div
                                     class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
@@ -122,22 +122,16 @@ import { useFilterStore } from "../../src/store_filter";
 export default {
     components: { Breadcrumb, PerPage, WidgetContainerModal: container, StatusDefault },
     setup() {
-        const title = "Data Staff"
-        const breadcrumb_list = ["Staff", "Data"];
+        const title = "Data User"
+        const breadcrumb_list = ["User", "Data"];
         const { getData, deleteData } = useAxios()
         const is_loading = ref(true)
-        const { app_store } = useFilterStore()
-
-        const filter = reactive({
-            page: 1,
-            name: '',
-            per_page: 25,
-        })
+        const { user_store } = useFilterStore()
 
         function loadDataContent(page = 1) {
             is_loading.value = true
-            filter.page = page
-            getData('users', filter)
+            user_store.page = page
+            getData('users', user_store)
                 .then((data) => {
                     if (data.success) {
                         response.data_content = data
@@ -156,7 +150,7 @@ export default {
         })
 
         function changePerPage(per_page) {
-            filter.per_page = per_page
+            user_store.per_page = per_page
             loadDataContent()
         }
 
@@ -166,7 +160,7 @@ export default {
                 deleteData('users/' + id)
                     .then((data) => {
                         SwalToast('Berhasil menghapus data.')
-                        loadDataContent(filter.page)
+                        loadDataContent(user_store.page)
                     })
             }
         }
@@ -175,9 +169,8 @@ export default {
             breadcrumb_list,
             title,
             response,
-            filter,
+            user_store,
             is_loading,
-            app_store,
             loadDataContent,
             changePerPage,
             deleteModal

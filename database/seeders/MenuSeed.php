@@ -35,12 +35,6 @@ class MenuSeed extends Seeder
                         'url'   => "/panel/transactions",
                         'type'  => "submenu",
                     ],
-                    [
-                        'title' => "Archive",
-                        'icon'  => "",
-                        'url'   => "/panel/archived-transactions",
-                        'type'  => "submenu",
-                    ],
                 ]
             ],
             [
@@ -53,12 +47,6 @@ class MenuSeed extends Seeder
                         'title' => "Submission",
                         'icon'  => "",
                         'url'   => "/panel/posts",
-                        'type'  => "submenu",
-                    ],
-                    [
-                        'title' => "Archive",
-                        'icon'  => "",
-                        'url'   => "/panel/archived-posts",
                         'type'  => "submenu",
                     ],
                 ]

@@ -18,6 +18,10 @@ import Category from "../pages/categories/Index.vue";
 import CategoryAddEdit from "../pages/categories/AddEdit.vue";
 import Posts from "../pages/posts/Index.vue";
 import PostsAddEdit from "../pages/posts/AddEdit.vue";
+import Transactions from "../pages/transactions/Index.vue";
+import TransactionsAddEdit from "../pages/transactions/AddEdit.vue";
+import Vouchers from "../pages/vouchers/Index.vue";
+import VouchersAddEdit from "../pages/vouchers/AddEdit.vue";
 
 const routes = [
     {
@@ -39,16 +43,17 @@ const routes = [
             { path: 'categories', component: Category, meta: { protected: true, title: "Category" } },
             { path: 'posts', component: Posts, meta: { protected: true, title: "Posts" } },
             { path: 'posts/:id', component: PostsAddEdit, meta: { protected: true, title: "Post" } },
+            { path: 'transactions/:id', component: TransactionsAddEdit, meta: { protected: true, title: "Post" } },
 
-            { path: 'transactions', component: Dashboard, meta: { protected: true, title: "Transactions" } },
+            { path: 'transactions', component: Transactions, meta: { protected: true, title: "Transactions" } },
             { path: 'archived-transactions', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'pages', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'posts', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'archived-posts', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'events', component: Dashboard, meta: { protected: true, title: "Transactions" } },
-            { path: 'events/:id', component: Dashboard, meta: { protected: true, title: "Transactions" } },
-            { path: 'vouchers', component: Dashboard, meta: { protected: true, title: "Transactions" } },
-            { path: 'vouchers/:id', component: Dashboard, meta: { protected: true, title: "Transactions" } },
+            { path: 'events/:id', component: Dashboard, meta: { protected: true, title: "Event" } },
+            { path: 'vouchers', component: Vouchers, meta: { protected: true, title: "Voucher" } },
+            { path: 'vouchers/:id', component: VouchersAddEdit, meta: { protected: true, title: "Voucher | Edit Add" } },
             { path: 'settings', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'settings/:id', component: Dashboard, meta: { protected: true, title: "Transactions" } },
         ]

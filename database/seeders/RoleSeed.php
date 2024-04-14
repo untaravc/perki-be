@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,9 +22,10 @@ class RoleSeed extends Seeder
         ];
 
         foreach ($data as $datum) {
-            try {
-                DB::table('roles')->insert($datum);
-            } catch (\Exception $e) {
+            $exist = Role::whereName($datum['name'])->first();
+
+            if(!$exist){
+                Role::create($datum);
             }
         }
     }
