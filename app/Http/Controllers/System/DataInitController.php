@@ -11,7 +11,7 @@ class DataInitController extends BaseController
     {
         switch ($request->section) {
             case 'events':
-                $event = new EventInitController();
+                $event = new Event24Controller();
                 $event->event_init();
                 break;
             case 'speakers':
@@ -28,17 +28,17 @@ class DataInitController extends BaseController
                 ];
         }
 
-        $user = new UserInitController();
-        $user->user_init();
+        // $user = new UserInitController();
+        // $user->user_init();
 
-        $job_type = new JobTypeInitController();
-        $job_type->job_type_init();
+        // $job_type = new JobTypeInitController();
+        // $job_type->job_type_init();
 
-        $cat = new CategoryInitController();
-        $cat->categories_init();
+        // $cat = new CategoryInitController();
+        // $cat->categories_init();
 
-        $voucher = new VoucherInitController();
-        $voucher->voucher_init();
+        // $voucher = new VoucherInitController();
+        // $voucher->voucher_init();
 
         return $this->response;
     }

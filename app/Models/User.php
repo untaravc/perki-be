@@ -40,6 +40,7 @@ class User extends Authenticatable
         "remember_token",
         "slug",
         "identity_photo",
+        "biography",
     ];
 
     protected $hidden = [
@@ -82,10 +83,11 @@ class User extends Authenticatable
         }
     }
 
-    public function getPhoneAttribute(){
-        if(isset($this->attributes['phone'])){
+    public function getPhoneAttribute()
+    {
+        if (isset($this->attributes['phone'])) {
             $phone = $this->attributes['phone'];
-            if($phone[0] == 0){
+            if ($phone[0] == 0) {
                 return '62' . substr($phone, 1);
             }
             return $phone;

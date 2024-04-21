@@ -7,14 +7,57 @@ use Illuminate\Http\Request;
 
 class PricingController extends Controller
 {
-    public function pricing(Request $request) {
-        if($request->ref == 2024){
+    public function pricing(Request $request)
+    {
+        if ($request->ref == 2024) {
             return $this->pricing2024();
         } else {
             return $this->pricing2023();
         }
     }
-    private function pricing2024(){
+    private function pricing2024()
+    {
+        $platinum_desc = "<ul>
+            <li>Morning Workshop: Friday, Oct 18th 2024 (08.00-11.30)</li>
+            <li>Afternoon Workshop: Friday, Oct 18th 2024 (13.00-15.30)</li>
+            <li>Symposium: Saturday, Oct 19th 2024 (08.00-15.30) - Sunday, Oct 20rd 2024 (08.00-15.30)</li>
+        </ul>";
+
+        $gold_desc = "<ul>
+            <li>Symposium: Symposium: Saturday, Oct 19th 2024 (08.00-15.30) - Sunday, Oct 20rd 2024 (08.00-15.30)</li>
+        </ul>";
+
+        $bronze_desc = "<ul>
+            <li>Workshop: Friday, Oct 18th 2024 (08.00-11.30) or (13.00-15.30)</li>
+        </ul>";
+
+        $data["platinum"] = [
+            "name"          => "Platinum",
+            "desc"          => $platinum_desc,
+            "price_drgn"    => 2250000,
+            "price_drgn_eb" => 2000000,
+            "price_drsp"    => 3250000,
+            "price_drsp_eb" => 3000000,
+        ];
+
+        $data["gold"] = [
+            "name"       => "Gold",
+            "desc"       => $gold_desc,
+            "price_drsp" => 1500000,
+            "price_drgn" => 1000000,
+            "price_stdn" => 500000,
+        ];
+
+        $data["bronze"] = [
+            "name"          => "Silver",
+            "desc"          => $bronze_desc,
+            "price_drgn"    => 750000,
+            "price_drgn_eb" => 0,
+            "price_drsp"    => 1000000,
+            "price_drsp_eb" => 0,
+        ];
+
+        $this->response['result'] = $data;
         return $this->response;
     }
     private function pricing2023()

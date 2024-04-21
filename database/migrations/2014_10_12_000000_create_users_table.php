@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('otp')->nullable();
             $table->string('type')->nullable();
             $table->string('slug')->nullable();
+            $table->text('biography')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->mediumInteger('status')->default(100);
             $table->timestamps();

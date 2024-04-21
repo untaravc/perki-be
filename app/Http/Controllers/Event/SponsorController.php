@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class SponsorController extends Controller
 {
-    
-    public function sponsor_slider(Request $request){
-        if($request->ref == 2024){
+
+    public function sponsor_slider(Request $request)
+    {
+        if ($request->ref == 2024) {
             return $this->sponsor_slider2024();
         } else {
             return $this->sponsor_slider2023();
@@ -29,7 +30,7 @@ class SponsorController extends Controller
         $this->response['result'] = $sponsors;
         return $this->response;
     }
-    
+
     public function sponsor_slider2023()
     {
         $sponsors = [
@@ -58,7 +59,7 @@ class SponsorController extends Controller
         ];
 
         for ($i = 0; $i < count($sponsors); $i++) {
-            $sponsors[$i]['image'] = env('APP_URL') . 'assets/logo/sponsors/' . $sponsors[$i]['image'];
+            $sponsors[$i]['image'] = env('APP_URL') . '/assets/logo/sponsors/' . $sponsors[$i]['image'];
         }
 
         $this->response['result'] = $sponsors;
