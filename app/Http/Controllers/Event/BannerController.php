@@ -22,9 +22,8 @@ class BannerController extends Controller
             [
                 "title"    => "Jogja Cardiology Update",
                 "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
-                "date"     => "Yogyakarta, October 2024",
-                "poster"   => '/assets24/posters/1st_announcement.jpeg',
-                // "poster"   => null,
+                "date"     => "Yogyakarta, 18-20 October 2024",
+                "poster"   => '/assets24/posters/1st_announcement.jpg',
                 "buttons"  => [
                     // [
                     //     "theme" => "light",
