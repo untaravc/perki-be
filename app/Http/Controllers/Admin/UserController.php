@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -20,8 +22,12 @@ class UserController extends Controller
 
     public function withFilter($data_content, $request)
     {
-        if ($request->s) {
-            $data_content = $data_content->where('name', 'LIKE', '%' . $request->s . '%');
+        if ($request->name) {
+            $data_content = $data_content->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        if ($request->type) {
+            $data_content = $data_content->where('type', $request->type);
         }
 
         return $data_content;
@@ -33,5 +39,39 @@ class UserController extends Controller
 
         $this->response['result'] = $data;
         return $this->response;
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->merge(['id' => $id]);
+        $this->validateData($request);
+
+        $data = User::find($request->id);
+        if ($data) {
+            if ($request->password) {
+                $request->merge([
+                    'password' => Hash::make($request->password)
+                ]);
+            }
+            $data->update($request->all());
+            $this->response['message'] = 'Updated!';
+        } else {
+            $this->response['success'] = false;
+            $this->response['message'] = 'Not Found';
+        }
+
+        return $this->response;
+    }
+
+    public function validateData($request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'      => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            $this->response['errors'] = $validator->errors();
+            abort(response($this->response, 422));
+        }
     }
 }

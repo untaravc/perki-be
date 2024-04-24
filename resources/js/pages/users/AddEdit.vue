@@ -9,31 +9,33 @@
                 </div>
             </div>
         </div>
-        <div id="kt_app_content" class="app-content flex-column-fluid">
-            <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="app-content flex-column-fluid">
+            <div class="app-container container-xxl">
                 <div id="kt_ecommerce_add_product_form"
-                    class="form d-flex flex-column flex-lg-row fv-plugins-bootstrap5 fv-plugins-framework"
-                    data-kt-redirect="../../demo1/dist/apps/ecommerce/catalog/products.html">
+                    class="form d-flex flex-column flex-lg-row fv-plugins-bootstrap5 fv-plugins-framework">
                     <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
                         <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title">
-                                    <h2>Status</h2>
-                                </div>
-                            </div>
                             <div class="card-body pt-0">
-                                <select class="form-select mb-2" v-model="form.status">
-                                    <option value="1">Aktif</option>
-                                    <option value="0">Non Aktif</option>
-                                </select>
-                                <div class="fv-plugins-message-container invalid-feedback" v-if="getStatus('status')">
-                                    {{ getMessage('status') }}
+                                <div class="mb-3">
+                                    <label>Status</label>
+                                    <select class="form-select mb-2" v-model="form.status">
+                                        <option value="1">Aktif</option>
+                                        <option value="0">Non Aktif</option>
+                                    </select>
+                                    <div class="fv-plugins-message-container invalid-feedback"
+                                        v-if="getStatus('status')">
+                                        {{ getMessage('status') }}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="p-2" v-if="form.image">
+                                        <img :src="form.image" style="width: 100%; height: auto" :alt="form.image">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
-
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
@@ -41,8 +43,8 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <form>
-                                    <div class="mb-5 fv-row fv-plugins-icon-container">
+                                <div class="row">
+                                    <div class="mb-5 col-md-12 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Nama</label>
                                         <input type="text" class="form-control mb-2" v-model="form.name">
                                         <div class="fv-plugins-message-container invalid-feedback"
@@ -50,18 +52,18 @@
                                             {{ getMessage('name') }}
                                         </div>
                                     </div>
-                                    <div class="mb-5 fv-row fv-plugins-icon-container">
-                                        <label class="form-label">Role</label>
-                                        <select class="form-control mb-2" v-model="form.role_id">
-                                            <option :value="role.id" :key="role.id" v-for="role in form_props.roles">{{
-                            role.name }}
-                                            </option>
+                                    <div class="mb-5  col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Tipe</label>
+                                        <select class="form-control mb-2" v-model="form.type">
+                                            <option value="speaker">Speaker</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="user">User</option>
                                         </select>
                                         <div class="fv-plugins-message-container invalid-feedback"
                                             v-if="getStatus('role_id')">{{ getMessage('role_id') }}
                                         </div>
                                     </div>
-                                    <div class="mb-5 fv-row fv-plugins-icon-container">
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
                                         <label class="form-label">Email</label>
                                         <input type="text" class="form-control mb-2" v-model="form.email"
                                             autocomplete="new-password">
@@ -70,7 +72,7 @@
                                             {{ getMessage('email') }}
                                         </div>
                                     </div>
-                                    <div class="mb-5 fv-row fv-plugins-icon-container">
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
                                         <label class="form-label">
                                             <span v-if="form_props.edit_mode">Ganti</span> Password
                                         </label>
@@ -84,7 +86,7 @@
                                             Kosongkan bila tidak akan mengganti password
                                         </span>
                                     </div>
-                                    <div class="mb-5 fv-row fv-plugins-icon-container">
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
                                         <label class="form-label">
                                             Konfirmasi <span v-if="form_props.edit_mode">Ganti</span> Password
                                         </label>
@@ -95,7 +97,43 @@
                                             {{ getMessage('password_confirmation') }}
                                         </div>
                                     </div>
-                                </form>
+                                    <div class="mb-5 col-12 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">
+                                            Curiculum Vitae
+                                        </label>
+                                        <ckeditor :editor="editor" v-model="form.biography"
+                                            :config="editor_data.config">
+                                        </ckeditor>
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Phone</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.phone">
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Institusi</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.institution">
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Kota</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.city">
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Provinsi</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.province">
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Pekerjaan</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.job_type_code">
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Deskripsi</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.desc">
+                                    </div>
+                                    <div class="mb-5 col-md-6 fv-row fv-plugins-icon-container">
+                                        <label class="form-label">Slug</label>
+                                        <input type="text" class="form-control mb-2" v-model="form.slug">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end">
@@ -129,6 +167,7 @@ import useAxios from "../../src/service";
 import useValidation from "../../src/validation";
 import { useRouter, useRoute } from "vue-router";
 import { useFilterStore } from "../../src/store_filter";
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
     components: { Breadcrumb },
@@ -154,14 +193,29 @@ export default {
         const title = form_props.edit_mode ? "Edit Staff" : "Tambah Staff"
         const breadcrumb_list = ["Klien", form_props.edit_mode ? "Edit" : "Tambah"];
 
+        const editor = ClassicEditor
+        const editor_data = reactive({
+            config: {},
+        })
+
         const form = reactive({
             id: '',
-            status: 1,
+            status: 100,
             name: '',
             email: '',
             password: '',
             password_confirmation: '',
-            role_id: '',
+            type: '',
+            biography: '',
+            phone: '',
+            institution: '',
+            city: '',
+            province: '',
+            job_type_code: '',
+            image: '',
+            desc: '',
+            slug: '',
+            identity_photo: '',
         })
 
         if (form_props.edit_mode) {
@@ -169,11 +223,19 @@ export default {
                 .then((data) => {
                     form.id = data.result.id
                     form.status = data.result.status
-                    form.code = data.result.code
                     form.name = data.result.name
                     form.email = data.result.email
-                    form.client_id = data.result.client_id
-                    form.role_id = data.result.role_id
+                    form.type = data.result.type
+                    form.biography = data.result.biography ?? ''
+                    form.phone = data.result.phone
+                    form.institution = data.result.institution
+                    form.city = data.result.city
+                    form.province = data.result.province
+                    form.job_type_code = data.result.job_type_code
+                    form.image = data.result.image
+                    form.desc = data.result.desc
+                    form.slug = data.result.slug
+                    form.identity_photo = data.result.identity_photo
                 })
         }
 
@@ -218,6 +280,8 @@ export default {
             form,
             form_props,
             app_store,
+            editor,
+            editor_data,
             createData,
             getStatus,
             getMessage,

@@ -21,8 +21,8 @@
                     <div class="py-6 px-8">
                         <div class="row">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" placeholder="Cari.." 
-                                    @keyup.enter="loadDataContent()" v-model="user_store.name" >
+                                <input type="text" class="form-control" placeholder="Cari.."
+                                    @keyup.enter="loadDataContent()" v-model="user_store.name">
                             </div>
                             <div class="col-md-3">
                                 <select class="form-control" @change="loadDataContent()" v-model="user_store.type">
@@ -43,7 +43,7 @@
                                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                             <th>No</th>
                                             <th>Nama</th>
-                                            <th>Role</th>
+                                            <th>Tipe</th>
                                             <th>Status</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
@@ -55,17 +55,17 @@
                                         <tr v-for="(data, d) in response.data_content.data">
                                             <td>
                                                 {{ response.data_content.per_page *
-                            (response.data_content.current_page - 1) + d + 1 }}
+                                                    (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
                                             <td>
                                                 <b>{{ data.name }}</b>
                                                 <div>{{ data.email }}</div>
                                             </td>
                                             <td>
-                                                {{ data.role }}
+                                                {{ data.type }}
                                             </td>
                                             <td>
-                                                <StatusDefault :status="data.status" />
+
                                             </td>
                                             <td class="text-end">
                                                 <div class="dropdown">
@@ -78,10 +78,6 @@
                                                             class="dropdown-item">
                                                             Edit
                                                         </router-link>
-                                                        <button class="dropdown-item text-danger"
-                                                            @click="deleteModal(data.id)">
-                                                            Hapus
-                                                        </button>
                                                     </div>
                                                 </div>
                                             </td>

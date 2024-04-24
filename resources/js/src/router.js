@@ -48,6 +48,7 @@ const routes = [
             { path: 'transactions', component: Transactions, meta: { protected: true, title: "Transactions" } },
             { path: 'archived-transactions', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'pages', component: Dashboard, meta: { protected: true, title: "Transactions" } },
+            { path: 'pages/:id', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'posts', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'archived-posts', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'events', component: Dashboard, meta: { protected: true, title: "Transactions" } },

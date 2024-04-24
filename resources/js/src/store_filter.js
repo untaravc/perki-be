@@ -17,7 +17,7 @@ export const useFilterStore = defineStore('filter', () => {
         page: 1,
         type: '',
     })
-    
+
     const transaction_store = reactive({
         page: 1,
         per_page: 25,
@@ -25,17 +25,18 @@ export const useFilterStore = defineStore('filter', () => {
         section: 'jcu24',
         status: '',
     })
-    
+
     const voucher_store = reactive({
         page: 1,
         per_page: 25,
         year: '2024',
     })
-    
+
     const user_store = reactive({
         page: 1,
         per_page: 25,
         type: 'user',
+        name: '',
     })
 
     const role_store = reactive({
