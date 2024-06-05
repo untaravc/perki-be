@@ -21,6 +21,9 @@ class AbstractController extends BaseController
                 'systematic_review',
                 'meta_analysis',
             ])
+            ->when($request->ref, function ($q) use ($request) {
+                $q->whereYear('created_at', $request->ref);
+            })
             ->with('authors')
             ->get();
 
@@ -173,7 +176,7 @@ class AbstractController extends BaseController
             ];
 
             $post_author = null;
-            if(isset($author['id'])){
+            if (isset($author['id'])) {
                 $post_author = PostAuthor::find($author['id']);
             }
 

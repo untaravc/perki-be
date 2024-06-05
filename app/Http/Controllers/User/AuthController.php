@@ -35,6 +35,7 @@ class AuthController extends BaseController
      */
     public function register(Request $request)
     {
+        $this->response['error'] = 422;
         $this->validate_register($request->all());
         $user_exist = User::whereEmail($request->email)->first();
 
@@ -43,6 +44,7 @@ class AuthController extends BaseController
             // - email sudah digunakan -> false
             if ($user_exist) {
                 $this->response['success'] = false;
+                $this->response['error'] = 401;
                 $this->response['message'] = 'Email has been registered';
                 return $this->response;
             }
@@ -101,7 +103,7 @@ class AuthController extends BaseController
         } else {
             $validator = Validator::make($request, [
                 "name"           => "required|string|max:100",
-                "email"          => "required|email|unique:users",
+                "email"          => "required|email",
                 "phone"          => "required|numeric|digits_between:8,15",
                 "institution"    => "required|string",
                 "city"           => "required|string",

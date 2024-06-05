@@ -30,11 +30,29 @@ class BannerController extends Controller
                     //     "text"  => "Schedule",
                     //     "link"  => "/#schedule",
                     // ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
+                ]
+            ],
+            [
+                "title"    => "Call for Abstracts",
+                "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
+                "date"     => "Submission, 31st May - 18th Sep 2024",
+                "poster"   => '/assets24/posters/call_for_abstracts.jpeg',
+                "buttons"  => [
                     // [
-                    //     "theme" => "dark",
-                    //     "text"  => "Register",
-                    //     "link"  => "/register",
-                    // ]
+                    //     "theme" => "light",
+                    //     "text"  => "Schedule",
+                    //     "link"  => "/#schedule",
+                    // ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Submit",
+                        "link"  => "/register?url=profile/abstracts",
+                    ]
                 ]
             ],
         ];
