@@ -43,11 +43,11 @@ class Event24Controller extends Controller
                     ],
                     [
                         "job_type_code" => "DRGN",
-                        "price"         => 1000000,
+                        "price"         => 750000,
                     ],
                     [
                         "job_type_code" => "MHSA",
-                        "price"         => 500000,
+                        "price"         => 750000,
                     ],
                 ],
                 "children"   => [

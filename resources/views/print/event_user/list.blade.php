@@ -48,6 +48,8 @@
         <td>Phone</td>
         <td>Job Type</td>
         <td>Payment Status</td>
+        <td>Paket</td>
+        <td>Total</td>
     </tr>
     </thead>
     <tbody>
@@ -77,6 +79,16 @@
                     Paid
                 @else
                     Pending
+                @endif
+            </td>
+            <td>
+                @if(isset($detail->transaction))
+                    {{$detail->transaction->package_name}}
+                @endif
+            </td>
+            <td>
+                @if(isset($detail->transaction))
+                    {{number_format($detail->transaction->total, 0, ',', '.')}}
                 @endif
             </td>
         </tr>

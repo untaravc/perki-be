@@ -29,6 +29,7 @@ use App\Http\Controllers\User\AbstractController;
 
 use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
+use App\Http\Controllers\User\EventTransaction24Controller;
 
 // ADMIN API
 Route::post('/', function () {
@@ -97,6 +98,11 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('abstracts', [AbstractController::class, 'abstract_submit']);
     Route::post('abstracts/{id}', [AbstractController::class, 'abstract_update']);
     Route::delete('abstracts/{id}', [AbstractController::class, 'abstract_delete']);
+
+    // JCU 2024
+    Route::get('events-list-24', [EventTransaction24Controller::class, 'event_list']);
+    Route::post('create-payment-24', [EventTransaction24Controller::class, 'create_payment']);
+    Route::post('calculate-price-24', [EventTransaction24Controller::class, 'calculate_price']);
 });
 // =========
 

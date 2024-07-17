@@ -304,7 +304,7 @@ class AuthController extends BaseController
             ->first();
 
         $payload = [
-            "section"       => "jcu23",
+            "section"       => "jcu24",
             "user_id"       => $user->id,
             "user_name"     => $request->name,
             "user_phone"    => $request->phone,
@@ -319,12 +319,12 @@ class AuthController extends BaseController
             $trx = Transaction::create($payload);
 
             $trx->update([
-                'number' => 'JCU23' . prefix_zero($trx->id),
+                'number' => 'JCU24' . prefix_zero($trx->id),
             ]);
         }
 
         // update data user ketika transaksi pertama
-        $transaction_count = Transaction::whereSection('jcu23')
+        $transaction_count = Transaction::whereSection('jcu24')
             ->whereUserId($user->id)
             ->count();
 

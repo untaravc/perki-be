@@ -100,7 +100,6 @@ class EventController extends Controller
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '!=', 400)
             ->get();
-
         return view('print.event_user.list', compact('event', 'transaction_details'));
     }
 

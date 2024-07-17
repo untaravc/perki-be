@@ -40,7 +40,7 @@ class EmailServiceController extends Controller
         $data['view'] = 'email.jcu22.bill';
         $data['email_subject'] = 'JCU 2023: Bill ' . $data['transaction']['number'];
 
-//        return view($data['view'], $data);
+        //        return view($data['view'], $data);
 
         $mail_log = [
             "email_sender"   => "perki.yogyakarta@gmail.com",
@@ -59,7 +59,7 @@ class EmailServiceController extends Controller
             if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
             } else {
-//                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+                // Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
             }
 
             MailLog::create($mail_log);
@@ -87,7 +87,7 @@ class EmailServiceController extends Controller
         $data['view'] = 'email.jcu22.invoice';
         $data['email_subject'] = 'JCU 2023: Invoice ' . $data['transaction']['number'];
 
-//        return view($data['view'], $data);
+        //        return view($data['view'], $data);
 
         $mail_log = [
             "email_sender"   => "perki.yogyakarta@gmail.com",
@@ -179,7 +179,7 @@ class EmailServiceController extends Controller
         $get_img = file_get_contents(public_path($data['path']));
         $data['qr_link'] = base64_encode($get_img);
 
-//        return view($data['view'], $data);
+        //        return view($data['view'], $data);
         $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView($data['view_pdf'], $data)
             ->setPaper([0, 0, 420, 595]);
         $content = $pdf->download()->getOriginalContent();
@@ -201,9 +201,9 @@ class EmailServiceController extends Controller
     public function send_event_certificate()
     {
         // setup
-        $models = ['sympo_ph_23'];
-        $file = public_path('assets/certificates/sympo_ph_23.png');
-        $data['email_subject'] = "Perki Jogja - Symposium Pulmonary Hypertension";
+        $models = ['jcu23_certificate'];
+        $file = public_path('assets/certificates/jcu23_sympo2.png');
+        $data['email_subject'] = "Perki Jogja";
         // --- end setup
 
         $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
@@ -215,19 +215,19 @@ class EmailServiceController extends Controller
 
         $mail_logs = MailLog::whereIn('label', $models)
             ->whereStatus(0)
-//            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
+            //            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
             ->limit(1)
             ->get();
 
         foreach ($mail_logs as $mail) {
-//            $user = User::find($mail['model_id']);
-//            if (!$user) {
-//                continue;
-//            }
+            //            $user = User::find($mail['model_id']);
+            //            if (!$user) {
+            //                continue;
+            //            }
 
             $mail_data['img'] = base64_encode(file_get_contents($file));
             $mail_data['name'] = $mail['receiver_name'];
-            $mail_data['name_top'] = 480;
+            $mail_data['name_top'] = 400;
             $mail_data['name_left'] = 260;
 
             $pdf = Pdf::setOptions([
@@ -237,20 +237,20 @@ class EmailServiceController extends Controller
             ])->loadView('print.events.certificate', $mail_data)
                 ->setPaper('a4', 'landscape');
 
-            $file_name = 'Certificate Sympo PH ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
+            $file_name = 'Certificate ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
             $content = $pdf->download()->getOriginalContent();
             $file_path = 'certificates/' . $mail->label . "/" . $file_name;
             Storage::disk('local')->put($file_path, $content);
-//            return view('print.events.certificate', $mail_data);
+            //            return view('print.events.certificate', $mail_data);
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
             $data['title'] = $mail->title;
-            $data['view'] = 'email.sympo_ph_certy';
+            $data['view'] = 'email.certificate';
             $data['attach'] = public_path('storage/' . $file_path);
-//            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
+            //            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
             $data['content'] = $mail->content;
 
-//            return view($data['view'], $mail);
+            //            return view($data['view'], $mail);
 
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
