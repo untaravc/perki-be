@@ -7,15 +7,30 @@ use Illuminate\Http\Request;
 
 class GuidanceController extends Controller
 {
-    public function guidance(Request $request){
-        if($request->ref == 2024){
+    public function guidance(Request $request)
+    {
+        if ($request->ref == 2024) {
             return $this->guidance2024();
         } else {
             return $this->guidance2023();
         }
     }
 
-    public function guidance2024(){
+    public function plataran()
+    {
+        $data = [];
+        $data[] = [
+            "title" => "Plataran Sehat",
+            "image" => "https://src.perki-jogja.com/assets/posters/TUTORIAL_AKTIVASI_PLATARAN_SEHAT.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/TUTORIAL_AKTIVASI_PLATARAN_SEHAT.pdf",
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function guidance2024()
+    {
         return $this->response;
     }
 

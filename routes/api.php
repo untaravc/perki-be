@@ -131,6 +131,7 @@ Route::group(['prefix' => 'pub'], function () {
 
     Route::get('events', [HomeController::class, 'events']);
     Route::get('guidance', [GuidanceController::class, 'guidance']); //
+    Route::get('guidance-plataran', [GuidanceController::class, 'plataran']);
     Route::get('cta-event', [HomeController::class, 'cta_event']); //
     Route::get('get-job-types', [HomeController::class, 'job_types']); // 
     Route::get('speakers', [SpeakerController::class, 'speakers']); //
