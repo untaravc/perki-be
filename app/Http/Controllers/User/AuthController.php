@@ -73,6 +73,13 @@ class AuthController extends BaseController
 
             // email sama dengan yg di register || email beda tp belum terdaftar
             else {
+                $user = User::whereEmail($request->email)->first();
+
+                if ($user) {
+                    $user->update([
+                        'nik' => $request->nik
+                    ]);
+                }
                 $transaction = $this->draft_transaction($user_login, $request);
                 $this->sendPostResponse('Registration success.', [
                     'transaction' => $transaction,
@@ -92,7 +99,8 @@ class AuthController extends BaseController
                 "institution"    => "required|string",
                 "city"           => "required|string",
                 "job_type_code"  => "required",
-                'identity_photo' => 'required_if:job_type_code,MHSA,COAS'
+                'identity_photo' => 'required_if:job_type_code,MHSA,COAS',
+                'nik'            => 'nullable|string|digits:16',
             ], [
                 "identity_photo.required" => "The identity photo field is required"
             ]);
@@ -109,7 +117,8 @@ class AuthController extends BaseController
                 "city"           => "required|string",
                 "job_type_code"  => "required",
                 "password"       => "required|min:6|confirmed",
-                'identity_photo' => 'required_if:job_type_code,MHSA,COAS'
+                'identity_photo' => 'required_if:job_type_code,MHSA,COAS',
+                'nik'            => 'nullable|numeric|digits:16',
             ], [
                 "identity_photo.required" => "The identity photo field is required"
             ]);
@@ -196,6 +205,7 @@ class AuthController extends BaseController
             'city',
             'job_type_code',
             'identity_photo',
+            'nik',
         ])
             ->find($request->user()['id']);
 
@@ -290,6 +300,7 @@ class AuthController extends BaseController
             "last_login"               => now(),
             "status"                   => 100,
             "email_verification_token" => Str::random(60),
+            "nik"                      => $request->nik,
         ]);
 
         // kirim konfirmasi email
@@ -311,6 +322,7 @@ class AuthController extends BaseController
             "user_email"    => $request->email,
             "job_type_code" => $request->job_type_code,
             "status"        => 100,
+            "nik"           => $request->nik,
         ];
 
         if ($trx) {

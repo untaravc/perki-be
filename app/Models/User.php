@@ -41,6 +41,8 @@ class User extends Authenticatable
         "slug",
         "identity_photo",
         "biography",
+        "nik",
+        "plataran_img",
     ];
 
     protected $hidden = [

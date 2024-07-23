@@ -68,7 +68,7 @@ class AuthController extends BaseController
 
     public function profile(Request $request)
     {
-        $data = $request->user()->only(['id', 'name', 'email', 'type']);
+        $data = $request->user()->only(['id', 'name', 'email', 'type', 'nik']);
         $this->sendGetResponse($data);
     }
 
