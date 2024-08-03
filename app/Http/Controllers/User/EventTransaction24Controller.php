@@ -16,7 +16,7 @@ class EventTransaction24Controller extends BaseController
     public function event_list(Request $request)
     {
         $transaction = Transaction::whereNumber($request->transaction_number)
-            ->with('users')
+            ->with(['users', 'transaction_details'])
             ->first();
 
         if (!$transaction) {
@@ -30,8 +30,8 @@ class EventTransaction24Controller extends BaseController
             ->whereJobTypeCode($job_type_code)
             ->get();
 
-        $symposium = Event::whereSection('jcu24')
-            ->whereMarker('symposium-jcu24')
+        $events = Event::whereSection('jcu24')
+            ->whereIn('marker', ['symposium-jcu24', 'first-workshop-jcu24', 'second-workshop-jcu24'])
             ->orderBy('name')
             ->select(
                 'id',
@@ -41,14 +41,31 @@ class EventTransaction24Controller extends BaseController
                 'slug',
                 'date_start',
                 'date_end',
-            )->first();
+            )->get();
+
+        $symposium = $events->where('marker', 'symposium-jcu24')->first();
+
+        $first_workshop = $events->where('marker', 'first-workshop-jcu24')->flatten();
+        $second_workshop = $events->where('marker', 'second-workshop-jcu24')->flatten();
 
         $symposium_price = $prices->where('model_id', $symposium->id)->first();
         $symposium['price'] = $symposium_price['price'];
 
+        foreach ($first_workshop as $first) {
+            $first['quota'] = 30;
+            $first['transactions_count'] = 0;
+            $first['available'] = true;
+        }
+
+        foreach ($second_workshop as $second) {
+            $second['quota'] = 30;
+            $second['transactions_count'] = 0;
+            $second['available'] = true;
+        }
+
         $data['symposium'] = $symposium;
-        // $data['morning_workshop'] = $morning_workshop;
-        // $data['afternoon_workshop'] = $afternoon_workshop;
+        $data['first_workshop'] = $first_workshop;
+        $data['second_workshop'] = $second_workshop;
 
         // has symposium
         $trx_symposium = TransactionDetail::whereUserId($transaction->user_id)
@@ -81,10 +98,10 @@ class EventTransaction24Controller extends BaseController
             'voucher_code'     => $pricing['voucher_code'],
             'voucher_discount' => $pricing['voucher_discount'],
             'discount_amount'  => $pricing['discount_amount'],
+            'package_discount' => $pricing['package_discount'],
             'total'            => $pricing['total'],
             'status'           => 110,
             'payment_method'   => 'manual_transfer',
-            'nik'              => $request->props['nik'],
             'plataran_img'     => $request->props['plataran_img'],
             'payment_method'   => 'manual_transfer',
         ];
@@ -135,10 +152,9 @@ class EventTransaction24Controller extends BaseController
         }
 
         if ($request->users) {
-            $this->record_child_transaction($transaction, $request->users);
+            // $this->record_child_transaction($transaction, $request->users);
         }
 
-        //        return $item_ids;
         // delete unused
         TransactionDetail::whereTransactionId($transaction->id)
             ->whereNotIn('event_id', $item_ids)
@@ -168,15 +184,27 @@ class EventTransaction24Controller extends BaseController
         $items = $request->items;
         $data[] = $this->get_symposium($items['symposium'], $transaction);
 
+        if (isset($items['first_workshop'])) {
+            $data[] = $this->get_symposium($items['first_workshop'], $transaction);
+        }
+        if (isset($items['second_workshop'])) {
+            $data[] = $this->get_symposium($items['second_workshop'], $transaction);
+        }
+
         $package_discount = 0;
         $subtotal = collect($data)->sum('price');
+        if (isset($items['second_workshop']) && isset($items['first_workshop'])) {
+            $second = $data[2];
+            if (isset($second['price'])) {
+                $package_discount = $second['price'];
+            }
+        }
         $total = $subtotal - $package_discount;
 
         $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
         if ($voucher_discount['discount_amount'] > 0) {
-            $package_discount = 0;
-            $total = $subtotal;
+            // $total = $subtotal;
             $total -= $voucher_discount['discount_amount'];
         }
 

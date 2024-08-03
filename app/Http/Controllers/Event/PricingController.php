@@ -18,43 +18,48 @@ class PricingController extends Controller
     private function pricing2024()
     {
         $platinum_desc = "<ul>
-            <li>Morning Workshop: Friday, Oct 18th 2024 (08.00-11.30)</li>
-            <li>Afternoon Workshop: Friday, Oct 18th 2024 (13.00-15.30)</li>
-            <li>Symposium: Saturday, Oct 19th 2024 (08.00-15.30) - Sunday, Oct 20rd 2024 (08.00-15.30)</li>
+            <li>Morning Workshop: Friday, Oct 18th 2024 (08.00-11.00)</li>
+            <li>Afternoon Workshop: Friday, Oct 18th 2024 (13.00-16.00)</li>
+            <li>Symposium: Saturday, Oct 19th 2024 (08.00-16.00) - Sunday, Oct 20rd 2024 (08.00-16.00)</li>
         </ul>";
 
         $gold_desc = "<ul>
-            <li>Symposium: Symposium: Saturday, Oct 19th 2024 (08.00-15.30) - Sunday, Oct 20rd 2024 (08.00-15.30)</li>
+            <li>Morning Workshop: Friday, Oct 18th 2024 (08.00-11.00)</li>
+            <li>Afternoon Workshop: Friday, Oct 18th 2024 (13.00-16.00)</li>
+            <li>Symposium: Saturday, Oct 19th 2024 (08.00-16.00) - Sunday, Oct 20rd 2024 (08.00-16.00)</li>
         </ul>";
 
         $bronze_desc = "<ul>
-            <li>Workshop: Friday, Oct 18th 2024 (08.00-11.30) or (13.00-15.30)</li>
+            <li>Morning Workshop: Friday, Oct 18th 2024 (08.00-11.00)</li>
+            <li>Afternoon Workshop: Friday, Oct 18th 2024 (13.00-16.00)</li>
+            <li>Symposium: Saturday, Oct 19th 2024 (08.00-16.00) - Sunday, Oct 20rd 2024 (08.00-16.00)</li>
         </ul>";
 
         $data["platinum"] = [
-            "name"          => "Platinum",
+            "name"          => "Specialist",
             "desc"          => $platinum_desc,
-            "price_drgn"    => 2250000,
-            "price_drgn_eb" => 2000000,
-            "price_drsp"    => 3250000,
-            "price_drsp_eb" => 3000000,
+            "price_drgn"    => 2000000,
+            // "price_drgn_eb" => 2000000,
+            "price_drsp"    => 3500000,
+            "price_drsp_eb" => 5000000, // harga corek
         ];
 
         $data["gold"] = [
-            "name"       => "Gold",
+            "name"       => "General Practitioner",
             "desc"       => $gold_desc,
-            "price_drsp" => 1500000,
-            "price_drgn" => 1000000,
-            "price_stdn" => 500000,
+            "price_drgn"    => 1000000,
+            // "price_drgn_eb" => 2000000,
+            "price_drsp"    => 1750000,
+            "price_drsp_eb" => 2500000, // harga corek
         ];
 
         $data["bronze"] = [
-            "name"          => "Silver",
+            "name"          => "Medical Student",
             "desc"          => $bronze_desc,
             "price_drgn"    => 750000,
-            "price_drgn_eb" => 0,
-            "price_drsp"    => 1000000,
-            "price_drsp_eb" => 0,
+            // "price_drgn_eb" => 2000000,
+            "price_drsp"    => 1500000,
+            "price_drsp_eb" => 2250000, // harga corek
         ];
 
         $this->response['result'] = $data;
