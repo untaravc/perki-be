@@ -16,18 +16,27 @@
                     <div class="py-6 px-8">
                         <div class="row">
                             <div class="col-md-3">
-                                <input type="text" class="form-control" placeholder="Cari.." @keyup.enter="loadDataContent()" v-model="transaction_store.user_name" >
+                                <input type="text" class="form-control" placeholder="Cari.."
+                                    @keyup.enter="loadDataContent()" v-model="transaction_store.user_name">
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control" @change="loadDataContent()" v-model="transaction_store.section">
+                                <VueCtkDateTimePicker v-model="transaction_store.dates" v-bind="date_config">
+                                </VueCtkDateTimePicker>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" @change="loadDataContent()"
+                                    v-model="transaction_store.section">
                                     <option value="jcu23">2023</option>
                                     <option value="jcu24">2024</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-control" @change="loadDataContent()" v-model="transaction_store.status">
+                                <select class="form-control" @change="loadDataContent()"
+                                    v-model="transaction_store.status">
+                                    <option value="">Semua</option>
                                     <option value="100">Select Event</option>
-                                    <option value="110">Waiting payment</option>
+                                    <option value="110">Waiting Payment</option>
+                                    <option value="120">Waiting Confirmation</option>
                                     <option value="200">Paid</option>
                                 </select>
                             </div>
@@ -55,36 +64,33 @@
                                         </tr>
                                         <tr v-for="(data, d) in response.data_content.data">
                                             <td>
-                                                {{ response.data_content.per_page * (response.data_content.current_page - 1) + d + 1 }}
+                                                {{ response.data_content.per_page * (response.data_content.current_page
+                                                    - 1) + d + 1 }}
                                             </td>
-                                            <td>{{ data.number }}</td>
+                                            <td>
+                                                {{ data.number }}
+                                                <div class="text-sm">{{ $filter.formatDateTime(data.created_at) }}
+                                                </div>
+                                            </td>
                                             <td>
                                                 <div v-if="data.user">
-                                                    <b>{{ data.user.name }}</b>
+                                                    {{ data.job_type_code }} <b>{{ data.user.name }}</b>
                                                     <br>
-                                                    <a :href="'https://wa.me/' + data.user.phone">{{ data.user.phone }}</a>
+                                                    <a class="text-blue-800 hover:text-blue-700"
+                                                        :href="'https://wa.me/' + data.user.phone">{{ data.user.phone
+                                                        }}</a>
                                                 </div>
                                             </td>
                                             <td>
                                                 {{ data.status_label }}
+                                                <div v-if="data.total" class="text-sm">Rp {{
+                                                    $filter.currency(data.total) }}</div>
                                             </td>
                                             <td class="text-end">
-                                                <div class="dropdown">
-                                                    <button class="btn btn-light dropdown-toggle btn-sm"
-                                                        data-toggle="dropdown">
-                                                        Aksi
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <router-link :to="'/panel/transactions/' + data.id"
-                                                            class="dropdown-item">
-                                                            Edit
-                                                        </router-link>
-                                                        <button class="dropdown-item text-danger"
-                                                            @click="deleteModal(data.id)">
-                                                            Hapus
-                                                        </button>
-                                                    </div>
-                                                </div>
+                                                <router-link :to="'/panel/transactions/' + data.id"
+                                                    class="btn btn-light btn-sm">
+                                                    Preccess
+                                                </router-link>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -127,16 +133,16 @@ export default {
         const breadcrumb_list = ["Transaction", "Data"];
         const { getData, deleteData } = useAxios()
         const is_loading = ref(true)
-        const { transaction_store } = useFilterStore()
+        const { transaction_store, date_config } = useFilterStore()
 
         function loadDataContent(page = 1) {
             is_loading.value = true
             transaction_store.page = page
 
-            getData('transactions', transaction_store).then((data)=>{
+            getData('transactions', transaction_store).then((data) => {
                 response.data_content = data
                 is_loading.value = false
-            }).catch(()=>{
+            }).catch(() => {
                 is_loading.value = false
             })
         }
@@ -173,8 +179,14 @@ export default {
             transaction_store,
             loadDataContent,
             changePerPage,
-            deleteModal
+            deleteModal,
+            date_config
         }
     }
 }
 </script>
+<style>
+input.field-input {
+    height: 42px !important;
+}
+</style>

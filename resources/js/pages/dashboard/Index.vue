@@ -12,36 +12,33 @@
         <div class="app-content flex-column-fluid">
             <div class="app-container container-xxl">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-8 mb-5">
                         <div class="rounded-3 bg-white p-4">
-                            <div class="text-lg h4">Pemain</div>
-                            <div class="h2 font-bold text-green-600">
-                                {{ content.stats.players_count }}
-                            </div>
+                            <div class="text-lg h4">Grafik</div>
+                            <div>Pembeli pending</div>
+                            <div>Pembeli paid</div>
+                            <div>Pembeli pengunjung web</div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4 mb-5">
                         <div class="rounded-3 bg-white p-4">
-                            <div class="text-lg h4">Kompetisi</div>
-                            <div class="h2 font-bold text-green-600">
-                                {{ content.stats.competitions_count }}
-                            </div>
+                            <div class="text-lg h4">Angka</div>
+                            <div>Submit abstrak</div>
+                            <div>Jumlah uang</div>
+                            <div>Total Member account</div>
+                            <div>Total Member paid</div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="rounded-3 bg-white p-4">
-                            <div class="text-lg h4">Catatan Poin</div>
-                            <div class="h2 font-bold text-green-600">
-                                {{ content.stats.points_count }}
-                            </div>
+                            <div class="text-lg h4">Sympo WS by transaction</div>
+                            paid, pending, select event
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="rounded-3 bg-white p-4">
-                            <div class="text-lg h4">Catatan Pertandingan</div>
-                            <div class="h2 font-bold text-green-600">
-                                {{ content.stats.matches_count }}
-                            </div>
+                            <div class="text-lg h4">Sympo WS by job</div>
+                            mhs, dr, sp
                         </div>
                     </div>
                 </div>

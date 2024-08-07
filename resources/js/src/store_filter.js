@@ -13,6 +13,17 @@ export const useFilterStore = defineStore('filter', () => {
         role_id: null,
     })
 
+    const date_config = reactive({
+        'range': true,
+        'no-shortcuts': true,
+        'no-label': true,
+        'no': true,
+        'formatted': 'll',
+        'locale': "id",
+        'only-date': true,
+        'input-size': 'sm',
+    })
+
     const category_store = reactive({
         page: 1,
         type: '',
@@ -24,6 +35,16 @@ export const useFilterStore = defineStore('filter', () => {
         user_name: '',
         section: 'jcu24',
         status: '',
+        dates: '',
+    })
+
+    const post_store = reactive({
+        page: 1,
+        per_page: 25,
+        title: '',
+        year: '2024',
+        status: '',
+        category: '',
     })
 
     const voucher_store = reactive({
@@ -59,5 +80,7 @@ export const useFilterStore = defineStore('filter', () => {
         transaction_store,
         voucher_store,
         user_store,
+        date_config,
+        post_store
     }
 })

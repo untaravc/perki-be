@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- TODO: Change this title -->
     <title>Payment Confirmed - Perki Jogja</title>
     <style>
@@ -277,7 +278,7 @@
             width: 100%;
         }
 
-        .btn > tbody > tr > td {
+        .btn>tbody>tr>td {
             padding-bottom: 15px;
         }
 
@@ -547,289 +548,235 @@
         }
     </style>
 </head>
+
 <body>
-<!-- TODO: Change this title -->
-<!-- This is preheader text. Some clients will show this text as a preview. -->
-<span class="preheader">Pembelian Berhasil</span>
-<table
-    role="presentation"
-    border="0"
-    cellpadding="0"
-    cellspacing="0"
-    class="body"
->
-    <tr>
-        <td>&nbsp;</td>
-        <td class="container">
-            <div class="content">
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table role="presentation" class="main">
-                    <!-- START MAIN CONTENT AREA -->
-                    <tr>
-                        <td class="wrapper">
-                            <table
-                                role="presentation"
-                                border="0"
-                                cellpadding="0"
-                                cellspacing="0"
-                            >
-                                <tr>
-                                    <td>
-                                        <table
-                                            role="presentation"
-                                            border="0"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                            class="logo"
-                                        >
-                                            <tbody>
-                                            <tr>
-                                                <td align="center">
-                                                    <table
-                                                        role="presentation"
-                                                        border="0"
-                                                        cellpadding="0"
-                                                        cellspacing="0"
-                                                    >
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <img
-                                                                    src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png"
-                                                                    alt="Useful alt text"
-                                                                    height="36"
-                                                                    style="
+    <!-- TODO: Change this title -->
+    <!-- This is preheader text. Some clients will show this text as a preview. -->
+    <span class="preheader">Pembelian Berhasil</span>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="container">
+                <div class="content">
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table role="presentation" class="main">
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                                class="logo">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table role="presentation" border="0" cellpadding="0"
+                                                                cellspacing="0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png"
+                                                                                alt="Useful alt text" height="36"
+                                                                                style="
                                                                         border: 0;
                                                                         outline: none;
                                                                         text-decoration: none;
                                                                         display: block;
-                                                                      "
-                                                                />
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <h1>Payment Confirmed</h1>
-                                        <!-- TODO: Change this name -->
-                                        <p>Hello <strong>{{$user['name']}}</strong></p>
-                                        <p class="mb-0">
-                                            Thank you for joining JCU 2023 in conjunction with the 6th Jincartos. Here
-                                            are the details of your transaction:
-                                        </p>
+                                                                      " />
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <h1>Payment Confirmed</h1>
+                                            <!-- TODO: Change this name -->
+                                            <p>Hello <strong>{{ $user['name'] }}</strong></p>
+                                            <p class="mb-0">
+                                                Thank you for joining JCU 2024 in conjunction with the 7th Jincartos.
+                                                Here
+                                                are the details of your transaction:
+                                            </p>
 
-                                        <table
-                                            role="presentation"
-                                            border="0"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                            class="payment-method"
-                                        >
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <table
-                                                        role="presentation"
-                                                        border="0"
-                                                        cellpadding="0"
-                                                        cellspacing="0"
-                                                    >
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>Total payment</td>
-                                                            <td>
-                                                                <strong class="text-primary">
-                                                                    Rp {{number_format($transaction['total'], 0, ',','.')}}
-                                                                </strong>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Bank</td>
-                                                            <td>
-                                                                <img
-                                                                    src="https://jcu.perki-jogja.com/storage/logo/Mandiri_logo.png"
-                                                                    alt="Useful alt text"
-                                                                    height="16"
-                                                                    border="0"
-                                                                    style="
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                                class="payment-method">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table role="presentation" border="0" cellpadding="0"
+                                                                cellspacing="0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Total payment</td>
+                                                                        <td>
+                                                                            <strong class="text-primary">
+                                                                                Rp
+                                                                                {{ number_format($transaction['total'], 0, ',', '.') }}
+                                                                            </strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Bank</td>
+                                                                        <td>
+                                                                            <img src="https://jcu.perki-jogja.com/storage/logo/Mandiri_logo.png"
+                                                                                alt="Useful alt text" height="16"
+                                                                                border="0"
+                                                                                style="
                                             border: 0;
                                             outline: none;
                                             text-decoration: none;
                                             display: block;
-                                          "
-                                                                />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Paid at</td>
-                                                            <td>
-                                                                <strong>
-                                                                    {{$transaction['paid_at']}}
-                                                                </strong>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-
-                                        @if(false)
-                                            <table>
-                                                <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <table
-                                                            role="presentation"
-                                                            border="0"
-                                                            cellpadding="0"
-                                                            cellspacing="0"
-                                                            class="btn btn-primary-outline"
-                                                        >
-                                                            <tbody>
-                                                            <tr>
-                                                                <td align="center" class="pb-6">
-                                                                    <table
-                                                                        role="presentation"
-                                                                        border="0"
-                                                                        cellpadding="0"
-                                                                        cellspacing="0"
-                                                                        class="full-width"
-                                                                    >
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <!-- TODO: Change this url -->
-                                                                                <a
-                                                                                    class="full-width"
-                                                                                    href="http://htmlemail.io"
-                                                                                    target="_blank"
-                                                                                >Lihat Detail Transaksi</a
-                                                                                >
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                    <td>
-                                                        <table
-                                                            role="presentation"
-                                                            border="0"
-                                                            cellpadding="0"
-                                                            cellspacing="0"
-                                                            class="btn btn-primary"
-                                                        >
-                                                            <tbody>
-                                                            <tr>
-                                                                <td align="center" class="pb-6">
-                                                                    <table
-                                                                        role="presentation"
-                                                                        border="0"
-                                                                        cellpadding="0"
-                                                                        cellspacing="0"
-                                                                        class="full-width"
-                                                                    >
-                                                                        <tbody>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <!-- TODO: Change this url -->
-                                                                                <a
-                                                                                    class="full-width"
-                                                                                    href="http://htmlemail.io"
-                                                                                    target="_blank"
-                                                                                >Lihat Informasi Paket</a
-                                                                                >
-                                                                            </td>
-                                                                        </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </td>
-                                                </tr>
+                                          " />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Payment Confirmed at</td>
+                                                                        <td>
+                                                                            <strong>
+                                                                                {{ $transaction['paid_at'] }}
+                                                                            </strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
-                                        @endif
 
-                                        <!-- TODO: change this transaction info content -->
-                                        <!-- transaction detail -->
-                                        <h2>Transaction Details</h2>
-
-                                        <table
-                                            role="presentation"
-                                            border="0"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                            class="transaction mb-6"
-                                        >
-                                            <tbody>
-                                            <tr>
-                                                <td>
-                                                    <table
-                                                        role="presentation"
-                                                        border="0"
-                                                        cellpadding="0"
-                                                        cellspacing="0"
-                                                    >
-                                                        <tbody>
+                                            @if (false)
+                                                <table>
+                                                    <tbody>
                                                         <tr>
-                                                            <td>ID Transaksi</td>
                                                             <td>
-                                                                <strong class="text-primary">
-                                                                    {{$transaction['number']}}
-                                                                </strong>
+                                                                <table role="presentation" border="0"
+                                                                    cellpadding="0" cellspacing="0"
+                                                                    class="btn btn-primary-outline">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td align="center" class="pb-6">
+                                                                                <table role="presentation"
+                                                                                    border="0" cellpadding="0"
+                                                                                    cellspacing="0" class="full-width">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- TODO: Change this url -->
+                                                                                                <a class="full-width"
+                                                                                                    href="http://htmlemail.io"
+                                                                                                    target="_blank">Lihat
+                                                                                                    Detail Transaksi</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
                                                             </td>
-                                                            <td></td>
+                                                            <td>
+                                                                <table role="presentation" border="0"
+                                                                    cellpadding="0" cellspacing="0"
+                                                                    class="btn btn-primary">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td align="center" class="pb-6">
+                                                                                <table role="presentation"
+                                                                                    border="0" cellpadding="0"
+                                                                                    cellspacing="0" class="full-width">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td>
+                                                                                                <!-- TODO: Change this url -->
+                                                                                                <a class="full-width"
+                                                                                                    href="http://htmlemail.io"
+                                                                                                    target="_blank">Lihat
+                                                                                                    Informasi Paket</a>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
                                                         </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <table style="width: 100%">
-                                                        <tr>
-                                                            <th style="text-align: center">Name</th>
-                                                            <th style="text-align: center; width: 50%">Schedule</th>
-                                                            <th>
-                                                                Time
-                                                            </th>
-                                                        </tr>
-                                                        @foreach($transaction_details as $detail)
-                                                            <tr>
-                                                                <td style="text-align: center">{{$detail['event_name']}}</td>
-                                                                <td style="text-align: center">{{date( 'l, jS M Y',strtotime($detail['event']['date_start']))}}</td>
-                                                                <td style="text-align: center">{{date( 'H:i',strtotime($detail['event']['date_start']))}}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <p class="mb-0">
-                                            Get Special Room Prices for JCU 2023 participants.
+                                                    </tbody>
+                                                </table>
+                                            @endif
+
+                                            <!-- TODO: change this transaction info content -->
+                                            <!-- transaction detail -->
+                                            <h2>Transaction Details</h2>
+
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                                class="transaction mb-6">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <table role="presentation" border="0" cellpadding="0"
+                                                                cellspacing="0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>ID Transaksi</td>
+                                                                        <td>
+                                                                            <strong class="text-primary">
+                                                                                {{ $transaction['number'] }}
+                                                                            </strong>
+                                                                        </td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <table style="width: 100%">
+                                                                <tr>
+                                                                    <th style="text-align: center">Name</th>
+                                                                    <th style="text-align: center; width: 50%">Schedule
+                                                                    </th>
+                                                                    <th>
+                                                                        Time
+                                                                    </th>
+                                                                </tr>
+                                                                @foreach ($transaction_details as $detail)
+                                                                    <tr>
+                                                                        <td style="text-align: center">
+                                                                            {{ $detail['event_name'] }}</td>
+                                                                        <td style="text-align: center">
+                                                                            {{ date('l, jS M Y', strtotime($detail['event']['date_start'])) }}
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            {{ date('H:i', strtotime($detail['event']['date_start'])) }}
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            {{-- <p class="mb-0">
+                                            Get Special Room Prices for JCU 2024 participants.
                                             For more detailed information
-                                            <a target="_blank" href="https://wa.me/628112925147?text=Special Room Prices for JCU 2023 - Perki Jogja participants. Nomot Transaksi: {{$transaction['number']}}">https://wa.me/628112925147</a>
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <!-- END MAIN CONTENT AREA -->
-                </table>
-                <!-- END CENTERED WHITE CONTAINER -->
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
+                                            <a target="_blank" href="https://wa.me/628112925147?text=Special Room Prices for JCU 2024 - Perki Jogja participants. Nomot Transaksi: {{$transaction['number']}}">https://wa.me/628112925147</a>
+                                        </p> --}}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <!-- END MAIN CONTENT AREA -->
+                    </table>
+                    <!-- END CENTERED WHITE CONTAINER -->
+                </div>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
 </body>
+
 </html>

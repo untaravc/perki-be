@@ -23,7 +23,7 @@ class PostController extends Controller
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
-        if($request->with_transaction == 1){
+        if ($request->with_transaction == 1) {
             $user_ids = $data_content->pluck('user_id');
 
             $transaction_details = TransactionDetail::whereIn('user_id', $user_ids)
@@ -31,7 +31,7 @@ class PostController extends Controller
                 ->where('event_id', 1)
                 ->get();
 
-            foreach ($data_content as $data){
+            foreach ($data_content as $data) {
                 $trx = $transaction_details->where('user_id', $data->user_id)->first();
                 $data->setAttribute('transaction', $trx);
             }
@@ -43,12 +43,8 @@ class PostController extends Controller
 
     public function withFilter($data_content, $request)
     {
-        if ($request->s) {
-            $data_content = $data_content->where(function ($q) use ($request){
-                $q->whereHas('user', function ($q2) use ($request){
-                    $q2->where('name', 'LIKE', '%' . $request->s . '%');
-                })->orWhere('title', 'LIKE', '%' . $request->s . '%');
-            });
+        if ($request->title) {
+            $data_content = $data_content->where('title', 'LIKE', '%' . $request->title . '%');
         }
 
         if ($request->type == 'abstract') {
@@ -62,6 +58,10 @@ class PostController extends Controller
 
         if ($request->category) {
             $data_content = $data_content->where('category', $request->category);
+        }
+
+        if ($request->year) {
+            $data_content = $data_content->whereYear('created_at', $request->year);
         }
 
         if ($request->status !== null) {
@@ -95,12 +95,12 @@ class PostController extends Controller
         }
 
         $users = [];
-        if($request->user_name == 1){
-            foreach ($data_content as $item){
+        if ($request->user_name == 1) {
+            foreach ($data_content as $item) {
                 $users[] = $item['user']['name'];
             }
         }
-//        return $users;
+        //        return $users;
 
         return view('print.posts.abstracts', compact('data_content', 'type'));
     }
@@ -144,7 +144,8 @@ class PostController extends Controller
         return $this->response;
     }
 
-    public function reviewer_list(){
+    public function reviewer_list()
+    {
         $data = User::whereType('reviewer')
             ->orderBy('name')
             ->get();
@@ -153,10 +154,11 @@ class PostController extends Controller
         return $this->response;
     }
 
-    public function set_reviewer(Request $request, $post_id){
+    public function set_reviewer(Request $request, $post_id)
+    {
         $data = Post::find($post_id);
 
-        if($data){
+        if ($data) {
             $data->update([
                 'reviewer_id' => $request->reviewer_id
             ]);
@@ -165,10 +167,11 @@ class PostController extends Controller
         return $this->response;
     }
 
-    public function post_review(Request $request, $post_id){
+    public function post_review(Request $request, $post_id)
+    {
         $post = Post::find($post_id);
 
-        if($post){
+        if ($post) {
             $post->update([
                 'status' => $request->status,
                 'score' => $request->score,
@@ -179,11 +182,12 @@ class PostController extends Controller
         return $this->response;
     }
 
-    public function previewAbstract(Request $request){
-        $data_content = Post::with(['user'=>function($q){
+    public function previewAbstract(Request $request)
+    {
+        $data_content = Post::with(['user' => function ($q) {
             $q->with('voucher_code');
         }, 'authors'])
-//            ->whereDate('created_at', '>', '2023-07-07')
+            //            ->whereDate('created_at', '>', '2023-07-07')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
             })
@@ -198,7 +202,7 @@ class PostController extends Controller
             ])
             ->orderBy('category')->get();
 
-//        return $data_content;
+        //        return $data_content;
 
         return view('print.posts.abstract_preview', compact('data_content'));
     }

@@ -31,6 +31,20 @@ class TransactionController extends Controller
         return $collect->merge($data_content);
     }
 
+    public function show($id)
+    {
+        $data = Transaction::orderByDesc('id')->with([
+            'transaction_details' => function ($q) {
+                $q->with('event');
+            },
+            'users',
+            'user'
+        ])->whereParentId(0)->find($id);
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
     public function withFilter($data_content, $request)
     {
         if ($request->user_name) {
@@ -40,7 +54,7 @@ class TransactionController extends Controller
         if ($request->id) {
             $data_content = $data_content->where('id', $request->id);
         }
-        
+
         if ($request->section) {
             $data_content = $data_content->where('section', $request->section);
         }
@@ -92,7 +106,7 @@ class TransactionController extends Controller
         $mail_log = [
             "email_receiver" => $transaction->user_email,
             "receiver_name"  => $transaction->user_name,
-            "label"          => "jcu_23_qr_access",
+            "label"          => "jcu_24_qr_access",
             "model"          => "transaction",
             "model_id"       => $transaction->id,
             "status"         => 0,

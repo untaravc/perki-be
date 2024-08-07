@@ -18,19 +18,27 @@
         <div id="kt_app_content" class="app-content flex-column-fluid">
             <div id="kt_app_content_container" class="app-container container-xxl">
                 <div class="card card-flush">
-                    <div class="card-header align-items-center py-5 gap-2 gap-md-5"
-                        data-select2-id="select2-data-124-lq0k">
-                        <div class="card-title">
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <span class="svg-icon svg-icon-1 position-absolute ms-4">
-                                    <v-icon name="bi-search" />
-                                </span>
-                                <input type="text" v-model="filter.name" @keyup.enter="loadDataContent"
-                                    class="form-control form-control-solid w-250px ps-14" placeholder="Cari..">
+                    <div class="py-6 px-8">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="Title.."
+                                    @keyup.enter="loadDataContent()" v-model="post_store.title">
                             </div>
-                        </div>
-                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
-                            data-select2-id="select2-data-123-4p2n">
+                            <div class="col-md-3">
+                                <select class="form-control" @change="loadDataContent()" v-model="post_store.year">
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" @change="loadDataContent()" v-model="post_store.category">
+                                    <option value="">Semua</option>
+                                    <option value="case_report">Case Report</option>
+                                    <option value="research">Research</option>
+                                    <option value="systematic_review">Systematic Review</option>
+                                    <option value="meta_analysis">Meta Analysis</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body pt-0">
@@ -42,9 +50,7 @@
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                             <th>No</th>
-                                            <th></th>
                                             <th>Judul</th>
-                                            <th>Kategori</th>
                                             <th>Status</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
@@ -56,24 +62,19 @@
                                         <tr v-for="(data, d) in response.data_content.data">
                                             <td>
                                                 {{ response.data_content.per_page *
-                            (response.data_content.current_page - 1) + d + 1 }}
-                                            </td>
-                                            <td style="width: 80px;">
-                                                <div v-if="data.image" class="bg-thumbnail"
-                                                    :style="'width: 50px; height: 50px;background: url(' + data.image + ');'">
-                                                </div>
+                                                    (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
                                             <td>
+                                                <div>{{ data.category }}</div>
                                                 {{ data.title }}
                                                 <div>
                                                     <small>{{ $filter.formatDate(data.created_at) }}</small>
                                                 </div>
                                             </td>
                                             <td>
-                                                <span v-if="data.category"> {{ data.category.name }}</span>
-                                            </td>
-                                            <td>
-                                                <StatusDefault :status="data.status" />
+                                                <span v-if="data.status === 0">pending</span>
+                                                <span v-if="data.status === 1">accepted</span>
+                                                <span v-if="data.status === 2">reject</span>
                                             </td>
                                             <td class="text-end">
                                                 <div class="dropdown">
@@ -134,7 +135,7 @@ export default {
         const breadcrumb_list = ["Post", "Data"];
         const { getData, deleteData } = useAxios()
         const is_loading = ref(true)
-        const { app_store } = useFilterStore()
+        const { app_store, post_store } = useFilterStore()
 
         const filter = reactive({
             page: 1,
@@ -145,7 +146,7 @@ export default {
         function loadDataContent(page = 1) {
             is_loading.value = true
             filter.page = page
-            getData('posts', filter)
+            getData('posts', post_store)
                 .then((data) => {
                     if (data.success) {
                         response.data_content = data
@@ -185,6 +186,7 @@ export default {
             filter,
             is_loading,
             app_store,
+            post_store,
             loadDataContent,
             changePerPage,
             deleteModal
