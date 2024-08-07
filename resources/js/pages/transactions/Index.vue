@@ -1,7 +1,7 @@
 <template>
     <div class="d-flex flex-column flex-column-fluid" style="min-height: calc(100vh - 130px)">
-        <div id="kt_app_toolbar" class="app-toolbar py-3 py-lg-6">
-            <div id="kt_app_toolbar_container" class="app-container container-xxl d-flex flex-stack">
+        <div class="app-toolbar py-3 py-lg-6">
+            <div class="app-container container-xxl d-flex flex-stack">
                 <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
                     <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">
                         {{ title }}
@@ -10,8 +10,8 @@
                 </div>
             </div>
         </div>
-        <div id="kt_app_content" class="app-content flex-column-fluid">
-            <div id="kt_app_content_container" class="app-container container-xxl">
+        <div class="app-content flex-column-fluid">
+            <div class="app-container container-xxl">
                 <div class="card card-flush">
                     <div class="py-6 px-8">
                         <div class="row">
@@ -43,12 +43,10 @@
                         </div>
                     </div>
                     <div class="card-body pt-0">
-                        <div id="kt_ecommerce_products_table_wrapper"
-                            class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="table-responsive">
                                 <Loading :active="is_loading" :loader="'dots'" :is-full-page="false" />
-                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer"
-                                    id="kt_ecommerce_products_table">
+                                <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                             <th>No</th>

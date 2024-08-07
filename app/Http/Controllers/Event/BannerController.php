@@ -51,7 +51,7 @@ class BannerController extends Controller
                     [
                         "theme" => "dark",
                         "text"  => "Submit",
-                        "link"  => "/register?url=profile/abstracts",
+                        "link"  => "/abstracts",
                     ]
                 ]
             ],

@@ -18,6 +18,7 @@ import Category from "../pages/categories/Index.vue";
 import CategoryAddEdit from "../pages/categories/AddEdit.vue";
 import Posts from "../pages/posts/Index.vue";
 import PostsAddEdit from "../pages/posts/AddEdit.vue";
+import PostsView from "../pages/posts/View.vue";
 import Transactions from "../pages/transactions/Index.vue";
 import TransactionsAddEdit from "../pages/transactions/AddEdit.vue";
 import Vouchers from "../pages/vouchers/Index.vue";
@@ -43,6 +44,7 @@ const routes = [
             { path: 'categories', component: Category, meta: { protected: true, title: "Category" } },
             { path: 'posts', component: Posts, meta: { protected: true, title: "Posts" } },
             { path: 'posts/:id', component: PostsAddEdit, meta: { protected: true, title: "Post" } },
+            { path: 'posts/:id/view', component: PostsView, meta: { protected: true, title: "Post View" } },
             { path: 'transactions/:id', component: TransactionsAddEdit, meta: { protected: true, title: "Post" } },
 
             { path: 'transactions', component: Transactions, meta: { protected: true, title: "Transactions" } },

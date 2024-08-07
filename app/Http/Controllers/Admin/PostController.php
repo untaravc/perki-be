@@ -41,6 +41,14 @@ class PostController extends Controller
         return $collect->merge($data_content);
     }
 
+    public function show($id)
+    {
+        $data = Post::find($id);
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
     public function withFilter($data_content, $request)
     {
         if ($request->title) {
