@@ -64,8 +64,11 @@ class EventTransaction24Controller extends BaseController
         }
 
         $data['symposium'] = $symposium;
-        $data['first_workshop'] = $first_workshop;
-        $data['second_workshop'] = $second_workshop;
+
+        if ($transaction->job_type_code !== "MHSA") {
+            $data['first_workshop'] = $first_workshop;
+            $data['second_workshop'] = $second_workshop;
+        }
 
         // has symposium
         $trx_symposium = TransactionDetail::whereUserId($transaction->user_id)

@@ -30,8 +30,6 @@ class PricingController extends Controller
         </ul>";
 
         $bronze_desc = "<ul>
-            <li>Morning Workshop: Friday, Oct 18th 2024 (08.00-11.00)</li>
-            <li>Afternoon Workshop: Friday, Oct 18th 2024 (13.00-16.00)</li>
             <li>Symposium: Saturday, Oct 19th 2024 (08.00-16.00) - Sunday, Oct 20rd 2024 (08.00-16.00)</li>
         </ul>";
 
@@ -58,8 +56,8 @@ class PricingController extends Controller
             "desc"          => $bronze_desc,
             "price_drgn"    => 750000,
             // "price_drgn_eb" => 2000000,
-            "price_drsp"    => 1500000,
-            "price_drsp_eb" => 2250000, // harga corek
+            // "price_drsp"    => 1500000,
+            // "price_drsp_eb" => 2250000, // harga corek
         ];
 
         $this->response['result'] = $data;

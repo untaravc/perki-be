@@ -100,7 +100,7 @@ class AuthController extends BaseController
                 "city"           => "required|string",
                 "job_type_code"  => "required",
                 'identity_photo' => 'required_if:job_type_code,MHSA,COAS',
-                'nik'            => 'nullable|string|digits:16',
+                'nik'            => 'required|string|digits:16',
             ], [
                 "identity_photo.required" => "The identity photo field is required"
             ]);
@@ -118,7 +118,7 @@ class AuthController extends BaseController
                 "job_type_code"  => "required",
                 "password"       => "required|min:6|confirmed",
                 'identity_photo' => 'required_if:job_type_code,MHSA,COAS',
-                'nik'            => 'nullable|numeric|digits:16',
+                'nik'            => 'required|numeric|digits:16',
             ], [
                 "identity_photo.required" => "The identity photo field is required"
             ]);
