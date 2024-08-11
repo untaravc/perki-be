@@ -22,11 +22,42 @@
                     </div>
                     <div class="col-md-4 mb-5">
                         <div class="rounded-3 bg-white p-4">
-                            <div class="text-lg h4">Angka</div>
-                            <div>Submit abstrak</div>
-                            <div>Jumlah uang</div>
-                            <div>Total Member account</div>
-                            <div>Total Member paid</div>
+                            <div class="text-lg h4 mb-0">Abstract Submission</div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <div class="text-sm">Pending</div>
+                                    <div class="h3 font-bold" v-if="content.abstract_status">
+                                        {{ content.abstract_status.pending }}
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-sm">Accepted</div>
+                                    <div class="h3 text-green-500 font-bold" v-if="content.abstract_status">
+                                        {{ content.abstract_status.accepted }}</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-sm">Rejected</div>
+                                    <div class="h3 text-red-500 font-bold" v-if="content.abstract_status">
+                                        {{ content.abstract_status.rejected }}</div>
+                                </div>
+                            </div>
+
+                            <div class="text-lg h4 mb-0">Member</div>
+                            <div class="row mb-2">
+                                <div class="col-4">
+                                    <div class="text-sm">Register</div>
+                                    <div class="h3 font-bold">122</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-sm">On Payment</div>
+                                    <div class="h3 text-green-500 font-bold">22</div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-sm">Paid</div>
+                                    <div class="h3 text-red-500 font-bold">22</div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -58,21 +89,16 @@ export default {
         const breadcrumb_list = ["Dashboard"];
         const { getData } = useAxios()
         const content = reactive({
-            stats: {
-                players_count: 0,
-                competitions_count: 0,
-                points_count: 0,
-                matches_count: 0,
-            }
+            abstract_status: {}
         })
 
         function loadStats() {
-            getData('dashboard-stats').then((data) => {
-                content.stats = data.result
+            getData('dashboard-user-stat').then((data) => {
+                content.abstract_status = data.result.abstract_status
             })
         }
 
-        // loadStats()
+        loadStats()
 
         return {
             title,

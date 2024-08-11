@@ -64,6 +64,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('roles', RoleController::class);
 
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
+    Route::patch('menu-role', [MenuController::class, 'menuRoleUpdate']);
 
     Route::patch('transaction-confirm', [AdminTransactionController::class, 'confirm']);
     Route::post('scan-event', [AdminEventController::class, 'scan_event']);

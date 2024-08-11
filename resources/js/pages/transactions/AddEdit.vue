@@ -85,10 +85,18 @@
                         </div>
                     </div>
                     <div class="col-span-2 text-right">
-                        <router-link to="/panel/transactions" class="btn btn-light me-5">Kembali</router-link>
+                        <router-link to="/panel/transactions"
+                            class="btn bg-slate-200 hover:bg-slate-100 me-5">Kembali</router-link>
                         <button v-if="form_props.edit_mode" :disabled="form_props.is_loading" @click="acceptPayment"
-                            class="btn btn-success">
+                            class="btn btn-success me-5">
                             <span v-if="!form_props.is_loading">Accept</span>
+                            <span v-if="form_props.is_loading">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                        <button v-if="form_props.edit_mode" :disabled="form_props.is_loading" @click="deletePayment"
+                            class="btn bg-red-600 hover:bg-red-500 text-white">
+                            <span v-if="!form_props.is_loading">Delete</span>
                             <span v-if="form_props.is_loading">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
                             </span>
@@ -155,6 +163,23 @@ export default {
             })
         }
 
+        function deletePayment() {
+            if (confirm("Delete Payment?")) {
+                form_props.is_loading = true
+                patchData('transaction-delete', {
+                    'transaction_id': param_id
+                }).then((data) => {
+                    form_props.is_loading = false;
+                    if (data.status) {
+                        router.push('/panel/transactions')
+                        resetErrors()
+                    } else {
+                        setErrors(data.errors)
+                    }
+                })
+            }
+        }
+
         function acceptPayment() {
             if (confirm("Confirm Payment?")) {
                 form_props.is_loading = true
@@ -181,7 +206,8 @@ export default {
             getMessage,
             editData,
             data_content,
-            acceptPayment
+            acceptPayment,
+            deletePayment
         }
     }
 }

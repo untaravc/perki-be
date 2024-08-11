@@ -78,7 +78,7 @@ router.beforeEach(async (to, from) => {
     }
 })
 
-const DEFAULT_TITLE = 'Tenis Indo';
+const DEFAULT_TITLE = 'JCU - Perki Jogja';
 router.afterEach((to, from) => {
     document.title = to.meta.title || DEFAULT_TITLE;
 });

@@ -126,13 +126,16 @@ class DashboardController extends Controller
 
     public function user_stat()
     {
-        $user['register'] = User::where('is_speaker', 0)->whereType('user')->count();
-        $user['register_paid'] = User::whereHas('success_transactions')->count();
+        // $user['register'] = User::where('is_speaker', 0)
+        //     ->whereType('user')
+        //     ->whereYear('updated_at',  )
+        //     ->count();
+        // $user['register_paid'] = User::whereHas('success_transactions')->count();
 
-        $user_job_type = User::select('job_type_code', DB::raw('count(*) as total'))
-            ->whereHas('success_transactions')
-            ->groupBy('job_type_code')
-            ->get();
+        // $user_job_type = User::select('job_type_code', DB::raw('count(*) as total'))
+        //     ->whereHas('success_transactions')
+        //     ->groupBy('job_type_code')
+        //     ->get();
 
         $abstracts = Post::whereIn('category', [
             'case_report',
@@ -140,16 +143,40 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('category', DB::raw('count(*) as total'))
+            ->whereYear('created_at', 2024)
             ->groupBy('category')
             ->get();
 
+        $abstract_status = Post::whereIn('category', [
+            'case_report',
+            'research',
+            'systematic_review',
+            'meta_analysis',
+        ])->select('status', DB::raw('count(*) as total'))
+            ->whereYear('created_at', 2024)
+            ->groupBy('status')
+            ->get();
+
         $this->response['result'] = [
-            "users"     => $user,
-            "abstracts" => $abstracts,
-            "type_code" => $user_job_type,
+            // "users"     => $user,
+            "abstract_status" => $this->abstract_status($abstract_status),
         ];
 
         return $this->response;
+    }
+
+    private function abstract_status($data)
+    {
+        $pending = collect($data)->where('status', 0)->first();
+        $accepted = collect($data)->where('status', 1)->first();
+        $rejected = collect($data)->where('status', 2)->first();
+        $result = [
+            'pending' => $pending ? $pending['total'] : 0,
+            'accepted' => $accepted ? $accepted['total'] : 0,
+            'rejected' => $rejected ? $rejected['total'] : 0,
+        ];
+
+        return $result;
     }
 
     public function sidebar_label()

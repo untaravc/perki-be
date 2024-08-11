@@ -38,6 +38,7 @@
                                     <option value="110">Waiting Payment</option>
                                     <option value="120">Waiting Confirmation</option>
                                     <option value="200">Paid</option>
+                                    <option value="400">Deleted</option>
                                 </select>
                             </div>
                         </div>

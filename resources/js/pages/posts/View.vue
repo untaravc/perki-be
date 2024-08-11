@@ -22,8 +22,37 @@
               <div class="italic mb-4">
                 Keyword: {{ form_props.data_detail.subtitle }}
               </div>
-              <div class="mb-2" v-for="body in form_props.data_detail.body_parsed">
+              <div class="mb-4" v-for="body in form_props.data_detail.body_parsed">
                 <b>{{ body.title }}</b> {{ body.content }}
+              </div>
+              <div v-if="form_props.data_detail.image">
+                <img :src="form_props.data_detail.image" alt="">
+              </div>
+              <hr>
+              <div class="h3 mt-4 mb-2">Review</div>
+              <div class="row mb-4">
+                <div class="col-md-3">
+                  <label>Skor</label>
+                  <input class="form-control mb-2" v-model="form_props.data_detail.score" type="number">
+                  <label>Status</label>
+                  <select class="form-control" v-model="form_props.data_detail.status">
+                    <option value="0">Pending</option>
+                    <option value="1">Accepted</option>
+                    <option value="2">Reject</option>
+                  </select>
+                </div>
+                <div class="col-md-9">
+                  <label>Komentar</label>
+                  <textarea class="form-control" v-model="form_props.data_detail.comment" cols="30" rows="5"></textarea>
+                </div>
+              </div>
+              <div class="text-right">
+                <router-link to="/panel/posts" class="btn btn-sm bg-secondary m-1">
+                  Batal
+                </router-link>
+                <button class="btn btn-sm bg-success m-1" @click="processAbstract()">
+                  Simpan Review
+                </button>
               </div>
             </div>
           </div>
@@ -38,22 +67,30 @@ import { reactive } from "vue";
 import useAxios from "../../src/service";
 import useValidation from "../../src/validation";
 import { useRouter, useRoute } from "vue-router";
-import { useFilterStore } from "../../src/store_filter";
 import VueSelect from "vue-select";
 
 export default {
   components: { Breadcrumb, VueSelect },
   setup() {
-    const { postData, getData, patchData } = useAxios()
+    const { getData, patchData } = useAxios()
     const router = useRouter()
     const { setErrors, getStatus, getMessage, resetErrors } = useValidation()
     const route = useRoute()
-    const { app_store } = useFilterStore()
 
     const form_props = reactive({
       is_loading: false,
       edit_mode: false,
-      data_detail: {}
+      data_detail: {
+        id: '',
+        abstract_number: '',
+        title: '',
+        subtitle: '',
+        body_parsed: '',
+        image: '',
+        status: '',
+        comment: '',
+        score: '',
+      }
     })
 
     const param_id = route.params.id
@@ -65,16 +102,38 @@ export default {
     function loadData() {
       getData('posts/' + param_id)
         .then((data) => {
-          form_props.data_detail = data.result;
+          form_props.data_detail.id = data.result.id;
+          form_props.data_detail.abstract_number = data.result.abstract_number;
+          form_props.data_detail.title = data.result.title;
+          form_props.data_detail.subtitle = data.result.subtitle;
+          form_props.data_detail.body_parsed = data.result.body_parsed;
+          form_props.data_detail.image = data.result.image;
+          form_props.data_detail.status = data.result.status;
+          form_props.data_detail.comment = data.result.comment;
+          form_props.data_detail.score = data.result.score;
         })
     }
 
     loadData()
 
+    function processAbstract() {
+      form_props.is_loading = true
+      patchData('posts/' + param_id, form_props.data_detail).then((data) => {
+        form_props.is_loading = false;
+        if (data.success) {
+          router.push('/panel/posts')
+          resetErrors()
+        } else {
+          setErrors(data.errors)
+        }
+      })
+    }
+
     return {
       breadcrumb_list,
       title,
-      form_props
+      form_props,
+      processAbstract
     }
   }
 }

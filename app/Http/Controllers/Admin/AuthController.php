@@ -46,7 +46,6 @@ class AuthController extends BaseController
         }
 
         if (!Hash::check($request->password, $user->password)) {
-
             $this->response['message'] = $message . '03';
             return $this->response;
         }

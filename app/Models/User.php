@@ -43,6 +43,7 @@ class User extends Authenticatable
         "biography",
         "nik",
         "plataran_img",
+        "role_id",
     ];
 
     protected $hidden = [

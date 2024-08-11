@@ -134,8 +134,12 @@ class MenuController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'role_id'   => 'required',
-            'menu_role' => 'required'
+            'menu_roles' => 'required'
         ]);
+
+        if ($validator->fails()) {
+            return;
+        }
 
         $menu_roles = $request->menu_roles;
         $selected = [];

@@ -41,6 +41,21 @@ class PostController extends Controller
         return $collect->merge($data_content);
     }
 
+    public function update($id, Request $request)
+    {
+        $data = Post::find($id);
+
+        if ($data) {
+            $data->update([
+                'comment' => $request->comment,
+                'score' => $request->score,
+                'status' => $request->status,
+            ]);
+        }
+
+        return $this->response;
+    }
+
     public function show($id)
     {
         $data = Post::find($id);

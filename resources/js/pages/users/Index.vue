@@ -26,9 +26,11 @@
                             </div>
                             <div class="col-md-3">
                                 <select class="form-control" @change="loadDataContent()" v-model="user_store.type">
+                                    <option value="">Semua</option>
                                     <option value="speaker">Speaker</option>
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
+                                    <option value="reviewer">Reviewer</option>
                                 </select>
                             </div>
                         </div>

@@ -39,6 +39,14 @@
                                     <option value="meta_analysis">Meta Analysis</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                                <select class="form-control" @change="loadDataContent()" v-model="post_store.status">
+                                    <option value="">Semua</option>
+                                    <option value="0">Pending</option>
+                                    <option value="1">Accepted</option>
+                                    <option value="2">Reject</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body pt-0">
@@ -49,7 +57,9 @@
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                                             <th>No</th>
+                                            <th></th>
                                             <th>Judul</th>
+                                            <th>Reviewer</th>
                                             <th>Status</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
@@ -64,6 +74,10 @@
                                                     (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
                                             <td>
+                                                {{ data.image }}
+                                                <img :src="data.image" style="max-width: 50px;" alt="">
+                                            </td>
+                                            <td>
                                                 <div>
                                                     <span class="text-sm bg-yellow-50 text-black px-2 py-1 rounded">
                                                         {{ data.category }}
@@ -74,10 +88,22 @@
                                                     <small>{{ $filter.formatDate(data.created_at) }}</small>
                                                 </div>
                                             </td>
+                                            <td style="min-width: 150px;">
+                                                <select class="form-control" v-model="data.reviewer_id"
+                                                    @change="setReviewer(data.id, $event)">
+                                                    <option value="">unset</option>
+                                                    <option :value="rev.id" v-for="rev in response.reviewers">{{
+                                                        rev.name }}</option>
+                                                </select>
+                                            </td>
                                             <td>
-                                                <span v-if="data.status === 0">pending</span>
-                                                <span v-if="data.status === 1">accepted</span>
-                                                <span v-if="data.status === 2">reject</span>
+                                                <div class="text-center h4">{{ data.score }}</div>
+                                                <span v-if="data.status === 0"
+                                                    class="rounded px-2 py-1 bg-slate-500 text-sm text-white">pending</span>
+                                                <span v-if="data.status === 1"
+                                                    class="rounded px-2 py-1 bg-green-500 text-sm text-white">accepted</span>
+                                                <span v-if="data.status === 2"
+                                                    class="rounded px-2 py-1 bg-red-500 text-sm text-white">reject</span>
                                             </td>
                                             <td class="text-end">
                                                 <router-link :to="'/panel/posts/' + data.id + '/view'"
@@ -124,7 +150,7 @@ export default {
     setup() {
         const title = "Data Post"
         const breadcrumb_list = ["Post", "Data"];
-        const { getData, deleteData } = useAxios()
+        const { getData, deleteData, postData } = useAxios()
         const is_loading = ref(true)
         const { app_store, post_store } = useFilterStore()
 
@@ -150,8 +176,9 @@ export default {
 
         const response = reactive({
             data_content: {
-                data: []
-            }
+                data: [],
+            },
+            reviewers: []
         })
 
         function changePerPage(per_page) {
@@ -170,6 +197,29 @@ export default {
             }
         }
 
+        function loadReviewer() {
+            getData('reviewer-list')
+                .then((data) => {
+                    if (data.success) {
+                        response.reviewers = data.result
+                    }
+                })
+        }
+
+        loadReviewer()
+
+        function setReviewer(id, event) {
+            let reviewer_id = event.target.value
+
+            postData('post-set-reviewer/' + id, {
+                reviewer_id: reviewer_id
+            }).then((data) => {
+                if (data.success) {
+                    SwalToast('Berhasil set reviewer')
+                }
+            })
+        }
+
         return {
             breadcrumb_list,
             title,
@@ -180,7 +230,8 @@ export default {
             post_store,
             loadDataContent,
             changePerPage,
-            deleteModal
+            deleteModal,
+            setReviewer
         }
     }
 }
