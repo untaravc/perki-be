@@ -855,7 +855,7 @@ class Event24Controller extends Controller
         return [
             [
                 "name"       => "Workshop 5",
-                "title"      => "Isthithaah for Hajj Preparation",
+                "title"      => "Fit in Body and Soul: Isthithaah for Hajj Preparation, Hands on Exercise Stress Test in Determining Functional Capacity",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",
@@ -904,7 +904,7 @@ class Event24Controller extends Controller
             ],
             [
                 "name"       => "Workshop 6",
-                "title"      => "VASKULAR GE (Topic: Vascular Diseases In Daily; Practice : Hands on DUS) ",
+                "title"      => "Vascular Insight: Comprehensive Learning from Pathophysiology to Ultrasound Mastery",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",
@@ -953,7 +953,7 @@ class Event24Controller extends Controller
             ],
             [
                 "name"       => "Workshop 7",
-                "title"      => "ARRHYTHMIAS and EMERGENCY ECG (Topic: Decoding the Depths: Beyond the Twelve-Lead Electrocardiogram) ",
+                "title"      => "Decoding the Depths: Beyond the Twelve-Lead Electrocardiogram",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",
@@ -1074,7 +1074,7 @@ class Event24Controller extends Controller
         return [
             [
                 "name"       => "Workshop 1",
-                "title"      => "Diagnosis of Rheumatic Heart Disease MSA",
+                "title"      => "Cutting Edge Concepts in Screening, Diagnosis, and Management of Rheumatic Heart Disease: What the Newest Guideline Says",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",
@@ -1124,7 +1124,7 @@ class Event24Controller extends Controller
             ],
             [
                 "name"       => "Workshop 2",
-                "title"      => "Rule of Ultrasound in Cardiac Critical Care",
+                "title"      => "Enhancing Ultrasound Utilization in Cardiac Critical Care",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",
@@ -1173,7 +1173,7 @@ class Event24Controller extends Controller
             ],
             [
                 "name"       => "Workshop 3",
-                "title"      => "Diuretic Resistance in Heart Failure",
+                "title"      => "Prompt and Precise Detection and Management of Diuretic Resistance",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",
@@ -1222,7 +1222,7 @@ class Event24Controller extends Controller
             ],
             [
                 "name"       => "Workshop 4",
-                "title"      => "Mastering Cardiac Emergencies for GP: Approaches to Acute Coronary Syndrome with Lethal Arrhythmias ",
+                "title"      => "Mastering Cardiac Emergencies for GP: Approaches to Acute Coronary Syndrome with Lethal Arrhythmias",
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jcu24",

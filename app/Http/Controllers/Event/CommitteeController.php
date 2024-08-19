@@ -25,7 +25,7 @@ class CommitteeController extends Controller
             'users' => [
                 ['user' => 'bambang.irawan'],
                 ['user' => 'budi.yuli'],
-                //                ['user' => 'arjono'],
+                ['user' => 'arjono'],
                 ['user' => 'hariadi.hariawan'],
                 ['user' => 'irsad.andi'],
             ],
@@ -177,7 +177,7 @@ class CommitteeController extends Controller
             'users' => [
                 ['user' => 'bambang.irawan'],
                 ['user' => 'budi.yuli'],
-                //                ['user' => 'arjono'],
+                ['user' => 'arjono'],
                 ['user' => 'hariadi.hariawan'],
                 ['user' => 'irsad.andi'],
             ],
@@ -191,8 +191,8 @@ class CommitteeController extends Controller
                 ['user' => 'monika.putri', 'position' => 'Secretary'],
                 ['user' => 'dyah.wulan', 'position' => 'Treasurer'],
                 ['user' => 'dyah.samti', 'position' => 'Treasurer'],
-                ['user' => 'hendry.purnasidha', 'position' => 'Sponsorship coordinator'],
-                ['user' => 'bagus.a', 'position' => 'Sponsorship coordinator'],
+                // ['user' => 'hendry.purnasidha', 'position' => 'Sponsorship coordinator'],
+                // ['user' => 'bagus.a', 'position' => 'Sponsorship coordinator'],
             ]
         ];
 
@@ -202,10 +202,8 @@ class CommitteeController extends Controller
             'title' => "Scientific Section",
             'users' => [
                 ['user' => 'anggoro.budi', 'position' => 'Coordinator'],
-                // ['user' => 'lucia.kris'],
-                // ['user' => 'nahar.taufiq'],
-                // ['user' => 'dyah.wulan'],
-                // ['user' => 'rizky.amalia'],
+                ['user' => 'lucia.kris'],
+                ['user' => 'nahar.taufiq'],
             ]
         ];
 
@@ -213,9 +211,8 @@ class CommitteeController extends Controller
             'title' => "Program Section",
             'users' => [
                 ['user' => 'dyah.wulan', 'position' => 'Coordinator'],
-                // ['user' => 'hasanah.mumpuni'],
-                // ['user' => 'erika.maharani'],
-                // ['user' => 'annisa.tridamayanti'],
+                ['user' => 'hasanah.mumpuni'],
+                ['user' => 'erika.maharani'],
             ]
         ];
 
@@ -223,7 +220,6 @@ class CommitteeController extends Controller
             'title' => "Registration Section",
             'users' => [
                 ['user' => 'monika.putri', 'position' => 'Coordinator'],
-                // ['user' => 'inggita.hanung'],
             ]
         ];
 
@@ -232,6 +228,7 @@ class CommitteeController extends Controller
             'users' => [
                 ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
                 ['user' => 'royhan.rozqie'],
+                ['user' => 'real.kusumanjaya'],
             ]
         ];
 
