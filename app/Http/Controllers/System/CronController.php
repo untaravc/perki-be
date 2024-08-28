@@ -34,17 +34,20 @@ class CronController extends Controller
         }
     }
 
-    public function send_certificate_email(){
+    public function send_certificate_email()
+    {
         $email_service = new EmailServiceController();
         $email_service->send_event_certificate();
     }
 
-    public function send_abstract_certificate(){
+    public function send_abstract_certificate()
+    {
         $email_service = new EmailServiceController();
         $email_service->send_abstract_certificate();
     }
 
-    public function send_event_certificate(){
+    public function send_event_certificate()
+    {
         $email_service = new EmailServiceController();
         $email_service->send_event_certificate();
     }
@@ -73,5 +76,10 @@ class CronController extends Controller
         }
 
         return $created;
+    }
+
+    public function send_announcment_email()
+    {
+        return view('email.announcment');
     }
 }

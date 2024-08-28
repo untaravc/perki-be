@@ -583,6 +583,18 @@
                                                                         text-decoration: none;
                                                                         display: block;
                                                                       " />
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <img src="https://jcu.perki-jogja.com/storage/logo/jcu24_color.png"
+                                                                                alt="Useful alt text" height="36"
+                                                                                style="
+                                                                        border: 0;
+                                                                        outline: none;
+                                                                        text-decoration: none;
+                                                                        display: block;
+                                                                        float:right;
+                                                                      " />
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
@@ -591,16 +603,44 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <h1>Set New Password</h1>
-                                            <!-- TODO: Change this name -->
-                                            <p>Hello <strong>{{ $user['name'] }}</strong></p>
-                                            <p class="mb-0">
-                                                Anda telah meminta melakukan pembaruan password.
+                                            <p>
+                                                Yth.
                                                 <br>
-                                                Klik konfirmasi Reset Password,
-                                                <br>
-                                                Silakan <b>perbarui password</b> setelah berhasil login.
+                                                PERKI Jogja dan FKKMK UGM mempersembahkan:
                                             </p>
+                                            <h3>Jogja Cardiology Update 2024</h3>
+                                            <i>Artificial Intellegence in Transdisciplinary Cardiovascular Care: The
+                                                Future is Now
+                                            </i>
+                                            <br>
+                                            <br>
+                                            Yang dilaksanakan bersamaan dengan the 7th JINCARTOS ( Jogja International
+                                            Cardiovascular Topic Series ) 2024
+                                            <br>
+                                            <i>Advanced Care in Heart Failure and Pulmonary Hypertension</i>
+                                            <br>
+                                            <br>
+                                            Yang akan kembali diselenggarakan secara <b>OFFLINE</b>
+                                            <br>
+                                            <br>
+                                            Jangan lupa tandai kalender anda:
+                                            <b>18 - 20 Oktober 2024</b>
+                                            Registrasi dapat dilakukan melalui Website
+                                            <a href="https://jcu.perki-jogja.com"><b>https://jcu.perki-jogja.com</b></a>
+                                            <br>
+                                            <br>
+                                            Narahubung :
+                                            <br>
+                                            Hotline JCU <a
+                                                href="https://wa.me/62895340394067"><b>0895-3403-94067</b></a>
+                                            <br>
+                                            <br>
+                                            Ikuti media sosial kami untuk informasi terkini<br>
+                                            Facebook: Jogja Cardiology Update 2024<br>
+                                            Instagram: jogjacardiologyupdate<br>
+                                            Twitter: JCU_2024<br>
+                                            Tiktok: JCU_2024<br>
+                                            <br>
 
                                             <table
                                                 style="margin-top: 20px; margin-bottom: 20px; width: 100%; text-align: center"
@@ -609,25 +649,17 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <a target="_blank"
-                                                                href="https://jcu.perki-jogja.com/reset-password?email={{ $user['email'] }}&token={{ $user['forgot_password_token'] }}"
-                                                                {{--                                                       href="http://localhost:5173/reset-password?email={{$user['email']}}&token={{$user['forgot_password_token']}}" --}}
+                                                            <a target="_blank" href="https://src.perki-jogja.com/"
                                                                 style="background-color: darkblue;
-                                                    text-decoration: none;
-                                                    border-radius: 100px;
-                                                    color: white; padding: 10px 25px">
-                                                                Konfirmasi Reset Password
+                                                                text-decoration: none;
+                                                                border-radius: 100px;
+                                                                color: white; padding: 10px 25px">
+                                                                Download Announcment Poster
                                                             </a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-
-                                            <p class="mb-0">
-                                                Get Special Room Prices for JCU 2024 participants.
-                                                For more detailed information
-
-                                            </p>
                                         </td>
                                     </tr>
                                 </table>

@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- TODO: Change this title -->
     <title>Code Access - Perki Jogja</title>
     <style>
@@ -277,7 +278,7 @@
             width: 100%;
         }
 
-        .btn > tbody > tr > td {
+        .btn>tbody>tr>td {
             padding-bottom: 15px;
         }
 
@@ -547,89 +548,68 @@
         }
     </style>
 </head>
+
 <body>
-<!-- TODO: Change this title -->
-<!-- This is preheader text. Some clients will show this text as a preview. -->
-<span class="preheader">Download Your Access Code. </span>
-<table
-    role="presentation"
-    border="0"
-    cellpadding="0"
-    cellspacing="0"
-    class="body"
->
-    <tr>
-        <td>&nbsp;</td>
-        <td class="container">
-            <div class="content">
-                <!-- START CENTERED WHITE CONTAINER -->
-                <table role="presentation" class="main">
-                    <!-- START MAIN CONTENT AREA -->
-                    <tr>
-                        <td class="wrapper">
-                            <table
-                                role="presentation"
-                                border="0"
-                                cellpadding="0"
-                                cellspacing="0"
-                            >
-                                <tr>
-                                    <td>
-                                        <table
-                                            role="presentation"
-                                            border="0"
-                                            cellpadding="0"
-                                            cellspacing="0"
-                                            class="logo"
-                                        >
-                                            <tbody>
-                                            <tr>
-                                                <td align="center">
-                                                    <table
-                                                        role="presentation"
-                                                        border="0"
-                                                        cellpadding="0"
-                                                        cellspacing="0"
-                                                    >
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>
-                                                                <img
-                                                                    src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png"
-                                                                    alt="Useful alt text"
-                                                                    height="36"
-                                                                    style="
+    <!-- TODO: Change this title -->
+    <!-- This is preheader text. Some clients will show this text as a preview. -->
+    <span class="preheader">Download Your Access Code. </span>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+        <tr>
+            <td>&nbsp;</td>
+            <td class="container">
+                <div class="content">
+                    <!-- START CENTERED WHITE CONTAINER -->
+                    <table role="presentation" class="main">
+                        <!-- START MAIN CONTENT AREA -->
+                        <tr>
+                            <td class="wrapper">
+                                <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <table role="presentation" border="0" cellpadding="0" cellspacing="0"
+                                                class="logo">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="center">
+                                                            <table role="presentation" border="0" cellpadding="0"
+                                                                cellspacing="0">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png"
+                                                                                alt="Useful alt text" height="36"
+                                                                                style="
                                                                         border: 0;
                                                                         outline: none;
                                                                         text-decoration: none;
                                                                         display: block;
-                                                                      "
-                                                                />
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                        <h1>Access Code</h1>
-                                        <!-- TODO: Change this name -->
-                                        <p><strong>{{$transaction['user_name']}},</strong></p>
-                                        <p class="mb-0">
-                                            thank you for joining JCU 2023 in conjunction with the 6th Jincartos.
-                                            Please download this following (PDF) document to get QR pass code.
-                                        </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </td>
-        <td>&nbsp;</td>
-    </tr>
-</table>
+                                                                      " />
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <h1>Access Code</h1>
+                                            <!-- TODO: Change this name -->
+                                            <p><strong>{{ $transaction['user_name'] }},</strong></p>
+                                            <p class="mb-0">
+                                                thank you for joining JCU 2023 in conjunction with the 6th Jincartos.
+                                                Please download this following (PDF) document to get QR pass code.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
 </body>
+
 </html>

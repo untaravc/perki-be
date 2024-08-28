@@ -16,12 +16,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->call(function () {
-             $cron = new CronController();
-//             $cron->send_qr_email();
-             $cron->send_certificate_email();
-//             $cron->send_event_certificate();
-         })->everyMinute();
+        $schedule->call(function () {
+            $cron = new CronController();
+            //             $cron->send_qr_email();
+            //  $cron->send_certificate_email();
+            //             $cron->send_event_certificate();
+
+        })->everyMinute();
     }
 
     /**
@@ -31,7 +32,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
