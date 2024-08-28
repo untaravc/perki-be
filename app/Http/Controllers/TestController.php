@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\System\EmailServiceController;
+use App\Models\Contact;
 use App\Models\Event;
 use App\Models\EventUser;
 use App\Models\MailLog;
@@ -24,8 +25,23 @@ class TestController extends Controller
         return $ctrl->send_abstract_certificate();
     }
 
-    public function sample_qrcode(Request $request)
+    public function contactList(Request $request)
     {
+        $per_page = 10;
+        $active_col = explode(',', $request->cols);
+
+        $contacts = Contact::when($request->type, function ($q) use ($request) {
+            $q->whereType($request->type);
+        })->paginate($request->per_page ?? $per_page);
+        $columns = [
+            'no' => in_array('no', $active_col),
+            'email' => in_array('email', $active_col),
+            'name' => in_array('name', $active_col),
+            'phone' => in_array('phone', $active_col),
+            'type' => in_array('type', $active_col),
+        ];
+
+        return view('print.contacts.index', compact('contacts', 'columns'));
     }
 
     public function print_by_name(Request $request)
@@ -49,11 +65,11 @@ class TestController extends Controller
             ->with(['transaction', 'event'])
             ->whereIn('event_id', [1])
             ->whereNotIn('user_id', exclude_user_ids())
-//            ->limit(2)
+            //            ->limit(2)
             ->get();
 
-//        $service = new EmailServiceController();
-//        return $service->send_certificate();
+        //        $service = new EmailServiceController();
+        //        return $service->send_certificate();
 
         foreach ($transaction_details as $detail) {
             $attend = EventUser::whereUserId($detail['user_id'])
@@ -65,7 +81,7 @@ class TestController extends Controller
                 "receiver_name"  => $detail['transaction']['user_name'],
                 "label"          => "jcu23_certificate",
                 "category"       => $detail['event']['slug'],
-                "title"          => $detail['event']['name'] . ": ".$detail['event']['title'],
+                "title"          => $detail['event']['name'] . ": " . $detail['event']['title'],
                 "model"          => "transaction_detail",
                 "model_id"       => $detail['id'],
                 "status"         => $attend ? 0 : 3,
@@ -83,7 +99,7 @@ class TestController extends Controller
                 $mail_log->update($payload);
             }
 
-            if($detail['event_id'] == 1){
+            if ($detail['event_id'] == 1) {
                 $sympo_1 = Event::find(110);
 
                 $attend2 = EventUser::whereUserId($detail['user_id'])
@@ -95,7 +111,7 @@ class TestController extends Controller
                     "receiver_name"  => $detail['transaction']['user_name'],
                     "label"          => "jcu23_certificate",
                     "category"       => $sympo_1->slug,
-                    "title"          => $sympo_1['name'] . ": ".$sympo_1['title'],
+                    "title"          => $sympo_1['name'] . ": " . $sympo_1['title'],
                     "model"          => "transaction_detail",
                     "model_id"       => $detail['id'],
                     "status"         => $attend2 ? 0 : 3,
@@ -116,7 +132,8 @@ class TestController extends Controller
         }
     }
 
-    public function send_certy(){
+    public function send_certy()
+    {
         $new = new EmailServiceController();
         return $new->send_abstract_certificate();
     }

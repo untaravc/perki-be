@@ -37,6 +37,7 @@ Route::post('/', function () {
 });
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
+Route::post('/import-contact', [DataInitController::class, 'importContact']);
 
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('auth', [AdminAuthController::class, 'authJson']);

@@ -63,7 +63,20 @@
                     <div class="col-md-6">
                         <div class="rounded-3 bg-white p-4">
                             <div class="text-lg h4">Sympo WS by transaction</div>
-                            paid, pending, select event
+                            <div>
+                                <div>Workshop 1</div>
+                                <div class="overflow-hidden h-4 mb-4 text-xs flex rounded bg-emerald-200">
+                                    <div style="width: 10%"
+                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500">
+                                    </div>
+                                    <div style="width: 15%"
+                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500">
+                                    </div>
+                                    <div style="width: 25%"
+                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
