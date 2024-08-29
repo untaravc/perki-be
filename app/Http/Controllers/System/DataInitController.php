@@ -24,15 +24,15 @@ class DataInitController extends BaseController
         switch ($request->section) {
             case 'events':
                 $event = new Event24Controller();
-                $event->event_init();
+                return $event->event_init();
                 break;
             case 'speakers':
                 $speakers = new SpeakerInitController();
-                $speakers->init_speaker();
+                return $speakers->init_speaker();
                 break;
             case 'users':
                 $speakers = new UserInitController();
-                $speakers->user_init();
+                return $speakers->user_init();
                 break;
             default:
                 return [

@@ -27,6 +27,12 @@ class ScheduleController extends Controller
 
         $saturday = [
             [
+                'date_start' => $events->where('slug', 'symposium-jcu24-a0')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu24-a0')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu24-a0')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu24-b0')->first(),
+            ],
+            [
                 'date_start' => $events->where('slug', 'symposium-jcu24-a1')->first()['date_start'],
                 'date_end'   => $events->where('slug', 'symposium-jcu24-a1')->first()['date_end'],
                 'room_a'     => $events->where('slug', 'symposium-jcu24-a1')->first(),
@@ -79,8 +85,8 @@ class ScheduleController extends Controller
             ],
         ];
 
-        $first_workshop = $events->where('marker', 'first-workshop-jcu24-1')->sortBy('name')->flatten();
-        $second_workshop = $events->where('marker', 'second-workshop-jcu24-2')->flatten();
+        $first_workshop = $events->where('marker', 'first-workshop-jcu24')->sortBy('name')->flatten();
+        $second_workshop = $events->where('marker', 'second-workshop-jcu24')->flatten();
 
         $this->response['result']['workshop_half_day_1'] = $first_workshop;
         $this->response['result']['workshop_half_day_2'] = $second_workshop;

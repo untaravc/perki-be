@@ -20,7 +20,7 @@ class GuidanceController extends Controller
     {
         $data = [];
         $data[] = [
-            "title" => "Plataran Sehat",
+            "title" => "Plataran Sehat Registration",
             "image" => "https://src.perki-jogja.com/assets/posters/TUTORIAL_AKTIVASI_PLATARAN_SEHAT.png",
             "link"  => "https://src.perki-jogja.com/assets/posters/TUTORIAL_AKTIVASI_PLATARAN_SEHAT.pdf",
         ];
@@ -31,6 +31,20 @@ class GuidanceController extends Controller
 
     public function guidance2024()
     {
+        $data = [];
+        $data[] = [
+            "title" => "Plataran Sehat",
+            "image" => "https://src.perki-jogja.com/assets/posters/TUTORIAL_AKTIVASI_PLATARAN_SEHAT.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/TUTORIAL_AKTIVASI_PLATARAN_SEHAT.pdf",
+        ];
+
+        $data[] = [
+            "title" => "First Announcement",
+            "image" => "https://src.perki-jogja.com/assets24/posters/1st_announcement.png",
+            "link"  => "https://src.perki-jogja.com/assets/posters/1st_announcement.pdf",
+        ];
+
+        $this->response['result'] = $data;
         return $this->response;
     }
 
