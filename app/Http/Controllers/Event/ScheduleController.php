@@ -56,15 +56,15 @@ class ScheduleController extends Controller
                 'room_a'     => $events->where('slug', 'symposium-jcu24-a7')->first(),
                 'room_b'     => $events->where('slug', 'symposium-jcu24-b8')->first(),
             ],
-        ];
-
-        $sunday = [
             [
                 'date_start' => $events->where('slug', 'symposium-jcu24-a9')->first()['date_start'],
                 'date_end'   => $events->where('slug', 'symposium-jcu24-a9')->first()['date_end'],
                 'room_a'     => $events->where('slug', 'symposium-jcu24-a9')->first(),
                 'room_b'     => $events->where('slug', 'symposium-jcu24-b10')->first(),
             ],
+        ];
+
+        $sunday = [
             [
                 'date_start' => $events->where('slug', 'symposium-jcu24-a11')->first()['date_start'],
                 'date_end'   => $events->where('slug', 'symposium-jcu24-a11')->first()['date_end'],
@@ -82,6 +82,18 @@ class ScheduleController extends Controller
                 'date_end'   => $events->where('slug', 'symposium-jcu24-a15')->first()['date_end'],
                 'room_a'     => $events->where('slug', 'symposium-jcu24-a15')->first(),
                 'room_b'     => $events->where('slug', 'symposium-jcu24-b16')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu24-a17')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu24-a17')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu24-a17')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu24-b18')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jcu24-a19')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jcu24-a19')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jcu24-a19')->first(),
+                'room_b'     => $events->where('slug', 'symposium-jcu24-b20')->first(),
             ],
         ];
 
