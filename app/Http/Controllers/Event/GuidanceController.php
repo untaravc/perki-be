@@ -40,8 +40,8 @@ class GuidanceController extends Controller
 
         $data[] = [
             "title" => "First Announcement",
-            "image" => "https://src.perki-jogja.com/assets24/posters/1st_announcement.png",
-            "link"  => "https://src.perki-jogja.com/assets/posters/1st_announcement.pdf",
+            "image" => "https://src.perki-jogja.com/assets24/posters/1st_announcement.jpg",
+            "link"  => "https://src.perki-jogja.com/assets24/posters/1st_announcement.pdf",
         ];
 
         $this->response['result'] = $data;

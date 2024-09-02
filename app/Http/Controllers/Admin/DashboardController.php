@@ -18,15 +18,32 @@ class DashboardController extends Controller
     {
         $exclude_user_ids = exclude_user_ids();
         $data['transaction_success'] = Transaction::where('status', '>=', 200)
+            ->whereSection('jcu24')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->count();
+
         $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)
+            ->whereSection('jcu24')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->sum('total');
 
-        $data['member'] = User::where('is_speaker', '!==', 1)->count();
+        $data['member'] = User::where('is_speaker', '!==', 1)
+            ->whereYear('updated_at', '2024')
+            ->count();
+
+        $data['transaction_pending'] = Transaction::where('status', '<=', 200)
+            ->whereSection('jcu24')
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->count();
+
+        $data['transaction_pending'] = Transaction::where('status', '<=', 200)
+            ->whereSection('jcu24')
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->count();
+
         $data['member_purchase'] = User::where('is_speaker', '!==', 1)
             ->whereHas('success_transactions')
+            ->whereNotIn('id', $exclude_user_ids)
             ->count();
 
         $this->response['result']['stat'] = $data;
@@ -96,6 +113,15 @@ class DashboardController extends Controller
             }
         }
 
+        for ($i = 1; $i <= count($array); $i++) {
+            if (!isset($array[$i]['visitor'])) {
+                $array[$i]['visitor'] = 0;
+            }
+            if (!isset($array[$i]['count'])) {
+                $array[$i]['count'] = 0;
+            }
+        }
+
         $this->response['result'] = $array;
         $this->response['total'] = $trx_day_total;
         return $this->response;
@@ -105,7 +131,7 @@ class DashboardController extends Controller
     {
         $events = Event::whereDataType('product')
             ->where('status', 1)
-            ->whereSection('jcu23')
+            ->whereSection('jcu24')
             ->orderBy('name')
             ->select(
                 'id',
