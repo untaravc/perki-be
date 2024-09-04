@@ -76,7 +76,7 @@ class PostController extends Controller
                 'research',
                 'systematic_review',
                 'meta_analysis',
-            ]);
+            ])->orderByDesc('score');
         }
 
         if ($request->category) {

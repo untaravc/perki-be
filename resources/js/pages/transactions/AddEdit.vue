@@ -49,7 +49,8 @@
                                     <div class="mb-2">
                                         <label class="text-sm font-medium italic text-slate-500">Package
                                             Discount</label>
-                                        <div>{{ $filter.currency(data_content.data_detail.package_discount) }}</div>
+                                        <div>{{ $filter.currency(parseInt(data_content.data_detail.package_discount)) }}
+                                        </div>
                                     </div>
                                     <div>
                                         <label class="text-sm">Total</label>
@@ -78,8 +79,33 @@
                     <div class="col-span-2 md:col-span-1">
                         <div class="card card-flush">
                             <div class="card-body">
+                                <div class="mb-4"
+                                    v-if="data_content.data_detail && data_content.data_detail.user && data_content.data_detail.user.identity_photo">
+                                    <div class="text-center font-bold">Identity Photo</div>
+                                    <div class="flex justify-center mb-4">
+                                        <a :href="data_content.data_detail.user.identity_photo" target="_blank">
+                                            <img :src="data_content.data_detail.user.identity_photo" class="max-h-96"
+                                                alt="">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div v-if="data_content.data_detail" class="mb-4">
+                                    <div class="text-center font-bold">Plataran Account</div>
+                                    <div class="flex justify-center mb-4">
+                                        <a :href="data_content.data_detail.plataran_img" target="_blank">
+                                            <img :src="data_content.data_detail.plataran_img" class="max-h-96" alt="">
+                                        </a>
+                                    </div>
+                                </div>
                                 <div v-if="data_content.data_detail && data_content.data_detail.transfer_proof">
-                                    <img :src="data_content.data_detail.transfer_proof" class="w-full" alt="">
+                                    <div class="text-center font-bold">Transfer Proof</div>
+                                    <div class="flex justify-center mb-4">
+                                        <img :src="data_content.data_detail.transfer_proof" class="w-1/2" alt="">
+                                    </div>
+                                    <div class="text-center">
+                                        <a :href="data_content.data_detail.transfer_proof" target="_blank"
+                                            class="font-semibold hover:text-blue-500 text-blue-600">Original File</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

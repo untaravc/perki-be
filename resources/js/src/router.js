@@ -30,6 +30,7 @@ const routes = [
         name: "Layout",
         component: Layout,
         children: [
+            { path: '', component: Dashboard, meta: { protected: true, title: "Dashboard" } },
             { path: 'dashboard', component: Dashboard, meta: { protected: true, title: "Dashboard" } },
             { path: 'users', component: Users, meta: { protected: true, title: "Data Staff" } },
             { path: 'users/:id', component: UserAddEdit, meta: { protected: true, title: "Sistem Antrian" } },

@@ -36,7 +36,8 @@ class DashboardController extends Controller
             ->whereNotIn('user_id', $exclude_user_ids)
             ->count();
 
-        $data['transaction_pending'] = Transaction::where('status', '<=', 200)
+        $data['transaction_pending'] = Transaction::where('status', '<', 200)
+            ->where('status', '>=', 110)
             ->whereSection('jcu24')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->count();
@@ -75,8 +76,19 @@ class DashboardController extends Controller
             $i++;
         }
 
-        $trx_day = Transaction::where('created_at', '>=', $params['date_start'])
+        $paid = Transaction::where('created_at', '>=', $params['date_start'])
             ->whereDate('created_at', '<=', $params['date_end'])
+            ->whereStatus(200)
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get(array(
+                DB::raw("Date(created_at) as date"),
+                DB::raw("COUNT(*) as 'total'"),
+            ));
+
+        $pending = Transaction::where('created_at', '>=', $params['date_start'])
+            ->whereDate('created_at', '<=', $params['date_end'])
+            ->where('status', '<=', 110)
             ->groupBy('date')
             ->orderBy('date', 'ASC')
             ->get(array(
@@ -98,9 +110,17 @@ class DashboardController extends Controller
             ->sum('total');
 
         for ($i = 1; $i <= count($array); $i++) {
-            foreach ($trx_day as $trx) {
-                if (date('Y-m-d', strtotime($trx['date'])) === $array[$i]['date']) {
-                    $array[$i]['count'] = $trx['total'];
+            foreach ($paid as $pd) {
+                if (date('Y-m-d', strtotime($pd['date'])) === $array[$i]['date']) {
+                    $array[$i]['paid'] = $pd['total'];
+                }
+            }
+        }
+
+        for ($i = 1; $i <= count($array); $i++) {
+            foreach ($pending as $pnd) {
+                if (date('Y-m-d', strtotime($pnd['date'])) === $array[$i]['date']) {
+                    $array[$i]['pending'] = $pnd['total'];
                 }
             }
         }
@@ -117,8 +137,12 @@ class DashboardController extends Controller
             if (!isset($array[$i]['visitor'])) {
                 $array[$i]['visitor'] = 0;
             }
-            if (!isset($array[$i]['count'])) {
-                $array[$i]['count'] = 0;
+            if (!isset($array[$i]['paid'])) {
+                $array[$i]['paid'] = 0;
+            }
+
+            if (!isset($array[$i]['pending'])) {
+                $array[$i]['pending'] = 0;
             }
         }
 
@@ -152,17 +176,6 @@ class DashboardController extends Controller
 
     public function user_stat()
     {
-        // $user['register'] = User::where('is_speaker', 0)
-        //     ->whereType('user')
-        //     ->whereYear('updated_at',  )
-        //     ->count();
-        // $user['register_paid'] = User::whereHas('success_transactions')->count();
-
-        // $user_job_type = User::select('job_type_code', DB::raw('count(*) as total'))
-        //     ->whereHas('success_transactions')
-        //     ->groupBy('job_type_code')
-        //     ->get();
-
         $abstracts = Post::whereIn('category', [
             'case_report',
             'research',
@@ -184,8 +197,8 @@ class DashboardController extends Controller
             ->get();
 
         $this->response['result'] = [
-            // "users"     => $user,
-            "abstract_status" => $this->abstract_status($abstract_status),
+            "abstract_categories"   => $this->abstract_category($abstracts),
+            "abstract_status"       => $this->abstract_status($abstract_status),
         ];
 
         return $this->response;
@@ -200,6 +213,22 @@ class DashboardController extends Controller
             'pending' => $pending ? $pending['total'] : 0,
             'accepted' => $accepted ? $accepted['total'] : 0,
             'rejected' => $rejected ? $rejected['total'] : 0,
+        ];
+
+        return $result;
+    }
+
+    private function abstract_category($data)
+    {
+        $case_report = collect($data)->where('category', 'case_report')->first();
+        $research = collect($data)->where('category', 'research')->first();
+        $meta_analysis = collect($data)->where('category', 'meta_analysis')->first();
+        $systematic_review = collect($data)->where('category', 'systematic_review')->first();
+        $result = [
+            'case_report' => $case_report ? $case_report['total'] : 0,
+            'research' => $research ? $research['total'] : 0,
+            'meta_analysis' => $meta_analysis ? $meta_analysis['total'] : 0,
+            'systematic_review' => $systematic_review ? $systematic_review['total'] : 0,
         ];
 
         return $result;

@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
-                        <div class="rounded-3 bg-white p-4">
+                        <div class="rounded-3 bg-white p-4 mb-4">
                             <div class="text-lg h4 mb-0">Abstracts Submission</div>
                             <div class="row mb-2">
                                 <div class="col-4">
@@ -40,16 +40,44 @@
                                     <div class="h3 text-red-500 font-bold" v-if="content.abstract_status">
                                         {{ content.abstract_status.rejected }}</div>
                                 </div>
+                                <div class="col-12 mb-2 mt-1">
+                                    <hr>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-sm">Case Report</div>
+                                    <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
+                                        {{ content.abstract_categories.case_report }}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-sm">Research</div>
+                                    <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
+                                        {{ content.abstract_categories.research }}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-sm">Systematic Review</div>
+                                    <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
+                                        {{ content.abstract_categories.systematic_review }}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-sm">Meta Analysis</div>
+                                    <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
+                                        {{ content.abstract_categories.meta_analysis }}
+                                    </div>
+                                </div>
                             </div>
-
+                        </div>
+                        <div class="rounded-3 bg-white p-4">
                             <div class="text-lg h4 mb-0">Members</div>
                             <div class="row mb-2">
                                 <div class="col-4">
-                                    <div class="text-sm">Registered</div>
+                                    <div class="text-sm">Register</div>
                                     <div class="h3 font-bold">{{ content.stat.member }}</div>
                                 </div>
                                 <div class="col-4">
-                                    <div class="text-sm">Purchased</div>
+                                    <div class="text-sm">Purchase</div>
                                     <div class="h3 text-blue-500 font-bold">
                                         {{ content.stat.member_purchase }}
                                     </div>
@@ -59,7 +87,7 @@
                             <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="text-sm">Est. Earning</div>
-                                    <div class="h3 font-bold">{{
+                                    <div class="h4 font-bold">{{
                                         $filter.currency(parseInt(content.stat.transaction_success_nominal)) }}</div>
                                 </div>
                                 <div class="col-4">
@@ -159,12 +187,14 @@ export default {
         const content = reactive({
             chart_loaded: false,
             abstract_status: {},
+            abstract_categories: {},
             stat: {},
             events: []
         })
 
         function loadUserStats() {
             getData('dashboard-user-stat').then((data) => {
+                content.abstract_categories = data.result.abstract_categories
                 content.abstract_status = data.result.abstract_status
             })
         }
@@ -200,8 +230,9 @@ export default {
         function parseChartData(data) {
             for (const [key, item] of Object.entries(data)) {
                 chart_data.labels.push(item.date.substring(8))
-                chart_data.datasets[0].data.push(item.count)
-                chart_data.datasets[1].data.push(item.visitor)
+                chart_data.datasets[0].data.push(item.paid)
+                chart_data.datasets[1].data.push(item.pending)
+                chart_data.datasets[2].data.push(item.visitor)
             }
 
             content.chart_loaded = true
@@ -211,8 +242,15 @@ export default {
             labels: [],
             datasets: [
                 {
-                    label: 'Paid Transaction',
+                    label: 'Paid',
                     borderColor: '#26ff71',
+                    tension: 0.2,
+                    pointStyle: false,
+                    data: []
+                },
+                {
+                    label: 'Pending',
+                    borderColor: '#ffdf0d',
                     tension: 0.2,
                     pointStyle: false,
                     data: []

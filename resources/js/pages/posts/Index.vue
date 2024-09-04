@@ -56,11 +56,11 @@
                                 <table class="table align-middle table-row-dashed fs-6 gy-5 dataTable no-footer">
                                     <thead>
                                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                                            <th>No</th>
+                                            <th class="w-8">No</th>
                                             <th></th>
-                                            <th>Judul</th>
-                                            <th>Reviewer</th>
-                                            <th>Status</th>
+                                            <th class="w-1/2">Judul</th>
+                                            <th v-if="filter.user_type === 'admin'">Reviewer</th>
+                                            <th class="text-center">Status</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
                                     </thead>
@@ -88,7 +88,7 @@
                                                     <small>{{ $filter.formatDate(data.created_at) }}</small>
                                                 </div>
                                             </td>
-                                            <td style="min-width: 150px;">
+                                            <td v-if="filter.user_type === 'admin'" style="min-width: 150px;">
                                                 <select class="form-control" v-model="data.reviewer_id"
                                                     @change="setReviewer(data.id, $event)">
                                                     <option value="">unset</option>
@@ -98,12 +98,17 @@
                                             </td>
                                             <td>
                                                 <div class="text-center h4">{{ data.score }}</div>
-                                                <span v-if="data.status === 0"
-                                                    class="rounded px-2 py-1 bg-slate-500 text-sm text-white">pending</span>
-                                                <span v-if="data.status === 1"
-                                                    class="rounded px-2 py-1 bg-green-500 text-sm text-white">accepted</span>
-                                                <span v-if="data.status === 2"
-                                                    class="rounded px-2 py-1 bg-red-500 text-sm text-white">reject</span>
+                                                <div class="text-center">
+                                                    <span v-if="data.status === 0"
+                                                        class="rounded px-2 py-1 bg-slate-500 text-sm text-white">pending</span>
+                                                    <span v-if="data.status === 1"
+                                                        class="rounded px-2 py-1 bg-green-500 text-sm text-white">accepted</span>
+                                                    <span v-if="data.status === 2"
+                                                        class="rounded px-2 py-1 bg-red-500 text-sm text-white">reject</span>
+                                                </div>
+                                                <div class="text-center text-xs">
+                                                    {{ data.comment }}
+                                                </div>
                                             </td>
                                             <td class="text-end">
                                                 <router-link :to="'/panel/posts/' + data.id + '/view'"
@@ -158,7 +163,10 @@ export default {
             page: 1,
             name: '',
             per_page: 25,
+            user_type: '',
         })
+
+        filter.user_type = localStorage.getItem('user_type')
 
         function loadDataContent(page = 1) {
             is_loading.value = true

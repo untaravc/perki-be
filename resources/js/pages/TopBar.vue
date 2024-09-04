@@ -100,8 +100,6 @@ export default {
             role: {},
         })
 
-        const { token_store, app_store } = useFilterStore()
-
         const { getData } = useAxios()
 
         function getAuth() {
@@ -111,7 +109,10 @@ export default {
                     user_data.email = data.result.email
                     user_data.type = data.result.type
                     user_data.role = data.result.role
+
+                    localStorage.setItem('user_type', data.result.type)
                 }
+
             })
         }
 
