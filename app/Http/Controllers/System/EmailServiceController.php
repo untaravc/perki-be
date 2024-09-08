@@ -274,7 +274,7 @@ class EmailServiceController extends Controller
         }
     }
 
-    public function send_announcment_email()
+    public function send_announcement_email()
     {
         $mail_ctrl = new MailController();
         $mail_ctrl->setMail();
@@ -289,8 +289,7 @@ class EmailServiceController extends Controller
 
         $mail_logs = MailLog::whereIn('label', $labels)
             ->whereStatus(0)
-            ->where('email_receiver', 'vyvy1777@gmail.com')
-            ->limit(1)
+            ->limit(2)
             ->get();
 
         foreach ($mail_logs as $mail) {

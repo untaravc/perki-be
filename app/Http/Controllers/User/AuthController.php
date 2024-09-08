@@ -375,6 +375,7 @@ class AuthController extends BaseController
             "phone"       => "required|numeric|digits_between:8,15",
             "institution" => "required|string",
             "city"        => "required|string",
+            "nik"        => "required|string",
             "password"    => "nullable|min:6|confirmed",
         ]);
 
@@ -388,6 +389,7 @@ class AuthController extends BaseController
             'name'        => $request->name,
             'phone'       => $request->phone,
             'city'        => $request->city,
+            'nik'        => $request->nik,
             'institution' => $request->institution,
         ]);
 

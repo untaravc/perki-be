@@ -32,16 +32,9 @@ class EventTransaction24Controller extends BaseController
 
         $events = Event::whereSection('jcu24')
             ->whereIn('marker', ['symposium-jcu24', 'first-workshop-jcu24', 'second-workshop-jcu24'])
+            ->withCount('transactions')
             ->orderBy('name')
-            ->select(
-                'id',
-                'name',
-                'title',
-                'marker',
-                'slug',
-                'date_start',
-                'date_end',
-            )->get();
+            ->get();
 
         $symposium = $events->where('marker', 'symposium-jcu24')->first();
 
@@ -52,15 +45,16 @@ class EventTransaction24Controller extends BaseController
         $symposium['price'] = $symposium_price['price'];
 
         foreach ($first_workshop as $first) {
-            $first['quota'] = 30;
-            $first['transactions_count'] = 0;
-            $first['available'] = true;
+            $first['quota'] = $first['quota'];
+            $first['transactions_count'] = min($first['quota'], $first['transactions_count']);
+            $first['available'] = $first['quota'] >  $first['transactions_count'];
         }
 
         foreach ($second_workshop as $second) {
-            $second['quota'] = 30;
-            $second['transactions_count'] = 0;
-            $second['available'] = true;
+            $second['quota'] = $second['quota'];
+            $second['transactions_count'] = min($second['quota'], $second['transactions_count']);
+
+            $second['available'] = $second['quota'] >  $second['transactions_count'];
         }
 
         $data['symposium'] = $symposium;

@@ -79,7 +79,7 @@ class CronController extends Controller
         return $created;
     }
 
-    public function create_announcment_mail_log()
+    public function create_announcement_mail_log()
     {
         $contacts = Contact::where(function ($q) {
             $q->where('email', 'LIKE', '%gmail.com')
@@ -87,8 +87,6 @@ class CronController extends Controller
                 ->orWhere('email', 'LIKE', '%yahoo.com')
                 ->orWhere('email', 'LIKE', '%yahoo.co.id');
         })
-            ->limit(10)
-//            ->whereEmail('vyvy1777@gmail.com')
             ->get();
 
         $created = [];
@@ -114,9 +112,9 @@ class CronController extends Controller
         return "Created : " . count($created);
     }
 
-    public function send_announcment_email()
+    public function send_announcement_email()
     {
         $email_service = new EmailServiceController();
-        return $email_service->send_announcment_email();
+        return $email_service->send_announcement_email();
     }
 }

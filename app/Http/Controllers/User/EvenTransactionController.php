@@ -364,6 +364,9 @@ class EvenTransactionController extends BaseController
 
         $data = Transaction::whereUserId($user['id'])
             ->orderByDesc('id')
+            ->when($request->ref, function ($q) use ($request) {
+                $q->whereYear('created_at', $request->ref);
+            })
             ->where('status', '<', 300)
             ->with(['transaction_details' => function ($q) {
                 $q->with('event');
@@ -399,11 +402,17 @@ class EvenTransactionController extends BaseController
         $user = $request->user();
 
         $data['pending_transaction'] = Transaction::whereUserId($user['id'])
+            ->when($request->ref, function ($q) use ($request) {
+                $q->whereYear('created_at', $request->ref);
+            })
             ->where('status', '<', 200)
             ->count();
 
         $data['abstracts'] = Post::whereUserId($user['id'])
             ->whereIn('category', ['case_report', 'research', 'systematic_review'])
+            ->when($request->ref, function ($q) use ($request) {
+                $q->whereYear('created_at', $request->ref);
+            })
             ->count();
 
         $this->response['result'] = $data;
