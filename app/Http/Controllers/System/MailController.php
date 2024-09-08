@@ -85,15 +85,16 @@ class MailController extends Controller
                 //     Config::set('mail', $this->gmail_config);
                 //     $this->used_config = $this->gmail_config;
                 //     break;
-            case $vyvy < 420:
-                Config::set('mail', $this->vyvy_config);
-                $this->used_config = $this->vyvy_config;
-                break;
             case $perki_yahoo < 420:
-                Config::set('mail', $this->yahoo_config);
                 $this->used_config = $this->yahoo_config;
+                $this->used_config['password'] = env('MAIL_PASSWORD_YAHOO', '');
+                Config::set('mail', $this->used_config);
                 break;
-
+            case $vyvy < 420:
+                $this->used_config = $this->vyvy_config;
+                $this->used_config['password'] = env('MAIL_PASSWORD_VYVY', '');
+                Config::set('mail', $this->used_config);
+                break;
                 // case $jcu_gmail < 420:
                 //     Config::set('mail', $this->jcu_config);
                 //     $this->used_config = $this->jcu_config;
