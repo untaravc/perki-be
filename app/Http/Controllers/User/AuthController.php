@@ -502,9 +502,9 @@ class AuthController extends BaseController
             return $this->response;
         }
 
-//        $reset_user->update([
-//            'forgot_password_token' => null,
-//        ]);
+        //        $reset_user->update([
+        //            'forgot_password_token' => null,
+        //        ]);
 
         $token = $reset_user->createToken('user');
 

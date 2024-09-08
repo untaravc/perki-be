@@ -604,7 +604,8 @@
                                                 </tbody>
                                             </table>
                                             <p>
-                                                Yth.
+                                                Yth. {{ $receiver_name }}
+                                                <br>
                                                 <br>
                                                 PERKI Jogja dan FKKMK UGM mempersembahkan:
                                             </p>
@@ -625,6 +626,7 @@
                                             <br>
                                             Jangan lupa tandai kalender anda:
                                             <b>18 - 20 Oktober 2024</b>
+                                            <br>
                                             Registrasi dapat dilakukan melalui Website
                                             <a href="https://jcu.perki-jogja.com"><b>https://jcu.perki-jogja.com</b></a>
                                             <br>
@@ -649,12 +651,13 @@
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <a target="_blank" href="https://src.perki-jogja.com/"
+                                                            <a target="_blank"
+                                                                href="https://src.perki-jogja.com/assets24/posters/1st_announcement.pdf"
                                                                 style="background-color: darkblue;
                                                                 text-decoration: none;
                                                                 border-radius: 100px;
                                                                 color: white; padding: 10px 25px">
-                                                                Download Announcment Poster
+                                                                Download Full Announcement
                                                             </a>
                                                         </td>
                                                     </tr>

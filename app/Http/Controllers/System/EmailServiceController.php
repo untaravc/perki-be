@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Config;
 
 class EmailServiceController extends Controller
 {
@@ -251,6 +252,53 @@ class EmailServiceController extends Controller
             $data['content'] = $mail->content;
 
             //            return view($data['view'], $mail);
+
+            try {
+                Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
+                    ->send(new SendDefaultMail($data));
+
+                MailLog::find($mail->id)
+                    ->update([
+                        'email_sender' => env('MAIL_USERNAME'),
+                        'status'       => 1,
+                        'sent_at'      => now()
+                    ]);
+            } catch (\Exception $e) {
+                MailLog::find($mail->id)
+                    ->update([
+                        'status' => 2,
+                        'log'    => $e->getMessage(),
+                    ]);
+                return $e->getMessage();
+            }
+        }
+    }
+
+    public function send_announcment_email()
+    {
+        $mail_ctrl = new MailController();
+        $mail_ctrl->setMail();
+
+        if ($mail_ctrl->used_config == null) {
+            return 'Out of quota.';
+        }
+
+        $mail_ctrl->used_config;
+
+        $labels = ['jcu24_announcement'];
+        $data['email_subject'] = "Jogja Cardiology Update 2024 - 7th JINCARTOS";
+        $data['sender_email'] = $mail_ctrl->used_config['username'];
+
+        $mail_logs = MailLog::whereIn('label', $labels)
+            ->whereStatus(0)
+            ->where('email_receiver', 'vyvy1777@gmail.com')
+            ->limit(1)
+            ->get();
+
+        foreach ($mail_logs as $mail) {
+            $data['email_receiver'] = $mail->email_receiver;
+            $data['receiver_name'] = $mail->receiver_name;
+            $data['view'] = 'email.announcment';
 
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\MailLog;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -78,8 +79,43 @@ class CronController extends Controller
         return $created;
     }
 
+    public function create_announcment_mail_log()
+    {
+        $contacts = Contact::where(function ($q) {
+            $q->where('email', 'LIKE', '%gmail.com')
+                ->orWhere('email', 'LIKE', '%gmail.co.id')
+                ->orWhere('email', 'LIKE', '%yahoo.com')
+                ->orWhere('email', 'LIKE', '%yahoo.co.id');
+        })
+            ->limit(10)->whereEmail('vyvy1777@gmail.com')
+            ->get();
+
+        $created = [];
+        $label = 'jcu24_announcement';
+        $model = 'contact';
+        foreach ($contacts as $contact) {
+            $mail_log = MailLog::whereLabel($label)
+                ->whereModelId($contact->id)
+                ->first();
+
+            if (!$mail_log) {
+                $created[] = MailLog::create([
+                    "email_receiver" => $contact->email,
+                    "receiver_name"  => $contact->name,
+                    "label"          => $label,
+                    "model"          => $model,
+                    "model_id"       => $contact->id,
+                    "status"         => 0,
+                ]);
+            }
+        }
+
+        return $created;
+    }
+
     public function send_announcment_email()
     {
-        return view('email.announcment');
+        $email_service = new EmailServiceController();
+        return $email_service->send_announcment_email();
     }
 }
