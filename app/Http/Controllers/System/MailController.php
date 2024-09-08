@@ -14,7 +14,7 @@ class MailController extends Controller
         'host'       => 'smtp.gmail.com',
         'username'   => 'perki.yogyakarta@gmail.com',
         'sender_name' => 'Perki Yogyakarta',
-        'password'   => 'qruyeqskyothjiso',
+        'password'   => '',
         'encryption' => 'tls'
     ]; // testet 07/09/24
 
@@ -34,7 +34,7 @@ class MailController extends Controller
         'host'       => 'smtp.gmail.com',
         'username'   => 'vyvy1777@gmail.com',
         'sender_name'   => 'Sekretariat JCU',
-        'password'   => 'hheuiptyeddxqadf',
+        'password'   => '',
         'encryption' => 'tls'
     ]; // Tested 07/09/24
 
@@ -44,7 +44,7 @@ class MailController extends Controller
         'host'       => 'smtp.mail.yahoo.com',
         'username'   => 'perki_yogyakarta@yahoo.com',
         'sender_name' => 'Perki Yogyakarta',
-        'password'   => 'jtfmvzyrxhhyebxk',
+        'password'   => '',
         'encryption' => 'tls'
     ]; // Tested 07/09/24
 

@@ -283,8 +283,6 @@ class EmailServiceController extends Controller
             return 'Out of quota.';
         }
 
-        $mail_ctrl->used_config;
-
         $labels = ['jcu24_announcement'];
         $data['email_subject'] = "Jogja Cardiology Update 2024 - 7th JINCARTOS";
         $data['sender_email'] = $mail_ctrl->used_config['username'];
@@ -306,7 +304,7 @@ class EmailServiceController extends Controller
 
                 MailLog::find($mail->id)
                     ->update([
-                        'email_sender' => env('MAIL_USERNAME'),
+                        'email_sender' => $data['sender_email'],
                         'status'       => 1,
                         'sent_at'      => now()
                     ]);
