@@ -41,7 +41,7 @@
         @foreach ($contacts as $contact)
             <tr>
                 @if ($columns['no'])
-                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ ($contacts->currentPage() - 1) * $contacts->perPage() + $loop->iteration }}</td>
                 @endif
                 @if ($columns['type'])
                     <td>{{ $contact->type }}</td>
@@ -53,7 +53,11 @@
                     <td>{{ $contact->email }}</td>
                 @endif
                 @if ($columns['phone'])
-                    <td>{{ $contact->phone }}</td>
+                    <td>
+                        <a href="https://wa.me/{{ $contact->phone }}" target="_blank">
+                            {{ $contact->phone }}
+                        </a>
+                    </td>
                 @endif
             </tr>
         @endforeach
