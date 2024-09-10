@@ -210,13 +210,13 @@ class PostController extends Controller
         $data_content = Post::with(['user' => function ($q) {
             $q->with('voucher_code');
         }, 'authors'])
-            //            ->whereDate('created_at', '>', '2023-07-07')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
             })
             ->when($request->post_id, function ($q) use ($request) {
                 $q->where('id', $request->post_id);
             })
+            ->whereYear('created_at', 2024)
             ->whereIn('category', [
                 'case_report',
                 'research',

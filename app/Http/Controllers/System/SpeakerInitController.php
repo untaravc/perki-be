@@ -125,10 +125,10 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/hasanah.mumpuni.png',
             ],
             [
-                'name'  => 'dr. Hendry Purnasidha Bagaswoto Sp.JP(K)',
-                'slug'  => 'hendry.purnasidha',
-                'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.png',
+                'name'      => 'dr. Hendry Purnasidha Bagaswoto Sp.JP(K)',
+                'slug'      => 'hendry.purnasidha',
+                'desc'      => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
+                'image'     => 'https://src.perki-jogja.com/assets/photo/hendry.purnasidha.png',
                 'biography' => "Dr. Hendry Purnasidha Bagaswoto, Sp.JP(K), has a rich academic background in the field of cardiology and emergency care. He obtained his Medical Doctor degree from Universitas Gadjah Mada in 2008 and later specialized as a Cardiologist at the same university in 2015. Dr. Bagaswoto furthered his expertise by becoming a Consultant of Interventional Cardiology at Dr. Sardjito Hospital in Yogyakarta in 2018 and then joined the National Cardiovascular Center Harapan Kita in Jakarta as a Consultant of Acute, Intensive, and Cardiovascular Emergency in 2019.
                 <br/>
                 Currently, Dr. Bagaswoto serves as a Consultant of Acute, Intensive, and Cardiovascular Emergency Care, specializing in Cardiology Intervention. He is also actively engaged as a staff member at the Department of Cardiology and Vascular Medicine within the Faculty of Medicine, Public Health, and Nursing at Universitas Gadjah Mada, contributing significantly to research and patient care in these fields."
@@ -315,15 +315,15 @@ class SpeakerInitController extends Controller
             ],
             [
                 'name'  => "dr. Pipin Ardhianto, SpJP(K)",
-                'slug'  => "pipin.ardianto",
+                'slug'  => "pipin.ardhianto",
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/pipin.ardianto.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/pipin.ardhianto.jpeg',
             ],
             [
                 'name'  => "Dr. dr. Habibie Arifianto, M.Kes, Sp.JP(K)",
-                'slug'  => "habibi.arifianto",
+                'slug'  => "habibie.arifianto",
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/habibi.arifianto.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/habibie.arifianto.jpeg',
             ],
             [
                 'name'  => "dr. Bambang Widyantoro, Ph.D, Sp.JP(K)",
@@ -385,6 +385,30 @@ class SpeakerInitController extends Controller
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/hyuk.jae.jpeg',
             ],
+            [
+                'name'  => "Prof. Dr. dr. Amiliana Mardiani Soesanto, Sp.JP(K)",
+                'slug'  => "amiliana.soesanto",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/amiliana.soesanto.jpg',
+            ],
+            [
+                'name'  => "dr. Monika Putri Adiningsih, Sp.JP",
+                'slug'  => "monika.putri",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Billy Aditya Pratama, Sp.JP",
+                'slug'  => "billy.aditya",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Faisol Siddiq, Sp.JP",
+                'slug'  => "faisol Siddiq",
+                'desc'  => "",
+                'image' => "",
+            ],
         ];
 
         foreach ($data as $datum) {
@@ -394,7 +418,12 @@ class SpeakerInitController extends Controller
             $datum['is_speaker'] = 1;
             $datum['type'] = 'speaker';
             if ($user) {
-                $user->update($datum);
+                $user->update([
+                    'name'  => $datum['name'],
+                    'slug'  => $datum['slug'],
+                    'desc'  => $datum['desc'],
+                    'image' => $datum['image'],
+                ]);
             } else {
                 User::create($datum);
             }

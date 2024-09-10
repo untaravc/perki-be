@@ -177,7 +177,7 @@ class CommitteeController extends Controller
             'users' => [
                 ['user' => 'bambang.irawan'],
                 ['user' => 'budi.yuli'],
-                ['user' => 'arjono'],
+                ['user' => 'rm.arjono'],
                 ['user' => 'hariadi.hariawan'],
                 ['user' => 'irsad.andi'],
             ],
@@ -272,16 +272,16 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
-            'title' => "Secretariat",
-            'users' => [
-                ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
-                ['user' => 'aris.widaryanti'],
-                ['user' => 'ice.suciati'],
-                ['user' => 'beti.meitasari'],
-                ['user' => 'intan.rengganis'],
-            ]
-        ];
+//        $names[] = [
+//            'title' => "Secretariat",
+//            'users' => [
+//                ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
+//                ['user' => 'aris.widaryanti'],
+//                ['user' => 'ice.suciati'],
+//                ['user' => 'beti.meitasari'],
+//                ['user' => 'intan.rengganis'],
+//            ]
+//        ];
 
         $user = User::where('is_speaker', 1)
             ->select('image', 'name', 'slug', 'desc')
