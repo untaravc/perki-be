@@ -23,7 +23,19 @@ class EventTransaction24Controller extends BaseController
             $this->sendError(422, 'Transaction number required.');
         }
 
-        $job_type_code = $transaction->job_type_code === 'DRSP' ? 'DRSP' : 'DRGN';
+        $job_type_code = 'DRGN';
+
+        switch ($transaction->job_type_code) {
+            case 'DRSP':
+            case 'PRKI':
+                $job_type_code = 'DRSP';
+                break;
+            case 'MHSA':
+                $job_type_code = "MHSA";
+                break;
+            default:
+                $job_type_code = 'DRGN';
+        }
 
         $prices = Price::whereModel('event')
             ->whereSection('jcu24')

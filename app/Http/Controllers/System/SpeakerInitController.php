@@ -89,7 +89,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.png',
             ],
             [
-                'name'  => 'dr. Firandi Saputra, Sp.JP',
+                'name'  => 'dr. Firandi Saputra, Sp.JP(K)',
                 'slug'  => 'firandi.saputra',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/firandi.saputra.jpg',
@@ -406,6 +406,24 @@ class SpeakerInitController extends Controller
             [
                 'name'  => "dr. Faisol Siddiq, Sp.JP",
                 'slug'  => "faisol Siddiq",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Erdiansyah Zulyadaini, Sp.JP",
+                'slug'  => "erdiansyah.zulyadaini",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Anindhita Muthmaina, Sp.Jp",
+                'slug'  => "anindhita.muthmaina",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Angga Dwi Prasetyo, Sp.JP",
+                'slug'  => "angga.dwi",
                 'desc'  => "",
                 'image' => "",
             ],

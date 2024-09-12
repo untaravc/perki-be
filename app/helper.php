@@ -19,13 +19,15 @@ if (!function_exists('prefix_zero')) {
 if (!function_exists('job_type_code_map')) {
     function job_type_code_map(string $job_type_code)
     {
-        switch ($job_type_code){
+        switch ($job_type_code) {
             case "DRSP":
-                $code = "DRSP"; break;
+            case "PRKI":
+                $code = "DRSP";
+                break;
             case "MHSA":
             case "COAS":
-            case "NURS":
-                $code = "MHSA"; break;
+                $code = "MHSA";
+                break;
             default:
                 $code = 'DRGN';
         }
@@ -37,6 +39,6 @@ if (!function_exists('job_type_code_map')) {
 if (!function_exists('exclude_user_ids')) {
     function exclude_user_ids()
     {
-        return [42,182,790,791,792,1];
+        return [42, 182, 790, 791, 792, 1];
     }
 }

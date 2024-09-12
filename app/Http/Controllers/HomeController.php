@@ -6,8 +6,6 @@ use App\Http\Controllers\BaseController;
 use App\Models\Event;
 use App\Models\GuestLog;
 use App\Models\JobType;
-use App\Models\Reference;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends BaseController
@@ -47,7 +45,7 @@ class HomeController extends BaseController
 
     public function cta_event(Request $request)
     {
-        if($request->ref == 2024){
+        if ($request->ref == 2024) {
             $data = [
                 "title"    => "Join Our Webinar JCU",
                 "subtitle" => "Free & Full Certificate",
