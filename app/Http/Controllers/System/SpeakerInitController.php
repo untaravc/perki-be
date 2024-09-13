@@ -329,13 +329,7 @@ class SpeakerInitController extends Controller
                 'name'  => "dr. Bambang Widyantoro, Ph.D, Sp.JP(K)",
                 'slug'  => "bambang.widyantoro",
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/bambang.widyantoro.jpeg',
-            ],
-            [
-                'name'  => "dr. Bambang Widyantoro, Ph.D, Sp.JP(K)",
-                'slug'  => "bambang.widyantoro",
-                'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/bambang.widyantoro.jpeg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/bambang.widyantoro.jpg',
             ],
             [
                 'name'  => "dr. R. Heru Prasanto, Sp.PD-KGH",

@@ -83,7 +83,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-lg h4 mb-0">Transactions</div>
+                            <div class="flex justify-between">
+                                <div class="text-lg h4 mb-0">Transactions</div>
+                                <div>
+                                    <a class="text-sm text-blue-600 hover:text-blue-400 underline" target="_blank"
+                                        href="/transaction-recap?section=jcu24">Data Detail</a>
+                                </div>
+                            </div>
                             <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="text-sm">Est. Earning</div>
@@ -146,7 +152,11 @@
                                 </div>
                             </div>
                             <div v-for="event in content.events">
-                                <div><b>{{ event.name }}</b></div>
+                                <div class="flex justify-between">
+                                    <b>{{ event.name }}</b>
+                                    <a :href="'/event-member/' + event.slug" target="_blank"
+                                        class="text-sm text-blue-600 hover:text-blue-400 underline">Data Peserta</a>
+                                </div>
                                 <div class="overflow-hidden h-4 mb-2 text-xs flex rounded bg-emerald-50">
                                     <div :style="'width: ' + event.transaction_success_std_count * 100 / event.quota + '%'"
                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">

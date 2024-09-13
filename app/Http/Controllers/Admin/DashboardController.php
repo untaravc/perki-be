@@ -162,6 +162,7 @@ class DashboardController extends Controller
                 'name',
                 'title',
                 'quota',
+                'slug',
             )->withCount([
                 'transaction_success',
                 'transaction_success_std',

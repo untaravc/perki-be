@@ -140,10 +140,13 @@ class TransactionController extends Controller
         return $this->responseUpdate($transaction);
     }
 
-    public function transaction_recap()
+    public function transaction_recap(Request $request)
     {
         $transactions = Transaction::where('status', '!=', 400)
             ->where('status', '>', 100)
+            ->when($request->section, function ($q) use ($request) {
+                $q->whereSection($request->section);
+            })
             ->orderByDesc('status')
             ->orderBy('id')
             ->with([
@@ -154,7 +157,9 @@ class TransactionController extends Controller
             ])
             ->get();
 
-        return view('print.transaction.list', compact('transactions'));
+        $query['section'] = $request->section;
+
+        return view('print.transaction.list', compact('transactions', 'query'));
     }
 
     public function invoice_pdf($transaction_id, Request $request)

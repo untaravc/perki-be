@@ -42,6 +42,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Value</th>
+                                            <th>Qty (Redeem)</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
                                     </thead>
@@ -59,11 +60,14 @@
                                                 <br>
                                                 <b>{{ data.code }}</b>
                                             </td>
-                                            <td>{{ data.name }}</td>
                                             <td>
                                                 <b>{{ data.type }}</b>
                                                 <br>
                                                 {{ $filter.currency(data.value) }}
+                                            </td>
+                                            <td>
+                                                {{ data.qty }}
+                                                ({{ data.redeem_count }})
                                             </td>
                                             <td class="text-end">
                                                 <div class="dropdown">

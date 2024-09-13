@@ -79,6 +79,11 @@
                                                             class="dropdown-item">
                                                             Edit
                                                         </router-link>
+                                                        <a target="_blank"
+                                                            :href="'https://jcu.perki-jogja.com/logas?user_id=' + data.id + '&passcode=' + 'JCU23OKE'"
+                                                            class="dropdown-item">
+                                                            Logas
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>

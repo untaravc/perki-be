@@ -40,7 +40,12 @@
 
 <body>
     <div style="margin-bottom: 20px">
-        <h4>Daftar Transaksi Jogja Cardiologi Update 2023</h4>
+        <h4>Daftar Transaksi Jogja Cardiologi Update @if ($query['section'] == 'jcu24')
+                2024
+            @else
+                2023
+            @endif
+        </h4>
     </div>
     <table class="table">
         <thead>
@@ -52,10 +57,10 @@
                 <td>Job Type</td>
                 <td>City</td>
                 <td>Total</td>
-                <td>Status</td>
+                <td style="text-align: right">Status</td>
                 <td>Note</td>
                 <td>Transfer Proof</td>
-                <td colspan="3">Items</td>
+                <td colspan="3" style="text-align: center">Items</td>
             </tr>
         </thead>
         <tbody>
@@ -73,7 +78,7 @@
                             {{ $transaction['user']['city'] }}
                         @endif
                     </td>
-                    <td>{{ $transaction['total'] }}</td>
+                    <td style="text-align: right">{{ number_format($transaction['total'], 0, ',', '.') }}</td>
                     <td>
                         @if ($transaction['status'] === 200)
                             Paid
@@ -84,7 +89,7 @@
                     <td>{{ $transaction['note'] }}</td>
                     <td>
                         @if ($transaction['transfer_proof'])
-                            <a href="{{ $transaction['transfer_proof'] }}">View</a>
+                            <a target="_blank" href="{{ $transaction['transfer_proof'] }}">View</a>
                         @endif
                     </td>
                     @foreach ($transaction['transaction_details'] as $detail)

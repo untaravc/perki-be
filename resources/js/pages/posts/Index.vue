@@ -123,7 +123,7 @@
                             <div class="row">
                                 <div
                                     class="col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start">
-                                    <PerPage :value="filter.per_page" @change-per-page="changePerPage" />
+                                    <PerPage :value="post_store.per_page" @change-per-page="changePerPage" />
                                 </div>
                                 <div
                                     class="col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end">
@@ -170,7 +170,7 @@ export default {
 
         function loadDataContent(page = 1) {
             is_loading.value = true
-            filter.page = page
+            post_store.page = page
             getData('posts', post_store)
                 .then((data) => {
                     if (data.success) {
@@ -190,7 +190,7 @@ export default {
         })
 
         function changePerPage(per_page) {
-            filter.per_page = per_page
+            post_store.per_page = per_page
             loadDataContent()
         }
 
@@ -200,7 +200,7 @@ export default {
                 deleteData('posts/' + id)
                     .then((data) => {
                         SwalToast('Berhasil menghapus data.')
-                        loadDataContent(filter.page)
+                        loadDataContent(post_store.page)
                     })
             }
         }

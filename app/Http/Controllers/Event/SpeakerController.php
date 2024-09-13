@@ -12,31 +12,20 @@ class SpeakerController extends BaseController
 {
     public function speakers(Request $request)
     {
-        $ids = [];
+        $slugs = Event::whereSection('jcu24')
+            ->pluck('speakers')
+            ->toArray();
+        $user_slugs = array_unique($slugs);
 
-        // if ($request->ref == 2024) {
-        //     $refs = Reference::whereReference($request->ref)
-        //         ->whereModel('user')
-        //         ->get();
-        //     $ids = $refs->pluck('model_id')->toArray();
-        // }
+        $speakers = User::where('is_speaker', 1)
+            ->whereIn('slug', $user_slugs)
+            ->when($request->limit, function ($q) use ($request) {
+                $q->limit($request->limit);
+            })
+            ->inRandomOrder()
+            ->select('id', 'name', 'desc', 'image')
+            ->get();
 
-
-        // $data = User::where('is_speaker', 1)
-        //     ->when($request->limit, function ($q) use ($request) {
-        //         $q->limit($request->limit);
-        //     })
-        //     ->inRandomOrder()
-        //     ->select('id', 'name', 'desc', 'image')
-        //     ->when(count($ids) > 0, function($q) use ($ids){
-        //         $q->whereIn('id', $ids);
-        //     })
-        //     ->get();
-
-        return $events = Event::whereSection('jcu24')->pluck('speakers');
-
-        User::where('is_speaker', 1)->whereIn('slug', $events);
-
-        $this->sendGetResponse('');
+        $this->sendGetResponse($speakers);
     }
 }
