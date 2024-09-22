@@ -10,6 +10,8 @@ class Event extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $appends = ['show'];
+
     protected $fillable = [
         "name",
         "section",
@@ -99,5 +101,10 @@ class Event extends Model
         return $this->hasMany(TransactionDetail::class)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 200);
+    }
+
+    public function getShowAttribute()
+    {
+        return false;
     }
 }
