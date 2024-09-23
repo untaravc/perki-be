@@ -5,12 +5,14 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::get('/', function () {
     return 'perki-src';
 });
 Route::get('/panel/print-abstract', [PostController::class, 'printPost']);
 Route::get('/panel/preview-abstract', [PostController::class, 'previewAbstract']);
+Route::get('/panel/register-user', [UserController::class, 'registerUser']);
 Route::get('/panel', [AuthController::class, 'adminPanel']);
 Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where('path', '([A-z\d\-\/_.]+)?');
 Route::get('/scanner', [AuthController::class, 'scannerPanel']);

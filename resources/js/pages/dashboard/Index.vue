@@ -22,7 +22,13 @@
                     </div>
                     <div class="col-md-4 mb-5">
                         <div class="rounded-3 bg-white p-4 mb-4">
-                            <div class="text-lg h4 mb-0">Abstracts Submission</div>
+                            <div class="flex justify-between">
+                                <div class="text-lg h4 mb-0">Abstracts Submission</div>
+                                <div>
+                                    <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
+                                        href="/panel/preview-abstract?ref=2024">Preview</a>
+                                </div>
+                            </div>
                             <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="text-sm">Pending</div>
@@ -44,25 +50,47 @@
                                     <hr>
                                 </div>
                                 <div class="col-6">
-                                    <div class="text-sm">Case Report</div>
+                                    <div class="text-sm">
+                                        <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
+                                            href="/panel/print-abstract?ref=2024&category=case_report" target="_blank">
+                                            Case Report
+                                        </a>
+                                    </div>
                                     <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
                                         {{ content.abstract_categories.case_report }}
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="text-sm">Research</div>
+                                    <div class="text-sm">
+                                        <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
+                                            href="/panel/print-abstract?ref=2024&category=research" target="_blank">
+                                            Research
+                                        </a>
+                                    </div>
                                     <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
                                         {{ content.abstract_categories.research }}
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="text-sm">Systematic Review</div>
+                                    <div class="text-sm">
+                                        <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
+                                            href="/panel/print-abstract?ref=2024&category=systematic_review"
+                                            target="_blank">
+                                            Systematic Review
+                                        </a>
+                                    </div>
                                     <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
                                         {{ content.abstract_categories.systematic_review }}
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="text-sm">Meta Analysis</div>
+                                    <div class="text-sm">
+                                        <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
+                                            href="/panel/print-abstract?ref=2024&category=meta_analysis"
+                                            target="_blank">
+                                            Meta Analysis
+                                        </a>
+                                    </div>
                                     <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
                                         {{ content.abstract_categories.meta_analysis }}
                                     </div>
@@ -70,7 +98,13 @@
                             </div>
                         </div>
                         <div class="rounded-3 bg-white p-4">
-                            <div class="text-lg h4 mb-0">Members</div>
+                            <div class="flex justify-between">
+                                <div class="text-lg h4 mb-0">Members</div>
+                                <div>
+                                    <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
+                                        href="/panel/register-user?ref=2024">Preview</a>
+                                </div>
+                            </div>
                             <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="text-sm">Register</div>

@@ -74,4 +74,13 @@ class UserController extends Controller
             abort(response($this->response, 422));
         }
     }
+
+    public function registerUser(Request $request)
+    {
+        $users = User::whereIsSpeaker(0)
+            ->whereYear('updated_at', $request->ref)
+            ->get();
+
+        return view('print.contacts.register-user', compact('users'));
+    }
 }

@@ -97,12 +97,14 @@ class PostController extends Controller
     public function printPost(Request $request)
     {
         $data_content = Post::with(['user', 'authors'])
-            ->groupBy('user_id')
-            ->whereDate('created_at', '>', '2023-07-07')
+            // ->groupBy('user_id')
+            ->whereDate('created_at', '>', '2024-01-01')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
             })->when($request->post_id, function ($q) use ($request) {
                 $q->where('id', $request->post_id);
+            })->when($request->ref, function ($q) use ($request) {
+                $q->whereYear('created_at', $request->ref);
             })
             ->whereIn('category', [
                 'case_report',
@@ -207,16 +209,21 @@ class PostController extends Controller
 
     public function previewAbstract(Request $request)
     {
-        $data_content = Post::with(['user' => function ($q) {
-            $q->with('voucher_code');
-        }, 'authors'])
+        $data_content = Post::with([
+            'user' => function ($q) {
+                $q->with('voucher_code', 'success_transactions');
+            },
+            'authors'
+        ])
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
             })
             ->when($request->post_id, function ($q) use ($request) {
                 $q->where('id', $request->post_id);
             })
-            ->whereYear('created_at', 2024)
+            ->when($request->ref, function ($q) use ($request) {
+                $q->whereYear('created_at', $request->ref);
+            })
             ->whereIn('category', [
                 'case_report',
                 'research',
@@ -224,8 +231,6 @@ class PostController extends Controller
                 'meta_analysis',
             ])
             ->orderBy('category')->get();
-
-        //        return $data_content;
 
         return view('print.posts.abstract_preview', compact('data_content'));
     }

@@ -6,41 +6,74 @@
         <td>City</td>
         <td>Institution</td>
         <td>Email</td>
-        <td>Voucher Code</td>
+        <td style="text-align: right">Transaction</td>
+        {{-- <td>Voucher Code</td> --}}
         <td>Type</td>
         <td>Title</td>
     </tr>
-    @foreach($data_content as $key => $data)
+    @foreach ($data_content as $key => $data)
         <tr>
-            <td>{{$key + 1}}</td>
+            <td>{{ $key + 1 }}</td>
             <td>
-                {{$data['category']}}
+                {{ $data['category'] }}
             </td>
             <td>
-                @if($data['user']) {{$data['user']['name']}} @endif
+                @if ($data['user'])
+                    {{ $data['user']['name'] }}
+                @endif
             </td>
             <td>
-                @if($data['user']) {{$data['user']['city']}} @endif
+                @if ($data['user'])
+                    {{ $data['user']['city'] }}
+                @endif
             </td>
             <td>
-                @if($data['user']) {{$data['user']['institution']}} @endif
+                @if ($data['user'])
+                    {{ $data['user']['institution'] }}
+                @endif
             </td>
-            <td>@if($data['user']) {{$data['user']['email']}} @endif</td>
-            <td>@if($data['user'] && $data['user']['voucher_code']) {{$data['user']['voucher_code']['code']}} @endif</td>
             <td>
-                @if($data['user'])
+                @if ($data['user'])
+                    {{ $data['user']['email'] }}
+                @endif
+            </td>
+            {{-- <td>@if ($data['user'] && $data['user']['voucher_code']) {{$data['user']['voucher_code']['code']}} @endif</td> --}}
+            <td style="text-align: right">
+                @if ($data['user'] && $data['user']['success_transactions'] && isset($data['user']['success_transactions'][0]))
+                    {{ number_format($data['user']['success_transactions'][0]['total'], 0, ',', '.') }}
+                @endif
+            </td>
+            <td>
+                @if ($data['user'])
                     @switch($data['user']['job_type_code'])
-                        @case('DRGN')General Practitioner @break
-                        @case('COAS')Coass @break
-                        @case('ITRS')Interenship @break
-                        @case('RSDN')Residen @break
-                        @case('DRSP')Spesialis @break
-                        @default {{$data['user']['job_type_code']}} @break
+                        @case('DRGN')
+                            General Practitioner
+                        @break
+
+                        @case('COAS')
+                            Coass
+                        @break
+
+                        @case('ITRS')
+                            Interenship
+                        @break
+
+                        @case('RSDN')
+                            Residen
+                        @break
+
+                        @case('DRSP')
+                            Spesialis
+                        @break
+
+                        @default
+                            {{ $data['user']['job_type_code'] }}
+                        @break
                     @endswitch
                 @endif
             </td>
             <td>
-                {{$data['title']}}
+                {{ $data['title'] }}
             </td>
         </tr>
     @endforeach
