@@ -170,6 +170,11 @@ class TransactionController extends Controller
             ->find($transaction_id);
 
         $data['note'] = $request->note ?? '';
+        if($request->status_label){
+            $data['status_label'] = $request->status_label;
+        } else {
+            $data['status_label'] = $data['transaction']['status_label'];
+        }
 
         return view('email.jcu22.invoice_pdf', $data);
     }

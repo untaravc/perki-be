@@ -371,7 +371,7 @@ class EvenTransactionController extends BaseController
             ->where('status', '<', 300)
             ->with(['transaction_details' => function ($q) {
                 $q->with('event');
-            }])
+            }, 'transaction_children'])
             ->get();
 
         $this->response['result'] = $data;

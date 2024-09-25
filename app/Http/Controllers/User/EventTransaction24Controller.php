@@ -161,7 +161,7 @@ class EventTransaction24Controller extends BaseController
         }
 
         if ($request->users) {
-            // $this->record_child_transaction($transaction, $request->users);
+            $this->record_child_transaction($transaction, $request->users);
         }
 
         // delete unused
@@ -191,7 +191,24 @@ class EventTransaction24Controller extends BaseController
         }
 
         $items = $request->items;
-        $data[] = $this->get_symposium($items['symposium'], $transaction);
+
+        $additional_user = collect($request->users);
+        $count = 0;
+        foreach ($additional_user as $user) {
+            if ($user['email'] != null && $user['name'] != null) {
+                $count++;
+            }
+        }
+
+        // $data[] = $this->get_symposium($items['symposium'], $transaction);
+        if (isset($items['symposium'])) {
+            if ($count >= 5) {
+                $force_price = $transaction->job_type_code === 'DRSP' ? 1000000 : 5000000;
+                $data[] = $this->get_symposium($items['symposium'], $transaction, $force_price);
+            } else {
+                $data[] = $this->get_symposium($items['symposium'], $transaction);
+            }
+        }
 
         if (isset($items['first_workshop'])) {
             $data[] = $this->get_symposium($items['first_workshop'], $transaction);
@@ -362,7 +379,7 @@ class EventTransaction24Controller extends BaseController
         $validate_users = 0;
 
         foreach ($users as $user) {
-            if ($user['email'] != '' && $user['name'] != '') {
+            if ($user['email'] != '' && $user['name'] != '' && $user['nik'] != '') {
                 $validate_users++;
             }
         }
@@ -375,7 +392,7 @@ class EventTransaction24Controller extends BaseController
         foreach ($users as $user) {
             if (!isset($user['id'])) {
                 $payload = [
-                    "section"          => "jcu23",
+                    "section"          => "jcu24",
                     "number"           => $this->generate_child_number($transaction->number),
                     "parent_id"        => $transaction->id,
                     "user_id"          => $transaction->id,
@@ -383,10 +400,12 @@ class EventTransaction24Controller extends BaseController
                     "user_phone"       => null,
                     "user_email"       => $user['email'],
                     "job_type_code"    => "DRGN",
+                    "nik"              => $user['nik'],
                     "subtotal"         => 0,
                     "voucher_code"     => 0,
                     "voucher_discount" => 0,
                     "discount_amount"  => 0,
+                    "service_fee"      => 0,
                     "service_fee"      => 0,
                     "tax"              => 0,
                     "total"            => 0,
@@ -398,7 +417,7 @@ class EventTransaction24Controller extends BaseController
                 $trx_child_ids[] = $trx_child->id;
 
                 $payload_detail = [
-                    "section"        => "jcu23",
+                    "section"        => "jcu24",
                     "transaction_id" => $trx_child->id,
                     "job_type_code"  => $payload['job_type_code'],
                     "user_id"        => $payload['user_id'],
@@ -419,5 +438,19 @@ class EventTransaction24Controller extends BaseController
             ->whereParentId($transaction->id)
             ->whereNotIn("id", $trx_child_ids)
             ->delete();
+    }
+
+    protected function generate_child_number($parent_number, $add = 1)
+    {
+        $parent = Transaction::where('number', 'LIKE', $parent_number . "%")->count();
+
+        $number = $parent_number . '-' . $parent;
+        $exist = Transaction::whereNumber($number)->first();
+
+        if ($exist) {
+            return $this->generate_child_number($parent_number, $add + 1);
+        }
+
+        return $number;
     }
 }

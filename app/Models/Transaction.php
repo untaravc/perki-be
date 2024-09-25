@@ -21,13 +21,15 @@ class Transaction extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $appends = ['last_time', 'status_label','user_phone_wa'];
+    protected $appends = ['last_time', 'status_label', 'user_phone_wa'];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->hasMany(self::class, 'parent_id', 'id');
     }
 
@@ -36,18 +38,23 @@ class Transaction extends Model
         return $this->hasMany(TransactionDetail::class);
     }
 
+    public function transaction_children()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
     public function getLastTimeAttribute()
     {
-        if(isset($this->attributes['updated_at'])){
+        if (isset($this->attributes['updated_at'])) {
             return date('Y-m-d H:i:s', strtotime($this->attributes['updated_at'] . '+24 hours'));
         }
     }
 
     public function getUserPhoneWaAttribute()
     {
-        if(isset($this->attributes['user_phone']) && $this->attributes['user_phone']){
+        if (isset($this->attributes['user_phone']) && $this->attributes['user_phone']) {
             $number = $this->attributes['user_phone'][0];
-            if($number === '0'){
+            if ($number === '0') {
                 return "62" . substr($this->attributes['user_phone'], 1);
             }
         }
@@ -57,12 +64,18 @@ class Transaction extends Model
     {
         if (isset($this->attributes['status'])) {
             switch ($this->attributes['status']) {
-                case 100: return 'Select Event';
-                case 110: return 'Waiting payment';
-                case 120: return 'Waiting confirmation';
-                case 200: return 'Paid';
-                case 300: return 'Sub Transaction';
-                case 400: return 'Deleted';
+                case 100:
+                    return 'Select Event';
+                case 110:
+                    return 'Waiting payment';
+                case 120:
+                    return 'Waiting confirmation';
+                case 200:
+                    return 'Paid';
+                case 300:
+                    return 'Sub Transaction';
+                case 400:
+                    return 'Deleted';
             }
         }
     }
@@ -71,15 +84,24 @@ class Transaction extends Model
     {
         if (isset($this->attributes['job_type_code'])) {
             switch ($this->attributes['job_type_code']) {
-                case 'MHSA': return 'Medical student';
-                case 'COAS': return 'Co-ass';
-                case 'NURS': return 'Nurse';
-                case 'ITRS': return 'Internship';
-                case 'RSDN': return 'Residency';
-                case 'DRGN': return 'General Practitioner';
-                case 'DRSP': return 'Specialist';
-                case 'OTHR': return 'Healthcare Provider';
-                default: return $this->attributes['job_type_code'];
+                case 'MHSA':
+                    return 'Medical student';
+                case 'COAS':
+                    return 'Co-ass';
+                case 'NURS':
+                    return 'Nurse';
+                case 'ITRS':
+                    return 'Internship';
+                case 'RSDN':
+                    return 'Residency';
+                case 'DRGN':
+                    return 'General Practitioner';
+                case 'DRSP':
+                    return 'Specialist';
+                case 'OTHR':
+                    return 'Healthcare Provider';
+                default:
+                    return $this->attributes['job_type_code'];
             }
         }
     }

@@ -20,16 +20,16 @@ class BannerController extends Controller
     {
         $data = [
             [
-                "title"    => "Jogja Cardiology Update",
-                "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
-                "date"     => "Yogyakarta, 18-20 October 2024",
-                "poster"   => '/assets24/posters/2nd_announcement.jpg',
+                "title"    => "Jogja Cardiology Update Workshop",
+                "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
+                "date"     => "Yogyakarta, 18th October 2024",
+                "poster"   => '/assets24/posters/jcu24_day1.jpeg',
                 "buttons"  => [
-                    // [
-                    //     "theme" => "light",
-                    //     "text"  => "Schedule",
-                    //     "link"  => "/#schedule",
-                    // ],
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
                     [
                         "theme" => "dark",
                         "text"  => "Register",
@@ -38,15 +38,38 @@ class BannerController extends Controller
                 ]
             ],
             [
-                "title"    => "Call for Abstracts",
+                "title"    => "Jogja Cardiology Update Symposium",
                 "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
-                "date"     => "Submission, 1st Oct 2024",
-                "poster"   => '/assets24/posters/abstract_extend.jpeg',
+                "date"     => "Yogyakarta, 19th October 2024",
+                "poster"   => '/assets24/posters/jcu24_day2.jpeg',
                 "buttons"  => [
                     [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
+                    [
                         "theme" => "dark",
-                        "text"  => "Submit",
-                        "link"  => "/abstracts",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
+                ]
+            ],
+            [
+                "title"    => "Jogja International Cardiovascular Topic Series",
+                "subtitle" => "Advance Care in Hearth Failure and Pulmonary Hypertension",
+                "date"     => "Yogyakarta, 20th October 2024",
+                "poster"   => '/assets24/posters/jcu24_day3.jpeg',
+                "buttons"  => [
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
                     ]
                 ]
             ],

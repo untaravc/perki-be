@@ -32,7 +32,7 @@
 <body>
 <div style="display: flex; justify-content: space-between; border-bottom: 1px solid gray">
     <div>
-        <img src="https://jcu.perki-jogja.com/storage/logo/jcu_color.png" alt="Perki Logo"
+        <img src="https://jcu.perki-jogja.com/storage/logo/jcu24_color.png" alt="Perki Logo"
              style="width: 100px">
         <h1 style="margin: 5px">Invoice</h1>
     </div>
@@ -61,7 +61,9 @@
         <div>Created at</div>
         <div style="margin-bottom: 2px"><b>{{$transaction['created_at']}}</b></div>
         <div>Status</div>
-        <div><b>{{$transaction['status_label']}}</b></div>
+        <div>
+            <b>{{$status_label}}</b>
+        </div>
     </div>
 </div>
 <div style="padding: 10px 0">
@@ -117,7 +119,7 @@
     </div>
 </div>
 <div class="bt" style="padding: 3px 0; text-align: right">
-    <small><i>valid access on <a href="{{url()->full()}}">{{url()->full()}}</a></i></small>
+    <small><i>valid access on <a href="{{url()->full()}}">{{url()->current()}}</a></i></small>
 </div>
 </body>
 </html>

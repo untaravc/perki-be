@@ -116,15 +116,15 @@ class DataInitController extends BaseController
         foreach ($rows as $cols) {
             $has_data = Contact::whereEmail($cols[self::EMAIL])->first();
             $has_user = User::whereEmail($cols[self::EMAIL])->first();
+
             $institution = $has_user ? $has_user->institution : null;
             $province = $has_user ? $has_user->province : null;
             $job_type_code = $has_user ? $has_user->job_type_code : null;
+            $phone = $has_user ? $has_user->phone : null;
 
             if ($has_data) {
                 $has_data->update([
-                    'type' => $cols[self::TYPE],
-                    'name' => $cols[self::NAME],
-                    'phone' => $cols[self::PHONE],
+                    'phone' => $phone === null ? $cols[self::PHONE] : $has_user->phone,
                     'user_id' => $has_user ? $has_user->id : null,
                     'institution' => $cols[self::INSTITUTION] ?? $institution,
                     'province' => $cols[self::PROVINCE] ?? $province,
