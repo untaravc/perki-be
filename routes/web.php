@@ -38,7 +38,7 @@ Route::get('print/transaction-presence/{transaction_id}', [\App\Http\Controllers
 Route::get('print/invoice-pdf/{transaction_id}', [TransactionController::class, 'invoice_pdf']);
 
 // TEST
-Route::get('test', [\App\Http\Controllers\System\CronController::class, 'create_announcement_mail_log']);
+Route::get('test', [\App\Http\Controllers\System\FonnteServiceController::class, 'test']);
 Route::get('print-by-name', [\App\Http\Controllers\TestController::class, 'print_by_name']);
 Route::get('send_certy', [\App\Http\Controllers\TestController::class, 'send_certy']);
 Route::get('create_certy_mail_log', [\App\Http\Controllers\TestController::class, 'create_certy_mail_log']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\System\EmailServiceController;
+use App\Http\Controllers\System\FonnteServiceController;
 use App\Models\Event;
 use App\Models\Price;
 use App\Models\Transaction;
@@ -172,6 +173,9 @@ class EventTransaction24Controller extends BaseController
         try {
             $email_service = new EmailServiceController();
             $email_service->bill($transaction->id);
+
+            $fonnte = new FonnteServiceController();
+            $fonnte->generateMessage($transaction);
         } catch (\Exception $e) {
         }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Mail\SendDefaultMail;
-use App\Models\Event;
 use App\Models\MailLog;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
@@ -13,7 +12,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Config;
 
 class EmailServiceController extends Controller
 {
