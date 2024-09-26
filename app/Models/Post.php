@@ -18,6 +18,11 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scores()
+    {
+        return $this->hasOne(Score::class);
+    }
+
     public function authors()
     {
         return $this->hasMany(PostAuthor::class);
@@ -52,6 +57,8 @@ class Post extends Model
                     return 'SR0' . $this->attributes['id'];
                 case 'case_report':
                     return 'CR0' . $this->attributes['id'];
+                case 'meta_analysis':
+                    return 'MA0' . $this->attributes['id'];
                 default:
                     return null;
             }

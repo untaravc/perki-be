@@ -9,9 +9,9 @@
                     <Breadcrumb :list="breadcrumb_list"></Breadcrumb>
                 </div>
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
-                    <router-link to="/panel/posts/add" class="btn btn-sm fw-bold btn-primary">
+                    <!-- <router-link to="/panel/posts/add" class="btn btn-sm fw-bold btn-primary">
                         Tambah Data
-                    </router-link>
+                    </router-link> -->
                 </div>
             </div>
         </div>

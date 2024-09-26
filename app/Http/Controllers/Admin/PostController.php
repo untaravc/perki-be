@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\Score;
 use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -51,6 +52,35 @@ class PostController extends Controller
                 'score' => $request->score,
                 'status' => $request->status,
             ]);
+
+            $score = Score::wherePostId($id)
+                ->whereUserId($data->reviewer_id)
+                ->first();
+
+            if ($score) {
+                $score->update([
+                    'first_score' => $request->scores['first_score'],
+                    'second_score' => $request->scores['second_score'],
+                    'third_score' => $request->scores['third_score'],
+                    'fourth_score' => $request->scores['fourth_score'],
+                    'fifth_score' => $request->scores['fifth_score'],
+                    'sixth_score' => $request->scores['sixth_score'],
+                    'seventh_score' => $request->scores['seventh_score'],
+                ]);
+            } else {
+                Score::create([
+                    'post_id' => $id,
+                    'user_id' => $data->reviewer_id,
+                    'first_score' => $request->scores['first_score'],
+                    'second_score' => $request->scores['second_score'],
+                    'third_score' => $request->scores['third_score'],
+                    'fourth_score' => $request->scores['fourth_score'],
+                    'fifth_score' => $request->scores['fifth_score'],
+                    'sixth_score' => $request->scores['sixth_score'],
+                    'seventh_score' => $request->scores['seventh_score'],
+                    'total' => $request->score,
+                ]);
+            }
         }
 
         return $this->response;
@@ -58,7 +88,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $data = Post::find($id);
+        $data = Post::with('scores')->find($id);
 
         $this->response['result'] = $data;
         return $this->response;

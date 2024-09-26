@@ -31,20 +31,87 @@
               <hr>
               <div class="h3 mt-4 mb-2">Review</div>
               <div class="row mb-4">
-                <div class="col-md-3">
-                  <label>Skor</label>
-                  <input class="form-control mb-2" v-model="form_props.data_detail.score" type="number">
-                  <label>Status</label>
-                  <select class="form-control" v-model="form_props.data_detail.status">
-                    <option value="0">Pending</option>
-                    <option value="1">Accepted</option>
-                    <option value="2">Reject</option>
-                  </select>
+                <div class="col-md-6">
+                  <table class="table">
+                    <tr>
+                      <td>Parameters</td>
+                      <td>Score</td>
+                    </tr>
+                    <tr>
+                      <td><b>Introduction (10)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="10" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.first_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Materials and Methods (10)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="10" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.second_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Research Findings / Results (15)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="15" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.third_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Depth of Research (15)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="15" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.fourth_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Relevance of Research to Clinical Situation (15)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="15" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.fifth_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Novelty (10)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="10" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.sixth_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Originality (15)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="15" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.seventh_score">
+                      </td>
+                    </tr>
+                  </table>
                 </div>
-                <div class="col-md-9">
-                  <label>Komentar</label>
-                  <textarea class="form-control" v-model="form_props.data_detail.comment" cols="30" rows="5"></textarea>
+                <div class="col-md-6">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label>Skor</label>
+                      <div class="text-xl font-semibold">
+                        {{ form_props.data_detail.score }}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label>Status</label>
+                      <select class="form-control" v-model="form_props.data_detail.status">
+                        <option value="0">Pending</option>
+                        <option value="1">Accepted</option>
+                        <option value="2">Reject</option>
+                      </select>
+                    </div>
+                    <div class="col-md-12">
+                      <label>Komentar</label>
+                      <textarea class="form-control" v-model="form_props.data_detail.comment" cols="30"
+                        rows="5"></textarea>
+                    </div>
+                  </div>
                 </div>
+
               </div>
               <div class="text-right">
                 <router-link to="/panel/posts" class="btn btn-sm bg-secondary m-1">
@@ -90,6 +157,15 @@ export default {
         status: '',
         comment: '',
         score: '',
+        scores: {
+          first_score: '',
+          second_score: '',
+          third_score: '',
+          fourth_score: '',
+          fifth_score: '',
+          sixth_score: '',
+          seventh_score: '',
+        }
       }
     })
 
@@ -111,10 +187,26 @@ export default {
           form_props.data_detail.status = data.result.status;
           form_props.data_detail.comment = data.result.comment;
           form_props.data_detail.score = data.result.score;
+          if (data.result.scores) {
+            form_props.data_detail.scores = data.result.scores;
+          }
         })
     }
 
     loadData()
+
+    function calculateScore() {
+      let total = 0
+      total += form_props.data_detail.scores.first_score
+      total += form_props.data_detail.scores.second_score
+      total += form_props.data_detail.scores.third_score
+      total += form_props.data_detail.scores.fourth_score
+      total += form_props.data_detail.scores.fifth_score
+      total += form_props.data_detail.scores.sixth_score
+      total += form_props.data_detail.scores.seventh_score
+
+      form_props.data_detail.score = total
+    }
 
     function processAbstract() {
       form_props.is_loading = true
@@ -133,7 +225,8 @@ export default {
       breadcrumb_list,
       title,
       form_props,
-      processAbstract
+      processAbstract,
+      calculateScore
     }
   }
 }
