@@ -59,8 +59,8 @@
                                             <th class="w-8">No</th>
                                             <th></th>
                                             <th class="w-1/2">Judul</th>
-                                            <th v-if="filter.user_type === 'admin'">Reviewer</th>
-                                            <th class="text-center">Status</th>
+                                            <th>Reviewer</th>
+                                            <th class="text-center" v-if="filter.user_type === 'admin'">Status</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
                                     </thead>
@@ -88,16 +88,20 @@
                                                     <small>{{ $filter.formatDate(data.created_at) }}</small>
                                                 </div>
                                             </td>
-                                            <td v-if="filter.user_type === 'admin'" style="min-width: 150px;">
-                                                <select class="form-control" v-model="data.reviewer_id"
-                                                    @change="setReviewer(data.id, $event)">
-                                                    <option value="">unset</option>
-                                                    <option :value="rev.id" v-for="rev in response.reviewers">{{
-                                                        rev.name }}</option>
-                                                </select>
-                                            </td>
                                             <td>
-                                                <div class="text-center h4">{{ data.score }}</div>
+                                                <div v-if="data.scores" v-for="score in data.scores">
+                                                    <span v-if="filter.user_type == 'admin'">
+                                                        {{ score.user.name }} : <b>{{ score.total }}</b>
+                                                    </span>
+                                                    <span
+                                                        v-if="filter.user_type !== 'admin' && filter.user_id == score.user_id">
+                                                        {{ score.user.name }} : <b>{{ score.total }}</b>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td v-if="filter.user_type === 'admin'">
+                                                <div class="text-center h4">{{
+                                                    data.score }}</div>
                                                 <div class="text-center">
                                                     <span v-if="data.status === 0"
                                                         class="rounded px-2 py-1 bg-slate-500 text-sm text-white">pending</span>
@@ -164,9 +168,11 @@ export default {
             name: '',
             per_page: 25,
             user_type: '',
+            user_id: '',
         })
 
         filter.user_type = localStorage.getItem('user_type')
+        filter.user_id = localStorage.getItem('user_id')
 
         function loadDataContent(page = 1) {
             is_loading.value = true

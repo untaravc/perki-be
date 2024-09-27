@@ -25,14 +25,14 @@
               <div class="mb-4" v-for="body in form_props.data_detail.body_parsed">
                 <b>{{ body.title }}</b> {{ body.content }}
               </div>
-              <div v-if="form_props.data_detail.image">
-                <img :src="form_props.data_detail.image" alt="">
+              <div v-if="form_props.data_detail.file">
+                <img :src="form_props.data_detail.file" alt="">
               </div>
               <hr>
               <div class="h3 mt-4 mb-2">Review</div>
               <div class="row mb-4">
-                <div class="col-md-6">
-                  <table class="table">
+                <div class="col-md-12">
+                  <table class="table w-full" v-if="form_props.data_detail.category == 'case_report'">
                     <tr>
                       <td>Parameters</td>
                       <td>Score</td>
@@ -87,13 +87,55 @@
                       </td>
                     </tr>
                   </table>
+                  <table class="table  w-full" v-if="form_props.data_detail.category != 'case_report'">
+                    <tr>
+                      <td>Parameters</td>
+                      <td>Score</td>
+                    </tr>
+                    <tr>
+                      <td><b>Introduction (10)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="10" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.first_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Recognition and Description of Case (20)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="20" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.second_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Discussion and Conclusion (20)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="20" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.third_score">
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td><b>Relevance of Research to Clinical Situation (15)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="15" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.fifth_score">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><b>Uniqueness (15)</b></td>
+                      <td>
+                        <input type="number" class="form-control mb-2" min="0" max="15" @change="calculateScore"
+                          v-model="form_props.data_detail.scores.fourth_score">
+                      </td>
+                    </tr>
+                  </table>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="row">
                     <div class="col-md-6">
                       <label>Skor</label>
                       <div class="text-xl font-semibold">
-                        {{ form_props.data_detail.score }}
+                        {{ form_props.data_detail.scores.total }}
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -110,7 +152,7 @@
                         rows="5"></textarea>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
               </div>
               <div class="text-right">
@@ -141,7 +183,7 @@ export default {
   setup() {
     const { getData, patchData } = useAxios()
     const router = useRouter()
-    const { setErrors, getStatus, getMessage, resetErrors } = useValidation()
+    const { setErrors, resetErrors } = useValidation()
     const route = useRoute()
 
     const form_props = reactive({
@@ -153,10 +195,11 @@ export default {
         title: '',
         subtitle: '',
         body_parsed: '',
-        image: '',
+        file: '',
         status: '',
         comment: '',
         score: '',
+        category: '',
         scores: {
           first_score: '',
           second_score: '',
@@ -183,10 +226,11 @@ export default {
           form_props.data_detail.title = data.result.title;
           form_props.data_detail.subtitle = data.result.subtitle;
           form_props.data_detail.body_parsed = data.result.body_parsed;
-          form_props.data_detail.image = data.result.image;
+          form_props.data_detail.file = data.result.file;
           form_props.data_detail.status = data.result.status;
           form_props.data_detail.comment = data.result.comment;
           form_props.data_detail.score = data.result.score;
+          form_props.data_detail.category = data.result.category;
           if (data.result.scores) {
             form_props.data_detail.scores = data.result.scores;
           }
@@ -205,7 +249,7 @@ export default {
       total += form_props.data_detail.scores.sixth_score
       total += form_props.data_detail.scores.seventh_score
 
-      form_props.data_detail.score = total
+      form_props.data_detail.scores.total = total
     }
 
     function processAbstract() {

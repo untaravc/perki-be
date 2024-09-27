@@ -26,7 +26,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'Dr. dr. Anggoro Budi Hartopo.,Ph.D, Sp.PD, Sp.JP',
                 'slug'  => 'anggoro.budi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/anggoro.budi.hartopo.png',
+                'image' => 'https://src.perki-jogja.com/assets/photo/anggoro.budi.jpg',
             ],
             [
                 'name'  => 'dr. Arditya Damarkusuma, M.Med(ClinEpi), Sp.JP',
@@ -56,7 +56,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
                 'slug'  => 'lucia.kris',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.dinarti.png',
+                'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.jpg',
             ],
             [
                 'name'  => 'Dr. dr. Nahar Taufiq, Sp.JP(K)',
@@ -86,7 +86,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Erika Maharani, SpJP(K)',
                 'slug'  => 'erika.maharani',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.png',
+                'image' => 'https://src.perki-jogja.com/assets/photo/erika.maharani.jpeg',
             ],
             [
                 'name'  => 'dr. Firandi Saputra, Sp.JP(K)',
@@ -137,7 +137,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
                 'slug'  => 'irsad.andi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.arso.png',
+                'image' => 'https://src.perki-jogja.com/assets/photo/irsad.andi.jpg',
             ],
             [ // 22
                 'name'  => 'dr. Lidwina Tarigan, Sp.JP(K)',
@@ -152,7 +152,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/lima.peni.jpg',
             ],
             [ // 24
-                'name'  => 'dr. M Ulil, SpJP',
+                'name'  => 'dr. M.Ulil Aidie Jomansyah, Sp.JP',
                 'slug'  => 'm.ulil',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/ulil.jpg',

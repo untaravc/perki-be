@@ -115,7 +115,10 @@ export default {
                 credential.is_loading = false
                 if (data.success) {
                     localStorage.setItem('user_token', data.result.token)
+                    localStorage.setItem('user_id', data.result.user.id)
                     window.location = '/panel/dashboard'
+                } else {
+                    alert('Email atau password salah!')
                 }
             })
         }

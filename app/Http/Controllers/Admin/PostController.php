@@ -8,19 +8,18 @@ use App\Models\Score;
 use App\Models\TransactionDetail;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index(Request $request)
     {
-        $auth = $request->user();
-        $type = $auth['type'];
-
         $data_content = Post::orderByDesc('id')
-            ->when($type === 'reviewer', function ($q) use ($auth) {
-                $q->where('reviewer_id', $auth['id']);
-            })->with('user');
+            // ->when($type === 'reviewer', function ($q) use ($auth) {
+            //     $q->where('reviewer_id', $auth['id']);
+            // })
+            ->with(['user', 'scores' => function ($q) {
+                $q->with('user');
+            }]);
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
@@ -45,16 +44,11 @@ class PostController extends Controller
     public function update($id, Request $request)
     {
         $data = Post::find($id);
+        $auth = $request->user();
 
         if ($data) {
-            $data->update([
-                'comment' => $request->comment,
-                'score' => $request->score,
-                'status' => $request->status,
-            ]);
-
             $score = Score::wherePostId($id)
-                ->whereUserId($data->reviewer_id)
+                ->whereUserId($auth['id'])
                 ->first();
 
             if ($score) {
@@ -66,11 +60,18 @@ class PostController extends Controller
                     'fifth_score' => $request->scores['fifth_score'],
                     'sixth_score' => $request->scores['sixth_score'],
                     'seventh_score' => $request->scores['seventh_score'],
+                    'total' => $request->scores['first_score'] +
+                        $request->scores['second_score'] +
+                        $request->scores['third_score'] +
+                        $request->scores['fourth_score'] +
+                        $request->scores['fifth_score'] +
+                        $request->scores['sixth_score'] +
+                        $request->scores['seventh_score']
                 ]);
             } else {
                 Score::create([
                     'post_id' => $id,
-                    'user_id' => $data->reviewer_id,
+                    'user_id' => $auth['id'],
                     'first_score' => $request->scores['first_score'],
                     'second_score' => $request->scores['second_score'],
                     'third_score' => $request->scores['third_score'],
@@ -78,17 +79,38 @@ class PostController extends Controller
                     'fifth_score' => $request->scores['fifth_score'],
                     'sixth_score' => $request->scores['sixth_score'],
                     'seventh_score' => $request->scores['seventh_score'],
-                    'total' => $request->score,
+                    'total' => $request->scores['first_score'] +
+                        $request->scores['second_score'] +
+                        $request->scores['third_score'] +
+                        $request->scores['fourth_score'] +
+                        $request->scores['fifth_score'] +
+                        $request->scores['sixth_score'] +
+                        $request->scores['seventh_score']
                 ]);
             }
+
+            $total = Score::wherePostId($id)->sum('total');
+
+            $data->update([
+                'comment' => $request->comment,
+                'score' => $total,
+                'status' => $request->status,
+            ]);
         }
 
         return $this->response;
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $data = Post::with('scores')->find($id);
+        $data = Post::find($id);
+
+        $auth = $request->user();
+        $score = Score::wherePostId($id)
+            ->whereUserId($auth['id'])
+            ->first();
+
+        $data['scores'] = $score;
 
         $this->response['result'] = $data;
         return $this->response;
