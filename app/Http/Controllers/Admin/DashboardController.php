@@ -31,11 +31,6 @@ class DashboardController extends Controller
             ->whereYear('updated_at', '2024')
             ->count();
 
-        $data['transaction_pending'] = Transaction::where('status', '<=', 200)
-            ->whereSection('jcu24')
-            ->whereNotIn('user_id', $exclude_user_ids)
-            ->count();
-
         $data['transaction_pending'] = Transaction::where('status', '<', 200)
             ->where('status', '>=', 110)
             ->whereSection('jcu24')

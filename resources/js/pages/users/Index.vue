@@ -45,7 +45,6 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Tipe</th>
-                                            <th>Status</th>
                                             <th class="text-end">Aksi</th>
                                         </tr>
                                     </thead>
@@ -54,7 +53,7 @@
                                             <td colspan="5" class="text-center"><i>Tidak ada data.</i></td>
                                         </tr>
                                         <tr v-for="(data, d) in response.data_content.data">
-                                            <td>
+                                            <td :title="data.id">
                                                 {{ response.data_content.per_page *
                                                     (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
@@ -64,9 +63,6 @@
                                             </td>
                                             <td>
                                                 {{ data.type }}
-                                            </td>
-                                            <td>
-
                                             </td>
                                             <td class="text-end">
                                                 <div class="dropdown">

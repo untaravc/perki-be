@@ -44,6 +44,12 @@ class GuidanceController extends Controller
             "link"  => "https://src.perki-jogja.com/assets24/posters/1st_announcement.pdf",
         ];
 
+        $data[] = [
+            "title" => "Booklet Final Announcement",
+            "image" => "https://src.perki-jogja.com/assets24/posters/jcu24_day1.jpeg",
+            "link"  => "https://drive.google.com/file/d/1KJpcI5-8EZWpvHDexbvFuQqUBaSsJBoO/view?usp=sharing",
+        ];
+
         $this->response['result'] = $data;
         return $this->response;
     }

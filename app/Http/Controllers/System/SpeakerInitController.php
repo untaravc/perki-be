@@ -427,6 +427,12 @@ class SpeakerInitController extends Controller
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/inggita.hanung.png',
             ],
+            [
+                'name'  => "dr. Indah Paranita, Sp.JP",
+                'slug'  => "indah.paranita",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/indah.paranita.jpg',
+            ],
         ];
 
         foreach ($data as $datum) {

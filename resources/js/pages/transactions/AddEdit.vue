@@ -75,6 +75,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card card-flush mt-4" v-if="data_content.data_detail.users.length > 0">
+                            <div class="card-body">
+                                <div class="mt-4 font-semibold text-lg">
+                                    Collective Registration
+                                </div>
+                                <div v-for="cld in data_content.data_detail.users" class="mb-2">
+                                    <div>{{ cld.user_name }}</div>
+                                    <div class="flex justify-between text-sm text-slate-500">
+                                        <div>{{ cld.user_email }}</div>
+                                        <div :title="cld.nik.length">{{ cld.nik }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-span-2 md:col-span-1">
                         <div class="card card-flush">
@@ -156,7 +170,9 @@ export default {
         })
 
         const data_content = reactive({
-            data_detail: {}
+            data_detail: {
+                users: []
+            }
         })
 
         const param_id = route.params.id

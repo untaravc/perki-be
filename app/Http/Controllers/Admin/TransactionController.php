@@ -38,8 +38,9 @@ class TransactionController extends Controller
                 $q->with('event');
             },
             'users',
-            'user'
-        ])->whereParentId(0)->find($id);
+            'user',
+        ])->whereParentId(0)
+            ->find($id);
 
         $this->response['result'] = $data;
         return $this->response;
@@ -170,7 +171,7 @@ class TransactionController extends Controller
             ->find($transaction_id);
 
         $data['note'] = $request->note ?? '';
-        if($request->status_label){
+        if ($request->status_label) {
             $data['status_label'] = $request->status_label;
         } else {
             $data['status_label'] = $data['transaction']['status_label'];

@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\Price;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
+use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 
@@ -394,12 +395,14 @@ class EventTransaction24Controller extends BaseController
 
         $trx_child_ids = [];
         foreach ($users as $user) {
+            $model_user = User::whereEmail($user['email'])
+                ->first();
             if (!isset($user['id'])) {
                 $payload = [
                     "section"          => "jcu24",
                     "number"           => $this->generate_child_number($transaction->number),
                     "parent_id"        => $transaction->id,
-                    "user_id"          => $transaction->id,
+                    "user_id"          => $model_user ? $model_user->id : 0,
                     "user_name"        => $user['name'],
                     "user_phone"       => null,
                     "user_email"       => $user['email'],
@@ -409,7 +412,6 @@ class EventTransaction24Controller extends BaseController
                     "voucher_code"     => 0,
                     "voucher_discount" => 0,
                     "discount_amount"  => 0,
-                    "service_fee"      => 0,
                     "service_fee"      => 0,
                     "tax"              => 0,
                     "total"            => 0,
@@ -425,7 +427,7 @@ class EventTransaction24Controller extends BaseController
                     "transaction_id" => $trx_child->id,
                     "job_type_code"  => $payload['job_type_code'],
                     "user_id"        => $payload['user_id'],
-                    "event_id"       => 1,
+                    "event_id"       => 111,
                     "event_name"     => "Symposium",
                     "price"          => 1000000,
                     "status"         => 110,

@@ -537,6 +537,7 @@ class Event24Controller extends Controller
                         "moderators" => "fera.hidayati",
                         "marker"     => "symposium-jcu24-a",
                         "slug"       => "symposium-jcu24-a11",
+                        "image"      => "/assets24/jincartos/day-3-1a.jpeg",
                         "date_start" => "2024-10-20 08:00:00",
                         "date_end"   => "2024-10-20 09:20:00",
                         "children"   => [
@@ -556,7 +557,7 @@ class Event24Controller extends Controller
                                 "title"      => "The Role of Triple Antithrombotic in Patients with Coronary Artery Disease: When and How to Do",
                                 "data_type"  => "schedule-detail",
                                 "section"    => "jcu24",
-                                "speakers"   => "hari.yusti",
+                                "speakers"   => "indah.paranita",
                                 "marker"     => "symposium-jcu24-a11",
                                 "slug"       => "symposium-jcu24-a11-2",
                                 "date_start" => "2024-10-20 08:00:00",
@@ -584,6 +585,7 @@ class Event24Controller extends Controller
                         "moderators" => "dyah.wulan",
                         "marker"     => "symposium-jcu24-b",
                         "slug"       => "symposium-jcu24-b12",
+                        "image"      => "/assets24/jincartos/day-3-1b.jpeg",
                         "date_start" => "2024-10-20 08:00:00",
                         "date_end"   => "2024-10-20 09:20:00",
                         "children"   => [
@@ -603,7 +605,7 @@ class Event24Controller extends Controller
                                 "title"      => "Mitral Stenosis Due to Rheumatic Heart Disease: What the Indonesian Studies Reveals?",
                                 "data_type"  => "schedule-detail",
                                 "section"    => "jcu24",
-                                "speakers"   => "amiliana.mardiani",
+                                "speakers"   => "amiliana.soesanto",
                                 "marker"     => "symposium-jcu24-b12",
                                 "slug"       => "symposium-jcu24-b12-2",
                                 "date_start" => "2024-10-20 08:00:00",
@@ -630,6 +632,7 @@ class Event24Controller extends Controller
                         "moderators" => "bagus.andi",
                         "marker"     => "symposium-jcu24-a",
                         "slug"       => "symposium-jcu24-a13",
+                        "image"      => "/assets24/jincartos/day-3-2a.jpeg",
                         "date_start" => "2024-10-20 09:30:00",
                         "date_end"   => "2024-10-20 10:40:00",
                         "children"   => [
@@ -676,6 +679,7 @@ class Event24Controller extends Controller
                         "moderators" => "real.kusumanjaya",
                         "marker"     => "symposium-jcu24-b",
                         "slug"       => "symposium-jcu24-b14",
+                        "image"      => "/assets24/jincartos/day-3-2b.jpeg",
                         "date_start" => "2024-10-20 09:30:00",
                         "date_end"   => "2024-10-20 10:50:00",
                         "children"   => [
@@ -695,7 +699,7 @@ class Event24Controller extends Controller
                                 "title"      => "Coronary Intervention in Coronary Artery Diease with Type 2 Diabetes: What and When",
                                 "data_type"  => "schedule-detail",
                                 "section"    => "jcu24",
-                                "speakers"   => "chandra.kurniawan",
+                                "speakers"   => "gagah.buana",
                                 "marker"     => "symposium-jcu24-b14",
                                 "slug"       => "symposium-jcu24-b14-2",
                                 "date_start" => "2024-10-20 09:30:00",
@@ -722,6 +726,7 @@ class Event24Controller extends Controller
                         "moderators" => "hendry.purnasidha",
                         "marker"     => "symposium-jcu24-a",
                         "slug"       => "symposium-jcu24-a15",
+                        "image"      => "/assets24/jincartos/day-3-3a.jpeg",
                         "date_start" => "2024-10-20 10:50:00",
                         "date_end"   => "2024-10-20 12:10:00",
                         "children"   => [
@@ -768,6 +773,7 @@ class Event24Controller extends Controller
                         "moderators" => "lucia.kris",
                         "marker"     => "symposium-jcu24-b",
                         "slug"       => "symposium-jcu24-b16",
+                        "image"      => "/assets24/jincartos/day-3-3b.jpeg",
                         "date_start" => "2024-10-20 10:50:00",
                         "date_end"   => "2024-10-20 12:10:00",
                         "children"   => [
@@ -814,6 +820,7 @@ class Event24Controller extends Controller
                         "moderators" => "erika.maharani",
                         "marker"     => "symposium-jcu24-a",
                         "slug"       => "symposium-jcu24-a17",
+                        "image"      => "/assets24/jincartos/day-3-4a.jpeg",
                         "date_start" => "2024-10-20 13:00:00",
                         "date_end"   => "2024-10-20 14:20:00",
                         "children"   => [
@@ -860,6 +867,7 @@ class Event24Controller extends Controller
                         "moderators" => "anggoro.budi",
                         "marker"     => "symposium-jcu24-b",
                         "slug"       => "symposium-jcu24-b18",
+                        "image"      => "/assets24/jincartos/day-3-4b.jpeg",
                         "date_start" => "2024-10-20 13:00:00",
                         "date_end"   => "2024-10-20 14:20:00",
                         "children"   => [
@@ -906,6 +914,7 @@ class Event24Controller extends Controller
                         "moderators" => "irsad.andi",
                         "marker"     => "symposium-jcu24-a",
                         "slug"       => "symposium-jcu24-a19",
+                        "image"      => "/assets24/jincartos/day-3-5a.jpeg",
                         "date_start" => "2024-10-20 14:20:00",
                         "date_end"   => "2024-10-20 15:40:00",
                         "children"   => [
@@ -952,6 +961,7 @@ class Event24Controller extends Controller
                         "moderators" => "putrika.prastuti",
                         "marker"     => "symposium-jcu24-b",
                         "slug"       => "symposium-jcu24-b20",
+                        "image"      => "/assets24/jincartos/day-3-5b.jpeg",
                         "date_start" => "2024-10-20 14:20:00",
                         "date_end"   => "2024-10-20 15:40:00",
                         "children"   => [

@@ -371,7 +371,7 @@ class AuthController extends BaseController
         $user = $request->user();
 
         $validator = Validator::make($request->all(), [
-            "name"        => "required|string|max:100|regex:/^[\pL\s\-]+$/u",
+            "name"        => "required|string|max:100",
             "phone"       => "required|numeric|digits_between:8,15",
             "institution" => "required|string",
             "city"        => "required|string",
