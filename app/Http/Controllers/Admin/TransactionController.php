@@ -99,6 +99,22 @@ class TransactionController extends Controller
                 ]);
         });
 
+        $children = Transaction::whereParentId($transaction->id)->get();
+
+        if (count($children) > 0) {
+            foreach ($children as $child) {
+                $child->update([
+                    'status' => 200,
+                    'paid_at' => now()
+                ]);
+
+                TransactionDetail::whereTransactionId($child->id)
+                    ->update([
+                        'status' => 200
+                    ]);
+            }
+        }
+
         // kirim invoice
         $email = new EmailServiceController();
         $email->invoice($transaction->id);

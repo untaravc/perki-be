@@ -87,9 +87,11 @@
                         @endif
                     </td>
                     <td>{{ $transaction['note'] }}</td>
-                    <td>
+                    <td style="text-align: center">
                         @if ($transaction['transfer_proof'])
-                            <a target="_blank" href="{{ $transaction['transfer_proof'] }}">View</a>
+                            <a target="_blank" href="{{ $transaction['transfer_proof'] }}">
+                                <img src="{{$transaction['transfer_proof']}}" height="150px" alt="">
+                            </a>
                         @endif
                     </td>
                     @foreach ($transaction['transaction_details'] as $detail)

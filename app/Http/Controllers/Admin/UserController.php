@@ -78,6 +78,7 @@ class UserController extends Controller
     public function registerUser(Request $request)
     {
         $users = User::whereIsSpeaker(0)
+            ->with('success_transactions')
             ->whereYear('updated_at', $request->ref)
             ->get();
 

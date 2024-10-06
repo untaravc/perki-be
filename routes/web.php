@@ -6,6 +6,12 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\VoucherController;
+use App\Http\Controllers\System\EmailServiceController;
+use App\Http\Controllers\System\EventInitController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\Admin\EventPresenceController;
+use App\Http\Controllers\System\FonnteServiceController;
 
 Route::get('/', function () {
     return 'perki-src';
@@ -24,22 +30,23 @@ Route::get('/auth/{path}', [AuthController::class, 'auth'])
 Route::get('/event-member/{slug}', [EventController::class, 'event_member']);
 Route::get('/event-presence/{slug}', [EventController::class, 'event_presence']);
 Route::get('/transaction-recap', [TransactionController::class, 'transaction_recap']);
+Route::get('/voucher-usage', [VoucherController::class, 'voucherRecap']);
 
 Route::get('login', [AuthController::class, 'login_view']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('/send-qr-code/{transaction_id}', [\App\Http\Controllers\System\EmailServiceController::class, 'qr_code_access']);
-Route::get('send-qrcode-email/{transaction_id}', [\App\Http\Controllers\System\EmailServiceController::class, 'qr_code_access']);
+Route::get('/send-qr-code/{transaction_id}', [EmailServiceController::class, 'qr_code_access']);
+Route::get('send-qrcode-email/{transaction_id}', [EmailServiceController::class, 'qr_code_access']);
 
-Route::get('event-init', [\App\Http\Controllers\System\EventInitController::class, 'event_init']);
-Route::get('sample-qrcode', [\App\Http\Controllers\TestController::class, 'sample_qrcode']);
-Route::get('print/event-presence/{event_user_id}', [\App\Http\Controllers\Admin\EventPresenceController::class, 'print_event_presence']);
-Route::get('print/transaction-presence/{transaction_id}', [\App\Http\Controllers\Admin\EventPresenceController::class, 'print_transaction_presence']);
+Route::get('event-init', [EventInitController::class, 'event_init']);
+Route::get('sample-qrcode', [TestController::class, 'sample_qrcode']);
+Route::get('print/event-presence/{event_user_id}', [EventPresenceController::class, 'print_event_presence']);
+Route::get('print/transaction-presence/{transaction_id}', [EventPresenceController::class, 'print_transaction_presence']);
 
 Route::get('print/invoice-pdf/{transaction_id}', [TransactionController::class, 'invoice_pdf']);
 
 // TEST
-Route::get('test', [\App\Http\Controllers\System\FonnteServiceController::class, 'test']);
-Route::get('print-by-name', [\App\Http\Controllers\TestController::class, 'print_by_name']);
-Route::get('send_certy', [\App\Http\Controllers\TestController::class, 'send_certy']);
-Route::get('create_certy_mail_log', [\App\Http\Controllers\TestController::class, 'create_certy_mail_log']);
-Route::get('contacts', [\App\Http\Controllers\TestController::class, 'contactList']);
+Route::get('test', [FonnteServiceController::class, 'test']);
+Route::get('print-by-name', [TestController::class, 'print_by_name']);
+Route::get('send_certy', [TestController::class, 'send_certy']);
+Route::get('create_certy_mail_log', [TestController::class, 'create_certy_mail_log']);
+Route::get('contacts', [TestController::class, 'contactList']);

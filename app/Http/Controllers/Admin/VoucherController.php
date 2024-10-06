@@ -45,6 +45,10 @@ class VoucherController extends Controller
             $data_content = $data_content->whereYear('created_at', $request->year);
         }
 
+        if ($request->ref) {
+            $data_content = $data_content->whereYear('created_at', $request->ref);
+        }
+
         return $data_content;
     }
 
@@ -88,5 +92,19 @@ class VoucherController extends Controller
             $this->response['errors'] = $validator->errors();
             abort(response($this->response, 422));
         }
+    }
+
+    public function voucherRecap(Request $request)
+    {
+        $query['section'] = $request->ref ?? '2024';
+        $data_content = Voucher::orderByDesc('id')
+            ->with('redeem');
+        $data_content = $this->withFilter($data_content, $request);
+        $data_content = $data_content->paginate($request->per_page ?? 25);
+
+        return view('print.voucher.voucher-recap', [
+            'vouchers' => $data_content,
+            'query' => $query
+        ]);
     }
 }

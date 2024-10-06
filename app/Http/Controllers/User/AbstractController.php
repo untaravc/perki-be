@@ -101,6 +101,8 @@ class AbstractController extends BaseController
 
     public function abstract_update(Request $request, $id)
     {
+//        $this->sendPostResponse();
+
         $request->merge([
             'body' => json_encode($request->body),
         ]);

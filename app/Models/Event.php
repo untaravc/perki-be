@@ -92,7 +92,7 @@ class Event extends Model
         return $this->hasMany(TransactionDetail::class)
             ->whereStatus(200)
             ->whereNotIn('user_id', $exclude_user_ids)
-            ->whereJobTypeCode('DRSP');
+            ->whereIn('job_type_code', ['DRSP', 'PRKI']);
     }
 
     public function transaction_pending()
