@@ -97,8 +97,10 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::patch('update-transaction-name', [EvenTransactionController::class, 'update_transaction_name']);
 
     Route::get('abstracts', [AbstractController::class, 'abstract_list']);
+    Route::get('abstracts-submit', [AbstractController::class, 'abstract_submit_open']);
     Route::post('abstracts', [AbstractController::class, 'abstract_submit']);
     Route::post('abstracts/{id}', [AbstractController::class, 'abstract_update']);
+    Route::post('abstracts-poster/{id}', [AbstractController::class, 'abstract_poster']);
     Route::delete('abstracts/{id}', [AbstractController::class, 'abstract_delete']);
 
     // JCU 2024

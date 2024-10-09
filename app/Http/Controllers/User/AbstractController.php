@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\PostAuthor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Distributions\F;
 
 class AbstractController extends BaseController
 {
@@ -99,9 +100,22 @@ class AbstractController extends BaseController
         $this->sendPostResponse();
     }
 
+    public function abstract_poster(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        if ($post) {
+            $post->update([
+                'image' => $request->image
+            ]);
+        }
+
+        $this->sendPostResponse();
+    }
+
     public function abstract_update(Request $request, $id)
     {
-//        $this->sendPostResponse();
+        //        $this->sendPostResponse();
 
         $request->merge([
             'body' => json_encode($request->body),
@@ -195,5 +209,12 @@ class AbstractController extends BaseController
         PostAuthor::whereNotIn('id', $ids)
             ->wherePostId($post->id)
             ->delete();
+    }
+
+    public function abstract_submit_open()
+    {
+        $this->sendGetResponse([
+            'open' => false
+        ]);
     }
 }

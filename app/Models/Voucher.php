@@ -20,6 +20,6 @@ class Voucher extends Model
     ];
 
     public function redeem(){
-        return $this->hasMany(Transaction::class, 'voucher_code', 'code');
+        return $this->hasMany(Transaction::class, 'voucher_code', 'code')->whereStatus(200);
     }
 }

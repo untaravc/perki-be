@@ -265,7 +265,8 @@ class PostController extends Controller
             'user' => function ($q) {
                 $q->with('voucher_code', 'success_transactions');
             },
-            'authors'
+            'authors',
+            'scores'
         ])
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
