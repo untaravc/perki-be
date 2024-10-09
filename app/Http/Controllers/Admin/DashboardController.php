@@ -205,10 +205,12 @@ class DashboardController extends Controller
         $pending = collect($data)->where('status', 0)->first();
         $accepted = collect($data)->where('status', 1)->first();
         $rejected = collect($data)->where('status', 2)->first();
+        $moderated = collect($data)->where('status', 3)->first();
         $result = [
             'pending' => $pending ? $pending['total'] : 0,
             'accepted' => $accepted ? $accepted['total'] : 0,
             'rejected' => $rejected ? $rejected['total'] : 0,
+            'moderated' => $moderated ? $moderated['total'] : 0,
         ];
 
         return $result;

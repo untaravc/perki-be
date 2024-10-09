@@ -6,6 +6,7 @@ use App\Http\Controllers\BaseController;
 use App\Models\Event;
 use App\Models\GuestLog;
 use App\Models\JobType;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends BaseController
@@ -123,5 +124,47 @@ class HomeController extends BaseController
 
         $this->response['result'] = $data;
         return $this->response;
+    }
+
+    public function posters(Request $request)
+    {
+        $data_content = Post::orderByDesc('status')
+            ->whereIn('status', [1, 3])
+            ->with(['user']);
+        $data_content = $this->withPostFilter($data_content, $request);
+        $data_content = $data_content->paginate($request->per_page ?? 24);
+
+        $collect = collect($this->response);
+        return $collect->merge($data_content);
+    }
+
+    public function withPostFilter($data_content, $request)
+    {
+        if ($request->title) {
+            $data_content = $data_content->where('title', 'LIKE', '%' . $request->title . '%');
+        }
+
+        if ($request->type == 'abstract') {
+            $data_content = $data_content->whereIn('category', [
+                'case_report',
+                'research',
+                'systematic_review',
+                'meta_analysis',
+            ])->orderByDesc('score');
+        }
+
+        if ($request->category) {
+            $data_content = $data_content->where('category', $request->category);
+        }
+
+        if ($request->year) {
+            $data_content = $data_content->whereYear('created_at', $request->year);
+        }
+
+        if ($request->status !== null) {
+            $data_content = $data_content->where('status', $request->status);
+        }
+
+        return $data_content;
     }
 }

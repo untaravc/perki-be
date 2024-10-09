@@ -73,9 +73,13 @@
                                                 {{ response.data_content.per_page *
                                                     (response.data_content.current_page - 1) + d + 1 }}
                                             </td>
-                                            <td>
-                                                {{ data.image }}
-                                                <img :src="data.image" style="max-width: 50px;" alt="">
+                                            <td class="text-center">
+                                                <a :href="data.image" target="_blank">
+                                                    <div style="width: 50px; height: 80px;"
+                                                        class="bg-center bg-contain bg-no-repeat"
+                                                        :style="'background-image: url(' + data.image + ');'">
+                                                    </div>
+                                                </a>
                                             </td>
                                             <td>
                                                 <div>
@@ -89,13 +93,15 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div v-if="data.scores" v-for="score in data.scores">
+                                                <div v-if="data.scores" v-for="score in data.scores" class="text-sm">
                                                     <span v-if="filter.user_type == 'admin'">
-                                                        {{ score.user.name }} : <b>{{ score.total }}</b>
+                                                        {{ $filter.truncate(score.user.name) }} : <b>{{ score.total
+                                                            }}</b>
                                                     </span>
                                                     <span
                                                         v-if="filter.user_type !== 'admin' && filter.user_id == score.user_id">
-                                                        {{ score.user.name }} : <b>{{ score.total }}</b>
+                                                        {{ $filter.truncate(score.user.name) }} : <b>{{ score.total
+                                                            }}</b>
                                                     </span>
                                                 </div>
                                             </td>

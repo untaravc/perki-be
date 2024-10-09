@@ -11,7 +11,7 @@ class Post extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = [];
-    protected $appends = ['status_label', 'body_parsed', 'abstract_number'];
+    protected $appends = ['status_label', 'body_parsed', 'abstract_number', 'image_link'];
 
     public function user()
     {
@@ -37,6 +37,15 @@ class Post extends Model
                 default:
                     return 'pending';
             }
+        }
+    }
+
+    public function getImageLinkAttribute()
+    {
+        if (isset($this->attributes['image']) && $this->attributes['image'] != null) {
+            return $this->attributes['image'];
+        } else {
+            return env('APP_URL') . 'assets24/logo/empty-image.png';
         }
     }
 

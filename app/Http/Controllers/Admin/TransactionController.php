@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\EmailServiceController;
+use App\Http\Controllers\System\FonnteServiceController;
 use App\Mail\SendDefaultMail;
 use App\Models\MailLog;
 use App\Models\Transaction;
@@ -194,5 +195,18 @@ class TransactionController extends Controller
         }
 
         return view('email.jcu22.invoice_pdf', $data);
+    }
+
+    public function notify($id)
+    {
+        $transaction = Transaction::where('status', '!=', 200)
+            ->find($id);
+
+        if ($transaction) {
+            $fonnte = new FonnteServiceController();
+            $fonnte->generateMessage($transaction);
+        }
+
+        return $this->responseUpdate($transaction);
     }
 }

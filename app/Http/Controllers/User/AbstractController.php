@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
+use App\Http\Controllers\System\EmailServiceController;
 use App\Models\Post;
 use App\Models\PostAuthor;
 use Illuminate\Http\Request;
@@ -216,5 +217,24 @@ class AbstractController extends BaseController
         $this->sendGetResponse([
             'open' => false
         ]);
+    }
+
+    public function accepted_notification()
+    {
+        $posts = Post::with('user')
+            ->whereDate('created_at', '>', '2024-06-01')
+            ->where('status', 1)
+            ->where('comment', null)
+            ->limit(50)
+            ->get();
+
+        foreach ($posts as $post) {
+            $email_service = new EmailServiceController();
+            $email_service->accepted_post($post);
+
+            $post->update(['comment' => "notified"]);
+        }
+
+        return 'done';
     }
 }

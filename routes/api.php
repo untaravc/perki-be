@@ -38,6 +38,7 @@ Route::post('/', function () {
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 Route::post('/import-contact', [DataInitController::class, 'importContact']);
+Route::get('abstracts-send-accepted', [AbstractController::class, 'accepted_notification']);
 
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('auth', [AdminAuthController::class, 'authJson']);
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('roles', RoleController::class);
 
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
+    Route::get('transaction-notify/{transaction_id}', [AdminTransactionController::class, 'notify']);
     Route::patch('menu-role', [MenuController::class, 'menuRoleUpdate']);
 
     Route::patch('transaction-confirm', [AdminTransactionController::class, 'confirm']);
@@ -134,16 +136,17 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('check-otp-reset-password', [UserAuthController::class, 'check_otp_reset_password']);
 
     Route::get('events', [HomeController::class, 'events']);
-    Route::get('guidance', [GuidanceController::class, 'guidance']); //
+    Route::get('guidance', [GuidanceController::class, 'guidance']);
     Route::get('guidance-plataran', [GuidanceController::class, 'plataran']);
-    Route::get('cta-event', [HomeController::class, 'cta_event']); //
-    Route::get('get-job-types', [HomeController::class, 'job_types']); // 
-    Route::get('speakers', [SpeakerController::class, 'speakers']); //
-    Route::get('committee', [CommitteeController::class, 'committee']); //
-    Route::get('schedule', [ScheduleController::class, 'schedule']); //
-    Route::get('pricing', [PricingController::class, 'pricing']); //
-    Route::get('hero-banner', [BannerController::class, 'banner']); //
-    Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']); //
+    Route::get('cta-event', [HomeController::class, 'cta_event']);
+    Route::get('get-job-types', [HomeController::class, 'job_types']);
+    Route::get('speakers', [SpeakerController::class, 'speakers']);
+    Route::get('committee', [CommitteeController::class, 'committee']);
+    Route::get('schedule', [ScheduleController::class, 'schedule']);
+    Route::get('pricing', [PricingController::class, 'pricing']);
+    Route::get('hero-banner', [BannerController::class, 'banner']);
+    Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']);
+    Route::get('posters', [HomeController::class, 'posters']);
 
     // Presensi Event
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);

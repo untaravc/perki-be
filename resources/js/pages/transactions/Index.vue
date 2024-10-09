@@ -90,6 +90,9 @@
                                                     class="btn btn-light btn-sm">
                                                     Preccess
                                                 </router-link>
+                                                <div class="btn btn-light btn-sm" @click="notifWa(data.id)">
+                                                    WA
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -133,6 +136,12 @@ export default {
         const { getData, deleteData } = useAxios()
         const is_loading = ref(true)
         const { transaction_store, date_config } = useFilterStore()
+
+        function notifWa(trx_id) {
+            if (confirm("Send Notif?")) {
+                getData('transaction-notify/' + trx_id)
+            }
+        }
 
         function loadDataContent(page = 1) {
             is_loading.value = true
@@ -179,7 +188,8 @@ export default {
             loadDataContent,
             changePerPage,
             deleteModal,
-            date_config
+            date_config,
+            notifWa
         }
     }
 }

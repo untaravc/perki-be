@@ -28,10 +28,10 @@ class FonnteServiceController extends Controller
 
   public function generateMessage(Transaction $transaction)
   {
-    $msg = "Hello *" . $transaction->user_name . "* \n \n";
-    $msg .= "You just made an event purchase with the following details: \n";
+    $msg = "Dear *" . $transaction->user_name . "* \n \n";
+    $msg .= "You made an event purchase with the following details: \n";
 
-    $msg .= "ID Transaksi: *" . $transaction->number . "* \n";
+    $msg .= "Transaction ID: *" . $transaction->number . "* \n";
 
     foreach ($transaction->transaction_details as $detail) {
       $msg .= "- " . $detail->event_name . " _" . $detail->event->title . "_ \n";
@@ -44,8 +44,11 @@ class FonnteServiceController extends Controller
     $msg .= "Account Name: *Perki Cabang Yogyakarta* \n \n";
     $msg .= "Please upload proof of payment after making payment. \n";
 
-    // return $msg;
-    return $this->sendMessage($transaction->user_phone, $msg);
+    if (env("APP_ENV") == 'local') {
+      return $this->sendMessage('081239709445', $msg);
+    } else {
+      // return $this->sendMessage($transaction->user_phone, $msg);
+    }
   }
 
   public function test()

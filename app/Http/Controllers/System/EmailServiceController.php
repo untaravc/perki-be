@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Mail\SendDefaultMail;
 use App\Models\MailLog;
+use App\Models\Post;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
@@ -313,6 +314,44 @@ class EmailServiceController extends Controller
                     ]);
                 return $e->getMessage();
             }
+        }
+    }
+
+    public function accepted_post(Post $post)
+    {
+        $data['view'] = 'email.poster_accepted';
+        $data['email_subject'] = 'Jogja Cardiology Update 2024: Accepted Abstract';
+        $data['post'] = $post;
+
+        // return view($data['view'], $data);
+
+        $mail_log = [
+            "email_sender"   => "perki.yogyakarta@gmail.com",
+            "email_receiver" => $post['user']['email'],
+            "receiver_name"  => $post['user']['name'],
+            "label"          => "acc_post",
+            "category"       => null,
+            "title"          => $data['email_subject'],
+            "model"          => "acc_post",
+            "model_id"       => $post->id,
+            "status"         => 1,
+            "sent_at"        => now(),
+        ];
+
+        try {
+            if (env('APP_ENV') == "prod") {
+                 Mail::to($post['user']['email'])->send(new SendDefaultMail($data));
+            } else {
+                Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+            }
+
+            MailLog::create($mail_log);
+        } catch (\Exception $exception) {
+            $mail_log['sent_at'] = null;
+            $mail_log['status'] = 2;
+            $mail_log['log'] = $exception->getMessage();
+
+            MailLog::create($mail_log);
         }
     }
 }

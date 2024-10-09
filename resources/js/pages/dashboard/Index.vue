@@ -30,21 +30,26 @@
                                 </div>
                             </div>
                             <div class="row mb-2">
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="text-sm">Pending</div>
                                     <div class="h3 font-bold" v-if="content.abstract_status">
                                         {{ content.abstract_status.pending }}
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="text-sm">Accepted</div>
                                     <div class="h3 text-green-500 font-bold" v-if="content.abstract_status">
                                         {{ content.abstract_status.accepted }}</div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-3">
                                     <div class="text-sm">Rejected</div>
                                     <div class="h3 text-red-500 font-bold" v-if="content.abstract_status">
                                         {{ content.abstract_status.rejected }}</div>
+                                </div>
+                                <div class="col-3">
+                                    <div class="text-sm">Moderated</div>
+                                    <div class="h3 text-blue-400 font-bold" v-if="content.abstract_status">
+                                        {{ content.abstract_status.moderated }}</div>
                                 </div>
                                 <div class="col-12 mb-2 mt-1">
                                     <hr>
