@@ -147,6 +147,7 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('hero-banner', [BannerController::class, 'banner']);
     Route::get('sponsor-slider', [SponsorController::class, 'sponsor_slider']);
     Route::get('posters', [HomeController::class, 'posters']);
+    Route::get('posters/{id}', [HomeController::class, 'posterShow']);
 
     // Presensi Event
     Route::get('scan-params', [EventPresenceController::class, 'scan_params']);

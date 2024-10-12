@@ -47,7 +47,7 @@ class FonnteServiceController extends Controller
     if (env("APP_ENV") == 'local') {
       return $this->sendMessage('081239709445', $msg);
     } else {
-      // return $this->sendMessage($transaction->user_phone, $msg);
+       return $this->sendMessage($transaction->user_phone, $msg);
     }
   }
 

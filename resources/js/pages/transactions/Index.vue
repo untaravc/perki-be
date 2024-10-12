@@ -72,11 +72,24 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div v-if="data.user">
-                                                    {{ data.job_type_code }} <b>{{ data.user.name }}</b>
+                                                <div class="border-b pb-1 mb-1"
+                                                    v-if="data.user && data.user.email !== data.user_email">
+                                                    <span>{{ data.user.job_type_code }}</span> <b>{{ data.user.name
+                                                        }}</b>
+                                                    <br>
+                                                    <span>{{ data.user.email }}</span>
                                                     <br>
                                                     <a class="text-blue-800 hover:text-blue-700"
                                                         :href="'https://wa.me/' + data.user.phone">{{ data.user.phone
+                                                        }}</a>
+                                                </div>
+                                                <div>
+                                                    {{ data.job_type_code }} <b>{{ data.user_name }}</b>
+                                                    <br>
+                                                    <span>{{ data.user_email }}</span>
+                                                    <br>
+                                                    <a class="text-blue-800 hover:text-blue-700"
+                                                        :href="'https://wa.me/' + data.user_phone">{{ data.user_phone
                                                         }}</a>
                                                 </div>
                                             </td>

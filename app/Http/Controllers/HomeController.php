@@ -129,8 +129,9 @@ class HomeController extends BaseController
     public function posters(Request $request)
     {
         $data_content = Post::orderByDesc('status')
+            ->orderByDesc('score')
             ->whereIn('status', [1, 3])
-            ->with(['user']);
+            ->with(['user', 'authors']);
         $data_content = $this->withPostFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 24);
 
@@ -166,5 +167,18 @@ class HomeController extends BaseController
         }
 
         return $data_content;
+    }
+
+    public function posterShow(Request $request, $id)
+    {
+        $poster = Post::with('authors')->find($id);
+
+        if ($poster) {
+            $poster->update(['comment' => $poster->comment + 1]);
+
+            $this->response['result'] = $poster;
+        }
+
+        return $this->response;
     }
 }
