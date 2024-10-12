@@ -47,7 +47,7 @@ class GuidanceController extends Controller
         $data[] = [
             "title" => "Booklet Final Announcement",
             "image" => "https://src.perki-jogja.com/assets24/posters/jcu24_day1.jpeg",
-            "link"  => "https://drive.google.com/file/d/1KJpcI5-8EZWpvHDexbvFuQqUBaSsJBoO/view?usp=sharing",
+            "link"  => "https://drive.google.com/drive/folders/1MpB9O3-l9RXHHbEzsaW6UWfrYxAO0Cvr?usp=drive_link",
         ];
 
         $this->response['result'] = $data;

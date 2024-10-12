@@ -20,6 +20,24 @@ class BannerController extends Controller
     {
         $data = [
             [
+                "title"    => "Welcome Message",
+                "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
+                "date"     => "Yogyakarta, 18th October 2024",
+                "poster"   => '/assets24/posters/welcome_msg.jpeg',
+                "buttons"  => [
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
+                ]
+            ],
+            [
                 "title"    => "Jogja Cardiology Update Workshop",
                 "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
                 "date"     => "Yogyakarta, 18th October 2024",
