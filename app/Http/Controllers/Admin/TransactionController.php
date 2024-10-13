@@ -137,8 +137,7 @@ class TransactionController extends Controller
 
     public function delete_transaction(Request $request)
     {
-        $transaction = Transaction::where('status', '!=', 200)
-            ->find($request->transaction_id);
+        $transaction = Transaction::find($request->transaction_id);
 
         if (!$transaction) {
             return $this->responseErrors('transaksi tidak dapat di hapus.');

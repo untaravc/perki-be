@@ -31,7 +31,7 @@
             <th>Name</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Transaction</th>
+            <th colspan="5">Transactions</th>
         </tr>
         @foreach ($users as $key => $user)
             <tr>
@@ -43,7 +43,9 @@
                 </td>
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ count($user->success_transactions) }}</td>
+                @foreach($user->success_transactions as $trx)
+                    <td>{{$trx->user_name}} ({{$trx->user_email}})</td>
+                @endforeach
             </tr>
         @endforeach
     </table>
