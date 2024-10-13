@@ -1,6 +1,7 @@
 import { OhVueIcon, addIcons } from "oh-vue-icons";
 import {
   BiArchive,
+  BiArrowLeft,
   BiBezier2,
   BiBookmarkStar,
   BiCameraVideo,
@@ -22,6 +23,7 @@ import {
 
 addIcons(
   BiArchive,
+  BiArrowLeft,
   BiBezier2,
   BiBookmarkStar,
   BiCameraVideo,

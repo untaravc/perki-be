@@ -24,6 +24,7 @@ import TransactionsAddEdit from "../pages/transactions/AddEdit.vue";
 import Vouchers from "../pages/vouchers/Index.vue";
 import VouchersAddEdit from "../pages/vouchers/AddEdit.vue";
 import Presence from "../pages/presence/Index.vue";
+import Scanner from "../pages/scanner/Index.vue";
 
 const routes = [
     {
@@ -64,6 +65,7 @@ const routes = [
             { path: 'presence', component: Presence, meta: { protected: true, title: "Presence" } },
         ]
     },
+    { path: "/scanner", name: "scanner", component: Scanner },
     { path: "/auth/404", name: "not-found", component: NotFound },
     { path: "/auth/login", name: "login", component: Login },
     { path: "/auth/forgot-password", name: "forgot-password", component: ForgotPassword },

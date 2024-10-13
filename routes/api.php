@@ -151,7 +151,7 @@ Route::group(['prefix' => 'pub'], function () {
     Route::get('posters/{id}', [HomeController::class, 'posterShow']);
 
     // Presensi Event
-    Route::get('scan-params', [EventPresenceController::class, 'scan_params']);
+    Route::get('scan-events', [EventController::class, 'index']);
     Route::get('scan-qrcode-event', [EventPresenceController::class, 'check_qrcode_data']);
     Route::post('scan-qrcode-event', [EventPresenceController::class, 'record_qrcode_data']);
 });

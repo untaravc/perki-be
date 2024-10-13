@@ -79,7 +79,7 @@ class EventPresenceController extends Controller
     {
         $result = $this->validateRequest($request);
 
-        if (!$result['status']) {
+        if (!$result['success']) {
             return $result;
         }
 
@@ -121,7 +121,7 @@ class EventPresenceController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'code'     => 'required',
-            'admin_id' => 'required',
+            // 'admin_id' => 'required',
             'event_id' => 'required',
         ]);
 
@@ -131,15 +131,16 @@ class EventPresenceController extends Controller
             return $this->response;
         }
 
-        $user = User::whereType('room')
-            ->find($request->admin_id);
-        if (!$user) {
-            $this->response['success'] = false;
-            $this->response['message'] = "Invalid parameters: Admin";
-            return $this->response;
-        }
+        // $user = User::whereType('room')
+        //     ->find($request->admin_id);
+        // if (!$user) {
+        //     $this->response['success'] = false;
+        //     $this->response['message'] = "Invalid parameters: Admin";
+        //     return $this->response;
+        // }
 
         $event = Event::where('data_type', 'product')->find($request->event_id);
+
         if (!$event) {
             $this->response['success'] = false;
             $this->response['message'] = "Invalid parameters: Event";
@@ -151,7 +152,7 @@ class EventPresenceController extends Controller
 
         if (!$transaction) {
             $this->response['success'] = false;
-            $this->response['message'] = "Invalid parameters: Transaction";
+            $this->response['message'] = "Kode Tidak Sesuai!";
             return $this->response;
         }
 
