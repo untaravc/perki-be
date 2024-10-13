@@ -38,6 +38,12 @@ export const useFilterStore = defineStore('filter', () => {
         dates: '',
     })
 
+    const presence_store = reactive({
+        event_id: 1,
+        page: 1,
+        per_page: 50,
+    })
+
     const post_store = reactive({
         page: 1,
         per_page: 25,
@@ -81,6 +87,7 @@ export const useFilterStore = defineStore('filter', () => {
         voucher_store,
         user_store,
         date_config,
+        presence_store,
         post_store
     }
 })

@@ -215,6 +215,20 @@ class MenuSeed extends Seeder
                         'type'  => "submenu",
                     ],
                 ]
+            ],
+            [
+                'title'    => "Presence",
+                'icon'     => "bi-check2-all",
+                'url'      => "/panel/presence--",
+                'type'     => "menu",
+                'children' => [
+                    [
+                        'title' => "Data",
+                        'icon'  => "",
+                        'url'   => "/panel/presence",
+                        'type'  => "submenu",
+                    ],
+                ]
             ]
         ];
 

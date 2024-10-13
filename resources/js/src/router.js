@@ -23,6 +23,7 @@ import Transactions from "../pages/transactions/Index.vue";
 import TransactionsAddEdit from "../pages/transactions/AddEdit.vue";
 import Vouchers from "../pages/vouchers/Index.vue";
 import VouchersAddEdit from "../pages/vouchers/AddEdit.vue";
+import Presence from "../pages/presence/Index.vue";
 
 const routes = [
     {
@@ -60,6 +61,7 @@ const routes = [
             { path: 'vouchers/:id', component: VouchersAddEdit, meta: { protected: true, title: "Voucher | Edit Add" } },
             { path: 'settings', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'settings/:id', component: Dashboard, meta: { protected: true, title: "Transactions" } },
+            { path: 'presence', component: Presence, meta: { protected: true, title: "Presence" } },
         ]
     },
     { path: "/auth/404", name: "not-found", component: NotFound },

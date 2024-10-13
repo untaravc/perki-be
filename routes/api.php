@@ -61,6 +61,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('posts', AdminPostController::class);
     Route::resource('users', AdminUserController::class);
     Route::resource('event-presence', EventPresenceController::class);
+    Route::resource('events', EventController::class);
     Route::resource('mail-logs', MailLogController::class);
     Route::resource('menus', MenuController::class);
     Route::resource('roles', RoleController::class);
