@@ -32,7 +32,7 @@
 {{-- <body onload="window.print()"> --}}
 @php
     $width = '440px';
-    $height = '1280px';
+    $height = '1000px';
 
     $font_size = '28px';
 

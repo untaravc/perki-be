@@ -169,7 +169,7 @@ class EmailServiceController extends Controller
 
         $data['view'] = 'email.jcu22.qr_code';
         $data['view_pdf'] = 'print.transaction.qr_code';
-        $data['email_subject'] = 'JCU 2023: Code Access ' . $data['transaction']['number'];
+        $data['email_subject'] = 'JCU 2024: QR Code Access ' . $data['transaction']['number'];
         $data['path'] = '/assets/qr_code/' . $data['transaction']['number'] . '.svg';
 
         QrCode::size(500)
@@ -190,10 +190,13 @@ class EmailServiceController extends Controller
         $data['attach'] = Storage::path($data['pdf_path']);
 
         if (env('APP_ENV') == "prod") {
-            Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
+            // Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
         } else {
             Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
         }
+
+        $fonnte = new FonnteServiceController();
+        $fonnte->generateQrMsg($data['transaction']);
 
         return true;
     }
@@ -340,7 +343,7 @@ class EmailServiceController extends Controller
 
         try {
             if (env('APP_ENV') == "prod") {
-                 Mail::to($post['user']['email'])->send(new SendDefaultMail($data));
+                Mail::to($post['user']['email'])->send(new SendDefaultMail($data));
             } else {
                 Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
             }

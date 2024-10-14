@@ -576,7 +576,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <img src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png"
+                                                                            <img src="https://jcu.perki-jogja.com/storage/logo/jcu24_color.png"
                                                                                 alt="Useful alt text" height="36"
                                                                                 style="
                                                                         border: 0;
@@ -596,7 +596,7 @@
                                             <!-- TODO: Change this name -->
                                             <p><strong>{{ $transaction['user_name'] }},</strong></p>
                                             <p class="mb-0">
-                                                thank you for joining JCU 2023 in conjunction with the 6th Jincartos.
+                                                thank you for joining JCU 2024 in conjunction with the 7th Jincartos.
                                                 Please download this following (PDF) document to get QR pass code.
                                             </p>
                                         </td>

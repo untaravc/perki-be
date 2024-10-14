@@ -14,8 +14,8 @@ class CronController extends Controller
     public function send_qr_email()
     {
         $pending_email = MailLog::whereStatus(0)
-            ->whereLabel('jcu_23_qr_access')
-            ->limit(2)
+            ->whereLabel('jcu_24_qr_access')
+            ->limit(1)
             ->get();
 
         $email_service = new EmailServiceController();

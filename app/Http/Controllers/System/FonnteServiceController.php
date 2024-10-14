@@ -26,6 +26,7 @@ class FonnteServiceController extends Controller
     }
   }
 
+  // On registration
   public function generateMessage(Transaction $transaction)
   {
     $msg = "Dear *" . $transaction->user_name . "* \n \n";
@@ -47,13 +48,40 @@ class FonnteServiceController extends Controller
     if (env("APP_ENV") == 'local') {
       return $this->sendMessage('081239709445', $msg);
     } else {
-       return $this->sendMessage($transaction->user_phone, $msg);
+      return $this->sendMessage($transaction->user_phone, $msg);
+    }
+  }
+
+  public function generateQrMsg(Transaction $transaction)
+  {
+    $msg = "Dear *" . $transaction->user_name . "* \n \n";
+
+    $msg .=  "Thank you for registering the Jogja Cardiology Update, scheduled to take place from October 18-20 at Tentrem Hotel Yogyakarta. Below are the event details based on your selected events: \n \n";
+    $msg .= "- Symposium: October 19 08.00 - 16.00 (WIB) and October 20, 08.00 - 16.00";
+
+    foreach ($transaction->transaction_details as $detail) {
+      if ($detail->event_id !== 111) {
+        $msg .= "- " . $detail->event_name . ": October 18 " . date("H:i", strtotime($detail->event->date_start)) . " - " . date("H:i", strtotime($detail->event->date_end)) . " \n";
+      }
+    }
+
+    $msg .= "\n \n";
+    $msg .= "Please download the QR code from this following link, which will serve as your access for event check-in. You will need to present this upon entering the venue. \n \n";
+    $msg .= "https://src.perki-jogja.com/storage/qr_pdf/" . $transaction->number . ".pdf";
+
+    if (env("APP_ENV") == 'local') {
+      return $this->sendMessage('081239709445', $msg);
+    } else {
+      // return $this->sendMessage($transaction->user_phone, $msg);
     }
   }
 
   public function test()
   {
-    $transaction  = Transaction::find(1204);
-    return $this->generateMessage($transaction);
+    // $email_service = new EmailServiceController();
+    // $email_service->qr_code_access(1038);
+
+    // $transaction  = Transaction::find(1204);
+    // return $this->generateQrMsg($transaction);
   }
 }
