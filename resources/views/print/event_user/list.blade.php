@@ -50,6 +50,8 @@
                 <td>No</td>
                 <td>Register</td>
                 <td>Name</td>
+                <td>Email</td>
+                <td>NIK</td>
                 <td>Phone</td>
                 <td>Job Type</td>
                 <td>Payment Status</td>
@@ -67,6 +69,20 @@
                     <td>
                         @if (isset($detail['transaction']))
                             {{ $detail['transaction']['user_name'] }}
+                        @else
+                            {{ $detail['transaction_id'] }}
+                        @endif
+                    </td>
+                    <td>
+                        @if (isset($detail['transaction']))
+                            {{ $detail['transaction']['user_email'] }}
+                        @else
+                            {{ $detail['transaction_id'] }}
+                        @endif
+                    </td>
+                    <td>
+                        @if (isset($detail['transaction']))
+                            {{ $detail['transaction']['nik'] }}
                         @else
                             {{ $detail['transaction_id'] }}
                         @endif

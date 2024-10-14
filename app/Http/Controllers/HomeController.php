@@ -130,6 +130,9 @@ class HomeController extends BaseController
     {
         $data_content = Post::orderByDesc('status')
             ->orderByDesc('score')
+            ->when($request->category, function ($q) use ($request) {
+                $q->where('category', $request->category);
+            })
             ->whereIn('status', [1, 3])
             ->with(['user', 'authors']);
         $data_content = $this->withPostFilter($data_content, $request);

@@ -160,6 +160,10 @@ class EmailServiceController extends Controller
     public function qr_code_access($transaction_id)
     {
         $data['transaction'] = Transaction::find($transaction_id);
+
+        if($data['transaction']['status'] != 200){
+            return;
+        }
         $data['transaction_details'] = TransactionDetail::with('event')
             ->orderBy('event_id')
             ->whereTransactionId($transaction_id)
@@ -190,7 +194,7 @@ class EmailServiceController extends Controller
         $data['attach'] = Storage::path($data['pdf_path']);
 
         if (env('APP_ENV') == "prod") {
-            // Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
+             Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
         } else {
             Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
         }

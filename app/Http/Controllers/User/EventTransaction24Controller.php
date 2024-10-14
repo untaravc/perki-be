@@ -309,6 +309,7 @@ class EventTransaction24Controller extends BaseController
 
         if ($voucher->qty != 0) {
             $used_voucher = Transaction::where('voucher_code', $voucher_code)
+                ->where('status', '<', 300)
                 ->count();
 
             if ($used_voucher >= $voucher->qty) {

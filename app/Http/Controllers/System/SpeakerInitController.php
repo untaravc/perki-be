@@ -53,7 +53,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/hariadi.hariawan.jpg',
             ],
             [
-                'name'  => 'Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
+                'name'  => 'Prof. Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
                 'slug'  => 'lucia.kris',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/lucia.kris.jpg',
