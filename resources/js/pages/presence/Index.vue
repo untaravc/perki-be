@@ -5,6 +5,23 @@
         <div class="card card-flush">
 
           <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="Nama.." @keyup.enter="loadDataContent()"
+                  v-model="presence_store.name">
+              </div>
+              <div class="col-md-3">
+                <select class="form-control" v-model="presence_store.align">
+                  <option value="center">Rata Tengah</option>
+                  <option value="left">Rata Kiri</option>
+                </select>
+              </div>
+              <div class="col-md-3"></div>
+              <div class="col-md-3 text-right">
+                <button class="btn btn-light btn-sm" @click="clearFilter()">Clear Filter</button>
+                <button class="btn btn-primary btn-sm" @click="loadDataContent()">Reload</button>
+              </div>
+            </div>
             <div class="grid grid-cols-4 gap-2">
               <div v-for="event in response.events" @click="selectEvent(event.id)"
                 :class="presence_store.event_id == event.id ? 'bg-blue-600 text-white' : 'bg-slate-100'"
@@ -19,6 +36,7 @@
                   <thead>
                     <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
                       <th>No</th>
+                      <th>Date</th>
                       <th>Nama</th>
                       <th>Event</th>
                       <th class="text-end">Aksi</th>
@@ -34,6 +52,9 @@
                           - 1) + d + 1 }}
                       </td>
                       <td>
+                        {{ $filter.formatDateTime(data.created_at) }}
+                      </td>
+                      <td>
                         <b>{{ data.user_name }}</b>
                       </td>
                       <td>
@@ -42,9 +63,13 @@
                         </span>
                       </td>
                       <td class="text-end">
-                        <a :href="'/print/event-presence/' + data.id" target="_blank" class="btn btn-light btn-sm">
+                        <a :href="'/print/event-presence/' + data.id + '?align=' + presence_store.align" target="_blank"
+                          class="btn btn-primary btn-sm">
                           Print
                         </a>
+                        <button class="btn btn-light btn-sm" @click="deletePresence(data.id)">
+                          Del
+                        </button>
                       </td>
                     </tr>
                   </tbody>
@@ -138,6 +163,22 @@ export default {
       loadDataContent()
     }
 
+    function clearFilter() {
+      presence_store.event_id = null
+      presence_store.name = null
+      loadDataContent()
+    }
+
+    function deletePresence(id) {
+      if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
+        deleteData('event-presence/' + id)
+          .then((data) => {
+            SwalToast('Berhasil menghapus data.')
+            loadDataContent(presence_store.page)
+          })
+      }
+    }
+
     return {
       breadcrumb_list,
       title,
@@ -148,7 +189,10 @@ export default {
       changePerPage,
       deleteModal,
       date_config,
-      selectEvent
+      selectEvent,
+      clearFilter,
+      deleteData,
+      deletePresence
     }
   }
 }

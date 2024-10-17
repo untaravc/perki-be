@@ -70,6 +70,11 @@
                                             <div class="text-sm italic text-slate-500">
                                                 {{ $filter.formatDateTime(trx.event.date_start) }}
                                             </div>
+                                            <div>
+                                                <button class="btn btn-primary btn-sm"
+                                                    @click="printName(data_content.data_detail, trx)">Print
+                                                    Name</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -154,11 +159,12 @@ import { reactive } from "vue";
 import useAxios from "../../src/service";
 import useValidation from "../../src/validation";
 import { useRouter, useRoute } from "vue-router";
+import Axios from "axios";
 
 export default {
     components: { Breadcrumb },
     setup() {
-        const { getData, patchData } = useAxios()
+        const { getData, patchData, postData } = useAxios()
         const router = useRouter()
         const { setErrors, getStatus, getMessage, resetErrors } = useValidation()
         const route = useRoute()
@@ -239,6 +245,25 @@ export default {
             }
         }
 
+        function printName(trx, trx_detail) {
+            let code = trx.number
+            let event_id = trx_detail.event_id
+            let url = window.location.origin + '/print-by-name?name=' + trx.user_name
+
+            Axios.post('/api/pub/scan-qrcode-event', {
+                code: code,
+                event_id: event_id
+            }).then(({ data }) => {
+                if (data.success) {
+                    window.open(url, '_blank').focus();
+                } else {
+                    alert(data.message)
+                }
+            })
+
+
+        }
+
         return {
             breadcrumb_list,
             title,
@@ -249,7 +274,8 @@ export default {
             editData,
             data_content,
             acceptPayment,
-            deletePayment
+            deletePayment,
+            printName
         }
     }
 }

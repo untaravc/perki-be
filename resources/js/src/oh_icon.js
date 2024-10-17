@@ -19,6 +19,7 @@ import {
   BiShieldCheck,
   BiTags,
   BiVectorPen,
+
 } from "oh-vue-icons/icons/bi";
 
 addIcons(

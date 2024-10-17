@@ -56,4 +56,10 @@ class RegisterController extends Controller
 //            'number' => $event . prefix_zero($transaction->id),
 //        ]);
     }
+
+    public function availableRegister()
+    {
+        $this->response['success'] = false;
+        return $this->response;
+    }
 }

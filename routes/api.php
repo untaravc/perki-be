@@ -119,6 +119,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () 
 
     Route::post('register', [UserAuthController::class, 'register']);
     Route::post('upload-file', [UploadFileController::class, 'store']);
+    Route::get('available-register', [EventRegisterController::class, 'availableRegister']);
 
     // register event
     Route::get('register-event', [EventRegisterController::class, 'register_event']);

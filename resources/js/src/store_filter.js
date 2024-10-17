@@ -42,6 +42,8 @@ export const useFilterStore = defineStore('filter', () => {
         event_id: 1,
         page: 1,
         per_page: 50,
+        name: '',
+        align: 'center',
     })
 
     const post_store = reactive({

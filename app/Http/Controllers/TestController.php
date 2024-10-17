@@ -49,7 +49,7 @@ class TestController extends Controller
         return view('print.event_user.nametag_by_name', [
             'name'  => $request->name,
             'title' => $request->title ?? "PARTICIPANT",
-            'align' => $request->align ?? "left"
+            'align' => $request->align ?? "center"
         ]);
     }
 

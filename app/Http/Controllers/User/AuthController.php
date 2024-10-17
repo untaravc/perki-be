@@ -35,6 +35,15 @@ class AuthController extends BaseController
      */
     public function register(Request $request)
     {
+        $transaction_count = Transaction::whereSection('jcu24')
+            ->where('status', '>=', 110)
+            ->where('status', '<', 300)
+            ->count();
+
+        if($transaction_count > 425){
+            $this->sendError(500, "Quota penuh " . $transaction_count);
+        }
+
         $this->response['error'] = 422;
         $this->validate_register($request->all());
         $user_exist = User::whereEmail($request->email)->first();

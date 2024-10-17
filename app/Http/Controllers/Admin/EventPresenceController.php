@@ -16,14 +16,24 @@ class EventPresenceController extends Controller
     public function index(Request $request)
     {
         $data_content = EventUser::orderByDesc('updated_at')
-            ->with('scanner', 'event');
+            ->with('scanner', 'event')
+            ->whereIn('event_id', [
+                111,
+                213,
+                217,
+                221,
+                225,
+                229,
+                233,
+                237,
+                242,
+            ]);
 
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
         foreach ($data_content as $data) {
             $transaction_detail = TransactionDetail::whereUserId($data->user_id)
-                ->whereIn('event_id', [20, 21, 22, 23, 68, 72, 76, 80])
                 ->first();
 
             if ($transaction_detail) {
@@ -214,5 +224,13 @@ class EventPresenceController extends Controller
         }
 
         return view('print.event_user.nametag', compact('event_user'));
+    }
+
+    public function destroy($id)
+    {
+        $event_user = EventUser::find($id);
+        $event_user->delete();
+
+        return $this->response;
     }
 }

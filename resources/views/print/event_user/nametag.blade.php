@@ -29,12 +29,13 @@
     </style>
 </head>
 
-{{-- <body onload="window.print()"> --}}
+{{-- <body > --}}
 @php
+    $align = request('align') ?? 'center';
     $width = '440px';
     $height = '1000px';
 
-    $font_size = '28px';
+    $font_size = '26px';
 
     $first_top = '195px';
     $second_top = '830px';
@@ -51,23 +52,44 @@
     }
 @endphp
 
-<body>
-    <div style="position: relative; width: {{ $width }}; height: {{ $height }}; background-image: url('')">
-        <div style="position: absolute; top: {{ $first_top }}; margin-left: 20px; max-width: 330px">
-            <div style="font-size: {{ $font_size }}; ">
-                {{ $event_user['user_name'] }}
+<body onload="window.print()">
+    @if ($align == 'left')
+        <div
+            style="position: relative; width: {{ $width }}; height: {{ $height }}; background-image: url('')">
+            <div style="position: absolute; top: {{ $first_top }}; margin-left: 20px; max-width: 330px">
+                <div style="font-size: {{ $font_size }}; ">
+                    {{ $event_user['user_name'] }}
+                </div>
+            </div>
+            <div
+                style="position: absolute; top: {{ $second_top }}; text-align: center; font-size: 32px; width: {{ $width }}">
+                PARTICIPANT
+            </div>
+            <div style="position: absolute; top: {{ $third_top }}; margin-left: 20px;  max-width: 330px">
+                <span style="font-size: {{ $font_size }}">
+                    {{ $event_user['user_name'] }}
+                </span>
             </div>
         </div>
+    @else
         <div
-            style="position: absolute; top: {{ $second_top }}; text-align: center; font-size: 32px; width: {{ $width }}">
-            PARTICIPANT
+            style="position: relative; width: 100%; height: {{ $height }}; background-image: url(''); display: flex; justify-content: center; background-repeat: no-repeat; background-position: top">
+            <div style="position: absolute; top: {{ $first_top }}; width: 330px">
+                <div style="font-size: {{ $font_size }}; ">
+                    {{ $event_user['user_name'] }}
+                </div>
+            </div>
+            <div
+                style="position: absolute; top: {{ $second_top }}; text-align: center; font-size: 32px; width: {{ $width }}">
+                PARTICIPANT
+            </div>
+            <div style="position: absolute; top: {{ $third_top }}; width: 330px">
+                <span style="font-size: {{ $font_size }}">
+                    {{ $event_user['user_name'] }}
+                </span>
+            </div>
         </div>
-        <div style="position: absolute; top: {{ $third_top }}; margin-left: 20px;  max-width: 330px">
-            <span style="font-size: {{ $font_size }}">
-                {{ $event_user['user_name'] }}
-            </span>
-        </div>
-    </div>
+    @endif
     <script>
         // setTimeout(() => {
         //     window.close();
