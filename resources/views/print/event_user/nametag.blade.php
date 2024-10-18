@@ -32,23 +32,23 @@
 {{-- <body > --}}
 @php
     $align = request('align') ?? 'center';
-    $width = '440px';
+    $width = '400px';
     $height = '1000px';
 
-    $font_size = '26px';
+    $font_size = '18px';
 
-    $first_top = '195px';
-    $second_top = '830px';
-    $third_top = '960px';
+    $first_top = '155px';
+    $second_top = '640px';
+    $third_top = '740px';
 
     $url_bg = '/assets24/posters/name_tag.jpeg';
 
     if (strlen($event_user['user_name']) > 25) {
-        $font_size = '22px';
+        $font_size = '14px';
     }
 
     if (strlen($event_user['user_name']) > 35) {
-        $font_size = '16px';
+        $font_size = '12px';
     }
 @endphp
 
@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div
-                style="position: absolute; top: {{ $second_top }}; text-align: center; font-size: 32px; width: {{ $width }}">
+                style="position: absolute; top: {{ $second_top }}; text-align: center; font-size: 28px; width: {{ $width }}">
                 PARTICIPANT
             </div>
             <div style="position: absolute; top: {{ $third_top }}; margin-left: 20px;  max-width: 330px">

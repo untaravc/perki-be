@@ -99,6 +99,7 @@ class EventTransaction24Controller extends BaseController
 
     public function create_payment(Request $request)
     {
+        return 'hi';
         $items = $request->items;
         $pricing = $this->calculate_price($request)['result'];
 

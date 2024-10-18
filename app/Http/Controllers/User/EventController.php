@@ -9,11 +9,11 @@ use Illuminate\Http\Request;
 
 const EVENT_ID = [
     // 80, //
-    // 111, // Sympo
-    213, // WS 1
-    217, // WS 2
-    221, // WS 3
-    225, // WS 4
+    111, // Sympo
+    //    213, // WS 1
+    //    217, // WS 2
+    //    221, // WS 3
+    //    225, // WS 4
     // 229, // WS 5
     // 233, // WS 6
     // 237, // WS 7

@@ -171,6 +171,19 @@ class EventPresenceController extends Controller
             ->whereStatus(200)
             ->first();
 
+        $has_print = EventUser::whereUserId($transaction->user_id)
+            ->whereIn('event_id', [
+                213, // WS 1
+                217, // WS 2
+                221, // WS 3
+                225, // WS 4
+                229, // WS 5
+                233, // WS 6
+                237, // WS 7
+                242, // WS 8
+            ])
+            ->first();
+
         if (!$transaction_detail) {
             $this->response['success'] = false;
             $this->response['message'] = "Peserta tidak terdaftar pada: " . $event->name;
@@ -179,6 +192,7 @@ class EventPresenceController extends Controller
 
         $data['transaction'] = $transaction;
         $data['transaction_detail'] = $transaction_detail;
+        $data['has_print'] = $has_print;
 
         $this->response['result'] = $data;
         return $this->response;
