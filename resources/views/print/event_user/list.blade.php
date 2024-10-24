@@ -55,8 +55,8 @@
                 <td>Phone</td>
                 <td>Job Type</td>
                 <td>Payment Status</td>
-                <td>Paket</td>
                 <td>Total</td>
+                <td>Presence</td>
             </tr>
         </thead>
         <tbody>
@@ -104,12 +104,14 @@
                     </td>
                     <td>
                         @if (isset($detail->transaction))
-                            {{ $detail->transaction->package_name }}
+                            {{ number_format($detail->transaction->total, 0, ',', '.') }}
                         @endif
                     </td>
                     <td>
-                        @if (isset($detail->transaction))
-                            {{ number_format($detail->transaction->total, 0, ',', '.') }}
+                        @if($detail->is_presence)
+                            Presence
+                        @else
+                            Absence
                         @endif
                     </td>
                 </tr>

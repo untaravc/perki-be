@@ -53,7 +53,7 @@
       </div>
       <div v-if="transaction && transaction.user_name" class="my-4">
         <div class="bg-yellow-300 p-4 text-center" v-if="has_print !== null">
-          <b>Telah Cetak Name Tag</b>
+          <b>Telah Mengikuti Sympo Day 1</b>
         </div>
         <div class="bg-green-600 text-white p-4 text-lg text-center">
           <b>QR CODE VALID</b>

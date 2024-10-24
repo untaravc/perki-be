@@ -161,7 +161,7 @@ class EmailServiceController extends Controller
     {
         $data['transaction'] = Transaction::find($transaction_id);
 
-        if($data['transaction']['status'] != 200){
+        if ($data['transaction']['status'] != 200) {
             return;
         }
         $data['transaction_details'] = TransactionDetail::with('event')
@@ -194,7 +194,7 @@ class EmailServiceController extends Controller
         $data['attach'] = Storage::path($data['pdf_path']);
 
         if (env('APP_ENV') == "prod") {
-             Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
+            Mail::to($data['transaction']['user_email'])->send(new SendDefaultMail($data));
         } else {
             Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
         }
@@ -208,9 +208,9 @@ class EmailServiceController extends Controller
     public function send_event_certificate()
     {
         // setup
-        $models = ['jcu23_certificate'];
-        $file = public_path('assets/certificates/jcu23_sympo2.png');
-        $data['email_subject'] = "Perki Jogja";
+        $labels = ['jcu24_displayed_poster'];
+        $file = public_path('assets24/certificates/jcu24_displayed.jpg');
+        $data['email_subject'] = "Certificate for Displayed Poster - JCU 2024 Abstract Submission Symposium";
         // --- end setup
 
         $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
@@ -220,10 +220,10 @@ class EmailServiceController extends Controller
             return '';
         }
 
-        $mail_logs = MailLog::whereIn('label', $models)
+        $mail_logs = MailLog::whereIn('label', $labels)
             ->whereStatus(0)
-            //            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
-            ->limit(1)
+//            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
+            ->limit(4)
             ->get();
 
         foreach ($mail_logs as $mail) {
@@ -234,7 +234,7 @@ class EmailServiceController extends Controller
 
             $mail_data['img'] = base64_encode(file_get_contents($file));
             $mail_data['name'] = $mail['receiver_name'];
-            $mail_data['name_top'] = 400;
+            $mail_data['name_top'] = 630;
             $mail_data['name_left'] = 260;
 
             $pdf = Pdf::setOptions([
@@ -248,16 +248,17 @@ class EmailServiceController extends Controller
             $content = $pdf->download()->getOriginalContent();
             $file_path = 'certificates/' . $mail->label . "/" . $file_name;
             Storage::disk('local')->put($file_path, $content);
-            //            return view('print.events.certificate', $mail_data);
+
+            // return view('print.events.certificate', $mail_data);
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
             $data['title'] = $mail->title;
-            $data['view'] = 'email.certificate';
+            $data['view'] = 'email.displayed_poster';
             $data['attach'] = public_path('storage/' . $file_path);
             //            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
             $data['content'] = $mail->content;
 
-            //            return view($data['view'], $mail);
+            // return view($data['view'], $mail);
 
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))

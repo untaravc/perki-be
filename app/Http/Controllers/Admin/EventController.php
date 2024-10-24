@@ -100,6 +100,26 @@ class EventController extends Controller
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '!=', 400)
             ->get();
+
+        if($event->id === 111){
+            $event_ids = [111, 111001];
+            $event_user = EventUser::whereIn('event_id', $event_ids)
+                ->pluck('user_id')
+                ->toArray();
+        } else {
+            $event_user = EventUser::whereEventId($event->id)
+                ->pluck('user_id')
+                ->toArray();
+        }
+
+        foreach ($transaction_details as $transaction_detail) {
+            if(in_array($transaction_detail->user_id, $event_user)){
+                $transaction_detail->setAttribute('is_presence', true);
+            } else {
+                $transaction_detail->setAttribute('is_presence', false);
+            }
+        }
+
         return view('print.event_user.list', compact('event', 'transaction_details'));
     }
 

@@ -38,6 +38,20 @@ class MenuSeed extends Seeder
                 ]
             ],
             [
+                'title'    => "Presence",
+                'icon'     => "bi-check2-all",
+                'url'      => "/panel/presence--",
+                'type'     => "menu",
+                'children' => [
+                    [
+                        'title' => "Data",
+                        'icon'  => "",
+                        'url'   => "/panel/presence",
+                        'type'  => "submenu",
+                    ],
+                ]
+            ],
+            [
                 'title'    => "Post",
                 'icon'     => "bi-file-earmark-post",
                 'url'      => "/panel/posts--",
@@ -216,20 +230,7 @@ class MenuSeed extends Seeder
                     ],
                 ]
             ],
-            [
-                'title'    => "Presence",
-                'icon'     => "bi-check2-all",
-                'url'      => "/panel/presence--",
-                'type'     => "menu",
-                'children' => [
-                    [
-                        'title' => "Data",
-                        'icon'  => "",
-                        'url'   => "/panel/presence",
-                        'type'  => "submenu",
-                    ],
-                ]
-            ]
+
         ];
 
         $active_ids = [];

@@ -18,6 +18,7 @@ class EventPresenceController extends Controller
         $data_content = EventUser::orderByDesc('updated_at')
             ->with('scanner', 'event')
             ->whereIn('event_id', [
+                111001,
                 111,
                 213,
                 217,
@@ -173,14 +174,15 @@ class EventPresenceController extends Controller
 
         $has_print = EventUser::whereUserId($transaction->user_id)
             ->whereIn('event_id', [
-                213, // WS 1
-                217, // WS 2
-                221, // WS 3
-                225, // WS 4
-                229, // WS 5
-                233, // WS 6
-                237, // WS 7
-                242, // WS 8
+//                213, // WS 1
+//                217, // WS 2
+//                221, // WS 3
+//                225, // WS 4
+//                229, // WS 5
+//                233, // WS 6
+//                237, // WS 7
+//                242, // WS 8
+                111001, // Sympo Day 1
             ])
             ->first();
 

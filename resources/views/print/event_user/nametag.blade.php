@@ -74,7 +74,7 @@
     @else
         <div
             style="position: relative; width: 100%; height: {{ $height }}; background-image: url(''); display: flex; justify-content: center; background-repeat: no-repeat; background-position: top">
-            <div style="position: absolute; top: {{ $first_top }}; width: 330px">
+            <div style="position: absolute; top: {{ $first_top }}; width: 330px; margin-left: 30px">
                 <div style="font-size: {{ $font_size }}; ">
                     {{ $event_user['user_name'] }}
                 </div>
@@ -83,7 +83,7 @@
                 style="position: absolute; top: {{ $second_top }}; text-align: center; font-size: 32px; width: {{ $width }}">
                 PARTICIPANT
             </div>
-            <div style="position: absolute; top: {{ $third_top }}; width: 330px">
+            <div style="position: absolute; top: {{ $third_top }}; width: 330px; margin-left: 30px">
                 <span style="font-size: {{ $font_size }}">
                     {{ $event_user['user_name'] }}
                 </span>

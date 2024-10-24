@@ -45,7 +45,7 @@ Route::get('print/transaction-presence/{transaction_id}', [EventPresenceControll
 Route::get('print/invoice-pdf/{transaction_id}', [TransactionController::class, 'invoice_pdf']);
 
 // TEST
-Route::get('test', [FonnteServiceController::class, 'test']);
+Route::get('test', [EmailServiceController::class, 'send_event_certificate']);
 Route::get('print-by-name', [TestController::class, 'print_by_name']);
 Route::get('send_certy', [TestController::class, 'send_certy']);
 Route::get('create_certy_mail_log', [TestController::class, 'create_certy_mail_log']);
