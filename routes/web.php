@@ -14,7 +14,7 @@ use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\System\FonnteServiceController;
 
 Route::get('/', function () {
-    return 'perki-src';
+    return 'src';
 });
 Route::get('/panel/print-abstract', [PostController::class, 'printPost']);
 Route::get('/panel/preview-abstract', [PostController::class, 'previewAbstract']);
@@ -29,7 +29,7 @@ Route::get('/auth/{path}', [AuthController::class, 'auth'])
 // Report
 Route::get('/event-member/{slug}', [EventController::class, 'event_member']);
 Route::get('/event-presence/{slug}', [EventController::class, 'event_presence']);
-Route::get('/transaction-recap', [TransactionController::class, 'transaction_recap']);
+//Route::get('/transaction-recap', [TransactionController::class, 'transaction_recap']);
 Route::get('/voucher-usage', [VoucherController::class, 'voucherRecap']);
 
 Route::get('login', [AuthController::class, 'login_view']);
