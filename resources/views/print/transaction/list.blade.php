@@ -88,14 +88,16 @@
             </td>
             <td>{{ $transaction['note'] }}</td>
             <td style="text-align: center">
-                ss
                 @if ($transaction['transfer_proof'])
                     <a target="_blank" href="{{ $transaction['transfer_proof'] }}">
                         <img src="{{$transaction['transfer_proof']}}" height="150px" alt="">
                     </a>
-                    <a target="_blank" href="{{ $transaction['transfer_proof'] }}">
-                        {{$transaction['transfer_proof']}}
-                    </a>
+                    <br>
+                    <small>
+                        <a target="_blank" href="{{ $transaction['transfer_proof'] }}">
+                            file
+                        </a>
+                    </small>
                 @endif
             </td>
             @foreach ($transaction['transaction_details'] as $detail)

@@ -159,7 +159,6 @@ class TransactionController extends Controller
 
     public function transaction_recap(Request $request)
     {
-        return 's';
         $transactions = Transaction::where('status', '!=', 400)
             ->where('status', '>', 100)
             ->when($request->section, function ($q) use ($request) {

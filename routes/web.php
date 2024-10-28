@@ -29,7 +29,7 @@ Route::get('/auth/{path}', [AuthController::class, 'auth'])
 // Report
 Route::get('/event-member/{slug}', [EventController::class, 'event_member']);
 Route::get('/event-presence/{slug}', [EventController::class, 'event_presence']);
-//Route::get('/transaction-recap', [TransactionController::class, 'transaction_recap']);
+Route::get('/transaction-recap', [TransactionController::class, 'transaction_recap']);
 Route::get('/voucher-usage', [VoucherController::class, 'voucherRecap']);
 
 Route::get('login', [AuthController::class, 'login_view']);
