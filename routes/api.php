@@ -71,6 +71,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::patch('menu-role', [MenuController::class, 'menuRoleUpdate']);
 
     Route::patch('transaction-confirm', [AdminTransactionController::class, 'confirm']);
+    Route::patch('transactions-validate/{transaction_id}', [AdminTransactionController::class, 'validate_transaction']);
     Route::post('scan-event', [AdminEventController::class, 'scan_event']);
     Route::post('post-set-reviewer/{post_id}', [AdminPostController::class, 'set_reviewer']);
     Route::post('post-review/{post_id}', [AdminPostController::class, 'post_review']);

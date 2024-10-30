@@ -260,8 +260,6 @@ export default {
                     alert(data.message)
                 }
             })
-
-
         }
 
         return {

@@ -20,6 +20,7 @@ import Posts from "../pages/posts/Index.vue";
 import PostsAddEdit from "../pages/posts/AddEdit.vue";
 import PostsView from "../pages/posts/View.vue";
 import Transactions from "../pages/transactions/Index.vue";
+import TransactionsValidate from "../pages/transactions/Validate.vue";
 import TransactionsAddEdit from "../pages/transactions/AddEdit.vue";
 import Vouchers from "../pages/vouchers/Index.vue";
 import VouchersAddEdit from "../pages/vouchers/AddEdit.vue";
@@ -51,6 +52,7 @@ const routes = [
             { path: 'transactions/:id', component: TransactionsAddEdit, meta: { protected: true, title: "Post" } },
 
             { path: 'transactions', component: Transactions, meta: { protected: true, title: "Transactions" } },
+            { path: 'transactions-validate/:id', component: TransactionsValidate, meta: { protected: true, title: "Transactions Validate" } },
             { path: 'archived-transactions', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'pages', component: Dashboard, meta: { protected: true, title: "Transactions" } },
             { path: 'pages/:id', component: Dashboard, meta: { protected: true, title: "Transactions" } },

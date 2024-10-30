@@ -163,6 +163,10 @@ class TransactionController extends Controller
             ->where('status', '>', 100)
             ->when($request->section, function ($q) use ($request) {
                 $q->whereSection($request->section);
+            })->when($request->note, function ($q) use ($request) {
+                $q->whereNote($request->note);
+            })->when($request->gl_name, function ($q) use ($request) {
+                $q->whereGlName($request->gl_name);
             })
             ->orderByDesc('status')
             ->orderBy('id')
@@ -207,5 +211,29 @@ class TransactionController extends Controller
         }
 
         return $this->responseUpdate($transaction);
+    }
+
+    public function validate_transaction(Request $request, $id)
+    {
+        $transaction = Transaction::find($id);
+
+        if ($transaction) {
+            $transaction->update([
+                'note' => $request->note,
+                'gl_name' => $request->gl_name,
+                'gl_date' => $request->gl_date,
+                'gl_status' => $request->gl_status,
+            ]);
+        }
+
+        $next = Transaction::where('id', '>', $id)
+            ->where('status', 200)
+            ->first();
+
+        if ($next) {
+            $this->response['result']['next_id'] = $next->id;
+        }
+
+        return $this->response;
     }
 }

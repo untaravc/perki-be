@@ -99,13 +99,17 @@
                                                     $filter.currency(data.total) }}</div>
                                             </td>
                                             <td class="text-end">
-                                                <router-link :to="'/panel/transactions/' + data.id"
+                                                <!-- <router-link :to="'/panel/transactions/' + data.id"
                                                     class="btn btn-light btn-sm">
                                                     Preccess
-                                                </router-link>
-                                                <div class="btn btn-light btn-sm" @click="notifWa(data.id)">
+                                                </router-link> -->
+                                                <a :href="'/panel/transactions-validate/' + data.id" target="_blank"
+                                                    class="btn btn-light btn-sm">
+                                                    Validate
+                                                </a>
+                                                <!-- <div class="btn btn-light btn-sm" @click="notifWa(data.id)">
                                                     WA
-                                                </div>
+                                                </div> -->
                                             </td>
                                         </tr>
                                     </tbody>

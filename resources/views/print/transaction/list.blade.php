@@ -54,13 +54,14 @@
         <td>Date</td>
         <td>Transaction Number</td>
         <td>Name</td>
-        <td>Job Type</td>
-        <td>City</td>
+{{--        <td>Job Type</td>--}}
+{{--        <td>City</td>--}}
         <td>Total</td>
-        <td style="text-align: right">Status</td>
+{{--        <td style="text-align: right">Status</td>--}}
         <td>Note</td>
+        <td>GL</td>
         <td>Transfer Proof</td>
-        <td colspan="3" style="text-align: center">Items</td>
+{{--        <td colspan="3" style="text-align: center">Items</td>--}}
     </tr>
     </thead>
     <tbody>
@@ -72,21 +73,22 @@
             </td>
             <td>{{ $transaction['number'] }}</td>
             <td>{{ $transaction['user_name'] }}</td>
-            <td>{{ $transaction['job_type_code'] }}</td>
-            <td>
-                @if ($transaction['user'])
-                    {{ $transaction['user']['city'] }}
-                @endif
-            </td>
+{{--            <td>{{ $transaction['job_type_code'] }}</td>--}}
+{{--            <td>--}}
+{{--                @if ($transaction['user'])--}}
+{{--                    {{ $transaction['user']['city'] }}--}}
+{{--                @endif--}}
+{{--            </td>--}}
             <td style="text-align: right">{{ number_format($transaction['total'], 0, ',', '.') }}</td>
-            <td>
-                @if ($transaction['status'] === 200)
-                    Paid
-                @else
-                    {{ $transaction['status'] }}
-                @endif
-            </td>
+{{--            <td>--}}
+{{--                @if ($transaction['status'] === 200)--}}
+{{--                    Paid--}}
+{{--                @else--}}
+{{--                    {{ $transaction['status'] }}--}}
+{{--                @endif--}}
+{{--            </td>--}}
             <td>{{ $transaction['note'] }}</td>
+            <td>{{ $transaction['gl_name'] }}</td>
             <td style="text-align: center">
                 @if ($transaction['transfer_proof'])
                     <a target="_blank" href="{{ $transaction['transfer_proof'] }}">
@@ -100,23 +102,23 @@
                     </small>
                 @endif
             </td>
-            @foreach ($transaction['transaction_details'] as $detail)
-                <td>
-                    {{ $detail['event_name'] }} <br>
-                </td>
-            @endforeach
-            @if (count($transaction['transaction_details']) === 0)
-                <td></td>
-                <td></td>
-                <td></td>
-            @endif
-            @if (count($transaction['transaction_details']) === 1)
-                <td></td>
-                <td></td>
-            @endif
-            @if (count($transaction['transaction_details']) === 2)
-                <td></td>
-            @endif
+{{--            @foreach ($transaction['transaction_details'] as $detail)--}}
+{{--                <td>--}}
+{{--                    {{ $detail['event_name'] }} <br>--}}
+{{--                </td>--}}
+{{--            @endforeach--}}
+{{--            @if (count($transaction['transaction_details']) === 0)--}}
+{{--                <td></td>--}}
+{{--                <td></td>--}}
+{{--                <td></td>--}}
+{{--            @endif--}}
+{{--            @if (count($transaction['transaction_details']) === 1)--}}
+{{--                <td></td>--}}
+{{--                <td></td>--}}
+{{--            @endif--}}
+{{--            @if (count($transaction['transaction_details']) === 2)--}}
+{{--                <td></td>--}}
+{{--            @endif--}}
         </tr>
     @endforeach
     </tbody>
