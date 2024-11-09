@@ -97,30 +97,33 @@ class HomeController extends BaseController
 
     public function video_on_demand(Request $request)
     {
-        //        $transaction_details = TransactionDetail::whereUserId($request->logged_user_id)
-        //            ->whereEventId(1)
-        //            ->first();
-        //
-        //        if (!$transaction_details) {
-        //            $this->response['success'] = false;
-        //            $this->response['message'] = "You are not registered as a symposium participant";
-        //            return $this->response;
-        //        }
-
         $event = Event::with(['schedules' => function ($q) {
             $q->with(['schedule_details' => function ($q2) {
                 $q2->with('speaker');
             }]);
         }])
-            ->select('id', 'title', 'record_link')
-            ->find(1);
+            ->select('id', 'title', 'record_link');
+
+        if ($request->ref == 'jcu24') {
+            $event = $event->find(111);
+        } else {
+            $event = $event->find(1);
+        }
 
         $schedule = collect($event['schedules']);
 
-        $data['day_1_a'] = $schedule->whereIn('id', [2, 4, 6, 8]);
-        $data['day_1_b'] = $schedule->whereIn('id', [3, 5, 7, 9]);
-        $data['day_2_a'] = $schedule->whereIn('id', [12, 14, 58, 60]);
-        $data['day_2_b'] = $schedule->whereIn('id', [13, 15, 59, 64]);
+        if ($request->ref === 'jcu24') {
+            $data['day_1_a'] = $schedule->whereIn('id', [112, 114, 122, 130, 138, 148]);
+            $data['day_1_b'] = $schedule->whereIn('id', [156, 164, 172, 246, 254]);
+            $data['day_2_a'] = $schedule->whereIn('id', [113, 118, 126, 134, 142, 152,]);
+            $data['day_2_b'] = $schedule->whereIn('id', [160, 168, 176, 250, 258,]);
+        } else {
+            $data['day_1_a'] = $schedule->whereIn('id', [2, 4, 6, 8]);
+            $data['day_1_b'] = $schedule->whereIn('id', [3, 5, 7, 9]);
+            $data['day_2_a'] = $schedule->whereIn('id', [12, 14, 58, 60]);
+            $data['day_2_b'] = $schedule->whereIn('id', [13, 15, 59, 64]);
+        }
+
 
         $this->response['result'] = $data;
         return $this->response;

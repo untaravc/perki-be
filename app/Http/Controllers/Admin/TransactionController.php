@@ -228,6 +228,7 @@ class TransactionController extends Controller
 
         $next = Transaction::where('id', '>', $id)
             ->where('status', 200)
+            ->where('section', 'jcu24')
             ->first();
 
         if ($next) {
