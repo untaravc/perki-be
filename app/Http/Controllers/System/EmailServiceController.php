@@ -208,9 +208,9 @@ class EmailServiceController extends Controller
     public function send_event_certificate()
     {
         // setup
-        $labels = ['jcu24_displayed_poster'];
-        $file = public_path('assets24/certificates/jcu24_displayed.jpg');
-        $data['email_subject'] = "Certificate for Displayed Poster - JCU 2024 Abstract Submission Symposium";
+        $labels = ['jcu24_sympo_certy'];
+        $file = public_path('assets24/certificates/sympo_certy.png');
+        $data['email_subject'] = "Certificate for Symposium Participant - JCU 2024";
         // --- end setup
 
         $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
@@ -223,7 +223,7 @@ class EmailServiceController extends Controller
         $mail_logs = MailLog::whereIn('label', $labels)
             ->whereStatus(0)
 //            ->where('email_receiver', 'vyvy1777@gmail.com') // tester email
-            ->limit(4)
+            ->limit(2)
             ->get();
 
         foreach ($mail_logs as $mail) {
@@ -253,7 +253,7 @@ class EmailServiceController extends Controller
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
             $data['title'] = $mail->title;
-            $data['view'] = 'email.displayed_poster';
+            $data['view'] = 'email.symposium_certificate';
             $data['attach'] = public_path('storage/' . $file_path);
             //            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
             $data['content'] = $mail->content;

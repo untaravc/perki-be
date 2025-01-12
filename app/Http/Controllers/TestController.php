@@ -135,6 +135,6 @@ class TestController extends Controller
     public function send_certy()
     {
         $new = new EmailServiceController();
-        return $new->send_abstract_certificate();
+        return $new->send_event_certificate();
     }
 }
