@@ -23,16 +23,16 @@ class BannerController extends Controller
     {
         $data = [
             [
-                "title"    => "JOGJA Cardiovascular Epidemiology and Prevention Forum 2025",
+                "title"    => "Jogja Cardiovascular Epidemiology and Prevention Forum 2025",
                 // "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
-                "date"     => "Yogyakarta, 22nd February 2025",
-                "poster"   => '/assets/posters/welcome_msg.jpeg',
+                "date"     => "Yogyakarta, 22nd & 23rd February 2025",
+                "poster"   => '/carvep/carvep-first.jpeg',
                 "buttons"  => [
-                    // [
-                    //     "theme" => "light",
-                    //     "text"  => "Schedule",
-                    //     "link"  => "/#schedule",
-                    // ],
+                     [
+                         "theme" => "light",
+                         "text"  => "Schedule",
+                         "link"  => "/#schedule",
+                     ],
                     [
                         "theme" => "dark",
                         "text"  => "Register",

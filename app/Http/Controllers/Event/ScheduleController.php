@@ -10,11 +10,57 @@ class ScheduleController extends Controller
 {
     public function schedule(Request $request)
     {
-        if ($request->ref == 2024) {
+        if ($request->ref == 'carvep') {
+            return $this->scheduleCarvep();
+        }if ($request->ref == 2024) {
             return $this->schedule2024();
         } else {
             return $this->schedule2023();
         }
+    }
+
+    private function scheduleCarvep()
+    {
+        $events = Event::with(['schedule_details' => function ($q) {
+            $q->with('speaker');
+        }, 'schedules'])
+            ->whereSection('carvep')
+            ->get();
+
+        $saturday = [
+            [
+                'date_start' => $events->where('slug', 'symposium-carvep-a0')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-carvep-a0')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-carvep-a0')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-carvep-a1')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-carvep-a1')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-carvep-a1')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-carvep-a2')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-carvep-a2')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-carvep-a2')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-carvep-a3')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-carvep-a3')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-carvep-a3')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-carvep-a4')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-carvep-a4')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-carvep-a4')->first(),
+            ],
+        ];
+
+        $workshop = $events->where('marker', 'workshop-carvep')->sortBy('name')->flatten();
+
+        $this->response['result']['saturday'] = $saturday;
+        $this->response['result']['workshop'] = $workshop;
+
+        return $this->response;
     }
 
     private function schedule2024()

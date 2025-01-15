@@ -12,7 +12,13 @@ class SpeakerController extends BaseController
 {
     public function speakers(Request $request)
     {
-        $slugs = Event::whereSection('jcu24')
+        $ref = 'jcu24';
+
+        if($request->ref){
+            $ref = $request->ref;
+        }
+
+        $slugs = Event::whereSection($ref)
             ->pluck('speakers')
             ->toArray();
         $user_slugs = array_unique($slugs);

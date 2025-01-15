@@ -275,7 +275,7 @@ class SpeakerInitController extends Controller
                 'name'  => "Prof. Salvatore Di Somma, MD, Ph.D",
                 'slug'  => "salvatore.disomma",
                 'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/salfatore.disomma.jpg',
+                'image' => 'https://src.perki-jogja.com/assets/photo/salvatore.disomma.jpg',
             ],
             [ // 52
                 'name'  => "dr. Muhammad Munawar, Sp.JP(K)",
@@ -432,6 +432,12 @@ class SpeakerInitController extends Controller
                 'slug'  => "indah.paranita",
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/indah.paranita.jpg',
+            ],
+            [
+                'name'  => "dr. I Nyoman Wiryawan, Sp.JP(K). FAPCS",
+                'slug'  => "nyoman.wiryawan",
+                'desc'  => "",
+                'image' => 'https://src.perki-jogja.com/assets/photo/nyoman.wiryawan.jpeg',
             ],
         ];
 

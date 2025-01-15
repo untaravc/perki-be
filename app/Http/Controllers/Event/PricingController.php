@@ -9,12 +9,55 @@ class PricingController extends Controller
 {
     public function pricing(Request $request)
     {
-        if ($request->ref == 2024) {
+        if ($request->ref == 'carvep') {
+            return $this->pricingCarvep();
+        }if ($request->ref == 2024) {
             return $this->pricing2024();
         } else {
             return $this->pricing2023();
         }
     }
+    private function pricingCarvep()
+    {
+        $data = [
+            [
+                "title"=> "Symposium",
+                "subtitle"=> "",
+                "desc" => "Held on 22nd February 2025",
+                "price_gp" => 250000,
+                "price_sp" => 500000,
+                "items" => [
+                    "Symposium on 22nd February 2025"
+                ],
+            ],
+            [
+                "title"=> "Symposium & Workshop",
+                "subtitle"=> "CPET for Specialist",
+                "desc" => "Held on 22nd and 23rd of February 2025",
+                "price_gp" => 0,
+                "price_sp" => 800000,
+                "items" => [
+                    "Symposium on 22nd February 2025",
+                    "Workshop CPET for Specialist on 23rd February 2025",
+                ],
+            ],
+            [
+                "title"=> "Symposium & Workshop",
+                "subtitle"=> "ABPM for General Practitioner",
+                "desc" => "Held on 22nd and 23rd of February 2025",
+                "price_gp" => 500000,
+                "price_sp" => 0,
+                "items" => [
+                    "Symposium on 22nd February 2025",
+                    "Workshop ABPM for General Practitioner on 23rd February 2025",
+                ],
+            ],
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
     private function pricing2024()
     {
         $platinum_desc = "<ul>
