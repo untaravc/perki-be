@@ -23,7 +23,7 @@ class DataInitController extends BaseController
     {
         switch ($request->section) {
             case 'events':
-                $event = new Event24Controller();
+                $event = new EventCvepController();
                 return $event->event_init();
                 break;
             case 'speakers':

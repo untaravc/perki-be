@@ -9,11 +9,41 @@ class BannerController extends Controller
 {
     public function banner(Request $request)
     {
+        if ($request->ref == 'cvep') {
+            return $this->bannerCvep();
+        }
         if ($request->ref == 2024) {
             return $this->banner2024();
         } else {
             return $this->banner2023();
         }
+    }
+
+    public function bannerCvep()
+    {
+        $data = [
+            [
+                "title"    => "JOGJA Cardiovascular Epidemiology and Prevention Forum 2025",
+                // "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
+                "date"     => "Yogyakarta, 22nd February 2025",
+                "poster"   => '/assets/posters/welcome_msg.jpeg',
+                "buttons"  => [
+                    // [
+                    //     "theme" => "light",
+                    //     "text"  => "Schedule",
+                    //     "link"  => "/#schedule",
+                    // ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
+                ]
+            ],
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
     }
 
     public function banner2024()

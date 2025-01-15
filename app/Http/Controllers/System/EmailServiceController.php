@@ -38,7 +38,7 @@ class EmailServiceController extends Controller
         $data['user'] = User::find($data['transaction']['user_id']);
 
         $data['view'] = 'email.jcu22.bill';
-        $data['email_subject'] = 'JCU 2023: Bill ' . $data['transaction']['number'];
+        $data['email_subject'] = 'Perki Jogja: Bill ' . $data['transaction']['number'];
 
         //        return view($data['view'], $data);
 
@@ -59,7 +59,7 @@ class EmailServiceController extends Controller
             if (env('APP_ENV') == "prod") {
                 Mail::to($data['user']['email'])->send(new SendDefaultMail($data));
             } else {
-                // Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
+                 Mail::to('vyvy1777@gmail.com')->send(new SendDefaultMail($data));
             }
 
             MailLog::create($mail_log);

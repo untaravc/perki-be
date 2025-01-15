@@ -30,6 +30,7 @@ use App\Http\Controllers\User\AbstractController;
 use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
 use App\Http\Controllers\User\EventTransaction24Controller;
+use App\Http\Controllers\User\EventTransactionCarvepController;
 
 // ADMIN API
 Route::post('/', function () {
@@ -111,6 +112,11 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::get('events-list-24', [EventTransaction24Controller::class, 'event_list']);
     Route::post('create-payment-24', [EventTransaction24Controller::class, 'create_payment']);
     Route::post('calculate-price-24', [EventTransaction24Controller::class, 'calculate_price']);
+
+    // CVEP
+    Route::get('events-list-carvep', [EventTransactionCarvepController::class, 'event_list']);
+    Route::post('calculate-price-carvep', [EventTransactionCarvepController::class, 'calculate_price']);
+    Route::post('create-payment-carvep', [EventTransactionCarvepController::class, 'create_payment']);
 });
 // =========
 

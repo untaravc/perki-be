@@ -5,7 +5,6 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Price;
-use Illuminate\Http\Request;
 
 class EventInitController extends Controller
 {

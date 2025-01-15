@@ -35,12 +35,12 @@ class AuthController extends BaseController
      */
     public function register(Request $request)
     {
-        $transaction_count = Transaction::whereSection('jcu24')
+        $transaction_count = Transaction::whereSection('carvep')
             ->where('status', '>=', 110)
             ->where('status', '<', 300)
             ->count();
 
-        if($transaction_count > 425){
+        if ($transaction_count > 150) {
             $this->sendError(500, "Quota penuh " . $transaction_count);
         }
 
@@ -89,6 +89,7 @@ class AuthController extends BaseController
                         'nik' => $request->nik
                     ]);
                 }
+
                 $transaction = $this->draft_transaction($user_login, $request);
                 $this->sendPostResponse('Registration success.', [
                     'transaction' => $transaction,
@@ -321,10 +322,11 @@ class AuthController extends BaseController
     {
         $trx = Transaction::whereUserId($user->id)
             ->where('status', '<', 110)
+            ->whereSection('carvep')
             ->first();
 
         $payload = [
-            "section"       => "jcu24",
+            "section"       => "carvep",
             "user_id"       => $user->id,
             "user_name"     => $request->name,
             "user_phone"    => $request->phone,
@@ -340,12 +342,12 @@ class AuthController extends BaseController
             $trx = Transaction::create($payload);
 
             $trx->update([
-                'number' => 'JCU24' . prefix_zero($trx->id),
+                'number' => 'CARVEP25' . prefix_zero($trx->id),
             ]);
         }
 
         // update data user ketika transaksi pertama
-        $transaction_count = Transaction::whereSection('jcu24')
+        $transaction_count = Transaction::whereSection('carvep')
             ->whereUserId($user->id)
             ->count();
 

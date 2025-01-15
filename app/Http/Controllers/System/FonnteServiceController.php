@@ -46,9 +46,9 @@ class FonnteServiceController extends Controller
         $msg .= "Please upload proof of payment after making payment. \n";
 
         if (env("APP_ENV") == 'local') {
-            return $this->sendMessage('081239709445', $msg);
+            $this->sendMessage('081239709445', $msg);
         } else {
-            return $this->sendMessage($transaction->user_phone, $msg);
+            $this->sendMessage($transaction->user_phone, $msg);
         }
     }
 
