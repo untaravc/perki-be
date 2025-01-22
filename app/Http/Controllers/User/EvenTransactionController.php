@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Http;
 
 const DRSP_BUNDLE_PRICE = 3750000;
 const DRGN_BUNDLE_PRICE = 1750000;
-const DISCORD_WH_URL = "https://discord.com/api/webhooks/1284197536298565653/1nxvO7p7M9DyN3OigBChy-oIbmKrXyM1R8ZZ63wUJeZZaxBsJte0IjlVR66_XfSuuro-";
 
 class EvenTransactionController extends BaseController
 {
@@ -395,9 +394,16 @@ class EvenTransactionController extends BaseController
             'status'         => 120,
         ]);
 
-        Http::post(DISCORD_WH_URL, [
-            "content" => "[" . date('H:i:s') . "] New Transaction:  " . $transaction->user_name . " - Rp " . number_format($transaction->total, 0, ',', '.'),
-        ]);
+        $discord_wh_url = env("DISCORD_WH_URL");
+
+        if($discord_wh_url) {
+            try{
+                Http::post($discord_wh_url, [
+                    "content" => "[" . date('H:i:s') . "] New Transaction:  " . $transaction->user_name . " - Rp " . number_format($transaction->total, 0, ',', '.'),
+                ]);
+            } catch (\Exception $e){}
+
+        }
 
         return $this->response;
     }

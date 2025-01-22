@@ -33,7 +33,7 @@ export const useFilterStore = defineStore('filter', () => {
         page: 1,
         per_page: 25,
         user_name: '',
-        section: 'jcu24',
+        section: 'carvep',
         status: '',
         dates: '',
     })

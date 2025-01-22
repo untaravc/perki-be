@@ -124,7 +124,7 @@ class TransactionController extends Controller
         $mail_log = [
             "email_receiver" => $transaction->user_email,
             "receiver_name"  => $transaction->user_name,
-            "label"          => "jcu_24_qr_access",
+            "label"          => "carvep_qr_access",
             "model"          => "transaction",
             "model_id"       => $transaction->id,
             "status"         => 0,
@@ -228,7 +228,7 @@ class TransactionController extends Controller
 
         $next = Transaction::where('id', '>', $id)
             ->where('status', 200)
-            ->where('section', 'jcu24')
+            ->where('section', 'carvep')
             ->first();
 
         if ($next) {

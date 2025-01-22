@@ -28,19 +28,19 @@
               <div>
                 Rp {{ $filter.currency(data_content.data_detail.total) }}
               </div>
-              <div class="mt-10">
+              <div class="mt-10 mb-2">
                 <label>Note</label>
                 <input type="text" class="form-control" v-model="data_content.data_detail.note">
               </div>
-              <div>
+              <div class="mb-2">
                 <label>GL Name</label>
                 <input type="text" class="form-control" v-model="data_content.data_detail.gl_name">
               </div>
-              <div>
+              <div class="mb-2">
                 <label>GL Date</label>
                 <input type="date" class="form-control" v-model="data_content.data_detail.gl_date">
               </div>
-              <div>
+              <div class="mb-4">
                 <label>GL Status</label>
                 <select class="form-control" v-model="data_content.data_detail.gl_status">
                   <option value="0">Pending</option>

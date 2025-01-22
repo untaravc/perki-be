@@ -26,8 +26,9 @@
                             <div class="col-md-3">
                                 <select class="form-control" @change="loadDataContent()"
                                     v-model="transaction_store.section">
-                                    <option value="jcu23">2023</option>
-                                    <option value="jcu24">2024</option>
+                                    <option value="jcu23">JCU 2023</option>
+                                    <option value="jcu24">JCU 2024</option>
+                                    <option value="carvep">Carvep</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -99,17 +100,26 @@
                                                     $filter.currency(data.total) }}</div>
                                             </td>
                                             <td class="text-end">
-                                                <!-- <router-link :to="'/panel/transactions/' + data.id"
-                                                    class="btn btn-light btn-sm">
-                                                    Preccess
-                                                </router-link> -->
-                                                <a :href="'/panel/transactions-validate/' + data.id" target="_blank"
-                                                    class="btn btn-light btn-sm">
-                                                    Validate
-                                                </a>
-                                                <!-- <div class="btn btn-light btn-sm" @click="notifWa(data.id)">
-                                                    WA
-                                                </div> -->
+                                                <div class="dropdown">
+                                                    <button class="btn btn-light dropdown-toggle btn-sm"
+                                                            data-toggle="dropdown">
+                                                        Aksi
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <router-link :to="'/panel/transactions/' + data.id"
+                                                                     class="dropdown-item">
+                                                            Process
+                                                        </router-link>
+                                                        <router-link :to="'/panel/transactions-validate/' + data.id"
+                                                                     class="dropdown-item">
+                                                            Validate
+                                                        </router-link>
+                                                        <button class="dropdown-item text-danger"
+                                                                @click="notifWa(data.id)">
+                                                            Message
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>

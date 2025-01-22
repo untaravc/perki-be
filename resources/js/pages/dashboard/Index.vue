@@ -107,7 +107,7 @@
                                 <div class="text-lg h4 mb-0">Members</div>
                                 <div>
                                     <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
-                                        href="/panel/register-user?ref=2024">Preview</a>
+                                        href="/panel/register-user?ref=carvep">Preview</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -229,7 +229,7 @@ import moment from "moment";
 export default {
     components: { LineChart },
     setup() {
-        const title = "Jogja Cardiology Update 2024 - 7th Jincartos"
+        const title = "Jogja Cardiovascular Epidemiology & Prevention Forum 2025"
         const subtitle = moment().format('DD MMM, HH:mm')
         const breadcrumb_list = ["Dashboard"];
         const { getData } = useAxios()

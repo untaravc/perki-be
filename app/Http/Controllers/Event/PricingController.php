@@ -45,7 +45,7 @@ class PricingController extends Controller
                 "title"=> "Symposium & Workshop",
                 "subtitle"=> "ABPM for General Practitioner",
                 "desc" => "Held on 22nd and 23rd of February 2025",
-                "price_gp" => 500000,
+                "price_gp" => 550000,
                 "price_sp" => 0,
                 "items" => [
                     "Symposium on 22nd February 2025",
@@ -57,7 +57,6 @@ class PricingController extends Controller
         $this->response['result'] = $data;
         return $this->response;
     }
-
     private function pricing2024()
     {
         $platinum_desc = "<ul>

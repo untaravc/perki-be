@@ -40,7 +40,7 @@ class EventCvepController extends Controller
                     ],
                     [
                         "job_type_code" => "DRGN",
-                        "price"         => 250000,
+                        "price"         => 300000,
                     ],
                 ],
                 "children"   => [

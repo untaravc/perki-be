@@ -18,22 +18,22 @@ class DashboardController extends Controller
     {
         $exclude_user_ids = exclude_user_ids();
         $data['transaction_success'] = Transaction::where('status', '>=', 200)
-            ->whereSection('jcu24')
+            ->whereSection('carvep')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->count();
 
         $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)
-            ->whereSection('jcu24')
+            ->whereSection('carvep')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->sum('total');
 
         $data['member'] = User::where('is_speaker', '!==', 1)
-            ->whereYear('updated_at', '2024')
+            ->whereDate('updated_at', '>', '2025-01-01')
             ->count();
 
         $data['transaction_pending'] = Transaction::where('status', '<', 200)
             ->where('status', '>=', 110)
-            ->whereSection('jcu24')
+            ->whereSection('carvep')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->count();
 
@@ -150,7 +150,7 @@ class DashboardController extends Controller
     {
         $events = Event::whereDataType('product')
             ->where('status', 1)
-            ->whereSection('jcu24')
+            ->whereSection('carvep')
             ->orderBy('name')
             ->select(
                 'id',
@@ -178,7 +178,7 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('category', DB::raw('count(*) as total'))
-            ->whereYear('created_at', 2024)
+            ->whereSection('carvep')
             ->groupBy('category')
             ->get();
 
@@ -188,7 +188,7 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('status', DB::raw('count(*) as total'))
-            ->whereYear('created_at', 2024)
+            ->whereSection('carvep')
             ->groupBy('status')
             ->get();
 
