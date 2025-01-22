@@ -66,5 +66,7 @@ class UserInitController extends Controller
                 User::create($item);
             }
         }
+
+        return 'Success';
     }
 }

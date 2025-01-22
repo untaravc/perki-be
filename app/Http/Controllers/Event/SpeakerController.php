@@ -29,6 +29,8 @@ class SpeakerController extends BaseController
                 $q->limit($request->limit);
             })
             ->inRandomOrder()
+            ->where("image", "!=", "")
+            ->where("image", "!=", null)
             ->select('id', 'name', 'desc', 'image')
             ->get();
 

@@ -11,6 +11,8 @@ class SpeakerInitController extends Controller
     public function init_speaker()
     {
         $this->speakers();
+
+        return 'Success';
     }
 
     private function speakers()

@@ -215,7 +215,7 @@ class AbstractController extends BaseController
     public function abstract_submit_open()
     {
         $this->sendGetResponse([
-            'open' => true
+            'open' => false
         ]);
     }
 
