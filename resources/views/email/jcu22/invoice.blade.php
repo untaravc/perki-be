@@ -596,7 +596,7 @@
                                             <!-- TODO: Change this name -->
                                             <p>Hello <strong>{{ $user['name'] }}</strong></p>
                                             <p class="mb-0">
-                                                Thank you for joining JCU 2024 in conjunction with the 7th Jincartos.
+                                                Thank you for joining the Event.
                                                 Here
                                                 are the details of your transaction:
                                             </p>
@@ -621,7 +621,7 @@
                                                                     <tr>
                                                                         <td>Bank</td>
                                                                         <td>
-                                                                            <img src="https://jcu.perki-jogja.com/storage/logo/Mandiri_logo.png"
+                                                                            <img src="https://src.perki-jogja.com/assets/logo/mandiri_logo.png"
                                                                                 alt="Useful alt text" height="16"
                                                                                 border="0"
                                                                                 style="
@@ -759,11 +759,6 @@
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            {{-- <p class="mb-0">
-                                            Get Special Room Prices for JCU 2024 participants.
-                                            For more detailed information
-                                            <a target="_blank" href="https://wa.me/628112925147?text=Special Room Prices for JCU 2024 - Perki Jogja participants. Nomot Transaksi: {{$transaction['number']}}">https://wa.me/628112925147</a>
-                                        </p> --}}
                                         </td>
                                     </tr>
                                 </table>

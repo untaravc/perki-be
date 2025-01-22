@@ -650,7 +650,7 @@
                                                             <td>Bank</td>
                                                             <td>
                                                                 <img
-                                                                    src="https://jcu.perki-jogja.com/storage/logo/Mandiri_logo.png"
+                                                                    src="https://src.perki-jogja.com/assets/logo/mandiri_logo.png"
                                                                     alt="Useful alt text"
                                                                     height="16"
                                                                     border="0"
@@ -713,7 +713,7 @@
                                                                 <!-- TODO: Change this url -->
                                                                 <a
                                                                     class="full-width"
-                                                                    href="https://jcu.perki-jogja.com/profile/transactions"
+                                                                    href="https://carvep.perki-jogja.com/profile/transactions"
                                                                     target="_blank"
                                                                 >Upload Bank Transfer Proof</a
                                                                 >

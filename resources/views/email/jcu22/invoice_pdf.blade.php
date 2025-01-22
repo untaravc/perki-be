@@ -32,7 +32,7 @@
 <body>
 <div style="display: flex; justify-content: space-between; border-bottom: 1px solid gray">
     <div>
-        <img src="https://jcu.perki-jogja.com/storage/logo/jcu24_color.png" alt="Perki Logo"
+        <img src="https://src.perki-jogja.com/assets/logo/PERKI_logo.jpg" alt="Perki Logo"
              style="width: 100px">
         <h1 style="margin: 5px">Invoice</h1>
     </div>
@@ -111,7 +111,7 @@
         <b>Payment Account</b>
     </div>
     <div style="margin-bottom: 5px">
-        <img src="https://jcu.perki-jogja.com/storage/logo/Mandiri_logo.png" alt="" style="width: 50px">
+        <img src="https://src.perki-jogja.com/assets/logo/mandiri_logo.png" alt="" style="width: 50px">
     </div>
     <div style="margin-bottom: 5px">
         <h3>1370 0013 3133 5</h3>

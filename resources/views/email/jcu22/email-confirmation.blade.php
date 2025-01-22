@@ -433,7 +433,7 @@
                                                 </tbody>
                                             </table>
                                             <h1>Confirm Your Email</h1>
-                                            <p>{{ ucwords($name) }}, Welcome to JCU 2023!</p>
+                                            <p>{{ ucwords($name) }}, Welcome!</p>
                                             <!-- TODO: Change this url -->
                                             <p>
                                                 Please open <a href="{{ $link }}" target="_blank">this link</a>

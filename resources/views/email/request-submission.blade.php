@@ -40,7 +40,7 @@
     </p>
     <p>
         Email to the Secretariat:
-        Send your full paper via email to our secretariat at sekretariat.jcu@gmail.com. Please make sure the email
+        Send your full paper via email to our secretariat. Please make sure the email
         subject
         includes "Full Paper - [Your Name]."
     </p>

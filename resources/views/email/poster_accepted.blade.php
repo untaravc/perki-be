@@ -21,7 +21,7 @@
 
     <p>Please upload your e-poster before <b>Wednesday, October 16th 2024 23.59 pm.</b></p>
 
-    <p>Each participants will get certificate as poster presenter. If you want to get attended JCU 2024 certificate with
+    <p>Each participants will get certificate as poster presenter. If you want to get attended Event certificate with
         Kemenkes Credit (SKP), you must be registered as paid member for the Jogja Cardiology Update 2024.</p>
 
     <p>NB :</p>
@@ -33,5 +33,5 @@
 
     <p>Best regard</p>
 
-    <p>JCU 2024 Scientific Committee</p>
+    <p>Scientific Committee</p>
 </div>

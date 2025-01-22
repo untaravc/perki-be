@@ -586,7 +586,7 @@
 
                                                                         </td>
                                                                         <td>
-                                                                            <img src="https://jcu.perki-jogja.com/storage/logo/jcu24_color.png"
+                                                                            <img src="https://src.perki-jogja.com/assets/logo/PERKI_logo.jpg"
                                                                                 alt="Useful alt text" height="36"
                                                                                 style="
                                                                         border: 0;
@@ -633,15 +633,11 @@
                                             <br>
                                             Narahubung :
                                             <br>
-                                            Hotline JCU <a
+                                            Hotline <a
                                                 href="https://wa.me/62895340394067"><b>0895-3403-94067</b></a>
                                             <br>
                                             <br>
                                             Ikuti media sosial kami untuk informasi terkini<br>
-                                            Facebook: Jogja Cardiology Update 2024<br>
-                                            Instagram: jogjacardiologyupdate<br>
-                                            Twitter: JCU_2024<br>
-                                            Tiktok: JCU_2024<br>
                                             <br>
 
                                             <table
