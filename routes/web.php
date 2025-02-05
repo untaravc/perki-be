@@ -19,9 +19,9 @@ Route::get('/', function () {
 Route::get('/panel/print-abstract', [PostController::class, 'printPost']);
 Route::get('/panel/preview-abstract', [PostController::class, 'previewAbstract']);
 Route::get('/panel/register-user', [UserController::class, 'registerUser']);
+Route::get('/scanner', [AuthController::class, 'scannerPanel']);
 Route::get('/panel', [AuthController::class, 'adminPanel']);
 Route::get('/panel/{path}', [AuthController::class, 'adminPanel'])->where('path', '([A-z\d\-\/_.]+)?');
-Route::get('/scanner', [AuthController::class, 'scannerPanel']);
 
 Route::get('/auth/{path}', [AuthController::class, 'auth'])
     ->where('path', '([A-z\d\-\/_.]+)?');

@@ -52,7 +52,7 @@ class EventTransactionCarvepController extends BaseController
 
         $symposium = $events->where('marker', 'symposium-carvep')->first();
 
-        if($job_type_code === 'DRSP'){
+        if ($job_type_code === 'DRSP') {
             $workshop = $events->where('marker', 'workshop-carvep')->where('slug', 'workshop-carvep-1')->flatten();
         } else {
             $workshop = $events->where('marker', 'workshop-carvep')->where('slug', 'workshop-carvep-2')->flatten();
@@ -109,15 +109,16 @@ class EventTransactionCarvepController extends BaseController
         $count = 0;
         foreach ($additional_user as $user) {
             if ($user['email'] != null && $user['name'] != null) {
-                $count++;
+                if ($user['email'] != '' && $user['name'] != '') {
+                    $count++;
+                }
             }
         }
 
         // $data[] = $this->get_symposium($items['symposium'], $transaction);
         if (isset($items['symposium'])) {
-            if ($count >= 5) {
-                $force_price = $transaction->job_type_code === 'DRSP' ? 1000000 : 5000000;
-                $data[] = $this->get_event($items['symposium'], $transaction, $force_price);
+            if ($count > 1) {
+                $data[] = $this->get_event($items['symposium'], $transaction, $count + 1);
             } else {
                 $data[] = $this->get_event($items['symposium'], $transaction);
             }
@@ -129,29 +130,29 @@ class EventTransactionCarvepController extends BaseController
 
         $package_discount = 0;
         $subtotal = collect($data)->sum('price');
-//        if (isset($items['second_workshop']) && isset($items['first_workshop'])) {
-//            $second = $data[2];
-//            if (isset($second['price'])) {
-//                $package_discount = $second['price'];
-//            }
-//        }
+        //        if (isset($items['second_workshop']) && isset($items['first_workshop'])) {
+        //            $second = $data[2];
+        //            if (isset($second['price'])) {
+        //                $package_discount = $second['price'];
+        //            }
+        //        }
         $total = $subtotal - $package_discount;
 
-//        $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
+        //        $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
-//        if ($voucher_discount['discount_amount'] > 0) {
-//            // $total = $subtotal;
-//            $total -= $voucher_discount['discount_amount'];
-//        }
+        //        if ($voucher_discount['discount_amount'] > 0) {
+        //            // $total = $subtotal;
+        //            $total -= $voucher_discount['discount_amount'];
+        //        }
 
         $this->response['result'] = [
             "transaction"        => $transaction,
             "items"              => $data,
             "subtotal"           => $subtotal,
-//            "voucher_code"       => $voucher_discount['voucher'],
-//            "voucher_validation" => $voucher_discount['voucher_validation'],
-//            "voucher_discount"   => $voucher_discount['voucher_discount'],
-//            "discount_amount"    => $voucher_discount['discount_amount'],
+            //            "voucher_code"       => $voucher_discount['voucher'],
+            //            "voucher_validation" => $voucher_discount['voucher_validation'],
+            //            "voucher_discount"   => $voucher_discount['voucher_discount'],
+            //            "discount_amount"    => $voucher_discount['discount_amount'],
             "package_discount"   => $package_discount,
             "total"              => $total,
         ];
@@ -159,7 +160,7 @@ class EventTransactionCarvepController extends BaseController
         return $this->response;
     }
 
-    private function get_event($symposium_id, Transaction $transaction, $force_price = null)
+    private function get_event($symposium_id, Transaction $transaction, $multiply = 1)
     {
         $event = Event::find($symposium_id);
 
@@ -182,7 +183,7 @@ class EventTransactionCarvepController extends BaseController
             'name'   => $event->name,
             'marker' => $event->marker,
             'slug'   => $event->slug,
-            'price'  => $force_price != null ? $force_price : $price['price']
+            'price'  => $price['price'] * $multiply
         ];
     }
 
@@ -195,9 +196,9 @@ class EventTransactionCarvepController extends BaseController
 
         $transaction_payload = [
             'subtotal'         => $pricing['subtotal'],
-//            'voucher_code'     => $pricing['voucher_code'],
-//            'voucher_discount' => $pricing['voucher_discount'],
-//            'discount_amount'  => $pricing['discount_amount'],
+            //            'voucher_code'     => $pricing['voucher_code'],
+            //            'voucher_discount' => $pricing['voucher_discount'],
+            //            'discount_amount'  => $pricing['discount_amount'],
             'package_discount' => $pricing['package_discount'],
             'total'            => $pricing['total'],
             'status'           => 110,
@@ -250,9 +251,9 @@ class EventTransactionCarvepController extends BaseController
             }
         }
 
-//        if ($request->users) {
-//            $this->record_child_transaction($transaction, $request->users);
-//        }
+        if ($request->users) {
+            $this->record_child_transaction($transaction, $request->users);
+        }
 
         // delete unused
         TransactionDetail::whereTransactionId($transaction->id)
@@ -269,5 +270,88 @@ class EventTransactionCarvepController extends BaseController
         }
 
         $this->sendPostResponse();
+    }
+
+    protected function record_child_transaction(Transaction $transaction, $users)
+    {
+        $validate_users = 0;
+        $valid_users = [];
+
+        foreach ($users as $user) {
+            if ($user['email'] != '' && $user['name'] != '' && $user['nik'] != '') {
+                $validate_users++;
+                $valid_users[] = $user;
+            }
+        }
+
+        if ($validate_users < 1) {
+            return '';
+        }
+
+        $trx_child_ids = [];
+        foreach ($valid_users as $valid_user) {
+            $model_user = User::whereEmail($valid_user['email'])
+                ->first();
+            if (!isset($valid_user['id'])) {
+                $payload = [
+                    "section"          => "carvep",
+                    "number"           => $this->generate_child_number($transaction->number),
+                    "parent_id"        => $transaction->id,
+                    "user_id"          => $model_user ? $model_user->id : 0,
+                    "user_name"        => $valid_user['name'],
+                    "user_phone"       => null,
+                    "user_email"       => $valid_user['email'],
+                    "job_type_code"    => "DRGN",
+                    "nik"              => $valid_user['nik'],
+                    "subtotal"         => 0,
+                    "voucher_code"     => 0,
+                    "voucher_discount" => 0,
+                    "discount_amount"  => 0,
+                    "service_fee"      => 0,
+                    "tax"              => 0,
+                    "total"            => 0,
+                    "status"           => 110,
+                    "payment_method"   => "manual_transfer",
+                ];
+
+                $trx_child = Transaction::create($payload);
+                $trx_child_ids[] = $trx_child->id;
+
+                $payload_detail = [
+                    "section"        => "carvep",
+                    "transaction_id" => $trx_child->id,
+                    "job_type_code"  => $payload['job_type_code'],
+                    "user_id"        => $payload['user_id'],
+                    "event_id"       => 270,
+                    "event_name"     => "Symposium",
+                    "price"          => 250000,
+                    "status"         => 110,
+                ];
+
+                TransactionDetail::create($payload_detail);
+            } else {
+                $trx_child_ids[] = $user['id'];
+            }
+        }
+
+        // delete unused
+        Transaction::whereUserId($transaction->user_id)
+            ->whereParentId($transaction->id)
+            ->whereNotIn("id", $trx_child_ids)
+            ->delete();
+    }
+
+    protected function generate_child_number($parent_number, $add = 1)
+    {
+        $parent = Transaction::where('number', 'LIKE', $parent_number . "%")->count();
+
+        $number = $parent_number . '-' . $parent;
+        $exist = Transaction::whereNumber($number)->first();
+
+        if ($exist) {
+            return $this->generate_child_number($parent_number, $add + 1);
+        }
+
+        return $number;
     }
 }

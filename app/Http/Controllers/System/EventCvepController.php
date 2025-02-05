@@ -27,7 +27,7 @@ class EventCvepController extends Controller
                 "title"      => "CardioVascular Disease Prevention and Longevity: Connecting the Dot",
                 "data_type"  => "product",
                 "section"    => "carvep",
-                "quota"      => "400",
+                "quota"      => 150,
                 "marker"     => "symposium-carvep",
                 "slug"       => "symposium-carvep",
                 "date_start" => "2025-02-22 08:00:00",
