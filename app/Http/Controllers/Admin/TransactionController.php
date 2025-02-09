@@ -187,7 +187,7 @@ class TransactionController extends Controller
     {
         $data['transaction'] = Transaction::with(['transaction_details' => function ($q) {
             $q->with('event');
-        }, 'user'])
+        }, 'user', 'users'])
             ->find($transaction_id);
 
         $data['note'] = $request->note ?? '';
@@ -197,6 +197,12 @@ class TransactionController extends Controller
             $data['status_label'] = $data['transaction']['status_label'];
         }
 
+        if($request->user_name){
+            $data['transaction']['user_name'] = $request->user_name;
+        }
+        if($request->user_phone){
+            $data['transaction']['user_phone'] = $request->user_phone;
+        }
         return view('email.jcu22.invoice_pdf', $data);
     }
 

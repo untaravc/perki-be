@@ -9,13 +9,13 @@ use Illuminate\Support\Facades\Config;
 class MailController extends Controller
 {
     public $gmail_config = [
-        'port'       => 587,
+        'port'       => 465,
         'driver'     => 'smtp',
         'host'       => 'smtp.gmail.com',
         'username'   => 'perki.yogyakarta@gmail.com',
         'sender_name' => 'Perki Yogyakarta',
         'password'   => '',
-        'encryption' => 'tls'
+        'encryption' => 'ssl'
     ]; // testet 07/09/24
 
     // public $jcu_config = [
@@ -64,14 +64,14 @@ class MailController extends Controller
     {
         $date = date('Y-m-d H:i:s', strtotime('-1 day'));
 
-        // $perki_gmail = MailLog::where('email_sender', "perki.yogyakarta@gmail.com")
-        //     ->where('sent_at', '>', $date)->count();
+         $perki_gmail = MailLog::where('email_sender', "perki.yogyakarta@gmail.com")
+             ->where('sent_at', '>', $date)->count();
 
-        $perki_yahoo = MailLog::where('email_sender', "perki_yogyakarta@yahoo.com")
-            ->where('sent_at', '>', $date)->count();
-
-        $vyvy = MailLog::where('email_sender', "vyvy1777@gmail.com")
-            ->where('sent_at', '>', $date)->count();
+//        $perki_yahoo = MailLog::where('email_sender', "perki_yogyakarta@yahoo.com")
+//            ->where('sent_at', '>', $date)->count();
+//
+//        $vyvy = MailLog::where('email_sender', "vyvy1777@gmail.com")
+//            ->where('sent_at', '>', $date)->count();
 
         // $jcu_gmail = MailLog::where('email_sender', "sekretariat.jcu@gmail.com")
         //     ->where('sent_at', '>', $date)->count();
@@ -81,20 +81,21 @@ class MailController extends Controller
 
 
         switch (true) {
-                // case $perki_gmail < 480:
-                //     Config::set('mail', $this->gmail_config);
-                //     $this->used_config = $this->gmail_config;
-                //     break;
-            case $perki_yahoo < 420:
-                $this->used_config = $this->yahoo_config;
-                $this->used_config['password'] = env('MAIL_PASSWORD_YAHOO', '');
-                Config::set('mail', $this->used_config);
-                break;
-            case $vyvy < 420:
-                $this->used_config = $this->vyvy_config;
-                $this->used_config['password'] = env('MAIL_PASSWORD_VYVY', '');
-                Config::set('mail', $this->used_config);
-                break;
+             case $perki_gmail < 380:
+                 $this->gmail_config['password'] = env("MAIL_PASSWORD_PERKI");
+                 Config::set('mail', $this->gmail_config);
+                 $this->used_config = $this->gmail_config;
+                 break;
+//            case $perki_yahoo < 420:
+//                $this->used_config = $this->yahoo_config;
+//                $this->used_config['password'] = env('MAIL_PASSWORD_YAHOO', '');
+//                Config::set('mail', $this->used_config);
+//                break;
+//            case $vyvy < 420:
+//                $this->used_config = $this->vyvy_config;
+//                $this->used_config['password'] = env('MAIL_PASSWORD_VYVY', '');
+//                Config::set('mail', $this->used_config);
+//                break;
                 // case $jcu_gmail < 420:
                 //     Config::set('mail', $this->jcu_config);
                 //     $this->used_config = $this->jcu_config;

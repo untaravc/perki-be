@@ -11,7 +11,8 @@ use App\Http\Controllers\System\EmailServiceController;
 use App\Http\Controllers\System\EventInitController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\EventPresenceController;
-use App\Http\Controllers\System\FonnteServiceController;
+use App\Http\Controllers\System\DataInitController;
+use App\Http\Controllers\System\CronController;
 
 Route::get('/', function () {
     return 'src';
@@ -50,3 +51,6 @@ Route::get('print-by-name', [TestController::class, 'print_by_name']);
 Route::get('send_certy', [TestController::class, 'send_certy']);
 Route::get('create_certy_mail_log', [TestController::class, 'create_certy_mail_log']);
 Route::get('contacts', [TestController::class, 'contactList']);
+Route::get('sync-contacts', [DataInitController::class, 'insertToContact']);
+Route::get('generate-announcement', [CronController::class, 'create_announcement_mail_log']);
+Route::get('send-announcement', [CronController::class, 'send_announcement_email']);

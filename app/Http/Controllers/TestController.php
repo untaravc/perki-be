@@ -32,7 +32,8 @@ class TestController extends Controller
 
         $contacts = Contact::when($request->type, function ($q) use ($request) {
             $q->whereType($request->type);
-        })->paginate($request->per_page ?? $per_page);
+        })
+            ->paginate($request->per_page ?? $per_page);
         $columns = [
             'no' => in_array('no', $active_col),
             'email' => in_array('email', $active_col),

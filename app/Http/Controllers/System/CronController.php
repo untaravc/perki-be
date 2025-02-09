@@ -81,16 +81,11 @@ class CronController extends Controller
 
     public function create_announcement_mail_log()
     {
-        $contacts = Contact::where(function ($q) {
-            $q->where('email', 'LIKE', '%gmail.com')
-                ->orWhere('email', 'LIKE', '%gmail.co.id')
-                ->orWhere('email', 'LIKE', '%yahoo.com')
-                ->orWhere('email', 'LIKE', '%yahoo.co.id');
-        })
+        $contacts = Contact::whereProvince('DI Yogyakarta')
             ->get();
 
         $created = [];
-        $label = 'jcu24_announcement';
+        $label = 'carvep_announcement';
         $model = 'contact';
         foreach ($contacts as $contact) {
             $mail_log = MailLog::whereLabel($label)

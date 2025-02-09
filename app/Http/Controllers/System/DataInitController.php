@@ -144,4 +144,42 @@ class DataInitController extends BaseController
             }
         }
     }
+
+    public function insertToContact()
+    {
+        $users = User::where('email', '!=', null)->get();
+        $updated = 0;
+        $created = 0;
+        foreach ($users as $user){
+            $contact = Contact::whereEmail($user->email)->first();
+            if(!$contact){
+                Contact::create([
+                    'type' => "personal",
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'phone' => $user->phone,
+                    'user_id' => $user->id,
+                    'institution' => $user->institution,
+                    'province' => $user->province,
+                    'job_type_code' => $user->job_type_code,
+                ]);
+                $created++;
+            } else {
+                $contact->update([
+                    'phone' => $user->phone,
+                    'user_id' => $user->id,
+                    'institution' => $user->institution,
+                    'city' => $user->city,
+                    'province' => $user->province,
+                    'job_type_code' => $user->job_type_code,
+                ]);
+                $updated++;
+            }
+        }
+
+        return [
+            'created' => $created,
+            'updated' => $updated,
+        ];
+    }
 }

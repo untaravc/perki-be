@@ -32,7 +32,7 @@
 <body>
 <div style="display: flex; justify-content: space-between; border-bottom: 1px solid gray">
     <div>
-        <img src="https://src.perki-jogja.com/assets/logo/PERKI_logo.jpg" alt="Perki Logo"
+        <img src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png" alt="Perki Logo"
              style="width: 100px">
         <h1 style="margin: 5px">Invoice</h1>
     </div>
@@ -73,7 +73,9 @@
             <td>No</td>
             <td>Name</td>
             <td>Schedule</td>
+            <td>Qyt</td>
             <td style="text-align: right">Price</td>
+            <td style="text-align: right">Total</td>
         </tr>
         </thead>
         <tbody>
@@ -82,10 +84,22 @@
                 <td>{{$key + 1}}</td>
                 <td>{{$detail['event_name']}}</td>
                 <td>{{date('M jS, H:i',strtotime($detail['event']['date_start']))}}</td>
+                <td>
+                    @php
+                        $qty = 1;
+                        if(isset($transaction['users'])){
+                            $qty = count($transaction['users']) + 1;
+                        }
+                    @endphp
+                    {{$qty}}
+                </td>
                 <td style="text-align: right">{{number_format($detail['price'], 0, ',', '.')}}</td>
+                <td style="text-align: right">{{number_format($detail['price'] * $qty, 0, ',', '.')}}</td>
             </tr>
         @endforeach
         <tr>
+            <td class="bt"></td>
+            <td class="bt"></td>
             <td class="bt"></td>
             <td class="bt"></td>
             <td class="bt" style="text-align: right">Subtotal</td>
@@ -94,10 +108,14 @@
         <tr>
             <td></td>
             <td></td>
+            <td></td>
+            <td></td>
             <td style="text-align: right">Discount</td>
             <td style="text-align: right">{{number_format($transaction['subtotal'] - $transaction['total'], 0, ',', '.')}}</td>
         </tr>
         <tr>
+            <td></td>
+            <td></td>
             <td></td>
             <td></td>
             <td style="text-align: right"><b>Total</b></td>

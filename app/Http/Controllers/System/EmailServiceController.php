@@ -288,19 +288,20 @@ class EmailServiceController extends Controller
             return 'Out of quota.';
         }
 
-        $labels = ['jcu24_announcement'];
-        $data['email_subject'] = "Jogja Cardiology Update 2024 - 7th JINCARTOS";
+        $labels = ['carvep_announcement'];
+        $data['email_subject'] = "Jogja Cardiovascular Epidemiology and Prevention Forum 2025";
         $data['sender_email'] = $mail_ctrl->used_config['username'];
 
         $mail_logs = MailLog::whereIn('label', $labels)
             ->whereStatus(0)
+//            ->where('email_receiver', 'vyvy1777@gmail.com')
             ->limit(2)
             ->get();
 
         foreach ($mail_logs as $mail) {
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
-            $data['view'] = 'email.announcment';
+            $data['view'] = 'email.carvep.announcement';
 
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))
