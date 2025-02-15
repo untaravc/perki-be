@@ -40,7 +40,7 @@
 
 <body>
     <div style="margin-bottom: 20px">
-        <h4>Daftar Peserta Jogja Cardiologi Update 2023</h4>
+        <h4>Daftar Peserta</h4>
         <h5>{{ $event['name'] }}: {{ $event['title'] }}</h5>
     </div>
     <div><small>{{ date('D, d M H:i', strtotime($event['date_start'])) }}</div>

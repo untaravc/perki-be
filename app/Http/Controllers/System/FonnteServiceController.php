@@ -56,12 +56,14 @@ class FonnteServiceController extends Controller
     {
         $msg = "Dear *" . $transaction->user_name . "* \n \n";
 
-        $msg .= "Thank you for registering the Jogja Cardiology Update, scheduled to take place from October 18-20 at Tentrem Hotel Yogyakarta. Below are the event details based on your selected events: \n \n";
-        $msg .= "- Symposium: October 19 08.00 - 16.00 (WIB) and October 20, 08.00 - 16.00 \n";
+        $msg .= "Thank you for registering the Jogja Cardiovascular Epidemiology and Prevention Forum 2025,
+         scheduled to take place in February 22nd at The Rich Hotel Yogyakarta and February 23rd at RSUP Dr Sardjito.
+         Below are the event details based on your selected events: \n \n";
+        $msg .= "- Symposium: February 22nd 08.00 - 16.00 (WIB) \n";
 
         foreach ($transaction->transaction_details as $detail) {
             if ($detail->event_id !== 111) {
-                $msg .= "- " . $detail->event_name . ": October 18 " . date("H:i", strtotime($detail->event->date_start)) . " - " . date("H:i", strtotime($detail->event->date_end)) . " \n";
+                $msg .= "- " . $detail->event_name . ": February 23rd " . date("H:i", strtotime($detail->event->date_start)) . " - " . date("H:i", strtotime($detail->event->date_end)) . " \n";
             }
         }
 

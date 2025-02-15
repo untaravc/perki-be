@@ -316,7 +316,7 @@ class EventCvepController extends Controller
                         "title"      => "Pelaksanaan ABPM: Bagaimana persiapan, pelaksanaan protokol dan best practice",
                         "data_type"  => "schedule",
                         "section"    => "carvep",
-                        "speakers"   => "muhammad.avies",
+                        "speakers"   => "moh.afis",
                         "marker"     => "workshop-carvep-2",
                         "slug"       => "workshop-carvep-2-2",
                         "date_start" => "2025-02-23 08:00:00",
