@@ -35,13 +35,13 @@ class AuthController extends BaseController
      */
     public function register(Request $request)
     {
-        $transaction_count = Transaction::whereSection('carvep')
-            ->where('status', '>=', 110)
-            ->where('status', '<', 300)
-            ->count();
+//        $transaction_count = Transaction::whereSection('carvep')
+//            ->where('status', '>=', 110)
+//            ->where('status', '<', 300)
+//            ->count();
 
-        if ($transaction_count > 150) {
-            $this->sendError(500, "Quota penuh " . $transaction_count);
+        if (date('Y-m-d H:i:s') > '2025-02-21 12:00:00') {
+            $this->sendError(500, "Qutoa telah penuh");
         }
 
         $this->response['error'] = 422;

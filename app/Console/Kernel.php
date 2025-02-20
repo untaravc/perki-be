@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $cron = new CronController();
             $cron->send_announcement_email();
+            $cron->send_qr_email();
         })->everyMinute();
     }
 

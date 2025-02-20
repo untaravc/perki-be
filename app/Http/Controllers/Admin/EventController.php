@@ -99,7 +99,8 @@ class EventController extends Controller
             ->orderBy('created_at')
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '!=', 400)
-            ->get()->sortBy('transaction.user_name');
+            ->get();
+//            ->sortBy('transaction.user_name');
 
         if($event->id === 111){
             $event_ids = [111, 111001];

@@ -160,7 +160,7 @@ class EmailServiceController extends Controller
         $data['transaction'] = Transaction::find($transaction_id);
 
         if ($data['transaction']['status'] != 200) {
-            return;
+            return false;
         }
         $data['transaction_details'] = TransactionDetail::with('event')
             ->orderBy('event_id')
@@ -169,9 +169,9 @@ class EmailServiceController extends Controller
 
         $data['user'] = User::find($data['transaction']['user_id']);
 
-        $data['view'] = 'email.jcu22.qr_code';
-        $data['view_pdf'] = 'print.transaction.qr_code';
-        $data['email_subject'] = 'JCU 2024: QR Code Access ' . $data['transaction']['number'];
+        $data['view'] = 'email.carvep.qr_code';
+        $data['view_pdf'] = 'email.carvep.qr_code_template';
+        $data['email_subject'] = 'CARVEP 2025: QR Code Access ' . $data['transaction']['number'];
         $data['path'] = '/assets/qr_code/' . $data['transaction']['number'] . '.svg';
 
         QrCode::size(500)
