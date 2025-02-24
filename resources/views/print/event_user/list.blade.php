@@ -54,6 +54,7 @@
                 <td>NIK</td>
                 <td>Phone</td>
                 <td>Job Type</td>
+                <td>From</td>
                 <td>Payment Status</td>
                 <td>Total</td>
                 <td>Presence</td>
@@ -94,6 +95,13 @@
                     </td>
                     <td>
                         {{ $detail['job_type_code'] }}
+                    </td>
+                    <td>
+                        @if(isset($detail['user']))
+                            {{$detail['user']['institution']}} |
+                            {{$detail['user']['city']}}
+                            {{$detail['user']['province']}}
+                        @endif
                     </td>
                     <td>
                         @if ($detail['status'] === 200)

@@ -40,8 +40,8 @@ class AuthController extends BaseController
 //            ->where('status', '<', 300)
 //            ->count();
 
-        if (date('Y-m-d H:i:s') > '2025-02-21 12:00:00') {
-            $this->sendError(500, "Qutoa telah penuh");
+        if (date('Y-m-d H:i:s') > '2025-02-21 17:40:00') {
+            $this->sendError(500, "Quota telah penuh");
         }
 
         $this->response['error'] = 422;
