@@ -12,35 +12,38 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+const SECTION = 'jcu24';
 class DashboardController extends Controller
 {
     public function statistics()
     {
         $exclude_user_ids = exclude_user_ids();
         $data['transaction_success'] = Transaction::where('status', '>=', 200)
-            ->whereSection('carvep')
+            ->whereSection(SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->count();
 
         $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)
-            ->whereSection('carvep')
+            ->whereSection(SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->sum('total');
 
-        $data['member'] = User::where('is_speaker', '!==', 1)
-            ->whereDate('updated_at', '>', '2025-01-01')
-            ->count();
+        $data['member'] = 0;
+//        $data['member'] = User::where('is_speaker', '!==', 1)
+//            ->whereDate('updated_at', '>', '2025-01-01')
+//            ->count();
 
         $data['transaction_pending'] = Transaction::where('status', '<', 200)
             ->where('status', '>=', 110)
-            ->whereSection('carvep')
+            ->whereSection(SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->count();
 
-        $data['member_purchase'] = User::where('is_speaker', '!==', 1)
-            ->whereHas('success_transactions')
-            ->whereNotIn('id', $exclude_user_ids)
-            ->count();
+        $data['member_purchase'] = 0;
+//        $data['member_purchase'] = User::where('is_speaker', '!==', 1)
+//            ->whereHas('success_transactions')
+//            ->whereNotIn('id', $exclude_user_ids)
+//            ->count();
 
         $this->response['result']['stat'] = $data;
         return $this->response;
@@ -150,7 +153,7 @@ class DashboardController extends Controller
     {
         $events = Event::whereDataType('product')
             ->where('status', 1)
-            ->whereSection('carvep')
+            ->whereSection(SECTION)
             ->orderBy('name')
             ->select(
                 'id',
@@ -178,7 +181,7 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('category', DB::raw('count(*) as total'))
-            ->whereSection('carvep')
+            ->whereSection(SECTION)
             ->groupBy('category')
             ->get();
 
@@ -188,7 +191,7 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('status', DB::raw('count(*) as total'))
-            ->whereSection('carvep')
+            ->whereSection(SECTION)
             ->groupBy('status')
             ->get();
 

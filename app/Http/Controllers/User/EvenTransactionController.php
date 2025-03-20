@@ -402,7 +402,6 @@ class EvenTransactionController extends BaseController
                     "content" => "[" . date('H:i:s') . "] New Transaction:  " . $transaction->user_name . " - Rp " . number_format($transaction->total, 0, ',', '.'),
                 ]);
             } catch (\Exception $e){}
-
         }
 
         return $this->response;

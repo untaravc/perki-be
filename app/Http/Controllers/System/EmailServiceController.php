@@ -206,9 +206,10 @@ class EmailServiceController extends Controller
     public function send_event_certificate()
     {
         // setup
-        $labels = ['jcu24_sympo_certy'];
-        $file = public_path('assets24/certificates/sympo_certy.png');
-        $data['email_subject'] = "Certificate for Symposium Participant - JCU 2024";
+        $labels = ['carvep_certy_abpm'];
+        $file = public_path('carvep/abpm_p1.jpg');
+        $file2 = public_path('carvep/abpm_p2.jpg');
+        $data['email_subject'] = "Certificate Workshop ABPM";
         // --- end setup
 
         $email_sent = MailLog::where('sent_at', '>', date('Y-m-d H:i:s', strtotime(now() . '-24 hours')))
@@ -225,21 +226,17 @@ class EmailServiceController extends Controller
             ->get();
 
         foreach ($mail_logs as $mail) {
-            //            $user = User::find($mail['model_id']);
-            //            if (!$user) {
-            //                continue;
-            //            }
-
             $mail_data['img'] = base64_encode(file_get_contents($file));
+            $mail_data['img2'] = base64_encode(file_get_contents($file2));
             $mail_data['name'] = $mail['receiver_name'];
-            $mail_data['name_top'] = 630;
+            $mail_data['name_top'] = 650;
             $mail_data['name_left'] = 260;
 
             $pdf = Pdf::setOptions([
                 'dpi'             => 200,
                 'defaultFont'     => 'sans-serif',
                 'isRemoteEnabled' => true,
-            ])->loadView('print.events.certificate', $mail_data)
+            ])->loadView('print.carvep.certificate_abpm', $mail_data)
                 ->setPaper('a4', 'landscape');
 
             $file_name = 'Certificate ' . preg_replace('/\s+/', ' ', trim($mail_data['name'])) . '_' . time() . '.pdf';
@@ -251,12 +248,9 @@ class EmailServiceController extends Controller
             $data['email_receiver'] = $mail->email_receiver;
             $data['receiver_name'] = $mail->receiver_name;
             $data['title'] = $mail->title;
-            $data['view'] = 'email.symposium_certificate';
+            $data['view'] = 'print.carvep.certificate_mail';
             $data['attach'] = public_path('storage/' . $file_path);
-            //            $data['attach2'] = public_path('assets/docs/template-full-paper-proceeding-jcu-2023.docx');
             $data['content'] = $mail->content;
-
-            // return view($data['view'], $mail);
 
             try {
                 Mail::to(preg_replace('/\s+/', ' ', trim($mail['email_receiver'])))

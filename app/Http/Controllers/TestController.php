@@ -62,75 +62,8 @@ class TestController extends Controller
 
     public function create_certy_mail_log()
     {
-        $transaction_details = TransactionDetail::whereStatus(200)
-            ->with(['transaction', 'event'])
-            ->whereIn('event_id', [1])
-            ->whereNotIn('user_id', exclude_user_ids())
-            //            ->limit(2)
-            ->get();
-
-        //        $service = new EmailServiceController();
-        //        return $service->send_certificate();
-
-        foreach ($transaction_details as $detail) {
-            $attend = EventUser::whereUserId($detail['user_id'])
-                ->whereEventId($detail['event_id'])
-                ->first();
-
-            $payload = [
-                "email_receiver" => $detail['transaction']['user_email'],
-                "receiver_name"  => $detail['transaction']['user_name'],
-                "label"          => "jcu23_certificate",
-                "category"       => $detail['event']['slug'],
-                "title"          => $detail['event']['name'] . ": " . $detail['event']['title'],
-                "model"          => "transaction_detail",
-                "model_id"       => $detail['id'],
-                "status"         => $attend ? 0 : 3,
-            ];
-
-            $mail_log = MailLog::whereLabel($payload['label'])
-                ->whereModel($payload['model'])
-                ->whereModelId($payload['model_id'])
-                ->whereCategory($payload['category'])
-                ->first();
-
-            if (!$mail_log) {
-                MailLog::create($payload);
-            } else {
-                $mail_log->update($payload);
-            }
-
-            if ($detail['event_id'] == 1) {
-                $sympo_1 = Event::find(110);
-
-                $attend2 = EventUser::whereUserId($detail['user_id'])
-                    ->whereEventId($sympo_1->id)
-                    ->first();
-
-                $payload2 = [
-                    "email_receiver" => $detail['transaction']['user_email'],
-                    "receiver_name"  => $detail['transaction']['user_name'],
-                    "label"          => "jcu23_certificate",
-                    "category"       => $sympo_1->slug,
-                    "title"          => $sympo_1['name'] . ": " . $sympo_1['title'],
-                    "model"          => "transaction_detail",
-                    "model_id"       => $detail['id'],
-                    "status"         => $attend2 ? 0 : 3,
-                ];
-
-                $mail_log2 = MailLog::whereLabel($payload2['label'])
-                    ->whereModel($payload2['model'])
-                    ->whereModelId($payload['model_id'])
-                    ->whereCategory($payload2['category'])
-                    ->first();
-
-                if (!$mail_log2) {
-                    MailLog::create($payload2);
-                } else {
-                    $mail_log2->update($payload2);
-                }
-            }
-        }
+        $mail_service = new EmailServiceController();
+        return $mail_service->send_event_certificate();
     }
 
     public function send_certy()
