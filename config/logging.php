@@ -48,6 +48,11 @@ return [
     */
 
     'channels' => [
+        'none' => [
+            'driver' => 'monolog',
+            'handler' => \Monolog\Handler\NullHandler::class,
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

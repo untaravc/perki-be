@@ -15,7 +15,7 @@ use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\CronController;
 
 Route::get('/', function () {
-    return 'src';
+    return '_apiperki_';
 });
 Route::get('/panel/print-abstract', [PostController::class, 'printPost']);
 Route::get('/panel/preview-abstract', [PostController::class, 'previewAbstract']);

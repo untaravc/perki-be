@@ -9,30 +9,59 @@ class BannerController extends Controller
 {
     public function banner(Request $request)
     {
-        if ($request->ref == 'cvep') {
-            return $this->bannerCvep();
+        switch ($request->ref) {
+            case 'cvep':
+                return $this->bannerCvep();
+            case '2024':
+                return $this->banner2024();
+            case '2023':
+                return $this->banner2023();
+            case 'jfu':
+                return $this->bannerJfu();
         }
-        if ($request->ref == 2024) {
-            return $this->banner2024();
-        } else {
-            return $this->banner2023();
-        }
+    }
+
+    public function bannerJfu()
+    {
+        $data = [
+            [
+                "title"   => "Jogja Foot Ulcer Meeting 2025",
+                // "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
+                "date"    => "Yogyakarta, 28th & 29th Mei 2025",
+                "poster"  => '',
+                "buttons" => [
+//                    [
+//                        "theme" => "light",
+//                        "text"  => "Schedule",
+//                        "link"  => "/#schedule",
+//                    ],
+//                    [
+//                        "theme" => "dark",
+//                        "text"  => "Register",
+//                        "link"  => "/register",
+//                    ]
+                ]
+            ],
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
     }
 
     public function bannerCvep()
     {
         $data = [
             [
-                "title"    => "Jogja Cardiovascular Epidemiology and Prevention Forum 2025",
+                "title"   => "Jogja Cardiovascular Epidemiology and Prevention Forum 2025",
                 // "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
-                "date"     => "Yogyakarta, 22nd & 23rd February 2025",
-                "poster"   => '/carvep/carvep-first.jpeg',
-                "buttons"  => [
-                     [
-                         "theme" => "light",
-                         "text"  => "Schedule",
-                         "link"  => "/#schedule",
-                     ],
+                "date"    => "Yogyakarta, 22nd & 23rd February 2025",
+                "poster"  => '/carvep/carvep-first.jpeg',
+                "buttons" => [
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
                     [
                         "theme" => "dark",
                         "text"  => "Register",
