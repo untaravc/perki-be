@@ -14,7 +14,6 @@ class SpeakerInitController extends Controller
 
         return 'Success';
     }
-
     private function speakers()
     {
         $data = [
@@ -52,7 +51,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'Dr. dr. Hariadi Hariawan, Sp.PD(K), Sp.JP(K)',
                 'slug'  => 'hariadi.hariawan',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo2/hariadi.hariawan.png',
+                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fhariadi.hariawan.png?alt=media&token=2d8955a2-fb15-4a46-97ce-3dd2ffc3c85c',
             ],
             [
                 'name'  => 'Prof. Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
@@ -163,7 +162,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Muhammad Gahan Satwiko, Sp.JP, Ph.D',
                 'slug'  => 'gahan.satwiko',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo2/gahan.satwiko.png',
+                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fgahan.satwiko.png?alt=media&token=ea6ac6db-0eb3-433e-a88d-0221f805c521',
             ],
             [ // 26
                 'name'  => 'dr. M. Yulianto Sismoyo, Sp.JP',
@@ -181,7 +180,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Muhammad Taufik Ismail, Sp.JP(K)',
                 'slug'  => 'taufik.ismail',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://src.perki-jogja.com/assets/photo2/taufik.ismail.png',
+                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Ftaufik.ismail.png?alt=media&token=5394e843-04e4-4ba7-aa0e-5b3e3859924a',
             ],
             [ // 29
                 'name'  => 'dr. Pamrayogi Hutomo, SpJP',
@@ -397,7 +396,7 @@ class SpeakerInitController extends Controller
                 'name'  => "dr. Billy Aditya Pratama, Sp.JP",
                 'slug'  => "billy.aditya",
                 'desc'  => "",
-                'image' => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fbilly.aditya.jpg?alt=media&token=cc0070c6-0571-484e-ab3c-860439d2296e",
             ],
             [
                 'name'  => "dr. Faisol Siddiq, Sp.JP",
@@ -452,6 +451,42 @@ class SpeakerInitController extends Controller
                 'slug'  => "moh.afis",
                 'desc'  => "",
                 'image' => "",
+            ],
+            [
+                'name'  => "dr. Hemi Sinorita, Sp.PD-KEMD",
+                'slug'  => "hemi.sinorita",
+                'desc'  => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fhemi.sinorita.png?alt=media&token=f34766da-a16a-4938-b049-fd42ec182c0e",
+            ],
+            [
+                'name'  => "dr. Rizka Humardewayanti Asdie Sp.PDKPTI",
+                'slug'  => "rizka.humardewayanti",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Yunanto Kurnia, Sp. BTKV, Subsp. VE (K)",
+                'slug'  => "yunanto.kurnia",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Meirizal Hasan, Sp.OT (K)",
+                'slug'  => "meirizal.hasan",
+                'desc'  => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fmeirizal.hasan.png?alt=media&token=07d7a80c-9550-491b-8107-a07b45e19445",
+            ],
+            [
+                'name'  => "Prof. Dr. Christantie Effendy, S.Kep, M. Kes",
+                'slug'  => "christantie.effendy",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "Ns. Sofiawati, A.Md. TKv",
+                'slug'  => "sofiawati",
+                'desc'  => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fsofiawati.png?alt=media&token=e437f0b7-b471-4360-ab47-2ef2af49d49b",
             ],
         ];
 

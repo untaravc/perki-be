@@ -10,7 +10,9 @@ class ScheduleController extends Controller
 {
     public function schedule(Request $request)
     {
-        if ($request->ref == 'carvep') {
+        if ($request->ref == 'jfu25') {
+            return $this->scheduleJfu25();
+        }if ($request->ref == 'carvep') {
             return $this->scheduleCarvep();
         }if ($request->ref == 2024) {
             return $this->schedule2024();
@@ -19,6 +21,34 @@ class ScheduleController extends Controller
         }
     }
 
+    private function scheduleJfu25()
+    {
+        $events = Event::with(['schedule_details' => function ($q) {
+            $q->with('speaker');
+        }, 'schedules'])
+            ->whereSection('jfu25')
+            ->get();
+
+        $thursday = [
+            [
+                'date_start' => $events->where('slug', 'symposium-jfu25-a1-1')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jfu25-a1-1')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jfu25-a1-1')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jfu25-a2-1')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jfu25-a2-1')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jfu25-a2-1')->first(),
+            ],
+        ];
+
+        $workshop = $events->where('marker', 'workshop-jfu25')->sortBy('name')->flatten();
+
+        $this->response['result']['thursday'] = $thursday;
+        $this->response['result']['workshop'] = $workshop;
+
+        return $this->response;
+    }
     private function scheduleCarvep()
     {
         $events = Event::with(['schedule_details' => function ($q) {

@@ -27,7 +27,7 @@ class BannerController extends Controller
             [
                 "title"   => "Jogja Foot Ulcer Meeting 2025",
                 // "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
-                "date"    => "Yogyakarta, 28th & 29th Mei 2025",
+                "date"    => "Yogyakarta, 29th & 30th May 2025",
                 "poster"  => '',
                 "buttons" => [
 //                    [
