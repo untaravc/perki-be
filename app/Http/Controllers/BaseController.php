@@ -53,7 +53,7 @@ class BaseController extends Controller
     public function sendPostResponse(string $message = null, array $data = [])
     {
         abort(response()->json([
-            'status'  => true,
+            'success'  => true,
             'message' => $message ?? 'Create data success',
             'result'  => $data,
         ], 201));

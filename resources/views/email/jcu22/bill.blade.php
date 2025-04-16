@@ -713,7 +713,7 @@
                                                                 <!-- TODO: Change this url -->
                                                                 <a
                                                                     class="full-width"
-                                                                    href="https://carvep.perki-jogja.com/profile/transactions"
+                                                                    href="https://jfu.perki-jogja.com/profile/transactions"
                                                                     target="_blank"
                                                                 >Upload Bank Transfer Proof</a
                                                                 >

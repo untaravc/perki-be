@@ -31,14 +31,14 @@ class ScheduleController extends Controller
 
         $thursday = [
             [
-                'date_start' => $events->where('slug', 'symposium-jfu25-a1-1')->first()['date_start'],
-                'date_end'   => $events->where('slug', 'symposium-jfu25-a1-1')->first()['date_end'],
-                'room_a'     => $events->where('slug', 'symposium-jfu25-a1-1')->first(),
+                'date_start' => $events->where('slug', 'symposium-jfu25-a1')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jfu25-a1')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jfu25-a1')->first(),
             ],
             [
-                'date_start' => $events->where('slug', 'symposium-jfu25-a2-1')->first()['date_start'],
-                'date_end'   => $events->where('slug', 'symposium-jfu25-a2-1')->first()['date_end'],
-                'room_a'     => $events->where('slug', 'symposium-jfu25-a2-1')->first(),
+                'date_start' => $events->where('slug', 'symposium-jfu25-a2')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jfu25-a2')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jfu25-a2')->first(),
             ],
         ];
 

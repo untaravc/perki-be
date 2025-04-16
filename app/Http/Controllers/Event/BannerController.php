@@ -26,20 +26,38 @@ class BannerController extends Controller
         $data = [
             [
                 "title"   => "Jogja Foot Ulcer Meeting 2025",
-                // "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
+                "subtitle" => "In conjunction with basic to advanced doppler workshop",
                 "date"    => "Yogyakarta, 29th & 30th May 2025",
                 "poster"  => '',
                 "buttons" => [
-//                    [
-//                        "theme" => "light",
-//                        "text"  => "Schedule",
-//                        "link"  => "/#schedule",
-//                    ],
-//                    [
-//                        "theme" => "dark",
-//                        "text"  => "Register",
-//                        "link"  => "/register",
-//                    ]
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
+                ]
+            ],
+            [
+                "title"     => "Basic to Advanced Doppler Workshop",
+                "subtitle"  => "Tracing the Flow: From Basics to Mastery in Cardiovascular Doppler",
+                "date"      => "Yogyakarta, 29th & 30th May 2025",
+                "poster"    => '',
+                "buttons"   => [
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
                 ]
             ],
         ];

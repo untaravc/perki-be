@@ -35,14 +35,10 @@ class AuthController extends BaseController
      */
     public function register(Request $request)
     {
-//        $transaction_count = Transaction::whereSection('carvep')
+//        $transaction_count = Transaction::whereSection($request->ref)
 //            ->where('status', '>=', 110)
 //            ->where('status', '<', 300)
 //            ->count();
-
-        if (date('Y-m-d H:i:s') > '2025-02-21 17:40:00') {
-            $this->sendError(500, "Quota telah penuh");
-        }
 
         $this->response['error'] = 422;
         $this->validate_register($request->all());
@@ -322,11 +318,11 @@ class AuthController extends BaseController
     {
         $trx = Transaction::whereUserId($user->id)
             ->where('status', '<', 110)
-            ->whereSection('carvep')
+            ->whereSection($request->ref)
             ->first();
 
         $payload = [
-            "section"       => "carvep",
+            "section"       => $request->ref,
             "user_id"       => $user->id,
             "user_name"     => $request->name,
             "user_phone"    => $request->phone,
@@ -342,12 +338,12 @@ class AuthController extends BaseController
             $trx = Transaction::create($payload);
 
             $trx->update([
-                'number' => 'CARVEP25' . prefix_zero($trx->id),
+                'number' => strtoupper($request->ref) . prefix_zero($trx->id),
             ]);
         }
 
         // update data user ketika transaksi pertama
-        $transaction_count = Transaction::whereSection('carvep')
+        $transaction_count = Transaction::whereSection($request->ref)
             ->whereUserId($user->id)
             ->count();
 
@@ -530,6 +526,24 @@ class AuthController extends BaseController
             'token' => $token->plainTextToken,
             'user'  => $reset_user,
         ];
+
+        return $this->response;
+    }
+
+    public function firebaseConfig()
+    {
+        $config = [
+            "apiKey" => env("FB_API_KEY"),
+            "authDomain" => env("FB_AUTH_DOMAIN"),
+            "databaseURL" => env("FB_DATABASE_URL"),
+            "projectId" => env("FB_PROJECT_ID"),
+            "storageBucket" => env("FB_STORAGE_BUCKET"),
+            "messagingSenderId" => env("FB_MESSAGING_SENDER_ID"),
+            "appId" => env("FB_APP_ID"),
+            "measurementId" => env("FB_MEASUREMENT_ID"),
+        ];
+
+        $this->response['result'] = $config;
 
         return $this->response;
     }

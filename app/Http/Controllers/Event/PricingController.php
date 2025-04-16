@@ -9,7 +9,9 @@ class PricingController extends Controller
 {
     public function pricing(Request $request)
     {
-        if ($request->ref == 'carvep') {
+        if ($request->ref == 'jfu25') {
+            return $this->pricingJfu25();
+        }if ($request->ref == 'carvep') {
             return $this->pricingCarvep();
         }if ($request->ref == 2024) {
             return $this->pricing2024();
@@ -17,6 +19,48 @@ class PricingController extends Controller
             return $this->pricing2023();
         }
     }
+    private function pricingJfu25()
+    {
+        $data = [
+            [
+                "title"=> "Symposium & Basic Workshop",
+                "subtitle"=> "",
+                "desc" => "Held on 29th May 2025",
+                "price_gp" => 250000,
+                "price_sp" => 500000,
+                "items" => [
+                    "Symposium on 29th May 2025",
+                    "Basic Doppler Workshop on 29th May 2025",
+                ],
+            ],
+            [
+                "title"=> "Symposium & Advance Doppler Workshop",
+                "subtitle"=> "",
+                "desc" => "Held on 29th and 30th of May 2025",
+                "price_gp" => 2150000,
+                "price_sp" => 3400000,
+                "items" => [
+                    "Symposium on 29th May 2025",
+                    "Basic Doppler Workshop on 29th May 2025",
+                    "Advance Doppler Workshop on 30th May 2025",
+                ],
+            ],
+            [
+                "title"=> "Advance Doppler Workshop",
+                "subtitle"=> "",
+                "desc" => "Held on 22nd and 23rd of February 2025",
+                "price_gp" => 2000000,
+                "price_sp" => 3000000,
+                "items" => [
+                    "Advance Doppler Workshop on 30th May 2025",
+                ],
+            ],
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
     private function pricingCarvep()
     {
         $data = [

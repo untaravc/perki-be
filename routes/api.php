@@ -31,6 +31,7 @@ use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
 use App\Http\Controllers\User\EventTransaction24Controller;
 use App\Http\Controllers\User\EventTransactionCarvepController;
+use App\Http\Controllers\User\EventTransactionJfu25Controller;
 
 // ADMIN API
 Route::post('/', function () {
@@ -40,6 +41,7 @@ Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 Route::post('/import-contact', [DataInitController::class, 'importContact']);
 Route::get('abstracts-send-accepted', [AbstractController::class, 'accepted_notification']);
+Route::get('firebase-config', [UserAuthController::class, 'firebaseConfig']);
 
 Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::get('auth', [AdminAuthController::class, 'authJson']);
@@ -87,12 +89,6 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::get('packages-active', [UserAuthController::class, 'package_active']);
     Route::patch('profile', [UserAuthController::class, 'profile_update']);
     Route::patch('profile-photo', [UserAuthController::class, 'profile_photo_update']);
-    Route::get('events-list', [EvenTransactionController::class, 'event_list']);
-    Route::get('events-list-2', [EvenTransactionController::class, 'event_list_2']);
-    Route::post('calculate-price', [EvenTransactionController::class, 'calculate_price']);
-    Route::post('calculate-price-2', [EvenTransactionController::class, 'calculate_price_2']);
-    Route::post('create-payment', [EvenTransactionController::class, 'create_payment']);
-    Route::post('create-payment-2', [EvenTransactionController::class, 'create_payment_2']);
     Route::get('transaction/{transaction_number}', [EvenTransactionController::class, 'show']);
     Route::get('pending-transaction-count', [EvenTransactionController::class, 'pending_transaction_count']);
 
@@ -108,15 +104,28 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('abstracts-poster/{id}', [AbstractController::class, 'abstract_poster']);
     Route::delete('abstracts/{id}', [AbstractController::class, 'abstract_delete']);
 
+    // JUC 2023
+    Route::get('events-list', [EvenTransactionController::class, 'event_list']);
+    Route::get('events-list-2', [EvenTransactionController::class, 'event_list_2']);
+    Route::post('calculate-price', [EvenTransactionController::class, 'calculate_price']);
+    Route::post('calculate-price-2', [EvenTransactionController::class, 'calculate_price_2']);
+    Route::post('create-payment', [EvenTransactionController::class, 'create_payment']);
+    Route::post('create-payment-2', [EvenTransactionController::class, 'create_payment_2']);
+
     // JCU 2024
     Route::get('events-list-24', [EventTransaction24Controller::class, 'event_list']);
-    Route::post('create-payment-24', [EventTransaction24Controller::class, 'create_payment']);
     Route::post('calculate-price-24', [EventTransaction24Controller::class, 'calculate_price']);
+    Route::post('create-payment-24', [EventTransaction24Controller::class, 'create_payment']);
 
     // CVEP
     Route::get('events-list-carvep', [EventTransactionCarvepController::class, 'event_list']);
     Route::post('calculate-price-carvep', [EventTransactionCarvepController::class, 'calculate_price']);
     Route::post('create-payment-carvep', [EventTransactionCarvepController::class, 'create_payment']);
+
+    // JFU
+    Route::get('events-list-jfu25', [EventTransactionJfu25Controller::class, 'event_list']);
+    Route::post('calculate-price-jfu25', [EventTransactionJfu25Controller::class, 'calculate_price']);
+    Route::post('create-payment-jfu25', [EventTransactionJfu25Controller::class, 'create_payment']);
 });
 // =========
 

@@ -109,7 +109,7 @@ class EventJfuController extends Controller
                                 "title"      => "Endovascular Intervention in Managing Foot Ulcer",
                                 "data_type"  => "schedule-detail",
                                 "section"    => "jfu25",
-                                "speakers"   => "taifik.ismail",
+                                "speakers"   => "taufik.ismail",
                                 "marker"     => "symposium-jfu25-a2",
                                 "slug"       => "symposium-jfu25-a2-1",
                                 "date_start" => "2025-05-29 10:00:00",

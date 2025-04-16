@@ -610,7 +610,7 @@
                                                     <tr>
                                                         <td>
                                                             <a target="_blank"
-                                                                href="https://carvep.perki-jogja.com/reset-password?email={{ $user['email'] }}&token={{ $user['forgot_password_token'] }}"
+                                                                href="https://jfu.perki-jogja.com/reset-password?email={{ $user['email'] }}&token={{ $user['forgot_password_token'] }}"
                                                                 {{--                                                       href="http://localhost:5173/reset-password?email={{$user['email']}}&token={{$user['forgot_password_token']}}" --}}
                                                                 style="background-color: darkblue;
                                                     text-decoration: none;
