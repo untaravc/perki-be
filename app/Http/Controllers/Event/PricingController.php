@@ -23,36 +23,36 @@ class PricingController extends Controller
     {
         $data = [
             [
-                "title"=> "Symposium & Basic Workshop",
+                "title"=> "Symposium & Workshop Basic DUS",
                 "subtitle"=> "",
                 "desc" => "Held on 29th May 2025",
                 "price_gp" => 250000,
                 "price_sp" => 500000,
                 "items" => [
-                    "Symposium on 29th May 2025",
-                    "Basic Doppler Workshop on 29th May 2025",
+                    "Symposium on 29th May 2025 (8.00 - 12.00)",
+                    "Workshop Basic DUS on 29th May 2025 (12.30 - 15.00)",
                 ],
             ],
             [
-                "title"=> "Symposium & Advance Doppler Workshop",
+                "title"=> "All-in Package",
                 "subtitle"=> "",
                 "desc" => "Held on 29th and 30th of May 2025",
                 "price_gp" => 2150000,
                 "price_sp" => 3400000,
                 "items" => [
-                    "Symposium on 29th May 2025",
-                    "Basic Doppler Workshop on 29th May 2025",
-                    "Advance Doppler Workshop on 30th May 2025",
+                    "Symposium on 29th May 2025 (8.00 - 12.00)",
+                    "Workshop Basic DUS on 29th May 2025 (12.30 - 15.00)",
+                    "Workshop Advance DUS on 30th May 2025 (8.00 - 12.00)",
                 ],
             ],
             [
-                "title"=> "Advance Doppler Workshop",
+                "title"=> "Workshop Advance DUS",
                 "subtitle"=> "",
-                "desc" => "Held on 22nd and 23rd of February 2025",
+                "desc" => "Held on 30th of May 2025",
                 "price_gp" => 2000000,
                 "price_sp" => 3000000,
                 "items" => [
-                    "Advance Doppler Workshop on 30th May 2025",
+                    "Workshop Advance DUS on 30th May 2025 (8.00 - 12.00)",
                 ],
             ],
         ];

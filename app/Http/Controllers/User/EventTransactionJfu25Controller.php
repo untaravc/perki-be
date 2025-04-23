@@ -24,6 +24,7 @@ class EventTransactionJfu25Controller extends BaseController
         if (!$transaction) {
             $this->sendError(422, 'Transaction number required.');
         }
+
         switch ($transaction->job_type_code) {
             case 'DRSP':
             case 'PRKI':
@@ -52,7 +53,6 @@ class EventTransactionJfu25Controller extends BaseController
         $workshop = $events->where('marker', 'workshop-jfu25')->where('slug', 'workshop-jfu25-1')->flatten();
 
         $symposium_price = $prices->where('model_id', $symposium->id)->first();
-
         $symposium['price'] = $symposium_price['price'];
 
         foreach ($workshop as $first) {
@@ -66,21 +66,9 @@ class EventTransactionJfu25Controller extends BaseController
             $data['workshop'] = $workshop;
         }
 
-        // has symposium
-        $trx_symposium = TransactionDetail::whereUserId($transaction->user_id)
-            ->whereEventId($symposium->id)
-            ->first();
-
-        if ($trx_symposium) {
-            $has_symposium = true;
-        } else {
-            $has_symposium = false;
-        }
-
         $this->response['result'] = [
             'items'         => $data,
             'transaction'   => $transaction,
-            'has_symposium' => $has_symposium,
         ];
 
         return $this->response;

@@ -28,7 +28,7 @@ class EventJfuController extends Controller
                 "title"      => "Multidisciplinary Team Collaboration for Managing Diabetic Foot Ulcer: From Wound Care To Endovascular Intervention",
                 "data_type"  => "product",
                 "section"    => "jfu25",
-                "quota"      => 150,
+                "quota"      => 100,
                 "marker"     => "symposium-jfu25",
                 "slug"       => "symposium-jfu25",
                 "date_start" => "2025-05-29 08:00:00",

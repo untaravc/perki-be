@@ -59,13 +59,11 @@ class EventTransaction24Controller extends BaseController
         $symposium['price'] = $symposium_price['price'];
 
         foreach ($first_workshop as $first) {
-            $first['quota'] = $first['quota'];
             $first['transactions_count'] = min($first['quota'], $first['transactions_count']);
             $first['available'] = $first['quota'] >  $first['transactions_count'];
         }
 
         foreach ($second_workshop as $second) {
-            $second['quota'] = $second['quota'];
             $second['transactions_count'] = min($second['quota'], $second['transactions_count']);
 
             $second['available'] = $second['quota'] >  $second['transactions_count'];

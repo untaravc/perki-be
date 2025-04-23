@@ -27,8 +27,8 @@ class BannerController extends Controller
             [
                 "title"   => "Jogja Foot Ulcer Meeting 2025",
                 "subtitle" => "In conjunction with basic to advanced doppler workshop",
-                "date"    => "Yogyakarta, 29th & 30th May 2025",
-                "poster"  => '',
+                "date"    => "Yogyakarta, 29th May 2025",
+                "poster"  => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJFU25%2Fposter_jfu_01.webp?alt=media&token=8f767a1b-6d13-4746-a4cf-0d3917543950',
                 "buttons" => [
                     [
                         "theme" => "light",
@@ -45,7 +45,7 @@ class BannerController extends Controller
             [
                 "title"     => "Basic to Advanced Doppler Workshop",
                 "subtitle"  => "Tracing the Flow: From Basics to Mastery in Cardiovascular Doppler",
-                "date"      => "Yogyakarta, 29th & 30th May 2025",
+                "date"      => "Yogyakarta, 30th May 2025",
                 "poster"    => '',
                 "buttons"   => [
                     [
