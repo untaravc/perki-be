@@ -2,11 +2,15 @@
     <div class="d-flex flex-column flex-column-fluid" style="min-height: calc(100vh - 130px)">
         <div class="app-toolbar py-3 py-lg-6">
             <div class="app-container container-xxl">
-                <div class="d-flex justify-content-between">
-                    <h1 class="page-headingtext-dark fw-bold fs-3">
-                        {{ title }}
-                    </h1>
-                    <div class="page-headingtext-dark fw-bold fs-3">{{ subtitle }}</div>
+                <div class="d-flex  justify-content-between">
+                    <select class="form-control w-3/4 form-control-lg"
+                            style="padding: 0; min-height: auto;background: transparent; border: none; font-size: 20px; font-weight: 700;"
+                            @change="reloadData()" v-model="content.section">
+                        <option v-for="section in content.sections" :value="section.section">
+                            {{section.name}}
+                        </option>
+                    </select>
+                    <div class="page-headingtext-dark fw-bold fs-2 ms-3">{{ subtitle }}</div>
                 </div>
             </div>
         </div>
@@ -17,7 +21,7 @@
                         <div class="rounded-3 bg-white p-4">
                             <div class="text-lg h4">Web Activity (last 30 days)</div>
                             <LineChart v-if="content.chart_loaded" class="max-h-96" :chartData="chart_data"
-                                :chartOptions="chart_options"></LineChart>
+                                       :chartOptions="chart_options"></LineChart>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
@@ -26,7 +30,7 @@
                                 <div class="text-lg h4 mb-0">Abstracts Submission</div>
                                 <div>
                                     <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
-                                        href="/panel/preview-abstract?ref=2024">Preview</a>
+                                       href="/panel/preview-abstract?ref=2024">Preview</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -39,17 +43,20 @@
                                 <div class="col-3">
                                     <div class="text-sm">Accepted</div>
                                     <div class="h3 text-green-500 font-bold" v-if="content.abstract_status">
-                                        {{ content.abstract_status.accepted }}</div>
+                                        {{ content.abstract_status.accepted }}
+                                    </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="text-sm">Rejected</div>
                                     <div class="h3 text-red-500 font-bold" v-if="content.abstract_status">
-                                        {{ content.abstract_status.rejected }}</div>
+                                        {{ content.abstract_status.rejected }}
+                                    </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="text-sm">Moderated</div>
                                     <div class="h3 text-blue-400 font-bold" v-if="content.abstract_status">
-                                        {{ content.abstract_status.moderated }}</div>
+                                        {{ content.abstract_status.moderated }}
+                                    </div>
                                 </div>
                                 <div class="col-12 mb-2 mt-1">
                                     <hr>
@@ -57,7 +64,7 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=case_report" target="_blank">
+                                           href="/panel/print-abstract?ref=2024&category=case_report" target="_blank">
                                             Case Report
                                         </a>
                                     </div>
@@ -68,7 +75,7 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=research" target="_blank">
+                                           href="/panel/print-abstract?ref=2024&category=research" target="_blank">
                                             Research
                                         </a>
                                     </div>
@@ -79,8 +86,8 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=systematic_review"
-                                            target="_blank">
+                                           href="/panel/print-abstract?ref=2024&category=systematic_review"
+                                           target="_blank">
                                             Systematic Review
                                         </a>
                                     </div>
@@ -91,8 +98,8 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=meta_analysis"
-                                            target="_blank">
+                                           href="/panel/print-abstract?ref=2024&category=meta_analysis"
+                                           target="_blank">
                                             Meta Analysis
                                         </a>
                                     </div>
@@ -107,7 +114,7 @@
                                 <div class="text-lg h4 mb-0">Members</div>
                                 <div>
                                     <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
-                                        href="/panel/register-user?ref=carvep">Preview</a>
+                                       href="/panel/register-user?ref=carvep">Preview</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -126,14 +133,16 @@
                                 <div class="text-lg h4 mb-0">Transactions</div>
                                 <div>
                                     <a class="text-sm text-blue-600 hover:text-blue-400 underline" target="_blank"
-                                        href="/transaction-recap?section=jcu24">Data Detail</a>
+                                       href="/transaction-recap?section=jcu24">Data Detail</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="text-sm">Est. Earning</div>
                                     <div class="h4 font-bold">{{
-                                        $filter.currency(parseInt(content.stat.transaction_success_nominal)) }}</div>
+                                            $filter.currency(parseInt(content.stat.transaction_success_nominal))
+                                        }}
+                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <div class="text-sm">Paid</div>
@@ -163,14 +172,15 @@
                             </div>
                             <div v-for="event in content.events">
                                 <div><b>{{ event.name }}</b> <span class="text-slate-500">{{
-                                    $filter.truncate(event.title, 50) }} </span></div>
+                                        $filter.truncate(event.title, 50)
+                                    }} </span></div>
                                 <div class="overflow-hidden h-4 mb-2 text-xs flex rounded bg-emerald-50">
                                     <div :style="'width: ' + event.transaction_success_count * 100 / event.quota + '%'"
-                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
+                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
                                         {{ event.transaction_success_count }}
                                     </div>
                                     <div :style="'width: ' + event.transaction_pending_count * 100 / event.quota + '%'"
-                                        class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-slate-500">
+                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-slate-500">
                                         {{ event.transaction_pending_count }}
                                     </div>
                                 </div>
@@ -194,18 +204,21 @@
                                 <div class="flex justify-between">
                                     <b>{{ event.name }}</b>
                                     <a :href="'/event-member/' + event.slug" target="_blank"
-                                        class="text-sm text-blue-600 hover:text-blue-400 underline">Data Peserta</a>
+                                       class="text-sm text-blue-600 hover:text-blue-400 underline">Data Peserta</a>
                                 </div>
                                 <div class="overflow-hidden h-4 mb-2 text-xs flex rounded bg-emerald-50">
-                                    <div :style="'width: ' + event.transaction_success_std_count * 100 / event.quota + '%'"
+                                    <div
+                                        :style="'width: ' + event.transaction_success_std_count * 100 / event.quota + '%'"
                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500">
                                         {{ event.transaction_success_std_count }}
                                     </div>
-                                    <div :style="'width: ' + event.transaction_success_gp_count * 100 / event.quota + '%'"
+                                    <div
+                                        :style="'width: ' + event.transaction_success_gp_count * 100 / event.quota + '%'"
                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-500">
                                         {{ event.transaction_success_gp_count }}
                                     </div>
-                                    <div :style="'width: ' + event.transaction_success_sp_count * 100 / event.quota + '%'"
+                                    <div
+                                        :style="'width: ' + event.transaction_success_sp_count * 100 / event.quota + '%'"
                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500">
                                         {{ event.transaction_success_sp_count }}
                                     </div>
@@ -222,23 +235,25 @@
 
 <script>
 import useAxios from "../../src/service";
-import { reactive, watch } from "vue";
+import {reactive, watch} from "vue";
 import LineChart from "../../components/LineChart.vue";
 import moment from "moment";
 
 export default {
-    components: { LineChart },
+    components: {LineChart},
     setup() {
         const title = "Jogja Cardiovascular Epidemiology & Prevention Forum 2025"
         const subtitle = moment().format('DD MMM, HH:mm')
         const breadcrumb_list = ["Dashboard"];
-        const { getData } = useAxios()
+        const {getData} = useAxios()
         const content = reactive({
             chart_loaded: false,
             abstract_status: {},
             abstract_categories: {},
             stat: {},
-            events: []
+            events: [],
+            sections: [],
+            section: 'jfu25',
         })
 
         function loadUserStats() {
@@ -248,10 +263,18 @@ export default {
             })
         }
 
+        function loadSection(){
+            getData('sections').then((data)=>{
+                content.sections = data.result
+            })
+        }
+
+        loadSection()
+
         loadUserStats()
 
         function loadStats() {
-            getData('dashboard-stat').then((data) => {
+            getData('dashboard-stat', {section: content.section}).then((data) => {
                 content.stat = data.result.stat
             })
         }
@@ -260,7 +283,8 @@ export default {
 
         function loadChart() {
             content.chart_loaded = false
-            getData('dashboard-chart').then((data) => {
+            getData('dashboard-chart', {section: content.section}).
+            then((data) => {
                 parseChartData(data.result)
             })
         }
@@ -269,7 +293,9 @@ export default {
 
         function loadEvent() {
             content.chart_loaded = false
-            getData('dashboard-event-purchase').then((data) => {
+            getData('dashboard-event-purchase', {
+                section: content.section
+            }).then((data) => {
                 content.events = data.result
             })
         }
@@ -277,6 +303,11 @@ export default {
         loadEvent()
 
         function parseChartData(data) {
+            chart_data.labels = []
+            chart_data.datasets[0].data = []
+            chart_data.datasets[1].data = []
+            chart_data.datasets[2].data = []
+
             for (const [key, item] of Object.entries(data)) {
                 chart_data.labels.push(item.date.substring(8))
                 chart_data.datasets[0].data.push(item.paid)
@@ -285,6 +316,12 @@ export default {
             }
 
             content.chart_loaded = true
+        }
+
+        function reloadData(){
+            loadChart()
+            loadEvent()
+            loadStats()
         }
 
         const chart_data = {
@@ -314,9 +351,7 @@ export default {
             ]
         }
 
-        const chart_options = {
-
-        }
+        const chart_options = {}
 
         return {
             title,
@@ -324,7 +359,8 @@ export default {
             content,
             chart_data,
             subtitle,
-            chart_options
+            chart_options,
+            reloadData
         }
     }
 }

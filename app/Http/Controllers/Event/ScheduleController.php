@@ -40,6 +40,11 @@ class ScheduleController extends Controller
                 'date_end'   => $events->where('slug', 'symposium-jfu25-a2')->first()['date_end'],
                 'room_a'     => $events->where('slug', 'symposium-jfu25-a2')->first(),
             ],
+            [
+                'date_start' => $events->where('slug', 'symposium-jfu25-a3')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'symposium-jfu25-a3')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'symposium-jfu25-a3')->first(),
+            ],
         ];
 
         $workshop = $events->where('marker', 'workshop-jfu25')->sortBy('name')->flatten();

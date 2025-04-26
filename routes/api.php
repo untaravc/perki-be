@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
@@ -12,7 +13,9 @@ use App\Http\Controllers\Admin\EventPresenceController;
 use App\Http\Controllers\Admin\MailLogController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\VoucherController;
+
 use App\Http\Controllers\Event\BannerController;
 use App\Http\Controllers\Event\CommitteeController;
 use App\Http\Controllers\Event\GuidanceController;
@@ -21,17 +24,18 @@ use App\Http\Controllers\Event\RegisterController as EventRegisterController;
 use App\Http\Controllers\Event\ScheduleController;
 use App\Http\Controllers\Event\SpeakerController;
 use App\Http\Controllers\Event\SponsorController;
+
 use App\Http\Controllers\User\AuthController as UserAuthController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\EvenTransactionController;
 use App\Http\Controllers\User\EventController;
 use App\Http\Controllers\User\AbstractController;
 
-use App\Http\Controllers\System\DataInitController;
-use App\Http\Controllers\System\UploadFileController;
 use App\Http\Controllers\User\EventTransaction24Controller;
 use App\Http\Controllers\User\EventTransactionCarvepController;
 use App\Http\Controllers\User\EventTransactionJfu25Controller;
+
+use App\Http\Controllers\System\DataInitController;
+use App\Http\Controllers\System\UploadFileController;
 
 // ADMIN API
 Route::post('/', function () {
@@ -68,6 +72,7 @@ Route::group(['prefix' => 'adm', 'middleware' => 'auth:sanctum'], function () {
     Route::resource('mail-logs', MailLogController::class);
     Route::resource('menus', MenuController::class);
     Route::resource('roles', RoleController::class);
+    Route::resource('sections', SectionController::class);
 
     Route::patch('transaction-delete', [AdminTransactionController::class, 'delete_transaction']);
     Route::get('transaction-notify/{transaction_id}', [AdminTransactionController::class, 'notify']);

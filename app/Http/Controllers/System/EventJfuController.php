@@ -24,7 +24,7 @@ class EventJfuController extends Controller
     {
         return [
             [
-                "name"       => "Symposium",
+                "name"       => "Symposium & Workshop Basic Doppler Ultrasound",
                 "title"      => "Multidisciplinary Team Collaboration for Managing Diabetic Foot Ulcer: From Wound Care To Endovascular Intervention",
                 "data_type"  => "product",
                 "section"    => "jfu25",
@@ -150,6 +150,31 @@ class EventJfuController extends Controller
                             ],
                         ],
                     ],
+                    [
+                        "name"       => "Workshop Basic DUS",
+                        "title"      => "",
+                        "data_type"  => "schedule",
+                        "section"    => "jfu25",
+                        "speakers"   => "",
+                        "image"      => "",
+                        "marker"     => "symposium-jfu25-a",
+                        "slug"       => "symposium-jfu25-a3",
+                        "date_start" => "2025-05-29 12:30:00",
+                        "date_end"   => "2025-05-29 15:00:00",
+                        "children"   => [
+                            [
+                                "name"       => "Session 1",
+                                "title"      => "Doppler Ultrasound in Diagnose Arterial Stenosis",
+                                "data_type"  => "schedule-detail",
+                                "section"    => "jfu25",
+                                "speakers"   => "",
+                                "marker"     => "symposium-jfu25-a3",
+                                "slug"       => "symposium-jfu25-a3-1",
+                                "date_start" => "2025-05-29 12:30:00",
+                                "date_end"   => "2025-05-29 15:00:00",
+                            ],
+                        ]
+                    ]
                 ],
             ],
         ];
@@ -169,12 +194,12 @@ class EventJfuController extends Controller
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jfu25",
-                "quota"      => "25",
+                "quota"      => 20,
                 "image"      => "",
                 "marker"     => "workshop-jfu25",
                 "slug"       => "workshop-jfu25-1",
                 "date_start" => "2025-05-30 08:00:00",
-                "date_end"   => "2025-05-30 12:00:00",
+                "date_end"   => "2025-05-30 16:00:00",
                 "children"   => [
                     [
                         "name"       => "Session 1",
@@ -230,6 +255,18 @@ class EventJfuController extends Controller
                         "slug"       => "workshop-jfu25-1-5",
                         "date_start" => "2025-05-30 10:45:00",
                         "date_end"   => "2025-05-30 11:15:00",
+                    ],
+                    [
+                        "name"       => "Hands On",
+                        "title"      => "Hands on: Carotis, Renal, Upper Extremities & Lower Extremities, 
+                        Haemodialysis Access, Chronic Vein Inssuficiency",
+                        "data_type"  => "schedule",
+                        "section"    => "jfu25",
+                        "speakers"   => "",
+                        "marker"     => "workshop-jfu25-1",
+                        "slug"       => "workshop-jfu25-1-6",
+                        "date_start" => "2025-05-30 11:15:00",
+                        "date_end"   => "2025-05-30 16:00:00",
                     ],
                 ],
                 "has_price"  => 1,

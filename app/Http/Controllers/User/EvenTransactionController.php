@@ -382,19 +382,26 @@ class EvenTransactionController extends BaseController
         $user = $request->user();
 
         $transaction = Transaction::whereUserId($user['id'])
-            //            ->whereIn('status', [100,110])
             ->find($request->transaction_id);
 
         if (!$transaction) {
             $this->sendError(404);
         }
 
-        $transaction->update([
-            'transfer_proof' => $request->transfer_proof_link,
-            'status'         => 120,
-        ]);
-
         $discord_wh_url = env("DISCORD_WH_URL");
+        if($request->transfer_proof_link){
+            $transaction->update([
+                'transfer_proof' => $request->transfer_proof_link,
+                'status'         => 120,
+            ]);
+        }
+
+        if($request->transfer_proof_gl_link){
+            $transaction->update([
+                'transfer_proof_gl' => $request->transfer_proof_gl_link,
+                'status'         => 119,
+            ]);
+        }
 
         if($discord_wh_url) {
             try{

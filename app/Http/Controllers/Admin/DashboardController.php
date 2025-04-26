@@ -15,35 +15,34 @@ use Illuminate\Support\Facades\DB;
 const SECTION = 'jcu24';
 class DashboardController extends Controller
 {
-    public function statistics()
+    public function statistics(Request $request)
     {
         $exclude_user_ids = exclude_user_ids();
         $data['transaction_success'] = Transaction::where('status', '>=', 200)
-            ->whereSection(SECTION)
+            ->whereSection($request->section ?? SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->where('status', '<', 300)->count();
 
         $data['transaction_success_nominal'] = Transaction::where('status', '>=', 200)
-            ->whereSection(SECTION)
+            ->whereSection($request->section ?? SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
-            ->where('status', '<', 300)->sum('total');
+            ->where('status', '<', 300)
+            ->sum('total');
 
         $data['member'] = 0;
-//        $data['member'] = User::where('is_speaker', '!==', 1)
-//            ->whereDate('updated_at', '>', '2025-01-01')
-//            ->count();
 
         $data['transaction_pending'] = Transaction::where('status', '<', 200)
             ->where('status', '>=', 110)
-            ->whereSection(SECTION)
+            ->whereSection($request->section ?? SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->count();
 
-        $data['member_purchase'] = 0;
-//        $data['member_purchase'] = User::where('is_speaker', '!==', 1)
-//            ->whereHas('success_transactions')
-//            ->whereNotIn('id', $exclude_user_ids)
-//            ->count();
+        $data['member_purchase'] = Transaction::where('status', '>=', 200)
+            ->where('status', '>', 300)
+            ->whereSection($request->section ?? SECTION)
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->groupBy('user_id')
+            ->count();
 
         $this->response['result']['stat'] = $data;
         return $this->response;
@@ -149,11 +148,11 @@ class DashboardController extends Controller
         return $this->response;
     }
 
-    public function event_purchase()
+    public function event_purchase(Request $request)
     {
         $events = Event::whereDataType('product')
             ->where('status', 1)
-            ->whereSection(SECTION)
+            ->whereSection($request->section ?? SECTION)
             ->orderBy('name')
             ->select(
                 'id',

@@ -124,7 +124,7 @@ class EmailServiceController extends Controller
         $data['user'] = $user;
 
         $data['view'] = 'email.set_new_password';
-        $data['email_subject'] = 'JCU 2023: Set New Password';
+        $data['email_subject'] = 'Perki Jogja: Set New Password';
 
         $mail_log = [
             "email_sender"   => "perki.yogyakarta@gmail.com",

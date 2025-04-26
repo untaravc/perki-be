@@ -26,9 +26,8 @@
                             <div class="col-md-3">
                                 <select class="form-control" @change="loadDataContent()"
                                     v-model="transaction_store.section">
-                                    <option value="jcu23">JCU 2023</option>
-                                    <option value="jcu24">JCU 2024</option>
-                                    <option value="carvep">Carvep</option>
+                                    <option value="">Semua</option>
+                                    <option v-for="section in response.sections" :value="section.section">{{section.name}}</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -37,6 +36,7 @@
                                     <option value="">Semua</option>
                                     <option value="100">Select Event</option>
                                     <option value="110">Waiting Payment</option>
+                                    <option value="119">Guarantee Letter</option>
                                     <option value="120">Waiting Confirmation</option>
                                     <option value="200">Paid</option>
                                     <option value="400">Deleted</option>
@@ -182,12 +182,20 @@ export default {
             })
         }
 
+        function loadSection(){
+            getData('sections').then((data)=>{
+                response.sections = data.result
+            })
+        }
+
+        loadSection()
         loadDataContent(transaction_store.page)
 
         const response = reactive({
             data_content: {
                 data: []
-            }
+            },
+            sections: []
         })
 
         function changePerPage(per_page) {
