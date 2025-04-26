@@ -16,6 +16,8 @@ class BannerController extends Controller
                 return $this->banner2024();
             case '2023':
                 return $this->banner2023();
+            case 'jcu25':
+                return $this->banner2025();
             case 'jfu':
                 return $this->bannerJfu();
         }
@@ -46,7 +48,7 @@ class BannerController extends Controller
                 "title"     => "Basic to Advanced Doppler Workshop",
                 "subtitle"  => "Tracing the Flow: From Basics to Mastery in Cardiovascular Doppler",
                 "date"      => "Yogyakarta, 30th May 2025",
-                "poster"    => '',
+                "poster"    => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJFU25%2Fposter_jfu_01.webp?alt=media&token=8f767a1b-6d13-4746-a4cf-0d3917543950',
                 "buttons"   => [
                     [
                         "theme" => "light",
@@ -86,6 +88,47 @@ class BannerController extends Controller
                         "link"  => "/register",
                     ]
                 ]
+            ],
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function banner2025()
+    {
+        $data = [
+            [
+                "title"    => "Jogja Cardiology Update Workshop",
+                "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
+                "date"     => "Yogyakarta, 1st August 2025",
+                "poster"   => '',
+                "buttons"  => [
+                    [
+                        "theme" => "light",
+                        "text"  => "Schedule",
+                        "link"  => "/#schedule",
+                    ],
+                    [
+                        "theme" => "dark",
+                        "text"  => "Register",
+                        "link"  => "/register",
+                    ]
+                ]
+            ],
+            [
+                "title"    => "Jogja Cardiology Update Symposium",
+                "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
+                "date"     => "Yogyakarta, 2nd August 2025",
+                "poster"   => '',
+                "buttons"  => []
+            ],
+            [
+                "title"    => "Jogja International Cardiovascular Topic Series",
+                "subtitle" => "Advance Care in Hearth Failure and Pulmonary Hypertension",
+                "date"     => "Yogyakarta, 3rd August 2025",
+                "poster"   => '',
+                "buttons"  => []
             ],
         ];
 
