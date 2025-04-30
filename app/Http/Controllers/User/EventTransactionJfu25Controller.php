@@ -250,8 +250,8 @@ class EventTransactionJfu25Controller extends BaseController
             $email_service = new EmailServiceController();
             $email_service->bill($transaction->id);
 
-//            $fonnte = new FonnteServiceController();
-//            $fonnte->generateMessage($transaction);
+            $fonnte = new FonnteServiceController();
+            $fonnte->generateMessage($transaction);
         } catch (\Exception $e) {
         }
 

@@ -13,14 +13,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <link href="/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css" />
+    @if (ENV('APP_ENV') == 'local')
+        <link href="/css/app.css" rel="stylesheet" type="text/css" />
+    @else
+        @include('admin.css_version')
+    @endif
 </head>
 
 <body data-kt-name="metronic" id="kt_app_body" class="app-blank bgi-size-cover bgi-position-center bgi-no-repeat">
     <div id="app" class="d-flex flex-column flex-root" id="kt_app_root">
         <router-view></router-view>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    @if (ENV('APP_ENV') != 'local')
+        @include('admin.js_version')
+    @else
+        <script src="/js/app.js"></script>
+    @endif
     {{--<script src="/assets/plugins/global/plugins.bundle.js"></script>--}}
     {{--<script src="/assets/js/scripts.bundle.js"></script>--}}
     {{--<!--end::Global Javascript Bundle-->--}}

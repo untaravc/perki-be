@@ -172,7 +172,7 @@ class DashboardController extends Controller
         return $this->response;
     }
 
-    public function user_stat()
+    public function user_stat(Request $request)
     {
         $abstracts = Post::whereIn('category', [
             'case_report',
@@ -180,7 +180,7 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('category', DB::raw('count(*) as total'))
-            ->whereSection(SECTION)
+            ->whereSection($request->section ?? SECTION)
             ->groupBy('category')
             ->get();
 
@@ -190,7 +190,7 @@ class DashboardController extends Controller
             'systematic_review',
             'meta_analysis',
         ])->select('status', DB::raw('count(*) as total'))
-            ->whereSection(SECTION)
+            ->whereSection($request->section ?? SECTION)
             ->groupBy('status')
             ->get();
 
