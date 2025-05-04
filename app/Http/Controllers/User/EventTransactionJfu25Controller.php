@@ -11,6 +11,7 @@ use App\Models\Price;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\User;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 
 class EventTransactionJfu25Controller extends BaseController
@@ -124,12 +125,12 @@ class EventTransactionJfu25Controller extends BaseController
         //        }
         $total = $subtotal - $package_discount;
 
-        //        $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
+        $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
-        //        if ($voucher_discount['discount_amount'] > 0) {
-        //            // $total = $subtotal;
-        //            $total -= $voucher_discount['discount_amount'];
-        //        }
+        if ($voucher_discount['discount_amount'] > 0) {
+            $total = $subtotal;
+            $total -= $voucher_discount['discount_amount'];
+        }
 
         $this->response['result'] = [
             "transaction"        => $transaction,
@@ -339,5 +340,103 @@ class EventTransactionJfu25Controller extends BaseController
         }
 
         return $number;
+    }
+
+    protected function calculate_discount($data, $voucher_code, $job_type_code = 'DRGN')
+    {
+        if (!$voucher_code) {
+            return [
+                "voucher"            => '',
+                "voucher_discount"   => 0,
+                "discount_amount"    => 0,
+                "voucher_validation" => '',
+            ];
+        }
+
+        $voucher = Voucher::whereCode($voucher_code)
+            ->first();
+
+        if (!$voucher) {
+            return [
+                "voucher"            => '',
+                "voucher_discount"   => 0,
+                "discount_amount"    => 0,
+                "voucher_validation" => 'Invalid Voucher Code.',
+            ];
+        }
+
+        $slugs = explode(',', $voucher->role);
+        $voucher_included = 'true';
+        foreach ($data as $datum) {
+            if (!in_array($datum['slug'], $slugs)) {
+                $voucher_included = 'false ' . $datum['marker'];
+            }
+        }
+
+        if (!$voucher_included) {
+            return [
+                "voucher"            => '',
+                "voucher_discount"   => 0,
+                "discount_amount"    => 0,
+                "voucher_validation" => 'Event not selected.',
+            ];
+        }
+
+        if ($voucher->job_type_scope != null) {
+            $job_type_scopes = explode(',', $voucher->job_type_scope);
+
+            if (!in_array($job_type_code, $job_type_scopes)) {
+                return [
+                    "voucher"            => '',
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Invalid Job Type',
+                ];
+            }
+        }
+
+        if ($voucher->qty != 0) {
+            $used_voucher = Transaction::where('voucher_code', $voucher_code)
+                ->where('status', '<', 300)
+                ->count();
+
+            if ($used_voucher >= $voucher->qty) {
+                return [
+                    "voucher"            => $voucher_code,
+                    "voucher_discount"   => 0,
+                    "discount_amount"    => 0,
+                    "voucher_validation" => 'Voucher Out of Stock',
+                ];
+            }
+        }
+
+        $discount_amount = 0;
+        $events = Event::whereIn('slug', $slugs)->get();
+        foreach ($slugs as $slug) {
+            $applied = collect($data)->pluck('slug')->toArray();
+            if (in_array($slug, $applied)) {
+                $event = $events->where('slug', $slug)->first();
+                $price = Price::whereModelId($event['id'])
+                    ->whereJobTypeCode($job_type_code)
+                    ->first();
+                if (!$price) {
+                    $price = Price::whereModelId($event['id'])
+                        ->whereJobTypeCode('DRGN')
+                        ->first();
+                }
+                if ($voucher->type == 'amount') {
+                    $discount_amount += $voucher->value;
+                } else if ('percent') {
+                    $discount_amount += $price['price'] * ($voucher->value / 100);
+                }
+            }
+        }
+
+        return [
+            "voucher"            => $voucher_code,
+            "voucher_discount"   => $voucher->value,
+            "discount_amount"    => $discount_amount,
+            "voucher_validation" => '',
+        ];
     }
 }

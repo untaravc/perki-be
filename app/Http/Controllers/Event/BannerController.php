@@ -102,32 +102,39 @@ class BannerController extends Controller
                 "title"    => "Jogja Cardiology Update Workshop",
                 "subtitle" => "Join us to master advanced cardiac care and vascular diagnostics for better patient outcomes! ",
                 "date"     => "Yogyakarta, 1st August 2025",
-                "poster"   => '',
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fjcu25-first.jpeg?alt=media&token=ba564950-0bc2-42cb-9a0b-3b4ee97a8ab6',
                 "buttons"  => [
-                    [
-                        "theme" => "light",
-                        "text"  => "Schedule",
-                        "link"  => "/#schedule",
-                    ],
-                    [
-                        "theme" => "dark",
-                        "text"  => "Register",
-                        "link"  => "/register",
-                    ]
+//                    [
+//                        "theme" => "light",
+//                        "text"  => "Schedule",
+//                        "link"  => "/#schedule",
+//                    ],
+//                    [
+//                        "theme" => "dark",
+//                        "text"  => "Register",
+//                        "link"  => "/register",
+//                    ]
                 ]
             ],
             [
                 "title"    => "Jogja Cardiology Update Symposium",
-                "subtitle" => "Artificial Intelligence in Transdisciplinary Cardiovascular Care: The Future is Now",
+                "subtitle" => "The  Future  of Cardiovascular  Emergency:  Aligning  Global  Progress  with  Local  Needs",
                 "date"     => "Yogyakarta, 2nd August 2025",
-                "poster"   => '',
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fjcu25-first.jpeg?alt=media&token=ba564950-0bc2-42cb-9a0b-3b4ee97a8ab6',
                 "buttons"  => []
             ],
             [
-                "title"    => "Jogja International Cardiovascular Topic Series",
-                "subtitle" => "Advance Care in Hearth Failure and Pulmonary Hypertension",
+                "title"    => "The 1st Indonesian Working Group of Pulmonary Hypertension Meeting",
+                "subtitle" => "",
+                "date"     => "Yogyakarta, 2nd August 2025",
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fjcu25-first.jpeg?alt=media&token=ba564950-0bc2-42cb-9a0b-3b4ee97a8ab6',
+                "buttons"  => []
+            ],
+            [
+                "title"    => "The 8th Jogja International Cardiovascular Topic Series",
+                "subtitle" => "",
                 "date"     => "Yogyakarta, 3rd August 2025",
-                "poster"   => '',
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fjcu25-first.jpeg?alt=media&token=ba564950-0bc2-42cb-9a0b-3b4ee97a8ab6',
                 "buttons"  => []
             ],
         ];

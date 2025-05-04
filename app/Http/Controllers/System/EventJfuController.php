@@ -131,7 +131,7 @@ class EventJfuController extends Controller
                                 "title"      => "VAC, Debridement & Amputation Indication in Foot Ulcer",
                                 "data_type"  => "schedule-detail",
                                 "section"    => "jfu25",
-                                "speakers"   => "meirizal.hasan",
+                                "speakers"   => "ardicho.irfantian",
                                 "marker"     => "symposium-jfu25-a2",
                                 "slug"       => "symposium-jfu25-a2-3",
                                 "date_start" => "2025-05-29 10:40:00",

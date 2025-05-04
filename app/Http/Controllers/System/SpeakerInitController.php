@@ -477,6 +477,18 @@ class SpeakerInitController extends Controller
                 'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fmeirizal.hasan.png?alt=media&token=07d7a80c-9550-491b-8107-a07b45e19445",
             ],
             [
+                'name'  => "dr. Ardicho Irfantian, MMR",
+                'slug'  => "ardicho.irfantian",
+                'desc'  => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fardicho.irfantian.jpeg?alt=media&token=709637a1-f6ae-4fc4-bf0d-af43d2ea2931",
+            ],
+            [
+                'name'  => "Prof. Dr. Christantie Effendy, S.Kep, M. Kes",
+                'slug'  => "christantie.effendy",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
                 'name'  => "Prof. Dr. Christantie Effendy, S.Kep, M. Kes",
                 'slug'  => "christantie.effendy",
                 'desc'  => "",
