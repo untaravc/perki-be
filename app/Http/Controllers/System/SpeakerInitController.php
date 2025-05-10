@@ -456,19 +456,19 @@ class SpeakerInitController extends Controller
                 'name'  => "dr. Hemi Sinorita, Sp.PD-KEMD",
                 'slug'  => "hemi.sinorita",
                 'desc'  => "",
-                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fhemi.sinorita.png?alt=media&token=f34766da-a16a-4938-b049-fd42ec182c0e",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Fhemi.sinorita.png?alt=media&token=e00d9bff-9aec-43ed-8d2b-d475010aaf21",
             ],
             [
-                'name'  => "dr. Rizka Humardewayanti Asdie Sp.PDKPTI",
+                'name'  => "dr. Rizka Humardewayanti Asdie, Sp.PD-KPTI",
                 'slug'  => "rizka.humardewayanti",
                 'desc'  => "",
-                'image' => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Frizka.humardewayanti.png?alt=media&token=046875b4-0e5b-4451-ae74-c6f56db0d3a6",
             ],
             [
                 'name'  => "dr. Yunanto Kurnia, Sp. BTKV, Subsp. VE (K)",
                 'slug'  => "yunanto.kurnia",
                 'desc'  => "",
-                'image' => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Fyunanto.kurnia.png?alt=media&token=355858c7-9e7c-48ad-9509-7f3ee0ad2006",
             ],
             [
                 'name'  => "dr. Meirizal Hasan, Sp.OT (K)",
@@ -486,13 +486,7 @@ class SpeakerInitController extends Controller
                 'name'  => "Prof. Dr. Christantie Effendy, S.Kep, M. Kes",
                 'slug'  => "christantie.effendy",
                 'desc'  => "",
-                'image' => "",
-            ],
-            [
-                'name'  => "Prof. Dr. Christantie Effendy, S.Kep, M. Kes",
-                'slug'  => "christantie.effendy",
-                'desc'  => "",
-                'image' => "",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Fchristantie.effendy.png?alt=media&token=e7b8658e-1b9f-4967-92e1-8dfe135eb55e",
             ],
             [
                 'name'  => "Ns. Sofiawati, A.Md. TKv",
