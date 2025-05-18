@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
-                        <div class="rounded-3 bg-white p-4 mb-4">
+                        <div class="rounded-3 bg-white p-4 mb-4" v-if="content.has_submission">
                             <div class="flex justify-between">
                                 <div class="text-lg h4 mb-0">Abstracts Submission</div>
                                 <div>
@@ -245,6 +245,7 @@ export default {
         const { getData } = useAxios()
         const content = reactive({
             chart_loaded: false,
+            has_submission: true,
             abstract_status: {},
             abstract_categories: {},
             stat: {},
@@ -257,6 +258,17 @@ export default {
             getData('dashboard-user-stat', { section: content.section }).then((data) => {
                 content.abstract_categories = data.result.abstract_categories
                 content.abstract_status = data.result.abstract_status
+
+                let sum = 0;
+                if(content.abstract_status){
+                    sum += content.abstract_status.pending
+                    sum += content.abstract_status.accepted
+                    sum += content.abstract_status.rejected
+                    sum += content.abstract_status.moderated
+                }
+                if(sum === 0){
+                    content.has_submission = false
+                }
             })
         }
 

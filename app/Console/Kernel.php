@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Http\Controllers\System\CronController;
+use App\Http\Controllers\System\UploadFirebaseController;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,9 +18,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $cron = new CronController();
-            $cron->send_event_certificate();
+//            $cron = new CronController();
+//            $cron->send_event_certificate();
 //            $cron->send_qr_email();
+            $fb = new UploadFirebaseController();
+            $fb->uploadDocument();
+            $fb->uploadPostImage();
         })->everyMinute();
     }
 

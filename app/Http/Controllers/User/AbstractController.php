@@ -26,6 +26,9 @@ class AbstractController extends BaseController
             ->when($request->ref, function ($q) use ($request) {
                 $q->whereYear('created_at', $request->ref);
             })
+            ->when($request->section, function ($q) use ($request) {
+                $q->where('section', $request->section);
+            })
             ->with('authors')
             ->get();
 
@@ -87,6 +90,7 @@ class AbstractController extends BaseController
             "file"     => $request->file,
             "body"     => $request->body,
             "subtitle" => $request->subtitle,
+            "section" => $request->section,
             "status"   => 0,
         ];
 

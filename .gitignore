@@ -6,7 +6,7 @@
 /public/css/app.css
 /public/js/app.js
 /public/js/app-*.js
-/public/js/app-*.js
+
 /resources/views/admin/css_version.blade.php
 /resources/views/admin/js_version.blade.php
 /storage/*.key
@@ -21,3 +21,5 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+
+firebase-adminsdk.json

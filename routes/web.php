@@ -54,3 +54,4 @@ Route::get('contacts', [TestController::class, 'contactList']);
 Route::get('sync-contacts', [DataInitController::class, 'insertToContact']);
 Route::get('generate-announcement', [CronController::class, 'create_announcement_mail_log']);
 Route::get('send-announcement', [CronController::class, 'send_announcement_email']);
+Route::get('upload-firebase', [\App\Http\Controllers\System\UploadFirebaseController::class, 'firebaseUpload']);

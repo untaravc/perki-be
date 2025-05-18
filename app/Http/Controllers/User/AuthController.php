@@ -82,7 +82,11 @@ class AuthController extends BaseController
 
                 if ($user) {
                     $user->update([
-                        'nik' => $request->nik
+                        'nik' => $request->nik,
+                        'identity_photo'=> $request->identity_photo,
+                        'institution' => $request->institution,
+                        'job_type_code' => $request->job_type_code,
+                        'phone' => $request->phone,
                     ]);
                 }
 

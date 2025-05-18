@@ -31,9 +31,6 @@ class EventTransactionJfu25Controller extends BaseController
             case 'PRKI':
                 $job_type_code = 'DRSP';
                 break;
-            case 'MHSA':
-                $job_type_code = "MHSA";
-                break;
             default:
                 $job_type_code = 'DRGN';
         }
@@ -51,7 +48,9 @@ class EventTransactionJfu25Controller extends BaseController
 
         $symposium = $events->where('marker', 'symposium-jfu25')->first();
 
-        $workshop = $events->where('marker', 'workshop-jfu25')->where('slug', 'workshop-jfu25-1')->flatten();
+        $workshop = $events->where('marker', 'workshop-jfu25')
+            ->where('slug', 'workshop-jfu25-1')
+            ->flatten();
 
         $symposium_price = $prices->where('model_id', $symposium->id)->first();
         $symposium['price'] = $symposium_price['price'];
@@ -63,9 +62,7 @@ class EventTransactionJfu25Controller extends BaseController
 
         $data['symposium'] = $symposium;
 
-        if ($transaction->job_type_code !== "MHSA") {
-            $data['workshop'] = $workshop;
-        }
+        $data['workshop'] = $workshop;
 
         $this->response['result'] = [
             'items'         => $data,

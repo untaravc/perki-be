@@ -1,29 +1,9 @@
 <template>
-    <div class="d-flex flex-column flex-lg-row flex-column-fluid">
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid bg-center bg-cover bg-no-repeat"
+         style="background-image: url('https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2Fbg_login_page.jpg?alt=media&token=98c8f5b5-b5d2-4af4-b739-c9504bdacf78')">
         <!--begin::Aside-->
         <div class="d-flex flex-lg-row-fluid">
-            <!--begin::Content-->
-            <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
-                <!--begin::Image-->
-                <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                    src="/assets/media/auth/agency.png" alt="" />
-                <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
-                    src="/assets/media/auth/agency-dark.png" alt="" />
-                <!--end::Image-->
-                <!--begin::Title-->
-                <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-7">Fast, Efficient and Productive</h1>
-                <!--end::Title-->
-                <!--begin::Text-->
-                <div class="text-gray-600 fs-base text-center fw-semibold">In this kind of post,
-                    <a href="#" class="opacity-75-hover text-primary me-1">the blogger</a>introduces a person they’ve
-                    interviewed
-                    <br />and provides some background information about
-                    <a href="#" class="opacity-75-hover text-primary me-1">the interviewee</a>and their
-                    <br />work following this is a transcript of the interview.
-                </div>
-                <!--end::Text-->
-            </div>
-            <!--end::Content-->
+
         </div>
         <!--begin::Aside-->
         <!--begin::Body-->
@@ -33,17 +13,12 @@
                 <!--begin::Content-->
                 <div class="w-md-400px">
                     <!--begin::Form-->
-
-                    <!--begin::Heading-->
-                    <div class="text-center mb-11">
-                        <!--begin::Title-->
-                        <h1 class="text-dark fw-bolder mb-3">Sign In</h1>
-                        <!--end::Title-->
+                    <div class="flex justify-center">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2Flogo-perki-jogja.png?alt=media&token=81d230eb-a9f6-4649-bbad-18b60eb24a26"
+                             style="max-height: 100px" alt="">
                     </div>
                     <!--begin::Separator-->
-                    <div class="separator separator-content my-14">
-                        <span class="w-125px text-gray-500 fw-semibold fs-7">With Account</span>
-                    </div>
+                    <div class="text-center mt-10 mb-4 fw-semibold fs-7">Sign In to Panel</div>
                     <!--end::Separator-->
                     <form>
                         <!--begin::Input group=-->
@@ -55,7 +30,7 @@
                         </div>
                         <!--end::Input group=-->
 
-                        <div class="fv-row mb-3">
+                        <div class="fv-row mb-8">
                             <!--begin::Password-->
                             <input type="password" placeholder="Password" name="password" autocomplete="new-password"
                                 v-model="credential.password" @keyup.enter="doLogin"
@@ -64,15 +39,6 @@
                         </div>
                     </form>
                     <!--end::Input group=-->
-                    <!--begin::Wrapper-->
-                    <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                        <div></div>
-                        <!--begin::Link-->
-                        <router-link to="/auth/forgot-password" class="link-primary">Forgot Password ?
-                        </router-link>
-                        <!--end::Link-->
-                    </div>
-                    <!--end::Wrapper-->
                     <!--begin::Submit button-->
                     <div class="d-grid mb-10">
                         <button @click="doLogin" id="kt_sign_in_submit" class="btn btn-primary">

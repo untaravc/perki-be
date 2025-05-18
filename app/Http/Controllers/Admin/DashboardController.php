@@ -29,7 +29,10 @@ class DashboardController extends Controller
             ->where('status', '<', 300)
             ->sum('total');
 
-        $data['member'] = 0;
+        $data['member'] = Transaction::whereSection($request->section ?? SECTION)
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->groupBy('user_id')
+            ->get()->count();
 
         $data['transaction_pending'] = Transaction::where('status', '<', 200)
             ->where('status', '>=', 110)
@@ -38,11 +41,11 @@ class DashboardController extends Controller
             ->count();
 
         $data['member_purchase'] = Transaction::where('status', '>=', 200)
-            ->where('status', '>', 300)
+            ->where('status', '<', 300)
             ->whereSection($request->section ?? SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->groupBy('user_id')
-            ->count();
+            ->get()->count();
 
         $this->response['result']['stat'] = $data;
         return $this->response;
@@ -195,8 +198,8 @@ class DashboardController extends Controller
             ->get();
 
         $this->response['result'] = [
-            "abstract_categories"   => $this->abstract_category($abstracts),
-            "abstract_status"       => $this->abstract_status($abstract_status),
+            "abstract_categories" => $this->abstract_category($abstracts),
+            "abstract_status"     => $this->abstract_status($abstract_status),
         ];
 
         return $this->response;
@@ -209,9 +212,9 @@ class DashboardController extends Controller
         $rejected = collect($data)->where('status', 2)->first();
         $moderated = collect($data)->where('status', 3)->first();
         $result = [
-            'pending' => $pending ? $pending['total'] : 0,
-            'accepted' => $accepted ? $accepted['total'] : 0,
-            'rejected' => $rejected ? $rejected['total'] : 0,
+            'pending'   => $pending ? $pending['total'] : 0,
+            'accepted'  => $accepted ? $accepted['total'] : 0,
+            'rejected'  => $rejected ? $rejected['total'] : 0,
             'moderated' => $moderated ? $moderated['total'] : 0,
         ];
 
@@ -225,9 +228,9 @@ class DashboardController extends Controller
         $meta_analysis = collect($data)->where('category', 'meta_analysis')->first();
         $systematic_review = collect($data)->where('category', 'systematic_review')->first();
         $result = [
-            'case_report' => $case_report ? $case_report['total'] : 0,
-            'research' => $research ? $research['total'] : 0,
-            'meta_analysis' => $meta_analysis ? $meta_analysis['total'] : 0,
+            'case_report'       => $case_report ? $case_report['total'] : 0,
+            'research'          => $research ? $research['total'] : 0,
+            'meta_analysis'     => $meta_analysis ? $meta_analysis['total'] : 0,
             'systematic_review' => $systematic_review ? $systematic_review['total'] : 0,
         ];
 
