@@ -13,6 +13,9 @@ class CommitteeController extends Controller
         if ($request->ref == '2024') {
             return $this->event2024();
         } else {
+            if ($request->section == 'jcu25') {
+                return $this->committeeJcu25();
+            }
             return $this->event2023();
         }
     }
@@ -282,6 +285,184 @@ class CommitteeController extends Controller
         //                ['user' => 'intan.rengganis'],
         //            ]
         //        ];
+
+        $user = User::where('is_speaker', 1)
+            ->select('image', 'name', 'slug', 'desc')
+            ->get();
+
+        for ($i = 0; $i < count($data); $i++) {
+            for ($u = 0; $u < count($data[$i]['users']); $u++) {
+                $selected = $user->where('slug', $data[$i]['users'][$u]['user'])->first();
+
+                if ($selected) {
+                    $data[$i]['users'][$u]['data'] = $selected;
+                }
+            }
+        }
+
+        for ($i = 0; $i < count($names); $i++) {
+            for ($u = 0; $u < count($names[$i]['users']); $u++) {
+                $selected = $user->where('slug', $names[$i]['users'][$u]['user'])->first();
+
+                if ($selected) {
+                    $names[$i]['users'][$u]['data'] = $selected;
+                }
+            }
+        }
+
+        $this->response['result']['photos'] = $data;
+        $this->response['result']['name'] = $names;
+        return $this->response;
+    }
+
+    private function committeeJcu25()
+    {
+        $data = [];
+        $data[] = [
+            'title' => "Advisor",
+            'users' => [
+                ['user' => 'bambang.irawan'],
+                ['user' => 'budi.yuli'],
+                ['user' => 'rm.arjono'],
+                ['user' => 'real.kusumanjaya'],
+                ['user' => 'hariadi.hariawan'],
+                ['user' => 'irsad.andi'],
+            ],
+        ];
+
+        $data[] = [
+            'title' => "Executive",
+            'users' => [
+                ['user' => 'firandi.saputra', 'position' => 'Chairperson'],
+                ['user' => 'dyah.adhi', 'position' => 'Vice chairperson'],
+                ['user' => 'anindhita.muthmaina', 'position' => 'Treasurer'],
+                ['user' => 'dyah.wulan', 'position' => 'Treasurer'],
+            ]
+        ];
+
+        $names = [];
+
+        $names[] = [
+            'title' => "Sponsorship Section",
+            'users' => [
+                ['user' => 'monika.putri', 'position' => 'Coordinator'],
+                ['user' => 'real.kusumanjaya'],
+                ['user' => 'hendry.purnasidha'],
+                ['user' => 'bagus.andi'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Scientific Section",
+            'users' => [
+                ['user' => 'fera.hidayati', 'position' => 'Coordinator'],
+                ['user' => 'lucia.kris'],
+                ['user' => 'nahar.taufiq'],
+                ['user' => 'yuwinda.prima'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Program Section",
+            'users' => [
+                ['user' => 'arditya.damarkusuma', 'position' => 'Coordinator'],
+                ['user' => 'anggoro.budi'],
+                ['user' => 'erika.maharani'],
+                ['user' => 'siti.hana'],
+                ['user' => 'helvina.vika'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Registration Section",
+            'users' => [
+                ['user' => 'anindhita.muthmaina', 'position' => 'Coordinator'],
+                ['user' => 'yunia.duana'],
+                ['user' => 'mutiara.putri'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Publication, Website and Documentation Section",
+            'users' => [
+                ['user' => 'gahan.satwiko', 'position' => 'Coordinator'],
+                ['user' => 'royhan.rozqie'],
+                ['user' => 'andro.diasmada'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Logistic Section",
+            'users' => [
+                ['user' => 'hasanah.mumpuni', 'position' => 'Coordinator'],
+                ['user' => 'erlinda.pretty'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Free Paper Section (Abstract, Oral Presentation and Proceeding)",
+            'users' => [
+                ['user' => 'dyah.samti', 'position' => 'Coordinator'],
+                ['user' => 'yusrina.adani'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Equipment, Exhibition, and Accommodation Section",
+            'users' => [
+                ['user' => 'billy.aditya', 'position' => 'Coordinator'],
+                ['user' => 'putrika.prastuti'],
+            ]
+        ];
+        $names[] = [
+            'title' => "Information and Technology Section",
+            'users' => [
+                ['user' => 'angga.dwi', 'position' => 'Coordinator'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "The Eighth JINCARTOS",
+            'users' => [
+                ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "InaPH Section",
+            'users' => [
+                ['user' => 'dyah.wulan', 'position' => 'Coordinator'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Alumni Gathering",
+            'users' => [
+                ['user' => 'evita.devi', 'position' => 'Coordinator'],
+                ['user' => 'inggita.hanung'],
+                ['user' => 'candra.kurniawan'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Mini Soccer",
+            'users' => [
+                ['user' => 'faisol.siddiq', 'position' => 'Coordinator'],
+                ['user' => 'athanasius.wrin'],
+                ['user' => 'adigama.priamas'],
+            ]
+        ];
+
+        $names[] = [
+            'title' => "Secretariat",
+            'users' => [
+                ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
+                ['user' => 'aris.widaryanti'],
+                ['user' => 'ice.suciati'],
+                ['user' => 'beti.meitasari'],
+                ['user' => 'intan.rengganis'],
+            ]
+        ];
 
         $user = User::where('is_speaker', 1)
             ->select('image', 'name', 'slug', 'desc')

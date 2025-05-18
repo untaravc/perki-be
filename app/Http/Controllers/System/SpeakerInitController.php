@@ -14,23 +14,24 @@ class SpeakerInitController extends Controller
 
         return 'Success';
     }
+
     private function speakers()
     {
         $data = [
             [
-                'name'  => 'dr. Anggia Endah S, Sp.JP(K)',
+                'name'  => 'dr. Anggia Endah Satuti, Sp.JP(K)',
                 'slug'  => 'anggia.endah',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/anggia.endah.jpg',
             ],
             [
-                'name'  => 'Dr. dr. Anggoro Budi Hartopo.,Ph.D, Sp.PD, Sp.JP',
+                'name'  => 'Prof. Dr. dr. Anggoro Budi Hartopo.,Ph.D, Sp.PD, Sp.JP',
                 'slug'  => 'anggoro.budi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/anggoro.budi.png',
             ],
             [
-                'name'  => 'dr. Arditya Damarkusuma, M.Med(ClinEpi), Sp.JP',
+                'name'  => 'dr. Arditya Damarkusuma, M.Med(ClinEpi), Sp.JP(K)',
                 'slug'  => 'arditya.damarkusuma',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/arditya.damarkusuma.png',
@@ -54,7 +55,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fhariadi.hariawan.png?alt=media&token=2d8955a2-fb15-4a46-97ce-3dd2ffc3c85c',
             ],
             [
-                'name'  => 'Prof. Dr. dr. Lucia Kris Dinarti, SpPD, SpJP(K)',
+                'name'  => 'Prof. Dr. dr. Lucia Kris Dinarti, SpPD, Sp.JP(K)',
                 'slug'  => 'lucia.kris',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/lucia.kris.png',
@@ -66,13 +67,13 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo2/nahar.taufiq.png',
             ],
             [
-                'name'  => 'dr. Dyah Adhi Kusumastuti, Sp.JP',
+                'name'  => 'dr. Dyah Adhi Kusumastuti, Sp.JP(K)',
                 'slug'  => 'dyah.adhi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/dyah.adhi.png',
             ],
             [
-                'name'  => 'dr. Dyah Samti Mayasari, PhD, Sp.JP',
+                'name'  => 'dr. Dyah Samti Mayasari, Ph.D, Sp.JP(K)',
                 'slug'  => 'dyah.samti',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/dyah.samti.png',
@@ -84,7 +85,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo2/dyah.wulan.png',
             ],
             [
-                'name'  => 'dr. Erika Maharani, SpJP(K)',
+                'name'  => 'dr. Erika Maharani, Sp.JP(K)',
                 'slug'  => 'erika.maharani',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photow/erika.maharani.png',
@@ -119,8 +120,8 @@ class SpeakerInitController extends Controller
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/hari.yusti.laksono.png',
             ],
-            [ // 19
-                'name'  => 'dr. Hasanah Mumpuni, SpPD, SpJP(K)',
+            [
+                'name'  => 'dr. Hasanah Mumpuni, SpPD, Sp.JP(K)',
                 'slug'  => 'hasanah.mumpuni',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/hasanah.mumpuni.png',
@@ -134,26 +135,26 @@ class SpeakerInitController extends Controller
                 <br/>
                 Currently, Dr. Bagaswoto serves as a Consultant of Acute, Intensive, and Cardiovascular Emergency Care, specializing in Cardiology Intervention. He is also actively engaged as a staff member at the Department of Cardiology and Vascular Medicine within the Faculty of Medicine, Public Health, and Nursing at Universitas Gadjah Mada, contributing significantly to research and patient care in these fields."
             ],
-            [ // 21
+            [
                 'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
                 'slug'  => 'irsad.andi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/irsad.andi.png',
             ],
-            [ // 22
+            [
                 'name'  => 'dr. Lidwina Tarigan, Sp.JP(K)',
                 'slug'  => 'lidwina.tarigan',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/lidwina.tarigan.jpg',
             ],
             [ // 23
-                'name'  => 'dr. Lima Peni, Sp.JP',
+                'name'  => 'dr. Lima Peni, Sp.JP(K)',
                 'slug'  => 'lima.peni',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/lima.peni.jpg',
             ],
             [ // 24
-                'name'  => 'dr. M.Ulil Aidie Jomansyah, Sp.JP',
+                'name'  => 'dr. Muhammad Ulil Aidie Jomansyah, Sp.JP',
                 'slug'  => 'm.ulil',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/ulil.jpg',
@@ -165,25 +166,25 @@ class SpeakerInitController extends Controller
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fgahan.satwiko.png?alt=media&token=ea6ac6db-0eb3-433e-a88d-0221f805c521',
             ],
             [ // 26
-                'name'  => 'dr. M. Yulianto Sismoyo, Sp.JP',
+                'name'  => 'dr. Muhammad Yulianto Sismoyo, Sp.JP',
                 'slug'  => 'yulianto.sismoyo',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/yulianto.sismoyo.jpg',
             ],
             [ // 27
-                'name'  => 'dr. Margono Gatot, Sp.JP(K)',
+                'name'  => 'dr. Margono Gatot Suwandi, Sp.JP(K)',
                 'slug'  => 'margono.gatot',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/margono.gatot.png',
             ],
             [ // 28
-                'name'  => 'dr. Muhammad Taufik Ismail, Sp.JP(K)',
+                'name'  => 'Dr. dr. Muhammad Taufik Ismail, Sp.JP(K)',
                 'slug'  => 'taufik.ismail',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Ftaufik.ismail.png?alt=media&token=5394e843-04e4-4ba7-aa0e-5b3e3859924a',
             ],
             [ // 29
-                'name'  => 'dr. Pamrayogi Hutomo, SpJP',
+                'name'  => 'dr. Pamrayogi Hutomo, Sp.JP',
                 'slug'  => 'pamrayogi.hutomo',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/pamrayogi.hutomo.jpg',
@@ -201,19 +202,19 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/rendi.asmara.jpg',
             ],
             [ // 32
-                'name'  => 'dr. Rizki Amalia, Sp.JP',
+                'name'  => 'dr. Rizki Amalia Gumilang, Sp.JP',
                 'slug'  => 'riski.amalia',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/riski.amalia.jpeg.jpg',
             ],
             [ // 33
-                'name'  => 'dr. RM Arjono, SP.JP(K)',
+                'name'  => 'dr. RM. Arjono, Sp.PD., Sp.Jp(K)',
                 'slug'  => 'rm.arjono',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/rm.arjono.jpeg',
             ],
             [ // 34
-                'name'  => 'dr. Royhan Rozqie, PhD, Sp.JP',
+                'name'  => 'dr. Royhan Rozqie, Ph.D, Sp.JP',
                 'slug'  => 'royhan.rozqie',
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/royhan.rozqie.png',
@@ -225,7 +226,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/suryo.prabowo.jpeg',
             ],
             [ // 36
-                'name'  => 'dr. Vita Yanti Anggraeni, Sp.PD, Sp.JP, Ph.D',
+                'name'  => 'dr. Vita Yanti Anggraeni, Ph.D, Sp.PD, Sp.JP',
                 'slug'  => 'vita.yanti',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo/vita.yanti.jpeg',
@@ -249,7 +250,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/fera.hidayati.png',
             ],
             [ // 40
-                'name'  => 'Dr.Med dr. Putrika Prastuti Ratna Gharini Sp.JP (K)',
+                'name'  => 'Dr.Med dr. Putrika Prastuti Ratna Gharini Sp.JP(K)',
                 'slug'  => 'putrika.prastuti',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/putrika.prastuti.png',
@@ -265,12 +266,6 @@ class SpeakerInitController extends Controller
                 'slug'  => 'budi.yuli',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
                 'image' => 'https://src.perki-jogja.com/assets/photo2/budi.yuli.png',
-            ],
-            [ // 43
-                'name'  => "dr. Aninditha Muthmainah, Sp.JP",
-                'slug'  => "aninditha.muthmainah",
-                'desc'  => "",
-                'image' => 'https://src.perki-jogja.com/assets/photo/',
             ],
             [ // 46
                 'name'  => "Prof. Salvatore Di Somma, MD, Ph.D",
@@ -309,13 +304,13 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/probosuseno.png',
             ],
             [
-                'name'  => "Thomas Weiler, MD ",
+                'name'  => "Thomas Weiler, MD",
                 'slug'  => "thomas.weiler",
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/thomas.weiler.jpeg',
             ],
             [
-                'name'  => "dr. Pipin Ardhianto, SpJP(K)",
+                'name'  => "dr. Pipin Ardhianto, Sp.JP(K)",
                 'slug'  => "pipin.ardhianto",
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/pipin.ardhianto.jpeg',
@@ -357,7 +352,7 @@ class SpeakerInitController extends Controller
                 'image' => 'https://src.perki-jogja.com/assets/photo/konlawij.trongtrakul.jpeg',
             ],
             [
-                'name'  => "dr.RR.Hari Hendriarti Satoto, Sp. JP(K)",
+                'name'  => "dr. RR. Hari Hendriarti Satoto, Sp. Jp(K)",
                 'slug'  => "hari.hendriarti",
                 'desc'  => "",
                 'image' => 'https://src.perki-jogja.com/assets/photo/hari.hendriarti.jpeg',
@@ -400,7 +395,7 @@ class SpeakerInitController extends Controller
             ],
             [
                 'name'  => "dr. Faisol Siddiq, Sp.JP",
-                'slug'  => "faisol Siddiq",
+                'slug'  => "faisol.siddiq",
                 'desc'  => "",
                 'image' => "",
             ],
@@ -411,7 +406,7 @@ class SpeakerInitController extends Controller
                 'image' => "",
             ],
             [
-                'name'  => "dr. Anindhita Muthmaina, Sp.Jp",
+                'name'  => "dr. Anindhita Muthmaina, Sp.JP",
                 'slug'  => "anindhita.muthmaina",
                 'desc'  => "",
                 'image' => "",
@@ -447,7 +442,7 @@ class SpeakerInitController extends Controller
                 'image' => "",
             ],
             [
-                'name'  => "dr. Moh Afis S, Sp.JP",
+                'name'  => "dr. Mohamad Afis S, Sp.JP",
                 'slug'  => "moh.afis",
                 'desc'  => "",
                 'image' => "",
@@ -494,6 +489,108 @@ class SpeakerInitController extends Controller
                 'desc'  => "",
                 'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Fsofiawati.png?alt=media&token=e437f0b7-b471-4360-ab47-2ef2af49d49b",
             ],
+            [
+                'name'  => "dr. Yuwinda Prima Ardelia, Sp.JP",
+                'slug'  => "yuwinda.prima",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Siti Hanna Armarandra, Sp.JP",
+                'slug'  => "siti.hana",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Helvina Vika Etami, Sp.JP",
+                'slug'  => "helvina.vika",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Yunia Duana, Sp.JP",
+                'slug'  => "yunia.duana",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Mutiara Putri, Sp.JP",
+                'slug'  => "mutiara.putri",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Erlinda Pretty Laksneri, Sp.JP",
+                'slug'  => "erlinda.pretty",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Yusrina Adani, Sp.JP",
+                'slug'  => "yusrina.adani",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Evita Devi Noor Rahmawati, Sp.JP(K)",
+                'slug'  => "evita.devi",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Candra Kurniawan, Sp.JP",
+                'slug'  => "candra.kurniawan",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Athanasius Wrin Hundoyo, Ph.D., Sp.JP",
+                'slug'  => "athanasius.wrin",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Adigama Priamas Febrianto, Sp.JP",
+                'slug'  => "adigama.priamas",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "Latifah Wulan",
+                'slug'  => "latifah.wulan",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "Aris Widaryanti",
+                'slug'  => "aris.widaryanti",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "Ice Suciati",
+                'slug'  => "ice.suciati",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "Beti Maitasari",
+                'slug'  => "beti.meitasari",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "Intan Rengganis",
+                'slug'  => "intan.rengganis",
+                'desc'  => "",
+                'image' => "",
+            ],
+            [
+                'name'  => "dr. Andro Diasmada, Sp.JP",
+                'slug'  => "andro.diasmada",
+                'desc'  => "",
+                'image' => "",
+            ],
         ];
 
         foreach ($data as $datum) {
@@ -504,10 +601,11 @@ class SpeakerInitController extends Controller
             $datum['type'] = 'speaker';
             if ($user) {
                 $user->update([
-                    'name'  => $datum['name'],
-                    'slug'  => $datum['slug'],
-                    'desc'  => $datum['desc'],
-                    'image' => $datum['image'],
+                    'type'       => $datum['type'],
+                    'name'       => $datum['name'],
+                    'slug'       => $datum['slug'],
+                    'image'      => $datum['image'],
+                    'is_speaker' => $datum['is_speaker'],
                 ]);
             } else {
                 User::create($datum);
