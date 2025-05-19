@@ -114,17 +114,13 @@ class EventTransactionJfu25Controller extends BaseController
             $package_discount = 100000;
         }
         $subtotal = collect($data)->sum('price');
-        //        if (isset($items['second_workshop']) && isset($items['first_workshop'])) {
-        //            $second = $data[2];
-        //            if (isset($second['price'])) {
-        //                $package_discount = $second['price'];
-        //            }
-        //        }
+
         $total = $subtotal - $package_discount;
 
         $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
         if ($voucher_discount['discount_amount'] > 0) {
+            $package_discount = 0;
             $total = $subtotal;
             $total -= $voucher_discount['discount_amount'];
         }
