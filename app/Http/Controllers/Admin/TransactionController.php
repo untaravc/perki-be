@@ -131,6 +131,18 @@ class TransactionController extends Controller
         ];
 
         MailLog::create($mail_log);
+        if (count($children) > 0) {
+            foreach ($children as $child) {
+                MailLog::create([
+                    "email_receiver" => $child->user_email,
+                    "receiver_name"  => $child->user_name,
+                    "label"          => "carvep_qr_access",
+                    "model"          => "transaction",
+                    "model_id"       => $child->id,
+                    "status"         => 0,
+                ]);
+            }
+        }
 
         return $this->responseUpdate($transaction);
     }

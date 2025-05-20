@@ -231,9 +231,9 @@ class EventTransactionJfu25Controller extends BaseController
             }
         }
 
-//        if ($request->users) {
-//            $this->record_child_transaction($transaction, $request->users);
-//        }
+        if ($request->users) {
+            $this->record_child_transaction($transaction, $request->users);
+        }
 
         // delete unused
         TransactionDetail::whereTransactionId($transaction->id)
@@ -274,7 +274,7 @@ class EventTransactionJfu25Controller extends BaseController
                 ->first();
             if (!isset($valid_user['id'])) {
                 $payload = [
-                    "section"          => "carvep",
+                    "section"          => "jfu25",
                     "number"           => $this->generate_child_number($transaction->number),
                     "parent_id"        => $transaction->id,
                     "user_id"          => $model_user ? $model_user->id : 0,
@@ -298,11 +298,11 @@ class EventTransactionJfu25Controller extends BaseController
                 $trx_child_ids[] = $trx_child->id;
 
                 $payload_detail = [
-                    "section"        => "carvep",
+                    "section"        => "jfu25",
                     "transaction_id" => $trx_child->id,
                     "job_type_code"  => $payload['job_type_code'],
                     "user_id"        => $payload['user_id'],
-                    "event_id"       => 270,
+                    "event_id"       => 294,
                     "event_name"     => "Symposium",
                     "price"          => 250000,
                     "status"         => 110,

@@ -109,20 +109,30 @@
                                     </div>
                                 </div>
                                 <div v-if="data_content.data_detail" class="mb-4">
-                                    <div class="text-center font-bold">Plataran Account</div>
+                                    <div class="font-bold text-xl">Plataran Account</div>
                                     <div class="flex justify-center mb-4">
                                         <a :href="data_content.data_detail.plataran_img" target="_blank">
-                                            <img :src="data_content.data_detail.plataran_img" class="max-h-96" alt="">
+                                            <img :src="data_content.data_detail.plataran_img" class="max-h-48" alt="">
                                         </a>
                                     </div>
                                 </div>
                                 <div v-if="data_content.data_detail && data_content.data_detail.transfer_proof">
-                                    <div class="text-center font-bold">Transfer Proof</div>
+                                    <div class="font-bold text-xl">Transfer Proof</div>
                                     <div class="flex justify-center mb-4">
                                         <img :src="data_content.data_detail.transfer_proof" class="w-1/2" alt="">
                                     </div>
                                     <div class="text-center">
                                         <a :href="data_content.data_detail.transfer_proof" target="_blank"
+                                            class="font-semibold hover:text-blue-500 text-blue-600">Original File</a>
+                                    </div>
+                                </div>
+                                <div v-if="data_content.data_detail && data_content.data_detail.transfer_proof_gl">
+                                    <div class="font-bold text-xl">Guarantee Letter</div>
+                                    <div class="flex justify-center mb-4">
+                                        <img :src="data_content.data_detail.transfer_proof_gl" class="w-1/2" alt="">
+                                    </div>
+                                    <div class="text-center">
+                                        <a :href="data_content.data_detail.transfer_proof_gl" target="_blank"
                                             class="font-semibold hover:text-blue-500 text-blue-600">Original File</a>
                                     </div>
                                 </div>
