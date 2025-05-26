@@ -85,7 +85,7 @@ class EmailServiceController extends Controller
         $data['user'] = User::find($data['transaction']['user_id']);
 
         $data['view'] = 'email.jcu22.invoice';
-        $data['email_subject'] = 'Cardiovascular Epidemiology & Prevention Forum: Invoice ' . $data['transaction']['number'];
+        $data['email_subject'] = 'Perki Jogja: Invoice ' . $data['transaction']['number'];
 
         $mail_log = [
             "email_sender"   => "perki.yogyakarta@gmail.com",

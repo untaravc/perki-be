@@ -138,6 +138,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
 Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () {
     Route::get('check-token', [UserAuthController::class, 'check_token']);
 
+    Route::get('registration', [UserAuthController::class, 'registerStatus']);
     Route::post('register', [UserAuthController::class, 'register']);
     Route::post('upload-file', [UploadFileController::class, 'store']);
     Route::get('available-register', [EventRegisterController::class, 'availableRegister']);

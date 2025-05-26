@@ -205,7 +205,7 @@ class EventJfuController extends Controller
                 "subtitle"   => "",
                 "data_type"  => "product",
                 "section"    => "jfu25",
-                "quota"      => 20,
+                "quota"      => 30,
                 "image"      => "",
                 "marker"     => "workshop-jfu25",
                 "slug"       => "workshop-jfu25-1",

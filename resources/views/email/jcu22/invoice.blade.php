@@ -552,7 +552,7 @@
 <body>
     <!-- TODO: Change this title -->
     <!-- This is preheader text. Some clients will show this text as a preview. -->
-    <span class="preheader">Pembelian Berhasil</span>
+    <span class="preheader">Payment Confirmed</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
         <tr>
             <td>&nbsp;</td>
@@ -576,7 +576,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <img src="https://perki-jogja.com/wp-content/uploads/2022/06/Logo-Perki-Jogja-2.png"
+                                                                            <img src="https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2Flogo-perki-jogja.png?alt=media&token=81d230eb-a9f6-4649-bbad-18b60eb24a26"
                                                                                 alt="Useful alt text" height="36"
                                                                                 style="
                                                                         border: 0;
@@ -621,7 +621,7 @@
                                                                     <tr>
                                                                         <td>Bank</td>
                                                                         <td>
-                                                                            <img src="https://src.perki-jogja.com/assets/logo/mandiri_logo.png"
+                                                                            <img src="https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2Fmandiri-logo.png?alt=media&token=bbf6e2b5-27a1-41ff-b78b-7b1d4ddc6565"
                                                                                 alt="Useful alt text" height="16"
                                                                                 border="0"
                                                                                 style="

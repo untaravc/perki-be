@@ -98,8 +98,8 @@ class EventTransactionJfu25Controller extends BaseController
 
         // $data[] = $this->get_symposium($items['symposium'], $transaction);
         if (isset($items['symposium'])) {
-            if ($count > 1) {
-                $data[] = $this->get_event($items['symposium'], $transaction, $count + 1);
+            if ($count > 0) {
+                $data[] = $this->get_event($items['symposium'], $transaction, $count);
             } else {
                 $data[] = $this->get_event($items['symposium'], $transaction);
             }
@@ -120,8 +120,7 @@ class EventTransactionJfu25Controller extends BaseController
         $voucher_discount = $this->calculate_discount($data, $request->voucher, $transaction->job_type_code);
 
         if ($voucher_discount['discount_amount'] > 0) {
-            $package_discount = 0;
-            $total = $subtotal;
+            $total = $subtotal - $package_discount;
             $total -= $voucher_discount['discount_amount'];
         }
 
