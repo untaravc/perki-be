@@ -58,6 +58,7 @@ class Transaction extends Model
             if ($number === '0') {
                 return "62" . substr($this->attributes['user_phone'], 1);
             }
+            return $this->attributes['user_phone'];
         }
     }
 

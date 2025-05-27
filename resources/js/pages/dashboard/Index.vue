@@ -268,6 +268,8 @@ export default {
                 }
                 if(sum === 0){
                     content.has_submission = false
+                } else {
+                    content.has_submission = true
                 }
             })
         }

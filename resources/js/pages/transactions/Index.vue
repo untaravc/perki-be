@@ -85,13 +85,12 @@
                                                         }}</a>
                                                 </div>
                                                 <div>
-                                                    {{ data.job_type_code }} <b>{{ data.user_name }}</b>
+                                                    {{ data.job_type_code }} <b :title="data.user_id">{{ data.user_name }}</b>
                                                     <br>
                                                     <span>{{ data.user_email }}</span>
                                                     <br>
                                                     <a class="text-blue-800 hover:text-blue-700"
-                                                        :href="'https://wa.me/' + data.user_phone">{{ data.user_phone
-                                                        }}</a>
+                                                        :href="'https://wa.me/' + data.user_phone_wa">{{ data.user_phone_wa }}</a>
                                                 </div>
                                             </td>
                                             <td>
