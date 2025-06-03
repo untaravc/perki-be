@@ -139,7 +139,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. Irsad Andi Arso Sp.PD, Sp.JP(K)',
                 'slug'  => 'irsad.andi',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv2%2Firsad.andi.png?alt=media&token=8766eec3-7516-4677-84e5-20358ab6aa0d',
+                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Firsad.andi.png?alt=media&token=d0400f06-eeaf-4e5f-b28c-942b8c6e2423',
             ],
             [
                 'name'  => 'dr. Lidwina Tarigan, Sp.JP(K)',
@@ -211,7 +211,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'dr. RM. Arjono, Sp.PD., Sp.Jp(K)',
                 'slug'  => 'rm.arjono',
                 'desc'  => "",
-                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv1%2Frm.arjono.jpeg?alt=media&token=4f0c0487-7921-4a27-9bfa-e8f67319380d',
+                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Frm.arjono.png?alt=media&token=83d5ca45-4698-47ac-840a-7453e1ecbb46',
             ],
             [ // 34
                 'name'  => 'dr. Royhan Rozqie, Ph.D, Sp.JP',
@@ -259,7 +259,7 @@ class SpeakerInitController extends Controller
                 'name'  => 'Prof. Dr. dr. Bambang Irawan, Sp.PD(K), Sp.JP',
                 'slug'  => 'bambang.irawan',
                 'desc'  => "Department of Cardiology & Vascular Medicine, FKKMK, UGM",
-                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv1%2Fbambang.irawan.jpeg?alt=media&token=0b266c67-3dff-4b53-b652-deb1775e013d',
+                'image' => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Fbambang.irawan.png?alt=media&token=a568fb99-9823-4da2-b67e-e03546eae962',
             ],
             [ //42
                 'name'  => 'Prof. Dr. dr. Budi Yuli Setianto, Sp.PD.KKV, Sp.JP(K)',
@@ -409,7 +409,7 @@ class SpeakerInitController extends Controller
                 'name'  => "dr. Anindhita Muthmaina, Sp.JP",
                 'slug'  => "anindhita.muthmaina",
                 'desc'  => "",
-                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Fanindhita.muthmaina.jpeg?alt=media&token=8dc7487c-4d0d-4ae6-8763-b1dde71c9a37",
+                'image' => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FSpeakers%2Fv3%2Fanindhita.muthmaina.png?alt=media&token=ebe74deb-32c1-4ee8-8434-315ce518c4e7",
             ],
             [
                 'name'  => "dr. Angga Dwi Prasetyo, Sp.JP",

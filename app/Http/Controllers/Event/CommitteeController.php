@@ -392,7 +392,7 @@ class CommitteeController extends Controller
         ];
 
         $names[] = [
-            'title' => "Logistic Section",
+            'title' => "Consumption  Section",
             'users' => [
                 ['user' => 'hasanah.mumpuni', 'position' => 'Coordinator'],
                 ['user' => 'erlinda.pretty'],
