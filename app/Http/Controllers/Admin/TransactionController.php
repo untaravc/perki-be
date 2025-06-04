@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class TransactionController extends Controller
 {
@@ -171,6 +172,11 @@ class TransactionController extends Controller
 
     public function transaction_recap(Request $request)
     {
+        $access_token = PersonalAccessToken::findToken($request->token);
+        if(!$access_token){
+            return 'No Access';
+        }
+
         $transactions = Transaction::where('status', '!=', 400)
             ->where('status', '>', 100)
             ->when($request->section, function ($q) use ($request) {

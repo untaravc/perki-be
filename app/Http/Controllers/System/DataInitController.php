@@ -29,7 +29,6 @@ class DataInitController extends BaseController
                         return $event->event_init();
                     case 'jcu25':
                 }
-
             case 'speakers':
                 $speakers = new SpeakerInitController();
                 return $speakers->init_speaker();

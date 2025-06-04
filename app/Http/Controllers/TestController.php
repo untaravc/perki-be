@@ -10,6 +10,7 @@ use App\Models\MailLog;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class TestController extends Controller
 {
@@ -27,6 +28,11 @@ class TestController extends Controller
 
     public function contactList(Request $request)
     {
+        $access_token = PersonalAccessToken::findToken($request->token);
+        if(!$access_token){
+            return 'No Access';
+        }
+
         $per_page = 10;
         $active_col = explode(',', $request->cols);
 

@@ -30,7 +30,7 @@
                                 <div class="text-lg h4 mb-0">Abstracts Submission</div>
                                 <div>
                                     <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
-                                        href="/panel/preview-abstract?ref=2024">Preview</a>
+                                        :href="`/panel/preview-abstract?section=` + content.section + `&token=` + content.token">Preview</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -64,7 +64,7 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=case_report" target="_blank">
+                                            :href="`/panel/print-abstract?category=case_report&section=` + content.section + `&token=` + content.token" target="_blank">
                                             Case Report
                                         </a>
                                     </div>
@@ -75,7 +75,7 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=research" target="_blank">
+                                           :href="`/panel/print-abstract?category=research&section=` + content.section + `&token=` + content.token" target="_blank">
                                             Research
                                         </a>
                                     </div>
@@ -86,7 +86,7 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=systematic_review"
+                                           :href="`/panel/print-abstract?category=systematic_review&section=` + content.section + `&token=` + content.token"
                                             target="_blank">
                                             Systematic Review
                                         </a>
@@ -98,7 +98,7 @@
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
-                                            href="/panel/print-abstract?ref=2024&category=meta_analysis"
+                                           :href="`/panel/print-abstract?category=meta_analysis&section=` + content.section + `&token=` + content.token"
                                             target="_blank">
                                             Meta Analysis
                                         </a>
@@ -114,7 +114,7 @@
                                 <div class="text-lg h4 mb-0">Members</div>
                                 <div>
                                     <a target="_blank" class="text-sm text-blue-600 hover:text-blue-400 underline"
-                                        href="/panel/register-user?ref=carvep">Preview</a>
+                                        :href="`/panel/register-user?section=` + content.section + `&token=` + content.token">Preview</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -133,7 +133,7 @@
                                 <div class="text-lg h4 mb-0">Transactions</div>
                                 <div>
                                     <a class="text-sm text-blue-600 hover:text-blue-400 underline" target="_blank"
-                                        href="/transaction-recap?section=jcu24">Data Detail</a>
+                                        :href="`/transaction-recap?section=` + content.section + '&token=' + content.token ">Data Detail</a>
                                 </div>
                             </div>
                             <div class="row mb-2">
@@ -251,8 +251,11 @@ export default {
             stat: {},
             events: [],
             sections: [],
-            section: 'jfu25',
+            section: 'jcu25',
+            token: '',
         })
+
+        content.token = localStorage.getItem('user_token')
 
         function loadUserStats() {
             getData('dashboard-user-stat', { section: content.section }).then((data) => {
@@ -266,11 +269,7 @@ export default {
                     sum += content.abstract_status.rejected
                     sum += content.abstract_status.moderated
                 }
-                if(sum === 0){
-                    content.has_submission = false
-                } else {
-                    content.has_submission = true
-                }
+                content.has_submission = sum !== 0;
             })
         }
 

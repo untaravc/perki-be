@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {
@@ -77,9 +78,13 @@ class UserController extends Controller
 
     public function registerUser(Request $request)
     {
+        $access_token = PersonalAccessToken::findToken($request->token);
+        if(!$access_token){
+            return 'No Access';
+        }
+
         $users = User::whereIsSpeaker(0)
             ->with('success_transactions')
-            ->whereYear('updated_at', $request->ref)
             ->get();
 
         return view('print.contacts.register-user', compact('users'));
