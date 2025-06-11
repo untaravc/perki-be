@@ -29,10 +29,11 @@ use App\Http\Controllers\User\AuthController as UserAuthController;
 use App\Http\Controllers\User\EvenTransactionController;
 use App\Http\Controllers\User\EventController;
 use App\Http\Controllers\User\AbstractController;
-
 use App\Http\Controllers\User\EventTransaction24Controller;
 use App\Http\Controllers\User\EventTransactionCarvepController;
 use App\Http\Controllers\User\EventTransactionJfu25Controller;
+use App\Http\Controllers\User\EventTransactionJcu25Controller;
+use App\Http\Controllers\User\GroupController;
 
 use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
@@ -109,6 +110,9 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('abstracts-poster/{id}', [AbstractController::class, 'abstract_poster']);
     Route::delete('abstracts/{id}', [AbstractController::class, 'abstract_delete']);
 
+    Route::get('groups', [GroupController::class, 'info']);
+    Route::post('groups', [GroupController::class, 'create']);
+
     // JUC 2023
     Route::get('events-list', [EvenTransactionController::class, 'event_list']);
     Route::get('events-list-2', [EvenTransactionController::class, 'event_list_2']);
@@ -127,10 +131,15 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('calculate-price-carvep', [EventTransactionCarvepController::class, 'calculate_price']);
     Route::post('create-payment-carvep', [EventTransactionCarvepController::class, 'create_payment']);
 
-    // JFU
+    // JFU 25
     Route::get('events-list-jfu25', [EventTransactionJfu25Controller::class, 'event_list']);
     Route::post('calculate-price-jfu25', [EventTransactionJfu25Controller::class, 'calculate_price']);
     Route::post('create-payment-jfu25', [EventTransactionJfu25Controller::class, 'create_payment']);
+
+    // JCU 25
+    Route::get('events-list-jcu25', [EventTransactionJcu25Controller::class, 'event_list']);
+    Route::post('calculate-price-jcu25', [EventTransactionJcu25Controller::class, 'calculate_price']);
+    Route::post('create-payment-jcu25', [EventTransactionJcu25Controller::class, 'create_payment']);
 });
 // =========
 

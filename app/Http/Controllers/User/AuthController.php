@@ -40,11 +40,6 @@ class AuthController extends BaseController
      */
     public function register(Request $request)
     {
-//        $transaction_count = Transaction::whereSection($request->ref)
-//            ->where('status', '>=', 110)
-//            ->where('status', '<', 300)
-//            ->count();
-
         $this->response['error'] = 422;
         $this->validate_register($request->all());
         $user_exist = User::whereEmail($request->email)->first();
@@ -327,11 +322,11 @@ class AuthController extends BaseController
     {
         $trx = Transaction::whereUserId($user->id)
             ->where('status', '<', 110)
-            ->whereSection($request->ref)
+            ->whereSection($request->section)
             ->first();
 
         $payload = [
-            "section"       => $request->ref,
+            "section"       => $request->section,
             "user_id"       => $user->id,
             "user_name"     => $request->name,
             "user_phone"    => $request->phone,
@@ -347,12 +342,12 @@ class AuthController extends BaseController
             $trx = Transaction::create($payload);
 
             $trx->update([
-                'number' => strtoupper($request->ref) . prefix_zero($trx->id),
+                'number' => strtoupper($request->section) . prefix_zero($trx->id),
             ]);
         }
 
         // update data user ketika transaksi pertama
-        $transaction_count = Transaction::whereSection($request->ref)
+        $transaction_count = Transaction::whereSection($request->section)
             ->whereUserId($user->id)
             ->count();
 

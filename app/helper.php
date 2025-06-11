@@ -24,6 +24,9 @@ if (!function_exists('job_type_code_map')) {
             case "PRKI":
                 $code = "DRSP";
                 break;
+            case "MHSA":
+                $code = "MHSA";
+                break;
             default:
                 $code = 'DRGN';
         }

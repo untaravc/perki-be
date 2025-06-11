@@ -28,6 +28,8 @@ class DataInitController extends BaseController
                         $event = new EventJfuController();
                         return $event->event_init();
                     case 'jcu25':
+                        $event = new EventJcu25Controller();
+                        return $event->event_init();
                 }
             case 'speakers':
                 $speakers = new SpeakerInitController();

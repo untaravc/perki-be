@@ -17,8 +17,8 @@ class Event24Controller extends Controller
         $first_workshop = $this->first_workshop();
         $this->insert_event($first_workshop);
 
-        $secon_workshop = $this->second_workshop();
-        $this->insert_event($secon_workshop);
+        $second_workshop = $this->second_workshop();
+        $this->insert_event($second_workshop);
 
         return 'event updated';
     }
