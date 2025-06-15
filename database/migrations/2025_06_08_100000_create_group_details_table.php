@@ -19,6 +19,8 @@ class CreateGroupDetailsTable extends Migration
             $table->integer('group_id');
             $table->integer('user_id')->nullable();
             $table->string('user_name');
+            $table->string('institution')->nullable();
+            $table->string('document_link')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('flag')->nullable();

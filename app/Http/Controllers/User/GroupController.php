@@ -51,51 +51,79 @@ class GroupController extends Controller
         return $this->response;
     }
 
-    public function index(Request $request)
+    public function mine(Request $request)
     {
-        $data = Group::whereSection($request->section);
+        $auth = $request->user();
+        $data = Group::whereUserId($auth->id)
+            ->with('members')->first();
 
+        if($data){
+            $this->response['result'] = $data;
+            return $this->response;
+        }
+
+        $this->response['success'] = false;
+        return $this->response;
     }
 
-    public function create(Request $request)
+    public function index(Request $request)
+    {
+        $auth = $request->user();
+        $data = Group::whereSection($request->section)
+            ->whereuserId($auth['id'])
+            ->with('members')
+            ->get();
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function store(Request $request)
     {
         $auth = $request->user();
         $this->validateData($request);
         $members = collect($request->input('members'));
 
-        if ($members->isEmpty()) {
+        $complete = true;
+        foreach ($members as $member) {
+            if (strlen($member['user_name']) < 2) {
+                $complete = false;
+            }
+            if (strlen($member['institution']) < 2) {
+                $complete = false;
+            }
+//            if(strlen($member['document_link']) < 2){$complete = false;}
+        }
+
+        if ($members->isEmpty() || !$complete) {
             $this->response['success'] = false;
             $this->response['message'] = "Member is required";
             return $this->response;
         }
 
-        $users = User::whereIn('email', $members->pluck('email')->toArray())->get();
-
         DB::beginTransaction();
         // insert groups
         $group = Group::create([
-            "user_id"     => $auth['id'],
-            "section"     => "jcu25",
-            "category"    => "ecg",
-            "name"        => $request->name,
-            "institution" => $request->institution,
-            "address"     => $request->address,
-            "email"       => $request->email,
-            "phone"       => $request->phone,
-            "status"      => 100,
+            "user_id"  => $auth['id'],
+            "section"  => "jcu25",
+            "category" => "ecg",
+            "name"     => $request->name,
+            "address"  => $request->address,
+            "email"    => $request->email,
+            "phone"    => $request->phone,
+            "status"   => 100,
         ]);
 
         // insert group detail
         foreach ($members as $member) {
-            $user = $users->where('email', $member['email'])->first();
             GroupDetail::create([
-                "section"   => $group->section,
-                "group_id"  => $group->id,
-                "user_id"   => $user ? $user->id : null,
-                "user_name" => $member['name'],
-                "email"     => $member['email'],
-                "phone"     => $member['phone'],
-                "flag"      => $member['flag'],
+                "section"       => $group->section,
+                "group_id"      => $group->id,
+                "user_id"       => "",
+                "user_name"     => $member['user_name'],
+                "flag"          => $member['flag'],
+                "institution"   => $member['institution'],
+                "document_link" => $member['document_link'],
             ]);
         }
         DB::commit();
@@ -103,19 +131,82 @@ class GroupController extends Controller
         return $this->response;
     }
 
+    public function update(Request $request, $id)
+    {
+        $auth = $request->user();
+        $this->validateData($request);
+        $members = collect($request->input('members'));
+
+        $complete = true;
+        foreach ($members as $member) {
+            if (strlen($member['user_name']) < 2) {
+                $complete = false;
+            }
+            if (strlen($member['institution']) < 2) {
+                $complete = false;
+            }
+        }
+
+        if ($members->isEmpty() || !$complete) {
+            $this->response['success'] = false;
+            $this->response['message'] = "Member is required";
+            return $this->response;
+        }
+
+        $group = Group::whereUserId($auth['id'])
+            ->find($id);
+
+        if ($group) {
+            $group->update([
+                "name"    => $request->name,
+                "address" => $request->address,
+                "email"   => $request->email,
+                "phone"   => $request->phone,
+            ]);
+        }
+
+        foreach ($members as $member) {
+            if ($member['id']) {
+                $detail = GroupDetail::find($member['id']);
+                if ($detail) {
+                    $detail->update([
+                        "user_name"     => $member['user_name'],
+                        "flag"          => $member['flag'],
+                        "institution"   => $member['institution'],
+                        "document_link" => $member['document_link'],
+                    ]);
+                }
+            }
+        }
+
+        return $this->response;
+    }
+
     public function validateData($request)
     {
         $validator = Validator::make($request->all(), [
-            'name'        => 'required',
-            "institution" => "required",
-            "address"     => "required",
-            "email"       => "required|email",
-            "phone"       => "required|numeric",
+            'name'    => 'required',
+            "address" => "required",
+            "email"   => "required|email",
+            "phone"   => "required|numeric",
         ]);
 
         if ($validator->fails()) {
+            $this->response['success'] = false;
             $this->response['errors'] = $validator->errors();
+            $this->response['message'] = "Please fill in all the required fields.";
             abort(response($this->response, 422));
         }
+    }
+
+    public function show(Request $request, $id)
+    {
+        $auth = $request->user();
+        $data = Group::whereuserId($auth['id'])
+            ->with('members')
+            ->find($id);
+
+        $this->response['result'] = $data;
+        return $this->response;
     }
 }

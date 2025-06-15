@@ -110,8 +110,8 @@ Route::group(['prefix' => 'pub', 'middleware' => 'auth:sanctum'], function () {
     Route::post('abstracts-poster/{id}', [AbstractController::class, 'abstract_poster']);
     Route::delete('abstracts/{id}', [AbstractController::class, 'abstract_delete']);
 
-    Route::get('groups', [GroupController::class, 'info']);
-    Route::post('groups', [GroupController::class, 'create']);
+    Route::resource('groups', GroupController::class);
+    Route::get('groups-ekg', [GroupController::class, 'mine']);
 
     // JUC 2023
     Route::get('events-list', [EvenTransactionController::class, 'event_list']);
