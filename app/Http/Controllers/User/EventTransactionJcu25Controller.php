@@ -201,23 +201,26 @@ class EventTransactionJcu25Controller extends BaseController
 
         $item_ids = [];
         foreach ($items as $item) {
-            if ($item) {
-                $item_ids[] = $item;
+
+            if(!$item) {
+                continue;
             }
+            $event = Event::whereSlug($item)->first();
+
             $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
-                ->whereEventId($item)
+                ->whereEventId($event->id)
                 ->first();
 
-            $event = Event::find($item);
             if ($event) {
+                $item_ids[] = $event->id;
                 $price = Price::whereModel('event')
-                    ->whereModelId($item)
+                    ->whereModelId($event->id)
                     ->whereJobTypeCode($transaction->job_type_code)
                     ->first();
 
                 if (!$price) {
                     $price = Price::whereModel('event')
-                        ->whereModelId($item)
+                        ->whereModelId($event->id)
                         ->whereJobTypeCode('DRGN')
                         ->first();
                 }
@@ -228,7 +231,7 @@ class EventTransactionJcu25Controller extends BaseController
                         "transaction_id" => $transaction->id,
                         "job_type_code"  => $transaction->job_type_code,
                         "user_id"        => $transaction->user_id,
-                        "event_id"       => $item,
+                        "event_id"       => $event->id,
                         "event_name"     => $event->name,
                         "price"          => $price ? $price['price'] : 0,
                         "status"         => $transaction->status,

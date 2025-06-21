@@ -33,7 +33,7 @@ export const useFilterStore = defineStore('filter', () => {
         page: 1,
         per_page: 25,
         user_name: '',
-        section: 'jfu25',
+        section: 'jcu25',
         status: '',
         dates: '',
     })
@@ -41,7 +41,7 @@ export const useFilterStore = defineStore('filter', () => {
     const transaction_validate_store = reactive({
         page: 1,
         per_page: 1,
-        section: 'jcu24',
+        section: 'jcu25',
     })
 
     const presence_store = reactive({
@@ -56,7 +56,7 @@ export const useFilterStore = defineStore('filter', () => {
         page: 1,
         per_page: 25,
         title: '',
-        year: '2024',
+        year: '2025',
         status: '',
         category: '',
     })
@@ -64,7 +64,7 @@ export const useFilterStore = defineStore('filter', () => {
     const voucher_store = reactive({
         page: 1,
         per_page: 25,
-        year: '2024',
+        year: '2025',
     })
 
     const user_store = reactive({

@@ -22,6 +22,8 @@ if (!function_exists('job_type_code_map')) {
         switch ($job_type_code) {
             case "DRSP":
             case "PRKI":
+            case "SPOG":
+            case "SPPD":
                 $code = "DRSP";
                 break;
             case "MHSA":

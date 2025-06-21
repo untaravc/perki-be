@@ -119,24 +119,31 @@ class BannerController extends Controller
             [
                 "title"    => "Jogja Cardiology Update Symposium",
                 "subtitle" => "The  Future  of Cardiovascular  Emergency:  Aligning  Global  Progress  with  Local  Needs",
-                "date"     => "Yogyakarta, 2nd August 2025",
-                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01',
+                "date"     => "Yogyakarta, 2nd - 3rd August 2025",
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fpricing.jpeg?alt=media&token=aa14b666-e43b-45a4-b128-93aaaf8b2499',
                 "buttons"  => []
             ],
             [
-                "title"    => "The 1st Indonesian Working Group of Pulmonary Hypertension Meeting",
-                "subtitle" => "",
-                "date"     => "Yogyakarta, 2nd August 2025",
-                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01',
+                "title"    => "Call for Abstracts",
+                "subtitle" => "Category: Case Report, Original Research, Systematic Review/Meta Analysis",
+                "date"     => "Until 7th July 2025",
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fcall_abstract.jpeg?alt=media&token=8466da9c-4f9b-4fdf-9916-b3cf6a2a2d97',
                 "buttons"  => []
             ],
-            [
-                "title"    => "The 8th Jogja International Cardiovascular Topic Series",
-                "subtitle" => "",
-                "date"     => "Yogyakarta, 3rd August 2025",
-                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01',
-                "buttons"  => []
-            ],
+//            [
+//                "title"    => "The 1st Indonesian Working Group of Pulmonary Hypertension Meeting",
+//                "subtitle" => "",
+//                "date"     => "Yogyakarta, 2nd August 2025",
+//                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01',
+//                "buttons"  => []
+//            ],
+//            [
+//                "title"    => "The 8th Jogja International Cardiovascular Topic Series",
+//                "subtitle" => "",
+//                "date"     => "Yogyakarta, 3rd August 2025",
+//                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01',
+//                "buttons"  => []
+//            ],
         ];
 
         $this->response['result'] = $data;

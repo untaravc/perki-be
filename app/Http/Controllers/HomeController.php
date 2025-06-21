@@ -13,7 +13,7 @@ class HomeController extends BaseController
 {
     public function job_types()
     {
-        $data = JobType::get();
+        $data = JobType::whereStatus(1)->orderBy('name')->get();
         $this->sendGetResponse($data);
     }
 

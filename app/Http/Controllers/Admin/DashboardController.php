@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-const SECTION = 'jcu24';
+const SECTION = 'jcu25';
 class DashboardController extends Controller
 {
     public function statistics(Request $request)

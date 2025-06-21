@@ -74,7 +74,7 @@ class Event extends Model
         return $this->hasMany(TransactionDetail::class)
             ->whereStatus(200)
             ->whereNotIn('user_id', $exclude_user_ids)
-            ->whereIn('job_type_code', ['MHSA', 'COAS']);
+            ->whereIn('job_type_code', ['MHSA']);
     }
 
     public function transaction_success_gp()
