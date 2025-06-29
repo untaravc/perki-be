@@ -177,6 +177,10 @@ class TransactionController extends Controller
             return 'No Access';
         }
 
+        if(!in_array($access_token->tokenable_id, [1])){
+            return 'No Access';
+        }
+
         $transactions = Transaction::where('status', '!=', 400)
             ->where('status', '>', 100)
             ->when($request->section, function ($q) use ($request) {

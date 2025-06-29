@@ -650,7 +650,7 @@
                                                             <td>Bank</td>
                                                             <td>
                                                                 <img
-                                                                    src="https://src.perki-jogja.com/assets/logo/mandiri_logo.png"
+                                                                    src="https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2Fmandiri-logo.png?alt=media&token=bbf6e2b5-27a1-41ff-b78b-7b1d4ddc6565"
                                                                     alt="Useful alt text"
                                                                     height="16"
                                                                     border="0"

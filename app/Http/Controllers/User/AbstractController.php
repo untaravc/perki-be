@@ -22,6 +22,8 @@ class AbstractController extends BaseController
                 'case_report',
                 'systematic_review',
                 'meta_analysis',
+                'case_report_sp',
+                'research_sp',
             ])
             ->when($request->ref, function ($q) use ($request) {
                 $q->whereYear('created_at', $request->ref);

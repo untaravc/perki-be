@@ -41,7 +41,7 @@ class EventTransactionJcu25Controller extends BaseController
             ->get();
 
         $events = Event::whereSection('jcu25')
-            ->whereIn('marker', ['jcu25-sympo', 'jcu25-ws'])
+            ->where('data_type', 'product')
             ->withCount('transactions')
             ->orderBy('name')
             ->get();
@@ -49,6 +49,9 @@ class EventTransactionJcu25Controller extends BaseController
         $symposium = $events->where('marker', 'jcu25-sympo')->first();
 
         $workshop = $events->where('marker', 'jcu25-ws')
+            ->flatten();
+
+        $accommodations = $events->where('marker', 'jcu25-acm')
             ->flatten();
 
         $symposium_price = $prices->where('model_id', $symposium->id)->first();
@@ -64,11 +67,23 @@ class EventTransactionJcu25Controller extends BaseController
             }
         }
 
+        foreach ($accommodations as $acm) {
+            $acm['transactions_count'] = min($acm['quota'], $acm['transactions_count']);
+            $acm['available'] = $acm['quota'] > $acm['transactions_count'];
+            if ($acm['slug'] === 'jcu25-ws-1' || $acm['slug'] === 'jcu25-ws-2') {
+                $acm['grid'] = 2;
+            } else {
+                $acm['grid'] = 1;
+            }
+        }
+
         $data['symposium'] = $symposium;
 
-        if($transaction['job_type_code'] !== 'MHSA'){
+        if ($transaction['job_type_code'] !== 'MHSA') {
             $data['workshop'] = $workshop;
         }
+
+        $data['accommodations'] = $accommodations;
 
         $this->response['result'] = [
             'items'       => $data,
@@ -134,6 +149,19 @@ class EventTransactionJcu25Controller extends BaseController
         if ($voucher_discount['discount_amount'] > 0) {
             $total = $subtotal - $package_discount;
             $total -= $voucher_discount['discount_amount'];
+        }
+
+        if($items['acm_first']){
+            $acm_first = $this->get_event($items['acm_first'], $transaction);
+            $data[] = $acm_first;
+            $subtotal += $acm_first['price'];
+            $total += $acm_first['price'];
+        }
+        if($items['acm_second']){
+            $acm_second = $this->get_event($items['acm_second'], $transaction);
+            $data[] = $acm_second;
+            $subtotal += $acm_second['price'];
+            $total += $acm_second['price'];
         }
 
         $this->response['result'] = [
@@ -202,7 +230,7 @@ class EventTransactionJcu25Controller extends BaseController
         $item_ids = [];
         foreach ($items as $item) {
 
-            if(!$item) {
+            if (!$item) {
                 continue;
             }
             $event = Event::whereSlug($item)->first();

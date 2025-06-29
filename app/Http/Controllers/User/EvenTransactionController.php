@@ -426,9 +426,15 @@ class EvenTransactionController extends BaseController
             ->count();
 
         $data['abstracts'] = Post::whereUserId($user['id'])
-            ->whereIn('category', ['case_report', 'research', 'systematic_review'])
-            ->when($request->ref, function ($q) use ($request) {
-                $q->whereYear('created_at', $request->ref);
+            ->whereIn('category', [
+                'case_report',
+                'case_report_sp',
+                'research',
+                'research_sp',
+                'systematic_review',
+            ])
+            ->when($request->section, function ($q) use ($request) {
+                $q->whereSection($request->section);
             })
             ->count();
 

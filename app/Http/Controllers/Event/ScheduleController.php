@@ -10,6 +10,9 @@ class ScheduleController extends Controller
 {
     public function schedule(Request $request)
     {
+        if($request->section === 'jcu25'){
+            return $this->schedule2025();
+        }
         if ($request->ref == 'jfu25') {
             return $this->scheduleJfu25();
         }if ($request->ref == 'carvep') {
@@ -256,6 +259,77 @@ class ScheduleController extends Controller
 
         $this->response['result']['workshop_half_day_1'] = $workshop_half_day_1;
         $this->response['result']['workshop_half_day_2'] = $workshop_half_day_2;
+        $this->response['result']['saturday'] = $saturday;
+        $this->response['result']['sunday'] = $sunday;
+
+        return $this->response;
+    }
+
+    private function schedule2025()
+    {
+        $events = Event::with(['schedule_details' => function ($q) {
+            $q->with('speaker');
+        }, 'schedules'])
+            ->whereSection('jcu25')
+            ->get();
+
+        $saturday = [
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d1-1a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d1-1a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d1-1a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d1-1b')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d1-2a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d1-2a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d1-2a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d1-2b')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d1-3a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d1-3a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d1-3a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d1-3b')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d1-4a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d1-4a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d1-4a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d1-4b')->first(),
+            ],
+        ];
+
+        $sunday = [
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d2-1a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d2-1a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d2-1a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d2-1b')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d2-2a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d2-2a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d2-2a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d2-2b')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d2-3a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d2-3a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d2-3a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d2-3b')->first(),
+            ],
+            [
+                'date_start' => $events->where('slug', 'jcu25-sympo-d2-4a')->first()['date_start'],
+                'date_end'   => $events->where('slug', 'jcu25-sympo-d2-4a')->first()['date_end'],
+                'room_a'     => $events->where('slug', 'jcu25-sympo-d2-4a')->first(),
+                'room_b'     => $events->where('slug', 'jcu25-sympo-d2-4b')->first(),
+            ],
+        ];
+
+        $workshops = $events->where('marker', 'jcu25-ws')->sortBy('name')->flatten();
+
+        $this->response['result']['workshops'] = $workshops;
         $this->response['result']['saturday'] = $saturday;
         $this->response['result']['sunday'] = $sunday;
 

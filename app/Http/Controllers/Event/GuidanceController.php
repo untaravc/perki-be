@@ -9,6 +9,9 @@ class GuidanceController extends Controller
 {
     public function guidance(Request $request)
     {
+        if($request->section === 'jcu25'){
+            return $this->guidance2025();
+        }
         if ($request->ref == 2024) {
             return $this->guidance2024();
         } else {
@@ -76,6 +79,24 @@ class GuidanceController extends Controller
             "title" => "Symposium Day 2",
             "image" => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.png",
             "link"  => "https://src.perki-jogja.com/assets/posters/SYMPO_DAY_2_1.pdf",
+        ];
+
+        $this->response['result'] = $data;
+        return $this->response;
+    }
+
+    public function guidance2025(){
+        $data = [];
+        $data[] = [
+            "title" => "ECG Championship",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fecg-timeline.jpeg?alt=media&token=d1a5728c-cbed-418a-8793-7c4127f72f89",
+            "link"  => "https://jcu.perki-jogja.com/ecg-championship-info",
+        ];
+
+        $data[] = [
+            "title" => "ECG Championship",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fcall_abstract.jpeg?alt=media&token=8466da9c-4f9b-4fdf-9916-b3cf6a2a2d97",
+            "link"  => "https://jcu.perki-jogja.com/abstracts",
         ];
 
         $this->response['result'] = $data;

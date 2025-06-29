@@ -576,7 +576,7 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <img src="https://src.perki-jogja.com/assets/logo/PERKI-logo.jpg"
+                                                                            <img src="https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2Flogo-perki-jogja.png?alt=media&token=81d230eb-a9f6-4649-bbad-18b60eb24a26"
                                                                                 alt="Useful alt text" height="36"
                                                                                 style="
                                                                         border: 0;

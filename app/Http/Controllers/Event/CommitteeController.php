@@ -340,9 +340,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names = [];
-
-        $names[] = [
+        $data[] = [
             'title' => "Sponsorship Section",
             'users' => [
                 ['user' => 'monika.putri', 'position' => 'Coordinator'],
@@ -352,7 +350,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Scientific Section",
             'users' => [
                 ['user' => 'fera.hidayati', 'position' => 'Coordinator'],
@@ -362,7 +360,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Program Section",
             'users' => [
                 ['user' => 'arditya.damarkusuma', 'position' => 'Coordinator'],
@@ -373,7 +371,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Registration Section",
             'users' => [
                 ['user' => 'anindhita.muthmaina', 'position' => 'Coordinator'],
@@ -382,7 +380,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Publication, Website and Documentation Section",
             'users' => [
                 ['user' => 'gahan.satwiko', 'position' => 'Coordinator'],
@@ -391,7 +389,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Consumption  Section",
             'users' => [
                 ['user' => 'hasanah.mumpuni', 'position' => 'Coordinator'],
@@ -399,7 +397,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Free Paper Section (Abstract, Oral Presentation and Proceeding)",
             'users' => [
                 ['user' => 'dyah.samti', 'position' => 'Coordinator'],
@@ -407,35 +405,35 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Equipment, Exhibition, and Accommodation Section",
             'users' => [
                 ['user' => 'billy.aditya', 'position' => 'Coordinator'],
                 ['user' => 'putrika.prastuti'],
             ]
         ];
-        $names[] = [
+        $data[] = [
             'title' => "Information and Technology Section",
             'users' => [
                 ['user' => 'angga.dwi', 'position' => 'Coordinator'],
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "The Eighth JINCARTOS",
             'users' => [
                 ['user' => 'taufik.ismail', 'position' => 'Coordinator'],
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "InaPH Section",
             'users' => [
                 ['user' => 'dyah.wulan', 'position' => 'Coordinator'],
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Alumni Gathering",
             'users' => [
                 ['user' => 'evita.devi', 'position' => 'Coordinator'],
@@ -444,7 +442,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Mini Soccer",
             'users' => [
                 ['user' => 'faisol.siddiq', 'position' => 'Coordinator'],
@@ -453,7 +451,7 @@ class CommitteeController extends Controller
             ]
         ];
 
-        $names[] = [
+        $data[] = [
             'title' => "Secretariat",
             'users' => [
                 ['user' => 'latifah.wulan', 'position' => 'Coordinator'],
@@ -478,18 +476,18 @@ class CommitteeController extends Controller
             }
         }
 
-        for ($i = 0; $i < count($names); $i++) {
-            for ($u = 0; $u < count($names[$i]['users']); $u++) {
-                $selected = $user->where('slug', $names[$i]['users'][$u]['user'])->first();
-
-                if ($selected) {
-                    $names[$i]['users'][$u]['data'] = $selected;
-                }
-            }
-        }
+//        for ($i = 0; $i < count($names); $i++) {
+//            for ($u = 0; $u < count($names[$i]['users']); $u++) {
+//                $selected = $user->where('slug', $names[$i]['users'][$u]['user'])->first();
+//
+//                if ($selected) {
+//                    $names[$i]['users'][$u]['data'] = $selected;
+//                }
+//            }
+//        }
 
         $this->response['result']['photos'] = $data;
-        $this->response['result']['name'] = $names;
+        $this->response['result']['name'] = [];
         return $this->response;
     }
 }
