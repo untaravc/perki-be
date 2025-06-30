@@ -94,7 +94,7 @@ class GuidanceController extends Controller
         ];
 
         $data[] = [
-            "title" => "ECG Championship",
+            "title" => "Call for Abstracts",
             "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fcall_abstract.jpeg?alt=media&token=8466da9c-4f9b-4fdf-9916-b3cf6a2a2d97",
             "link"  => "https://jcu.perki-jogja.com/abstracts",
         ];

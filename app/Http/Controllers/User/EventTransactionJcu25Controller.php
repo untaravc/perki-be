@@ -43,7 +43,7 @@ class EventTransactionJcu25Controller extends BaseController
         $events = Event::whereSection('jcu25')
             ->where('data_type', 'product')
             ->withCount('transactions')
-            ->orderBy('name')
+            ->orderBy('slug')
             ->get();
 
         $symposium = $events->where('marker', 'jcu25-sympo')->first();
@@ -162,6 +162,12 @@ class EventTransactionJcu25Controller extends BaseController
             $data[] = $acm_second;
             $subtotal += $acm_second['price'];
             $total += $acm_second['price'];
+        }
+        if($items['acm_third']){
+            $acm_third = $this->get_event($items['acm_third'], $transaction);
+            $data[] = $acm_third;
+            $subtotal += $acm_third['price'];
+            $total += $acm_third['price'];
         }
 
         $this->response['result'] = [

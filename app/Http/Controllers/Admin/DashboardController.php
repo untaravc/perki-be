@@ -179,7 +179,9 @@ class DashboardController extends Controller
     {
         $abstracts = Post::whereIn('category', [
             'case_report',
+            'case_report_sp',
             'research',
+            'research_sp',
             'systematic_review',
             'meta_analysis',
         ])->select('category', DB::raw('count(*) as total'))
@@ -189,7 +191,9 @@ class DashboardController extends Controller
 
         $abstract_status = Post::whereIn('category', [
             'case_report',
+            'case_report_sp',
             'research',
+            'research_sp',
             'systematic_review',
             'meta_analysis',
         ])->select('status', DB::raw('count(*) as total'))
@@ -224,12 +228,17 @@ class DashboardController extends Controller
     private function abstract_category($data)
     {
         $case_report = collect($data)->where('category', 'case_report')->first();
+        $case_report_sp = collect($data)->where('category', 'case_report_sp')->first();
         $research = collect($data)->where('category', 'research')->first();
+        $research_sp = collect($data)->where('category', 'research_sp')->first();
         $meta_analysis = collect($data)->where('category', 'meta_analysis')->first();
         $systematic_review = collect($data)->where('category', 'systematic_review')->first();
+
         $result = [
             'case_report'       => $case_report ? $case_report['total'] : 0,
+            'case_report_sp'    => $case_report_sp ? $case_report_sp['total'] : 0,
             'research'          => $research ? $research['total'] : 0,
+            'research_sp'       => $research_sp ? $research_sp['total'] : 0,
             'meta_analysis'     => $meta_analysis ? $meta_analysis['total'] : 0,
             'systematic_review' => $systematic_review ? $systematic_review['total'] : 0,
         ];

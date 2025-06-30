@@ -413,9 +413,26 @@ class EventJcu25Controller extends Controller
                 "children"   => []
             ],
             [
-                "name"       => "Accommodation Day 1",
+                "name"       => "Room Thursday",
                 "title"      => "Hotel Tentrem Yogyakarta: Deluxe Room",
-                "subtitle"   => "Spicial Price for JCU Participant : IDR 1.850.000/Days",
+                "subtitle"   => "Special Price for JCU Participant : IDR 1.850.000/Days",
+                "data_type"  => "product",
+                "quota"      => 20,
+                "section"    => "jcu25",
+                "image"      => "",
+                "marker"     => "jcu25-acm",
+                "slug"       => "jcu25-acm-0",
+                "date_start" => "2025-08-31 14:00:00",
+                "date_end"   => "2025-08-01 12:00:00",
+                "has_price"  => 1,
+                "prices"     => $acm_price,
+                "children"   => [],
+                "body"       => "King Bed Size / Double Twin Bed Size, Minibar, Breakfast for 2 Person"
+            ],
+            [
+                "name"       => "Room Friday",
+                "title"      => "Hotel Tentrem Yogyakarta: Deluxe Room",
+                "subtitle"   => "Special Price for JCU Participant : IDR 1.850.000/Days",
                 "data_type"  => "product",
                 "quota"      => 20,
                 "section"    => "jcu25",
@@ -427,12 +444,12 @@ class EventJcu25Controller extends Controller
                 "has_price"  => 1,
                 "prices"     => $acm_price,
                 "children"   => [],
-                "body"       => "Facilities: 40 m2 Room Area, King Bed Size 200 x 200 /Double Twin Bed Size 140 x 200, Free Minibar, Free Breakfast for 2 Person"
+                "body"       => "King Bed Size / Double Twin Bed Size, Minibar, Breakfast for 2 Person"
             ],
             [
-                "name"       => "Accommodation Day 2",
+                "name"       => "Room Saturday",
                 "title"      => "Hotel Tentrem Yogyakarta: Deluxe Room",
-                "subtitle"   => "Spicial Price for JCU Participant : IDR 1.850.000/Days",
+                "subtitle"   => "Special Price for JCU Participant : IDR 1.850.000/Days",
                 "data_type"  => "product",
                 "quota"      => 20,
                 "section"    => "jcu25",
@@ -444,7 +461,7 @@ class EventJcu25Controller extends Controller
                 "has_price"  => 1,
                 "prices"     => $acm_price,
                 "children"   => [],
-                "body"       => "Facilities: 40 m2 Room Area, King Bed Size 200 x 200 /Double Twin Bed Size 140 x 200, Free Minibar, Free Breakfast for 2 Person"
+                "body"       => "King Bed Size / Double Twin Bed Size, Minibar, Breakfast for 2 Person"
             ],
         ];
     }
