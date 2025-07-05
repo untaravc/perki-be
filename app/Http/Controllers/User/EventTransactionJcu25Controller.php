@@ -108,7 +108,7 @@ class EventTransactionJcu25Controller extends BaseController
         $items = $request->items;
 
         $additional_user = collect($request->users);
-        $count = 0;
+        $count = 1;
         foreach ($additional_user as $user) {
             if ($user['email'] != null && $user['name'] != null) {
                 if ($user['email'] != '' && $user['name'] != '') {
@@ -117,7 +117,10 @@ class EventTransactionJcu25Controller extends BaseController
             }
         }
 
-//         $data[] = $this->get_symposium($items['symposium'], $transaction);
+        if($count > 5){
+            $count--;
+        }
+
         if (isset($items['symposium'])) {
             if ($count > 0) {
                 $data[] = $this->get_event($items['symposium'], $transaction, $count);
@@ -151,23 +154,36 @@ class EventTransactionJcu25Controller extends BaseController
             $total -= $voucher_discount['discount_amount'];
         }
 
-        if($items['acm_first']){
+        if ($items['acm_first']) {
             $acm_first = $this->get_event($items['acm_first'], $transaction);
+            $acm_first['name'] = $acm_first['name'] . " (" . ucfirst($items['acm_first_tag']) . " Bed)";
             $data[] = $acm_first;
             $subtotal += $acm_first['price'];
             $total += $acm_first['price'];
         }
-        if($items['acm_second']){
+
+        if ($items['acm_second']) {
             $acm_second = $this->get_event($items['acm_second'], $transaction);
+            $acm_second['name'] = $acm_second['name'] . " (" . ucfirst($items['acm_second_tag']) . " Bed)";
             $data[] = $acm_second;
             $subtotal += $acm_second['price'];
             $total += $acm_second['price'];
         }
-        if($items['acm_third']){
+
+        if ($items['acm_third']) {
             $acm_third = $this->get_event($items['acm_third'], $transaction);
+            $acm_third['name'] = $acm_third['name'] . " (" . ucfirst($items['acm_third_tag']) . " Bed)";
             $data[] = $acm_third;
             $subtotal += $acm_third['price'];
             $total += $acm_third['price'];
+        }
+
+        if ($items['acm_fourth']) {
+            $acm_fourth = $this->get_event($items['acm_fourth'], $transaction);
+            $acm_fourth['name'] = $acm_fourth['name'] . " (" . ucfirst($items['acm_fourth_tag']) . " Bed)";
+            $data[] = $acm_fourth;
+            $subtotal += $acm_fourth['price'];
+            $total += $acm_fourth['price'];
         }
 
         $this->response['result'] = [
@@ -221,9 +237,9 @@ class EventTransactionJcu25Controller extends BaseController
 
         $transaction_payload = [
             'subtotal'         => $pricing['subtotal'],
-            //            'voucher_code'     => $pricing['voucher_code'],
-            //            'voucher_discount' => $pricing['voucher_discount'],
-            //            'discount_amount'  => $pricing['discount_amount'],
+            'voucher_code'     => $pricing['voucher_code'],
+            'voucher_discount' => $pricing['voucher_discount'],
+            'discount_amount'  => $pricing['discount_amount'],
             'package_discount' => $pricing['package_discount'],
             'total'            => $pricing['total'],
             'status'           => 110,
@@ -235,17 +251,16 @@ class EventTransactionJcu25Controller extends BaseController
 
         $item_ids = [];
         foreach ($items as $item) {
-
             if (!$item) {
                 continue;
             }
             $event = Event::whereSlug($item)->first();
 
-            $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
-                ->whereEventId($event->id)
-                ->first();
-
             if ($event) {
+                $transaction_detail = TransactionDetail::whereTransactionId($transaction->id)
+                    ->whereEventId($event->id)
+                    ->first();
+
                 $item_ids[] = $event->id;
                 $price = Price::whereModel('event')
                     ->whereModelId($event->id)
@@ -259,6 +274,17 @@ class EventTransactionJcu25Controller extends BaseController
                         ->first();
                 }
 
+                $tag = null;
+                if ($item === "jcu25-acm-0") {
+                    $tag = $items['acm_first_tag'];
+                } else if ($item === "jcu25-acm-1") {
+                    $tag = $items['acm_second_tag'];
+                } else if ($item === "jcu25-acm-2") {
+                    $tag = $items['acm_third_tag'];
+                } else if ($item === "jcu25-acm-3") {
+                    $tag = $items['acm_fourth_tag'];
+                }
+
                 if (!$transaction_detail) {
                     TransactionDetail::create([
                         "section"        => $transaction->section,
@@ -266,14 +292,16 @@ class EventTransactionJcu25Controller extends BaseController
                         "job_type_code"  => $transaction->job_type_code,
                         "user_id"        => $transaction->user_id,
                         "event_id"       => $event->id,
-                        "event_name"     => $event->name,
+                        "event_name"     => $event->name . " ".$tag,
                         "price"          => $price ? $price['price'] : 0,
                         "status"         => $transaction->status,
+                        "tag"            => $tag,
                     ]);
                 } else {
                     $transaction_detail->update([
                         "price"  => $price ? $price['price'] : 0,
                         "status" => $transaction->status,
+                        "tag"    => $tag,
                     ]);
                 }
             }
