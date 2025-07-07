@@ -35,7 +35,9 @@
                                 <select class="form-control" @change="loadDataContent()" v-model="post_store.category">
                                     <option value="">Semua</option>
                                     <option value="case_report">Case Report</option>
+                                    <option value="case_report_sp">Case Report Sp</option>
                                     <option value="research">Research</option>
+                                    <option value="research_sp">Research Sp</option>
                                     <option value="systematic_review">Systematic Review</option>
                                     <option value="meta_analysis">Meta Analysis</option>
                                 </select>

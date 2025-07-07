@@ -65,22 +65,24 @@
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
                                             :href="`/panel/print-abstract?category=case_report&section=` + content.section + `&token=` + content.token" target="_blank">
-                                            Case Report
+                                            Case Report + SP
                                         </a>
                                     </div>
                                     <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
-                                        {{ content.abstract_categories.case_report }}
+                                        {{ content.abstract_categories.case_report }} +
+                                        {{ content.abstract_categories.case_report_sp }}
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="text-sm">
                                         <a class="text-blue-600 hover:text-blue-400 underline font-semibold"
                                            :href="`/panel/print-abstract?category=research&section=` + content.section + `&token=` + content.token" target="_blank">
-                                            Research
+                                            Research + SP
                                         </a>
                                     </div>
                                     <div class="h3 text-blue-800 font-bold" v-if="content.abstract_categories">
-                                        {{ content.abstract_categories.research }}
+                                        {{ content.abstract_categories.research }} +
+                                        {{ content.abstract_categories.research_sp }}
                                     </div>
                                 </div>
                                 <div class="col-6">
