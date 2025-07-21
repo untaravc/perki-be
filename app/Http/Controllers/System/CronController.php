@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\CreatePayment;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\MailLog;
@@ -13,7 +14,7 @@ class CronController extends Controller
 {
     public function send_qr_email()
     {
-        return $pending_email = MailLog::whereStatus(0)
+        $pending_email = MailLog::whereStatus(0)
             ->whereLabel('jcu25_qr_access')
             ->whereEmailReceiver('vyvy1777@gmail.com')
             ->limit(1)
@@ -21,8 +22,8 @@ class CronController extends Controller
 
         $email_service = new EmailServiceController();
         foreach ($pending_email as $mail) {
+            $email_service->qr_code_access($mail->model_id);
             try {
-                $email_service->qr_code_access($mail->model_id);
                 $mail->update([
                     'status'  => 1,
                     'sent_at' => now(),
@@ -112,5 +113,16 @@ class CronController extends Controller
     {
         $email_service = new EmailServiceController();
         return $email_service->send_announcement_email();
+    }
+
+    public function sendRegisterProcess()
+    {
+        $transaction = Transaction::where('user_email', 'vyvy1777@gmail.com')
+            ->orderByDesc('id')
+            ->first();
+
+        CreatePayment::dispatch($transaction);
+
+        return 'success';
     }
 }

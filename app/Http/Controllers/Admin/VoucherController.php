@@ -96,15 +96,16 @@ class VoucherController extends Controller
 
     public function voucherRecap(Request $request)
     {
-        $query['section'] = $request->ref ?? '2024';
+
         $data_content = Voucher::orderByDesc('id')
+            ->where('section', $request->section ?? 'jcu25')
             ->with('redeem');
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
         return view('print.voucher.voucher-recap', [
             'vouchers' => $data_content,
-            'query' => $query
+            'query' => $request->all(),
         ]);
     }
 }

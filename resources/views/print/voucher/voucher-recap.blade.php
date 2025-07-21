@@ -38,12 +38,7 @@
     </style>
 </head>
 <div style="margin-bottom: 20px">
-    <h4>Voucher Jogja Cardiologi Update
-        @if ($query['section'] == '2024')
-            2024
-        @else
-            2023
-        @endif
+    <h4>Voucher Usage
     </h4>
 </div>
 @php

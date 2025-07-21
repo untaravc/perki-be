@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\BaseController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\System\EmailServiceController;
 use App\Http\Controllers\System\FonnteServiceController;
+use App\Jobs\CreatePayment;
 use App\Models\Event;
 use App\Models\Price;
 use App\Models\Transaction;
@@ -323,8 +323,9 @@ class EventTransactionJcu25Controller extends BaseController
 
             $fonnte = new FonnteServiceController();
             $fonnte->generateMessage($transaction);
-        } catch (\Exception $e) {
-        }
+        } catch (\Exception $e) {}
+
+//        CreatePayment::dispatch($transaction);
 
         $this->sendPostResponse();
     }
