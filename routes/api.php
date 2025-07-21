@@ -37,6 +37,7 @@ use App\Http\Controllers\User\GroupController;
 
 use App\Http\Controllers\System\DataInitController;
 use App\Http\Controllers\System\UploadFileController;
+use App\Http\Controllers\System\CronController;
 
 // ADMIN API
 Route::post('/', function () {
@@ -45,6 +46,7 @@ Route::post('/', function () {
 Route::post('/adm/login', [AdminAuthController::class, 'login']);
 Route::post('/set-data', [DataInitController::class, 'init']);
 Route::post('/import-contact', [DataInitController::class, 'importContact']);
+Route::get('/test-qr-access', [CronController::class, 'send_qr_email']);
 Route::get('abstracts-send-accepted', [AbstractController::class, 'accepted_notification']);
 Route::get('firebase-config', [UserAuthController::class, 'firebaseConfig']);
 

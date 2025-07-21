@@ -88,6 +88,18 @@ class GuidanceController extends Controller
     public function guidance2025(){
         $data = [];
         $data[] = [
+            "title" => "Booklet Final Announcement",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01",
+            "link"  => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2FBOOKLET%20JCU%202025.pdf?alt=media&token=0e45be06-51e3-4bbe-b5a7-3b0881d1e4e5",
+        ];
+
+        $data[] = [
+            "title" => "Date Extended Until July 12th 2025",
+            "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fextended-abstracts.jpeg?alt=media&token=ecc57b9e-595d-481e-8488-6d4fe2c77176",
+            "link"  => "https://jcu.perki-jogja.com/abstracts",
+        ];
+
+        $data[] = [
             "title" => "ECG Championship",
             "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fecg-timeline.jpeg?alt=media&token=d1a5728c-cbed-418a-8793-7c4127f72f89",
             "link"  => "https://jcu.perki-jogja.com/ecg-championship-info",

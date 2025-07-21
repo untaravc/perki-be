@@ -171,7 +171,7 @@ class EmailServiceController extends Controller
 
         $data['view'] = 'email.carvep.qr_code';
         $data['view_pdf'] = 'email.carvep.qr_code_template';
-        $data['email_subject'] = 'CARVEP 2025: QR Code Access ' . $data['transaction']['number'];
+        $data['email_subject'] = 'JCU 2025: QR Code Access ' . $data['transaction']['number'];
         $data['path'] = '/assets/qr_code/' . $data['transaction']['number'] . '.svg';
 
         QrCode::size(500)

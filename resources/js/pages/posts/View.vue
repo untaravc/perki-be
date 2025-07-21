@@ -32,7 +32,7 @@
               <div class="h3 mt-4 mb-2">Review</div>
               <div class="row mb-4">
                 <div class="col-md-12">
-                  <table class="table w-full" v-if="form_props.data_detail.category != 'case_report'">
+                  <table class="table w-full" v-if="form_props.data_detail.category !== 'case_report' && form_props.data_detail.category !== 'case_report_sp'">
                     <tr>
                       <td>Parameters</td>
                       <td>Score</td>
@@ -87,7 +87,7 @@
                       </td>
                     </tr>
                   </table>
-                  <table class="table  w-full" v-if="form_props.data_detail.category == 'case_report'">
+                  <table class="table  w-full" v-if="form_props.data_detail.category === 'case_report' || form_props.data_detail.category === 'case_report_sp'">
                     <tr>
                       <td>Parameters</td>
                       <td>Score</td>

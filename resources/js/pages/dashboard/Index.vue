@@ -141,9 +141,11 @@
                             <div class="row mb-2">
                                 <div class="col-4">
                                     <div class="text-sm">Est. Earning</div>
-                                    <div class="h4 font-bold">{{
-                                        $filter.currency(parseInt(content.stat.transaction_success_nominal))
-                                        }}
+                                    <div class="h4 font-bold">
+                                        {{$filter.currency(parseInt(content.stat.transaction_success_nominal))}}
+                                        <div class="h5" title="Hotel room">
+                                            +  {{ $filter.currency(parseInt(content.stat.transaction_success_additional))}}
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-4">

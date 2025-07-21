@@ -125,9 +125,9 @@ class BannerController extends Controller
             ],
             [
                 "title"    => "Call for Abstracts",
-                "subtitle" => "Category: Case Report, Original Research, Systematic Review/Meta Analysis",
-                "date"     => "Until 7th July 2025",
-                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fcall_abstract.jpeg?alt=media&token=8466da9c-4f9b-4fdf-9916-b3cf6a2a2d97',
+                "subtitle" => "Abstract Submission Date Extended Until July 12th, 2025",
+                "date"     => "Until 12th July 2025",
+                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fextended-abstracts.jpeg?alt=media&token=ecc57b9e-595d-481e-8488-6d4fe2c77176',
                 "buttons"  => []
             ],
 //            [

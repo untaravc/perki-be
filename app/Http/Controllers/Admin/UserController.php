@@ -67,7 +67,7 @@ class UserController extends Controller
     public function validateData($request)
     {
         $validator = Validator::make($request->all(), [
-            'name'      => 'required',
+            'name' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -79,13 +79,25 @@ class UserController extends Controller
     public function registerUser(Request $request)
     {
         $access_token = PersonalAccessToken::findToken($request->token);
-        if(!$access_token){
+        if (!$access_token) {
             return 'No Access';
         }
+//        Transaction::whereSection($request->section ?? SECTION)
+//            ->whereNotIn('user_id', $exclude_user_ids)
+//            ->groupBy('user_id')
+//            ->get()->count();
 
         $users = User::whereIsSpeaker(0)
-            ->with('success_transactions')
-            ->get();
+            ->whereNotIn('users.id', exclude_user_ids())
+            ->leftJoin('transactions', 'transactions.user_id', '=', 'users.id')
+            ->groupBy('users.id')
+            ->select('users.*', 'transactions.section');
+
+        if ($request->section) {
+            $users = $users->where('transactions.section', $request->section);
+        }
+
+        $users = $users->get();
 
         return view('print.contacts.register-user', compact('users'));
     }

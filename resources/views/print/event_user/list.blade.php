@@ -58,6 +58,7 @@
                 <td>Payment Status</td>
                 <td>Total</td>
                 <td>Presence</td>
+                <td>Tag</td>
             </tr>
         </thead>
         <tbody>
@@ -120,6 +121,11 @@
                             Presence
                         @else
                             Absence
+                        @endif
+                    </td>
+                    <td>
+                        @if($detail->tag)
+                            {{$detail->tag}}
                         @endif
                     </td>
                 </tr>

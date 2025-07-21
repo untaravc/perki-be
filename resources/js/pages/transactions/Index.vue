@@ -113,6 +113,10 @@
                                                                      class="dropdown-item">
                                                             Validate
                                                         </router-link>
+                                                        <a :href="'/print/invoice-pdf/' + data.id"
+                                                                     class="dropdown-item" target="_blank">
+                                                            Invoice
+                                                        </a>
                                                         <button class="dropdown-item text-danger"
                                                                 @click="notifWa(data.id)">
                                                             Message

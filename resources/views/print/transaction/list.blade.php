@@ -102,6 +102,19 @@
                     </small>
                 @endif
             </td>
+            <td style="text-align: center">
+                @if ($transaction['transfer_proof_gl'])
+                    <a target="_blank" href="{{ $transaction['transfer_proof_gl'] }}">
+                        <img src="{{$transaction['transfer_proof_gl']}}" height="150px" alt="">
+                    </a>
+                    <br>
+                    <small>
+                        <a target="_blank" href="{{ $transaction['transfer_proof_gl'] }}">
+                            file
+                        </a>
+                    </small>
+                @endif
+            </td>
 {{--            @foreach ($transaction['transaction_details'] as $detail)--}}
 {{--                <td>--}}
 {{--                    {{ $detail['event_name'] }} <br>--}}

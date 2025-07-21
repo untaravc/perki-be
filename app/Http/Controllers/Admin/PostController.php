@@ -14,6 +14,7 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+        $auth = $request->user();
         $data_content = Post::orderByDesc('id')
             // ->when($type === 'reviewer', function ($q) use ($auth) {
             //     $q->where('reviewer_id', $auth['id']);
@@ -21,6 +22,27 @@ class PostController extends Controller
             ->with(['user', 'scores' => function ($q) {
                 $q->with('user');
             }]);
+
+        if ($auth->type == 'reviewer') {
+            switch ($auth->id) {
+                case 35:
+                case 1032:
+                case 41:
+                    $data_content = $data_content->whereIn('category', ['case_report', 'case_report_sp']);
+                    break;
+                case 39:
+                case 136:
+                case 32:
+                    $data_content = $data_content->whereIn('category', ['research', 'research_sp']);
+                    break;
+                case 91:
+                case 33:
+                    $data_content = $data_content->whereIn('category', ['meta_analysis', 'systematic_review']);
+                    break;
+            }
+        }
+
+
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 
@@ -54,14 +76,14 @@ class PostController extends Controller
 
             if ($score) {
                 $score->update([
-                    'first_score' => $request->scores['first_score'],
-                    'second_score' => $request->scores['second_score'],
-                    'third_score' => $request->scores['third_score'],
-                    'fourth_score' => $request->scores['fourth_score'],
-                    'fifth_score' => $request->scores['fifth_score'],
-                    'sixth_score' => $request->scores['sixth_score'],
+                    'first_score'   => $request->scores['first_score'],
+                    'second_score'  => $request->scores['second_score'],
+                    'third_score'   => $request->scores['third_score'],
+                    'fourth_score'  => $request->scores['fourth_score'],
+                    'fifth_score'   => $request->scores['fifth_score'],
+                    'sixth_score'   => $request->scores['sixth_score'],
                     'seventh_score' => $request->scores['seventh_score'],
-                    'total' => $request->scores['first_score'] +
+                    'total'         => $request->scores['first_score'] +
                         $request->scores['second_score'] +
                         $request->scores['third_score'] +
                         $request->scores['fourth_score'] +
@@ -71,16 +93,16 @@ class PostController extends Controller
                 ]);
             } else {
                 Score::create([
-                    'post_id' => $id,
-                    'user_id' => $auth['id'],
-                    'first_score' => $request->scores['first_score'],
-                    'second_score' => $request->scores['second_score'],
-                    'third_score' => $request->scores['third_score'],
-                    'fourth_score' => $request->scores['fourth_score'],
-                    'fifth_score' => $request->scores['fifth_score'],
-                    'sixth_score' => $request->scores['sixth_score'],
+                    'post_id'       => $id,
+                    'user_id'       => $auth['id'],
+                    'first_score'   => $request->scores['first_score'],
+                    'second_score'  => $request->scores['second_score'],
+                    'third_score'   => $request->scores['third_score'],
+                    'fourth_score'  => $request->scores['fourth_score'],
+                    'fifth_score'   => $request->scores['fifth_score'],
+                    'sixth_score'   => $request->scores['sixth_score'],
                     'seventh_score' => $request->scores['seventh_score'],
-                    'total' => $request->scores['first_score'] +
+                    'total'         => $request->scores['first_score'] +
                         $request->scores['second_score'] +
                         $request->scores['third_score'] +
                         $request->scores['fourth_score'] +
@@ -94,8 +116,8 @@ class PostController extends Controller
 
             $data->update([
                 'comment' => $request->comment,
-                'score' => $total,
-                'status' => $request->status,
+                'score'   => $total,
+                'status'  => $request->status,
             ]);
         }
 
@@ -150,12 +172,12 @@ class PostController extends Controller
     public function printPost(Request $request)
     {
         $access_token = PersonalAccessToken::findToken($request->token);
-        if(!$access_token){
+        if (!$access_token) {
             return 'No Access';
         }
 
         $data_content = Post::with(['user', 'authors'])
-            ->whereDate('created_at', '>', '2024-01-01')
+            ->whereDate('created_at', '>', '2025-01-01')
             ->when($request->category, function ($q) use ($request) {
                 $q->where('category', $request->category);
             })
@@ -167,7 +189,9 @@ class PostController extends Controller
             })
             ->whereIn('category', [
                 'case_report',
+                'case_report_sp',
                 'research',
+                'research_sp',
                 'systematic_review',
                 'meta_analysis',
             ])->get()->sortBy('user.name');
@@ -257,8 +281,8 @@ class PostController extends Controller
 
         if ($post) {
             $post->update([
-                'status' => $request->status,
-                'score' => $request->score,
+                'status'  => $request->status,
+                'score'   => $request->score,
                 'comment' => $request->comment,
             ]);
         }
@@ -270,7 +294,7 @@ class PostController extends Controller
     {
         $access_token = PersonalAccessToken::findToken($request->token);
 
-        if(!$access_token){
+        if (!$access_token) {
             return 'No Access';
         }
 

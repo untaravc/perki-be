@@ -29,6 +29,15 @@ class DashboardController extends Controller
             ->where('status', '<', 300)
             ->sum('total');
 
+        $data['transaction_success_additional'] = TransactionDetail::where('status', '>=', 200)
+            ->where('status', '<', 300)
+            ->whereSection($request->section ?? SECTION)
+            ->whereNotIn('user_id', $exclude_user_ids)
+            ->whereIn('event_id', [340, 341, 342, 343])
+            ->count() * 1850000;
+
+        $data['transaction_success_nominal'] -= $data['transaction_success_additional'];
+
         $data['member'] = Transaction::whereSection($request->section ?? SECTION)
             ->whereNotIn('user_id', $exclude_user_ids)
             ->groupBy('user_id')
@@ -51,8 +60,16 @@ class DashboardController extends Controller
         return $this->response;
     }
 
-    public function chart()
+    public function chart(Request $request)
     {
+        if ($request->section) {
+            if ($request->section === 'jcu24') {
+                $request->merge(['end' => '2024-10-18']);
+            } else if ($request->section === 'jcu23') {
+                $request->merge(['end' => '2024-10-18']);
+            }
+        }
+
         $default_diff = 30;
         $params['date_end'] = $request->end ?? date('Y-m-d');
         $params['date_start'] = $request->start ?? date('Y-m-d', strtotime($params['date_end'] . '-' . $default_diff . ' days'));
@@ -154,9 +171,8 @@ class DashboardController extends Controller
     public function event_purchase(Request $request)
     {
         $events = Event::whereDataType('product')
-            ->where('status', 1)
             ->whereSection($request->section ?? SECTION)
-            ->orderBy('name')
+            ->orderBy('id')
             ->select(
                 'id',
                 'name',

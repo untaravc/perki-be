@@ -18,12 +18,12 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-//            $cron = new CronController();
+            $cron = new CronController();
 //            $cron->send_event_certificate();
-//            $cron->send_qr_email();
-            $fb = new UploadFirebaseController();
-            $fb->uploadDocument();
-            $fb->uploadPostImage();
+            $cron->send_qr_email();
+//            $fb = new UploadFirebaseController();
+//            $fb->uploadDocument();
+//            $fb->uploadPostImage();
         })->everyMinute();
     }
 

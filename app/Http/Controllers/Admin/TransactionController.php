@@ -125,7 +125,7 @@ class TransactionController extends Controller
         $mail_log = [
             "email_receiver" => $transaction->user_email,
             "receiver_name"  => $transaction->user_name,
-            "label"          => "carvep_qr_access",
+            "label"          => "jcu25_qr_access",
             "model"          => "transaction",
             "model_id"       => $transaction->id,
             "status"         => 0,
@@ -137,7 +137,7 @@ class TransactionController extends Controller
                 MailLog::create([
                     "email_receiver" => $child->user_email,
                     "receiver_name"  => $child->user_name,
-                    "label"          => "carvep_qr_access",
+                    "label"          => "jcu25_qr_access",
                     "model"          => "transaction",
                     "model_id"       => $child->id,
                     "status"         => 0,
@@ -256,7 +256,7 @@ class TransactionController extends Controller
 
         $next = Transaction::where('id', '>', $id)
             ->where('status', 200)
-            ->where('section', 'carvep')
+            ->where('section', 'jcu25')
             ->first();
 
         if ($next) {

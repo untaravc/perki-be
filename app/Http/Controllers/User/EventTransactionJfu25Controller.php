@@ -175,9 +175,9 @@ class EventTransactionJfu25Controller extends BaseController
 
         $transaction_payload = [
             'subtotal'         => $pricing['subtotal'],
-            //            'voucher_code'     => $pricing['voucher_code'],
-            //            'voucher_discount' => $pricing['voucher_discount'],
-            //            'discount_amount'  => $pricing['discount_amount'],
+            'voucher_code'     => $pricing['voucher_code'],
+            'voucher_discount' => $pricing['voucher_discount'],
+            'discount_amount'  => $pricing['discount_amount'],
             'package_discount' => $pricing['package_discount'],
             'total'            => $pricing['total'],
             'status'           => 110,
