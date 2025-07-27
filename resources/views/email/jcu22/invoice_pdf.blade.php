@@ -51,8 +51,8 @@
                 <div>({{$note}})</div>
             @endif
             <div>{{$transaction['user_phone']}}</div>
-            <div>{{$transaction['user']['institution']}}</div>
-            <div>{{$transaction['user']['city']}}</div>
+            <div>{{$transaction['user']['institution'] ?? ""}}</div>
+            <div>{{$transaction['user']['city'] ?? ""}}</div>
         </div>
     </div>
     <div style="max-width: 250px; text-align: right;">

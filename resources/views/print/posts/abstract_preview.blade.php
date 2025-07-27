@@ -10,8 +10,8 @@
         {{-- <td>Voucher Code</td> --}}
         {{--        <td>Type</td> --}}
         <td>Title</td>
-        {{--        <td>Score</td> --}}
-        {{--        <td colspan="3">Score List</td> --}}
+        <td>Score</td>
+        <td colspan="3">Score List</td>
     </tr>
     @foreach ($data_content as $key => $data)
         <tr>
@@ -78,11 +78,11 @@
                 {{ $data['title'] }}
             </td>
             <td>
-                {{ $data['status'] }}
+                {{ $data['score'] }}
             </td>
-            {{--            @foreach ($data['scores'] as $score) --}}
-            {{--                <td>{{ $score['total'] }}</td> --}}
-            {{--            @endforeach --}}
+            @foreach ($data['scores'] as $score)
+                <td>{{ $score['total'] }}</td>
+            @endforeach
         </tr>
     @endforeach
 </table>

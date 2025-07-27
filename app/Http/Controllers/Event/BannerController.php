@@ -123,13 +123,13 @@ class BannerController extends Controller
                 "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fpricing.jpeg?alt=media&token=aa14b666-e43b-45a4-b128-93aaaf8b2499',
                 "buttons"  => []
             ],
-            [
-                "title"    => "Call for Abstracts",
-                "subtitle" => "Abstract Submission Date Extended Until July 12th, 2025",
-                "date"     => "Until 12th July 2025",
-                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fextended-abstracts.jpeg?alt=media&token=ecc57b9e-595d-481e-8488-6d4fe2c77176',
-                "buttons"  => []
-            ],
+//            [
+//                "title"    => "Call for Abstracts",
+//                "subtitle" => "Abstract Submission Date Extended Until July 12th, 2025",
+//                "date"     => "Until 12th July 2025",
+//                "poster"   => 'https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Fextended-abstracts.jpeg?alt=media&token=ecc57b9e-595d-481e-8488-6d4fe2c77176',
+//                "buttons"  => []
+//            ],
 //            [
 //                "title"    => "The 1st Indonesian Working Group of Pulmonary Hypertension Meeting",
 //                "subtitle" => "",

@@ -52,8 +52,8 @@ class EventTransactionJcu25Controller extends BaseController
         $workshop = $events->where('marker', 'jcu25-ws')
             ->flatten();
 
-        $accommodations = $events->where('marker', 'jcu25-acm')
-            ->flatten();
+//        $accommodations = $events->where('marker', 'jcu25-acm')
+//            ->flatten();
 
         $symposium_price = $prices->where('model_id', $symposium->id)->first();
         $symposium['price'] = $symposium_price['price'];
@@ -68,23 +68,27 @@ class EventTransactionJcu25Controller extends BaseController
             }
         }
 
-        foreach ($accommodations as $acm) {
-            $acm['transactions_count'] = min($acm['quota'], $acm['transactions_count']);
-            $acm['available'] = $acm['quota'] > $acm['transactions_count'];
-            if ($acm['slug'] === 'jcu25-ws-1' || $acm['slug'] === 'jcu25-ws-2') {
-                $acm['grid'] = 2;
-            } else {
-                $acm['grid'] = 1;
-            }
-        }
+//        foreach ($accommodations as $acm) {
+//            $acm['transactions_count'] = min($acm['quota'], $acm['transactions_count']);
+//            $acm['available'] = $acm['quota'] > $acm['transactions_count'];
+//            if ($acm['slug'] === 'jcu25-ws-1' || $acm['slug'] === 'jcu25-ws-2') {
+//                $acm['grid'] = 2;
+//            } else {
+//                $acm['grid'] = 1;
+//            }
+//        }
 
         $data['symposium'] = $symposium;
 
         if ($transaction['job_type_code'] !== 'MHSA') {
-            $data['workshop'] = $workshop;
+            if(date('Y-m-d H:i:s') < '2025-07-29 12:00:00'){
+                $data['workshop'] = $workshop;
+            } else {
+                $data['workshop'] = [];
+            }
         }
 
-        $data['accommodations'] = $accommodations;
+        $data['accommodations'] = [];
 
         $this->response['result'] = [
             'items'       => $data,
@@ -317,15 +321,17 @@ class EventTransactionJcu25Controller extends BaseController
             ->whereNotIn('event_id', $item_ids)
             ->delete();
 
-        try {
-            $email_service = new EmailServiceController();
-            $email_service->bill($transaction->id);
+//        try {
+//            $email_service = new EmailServiceController();
+//            $email_service->bill($transaction->id);
+//
+//            $fonnte = new FonnteServiceController();
+//            $fonnte->generateMessage($transaction);
+//        } catch (\Exception $e) {}
 
-            $fonnte = new FonnteServiceController();
-            $fonnte->generateMessage($transaction);
-        } catch (\Exception $e) {}
-
-//        CreatePayment::dispatch($transaction);
+        if($transaction->total > 0){
+            CreatePayment::dispatch($transaction);
+        }
 
         $this->sendPostResponse();
     }

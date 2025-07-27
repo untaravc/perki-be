@@ -88,9 +88,9 @@ class GuidanceController extends Controller
     public function guidance2025(){
         $data = [];
         $data[] = [
-            "title" => "Booklet Final Announcement",
+            "title" => "Booklet JCU 2025",
             "image" => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2Ffirst-poster-jcu25.png?alt=media&token=6eff1e31-648a-412c-98fe-d89e1070ca01",
-            "link"  => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2FBOOKLET%20JCU%202025.pdf?alt=media&token=0e45be06-51e3-4bbe-b5a7-3b0881d1e4e5",
+            "link"  => "https://firebasestorage.googleapis.com/v0/b/unt-dev.firebasestorage.app/o/Perki%2FJCU25%2FBOOKLET%20JCU%202025-f.pdf?alt=media&token=31422697-1d94-4589-892e-5f20b780b3d1",
         ];
 
         $data[] = [

@@ -25,7 +25,7 @@ class TransactionController extends Controller
             },
             'users',
             'user'
-        ])->whereParentId(0);
+        ]);
         $data_content = $this->withFilter($data_content, $request);
         $data_content = $data_content->paginate($request->per_page ?? 25);
 

@@ -316,7 +316,9 @@ class PostController extends Controller
             })
             ->whereIn('category', [
                 'case_report',
+                'case_report_sp',
                 'research',
+                'research_sp',
                 'systematic_review',
                 'meta_analysis',
             ])

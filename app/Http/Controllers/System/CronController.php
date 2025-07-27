@@ -4,11 +4,14 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\CreatePayment;
+use App\Mail\SendDefaultMail;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\MailLog;
+use App\Models\Reference;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CronController extends Controller
 {
@@ -16,14 +19,13 @@ class CronController extends Controller
     {
         $pending_email = MailLog::whereStatus(0)
             ->whereLabel('jcu25_qr_access')
-            ->whereEmailReceiver('vyvy1777@gmail.com')
             ->limit(1)
             ->get();
 
         $email_service = new EmailServiceController();
         foreach ($pending_email as $mail) {
-            $email_service->qr_code_access($mail->model_id);
             try {
+                $email_service->qr_code_access($mail->model_id);
                 $mail->update([
                     'status'  => 1,
                     'sent_at' => now(),
@@ -117,12 +119,48 @@ class CronController extends Controller
 
     public function sendRegisterProcess()
     {
-        $transaction = Transaction::where('user_email', 'vyvy1777@gmail.com')
-            ->orderByDesc('id')
-            ->first();
-
-        CreatePayment::dispatch($transaction);
+        $cron = new CronController();
+        return $cron->send_qr_email();
 
         return 'success';
+    }
+
+    public function send_abstract_email()
+    {
+        $oral = MailLog::where('label', 'jcu25_oral_presentation')
+            ->whereStatus(0)
+            ->limit(1)
+            ->get();
+
+        foreach ($oral as $or) {
+            $data['user_name'] = $or->receiver_name;
+            $data['title'] = $or->title;
+            $data['category'] = $or->category;
+            $data['email_subject'] = 'Oral Presentation Notification – Jogja Cardiology Update (JCU) 2025';
+            $data['view'] = 'email.jcu25.oral_presentation';
+            Mail::to($or['email_receiver'])->send(new SendDefaultMail($data));
+
+            $or->update([
+                'status' => 1
+            ]);
+        }
+
+        $display = MailLog::where('label', 'jcu25_display_poster')
+            ->whereStatus(0)
+            ->limit(1)
+            ->get();
+
+        foreach ($display as $or) {
+            $data['user_name'] = $or->receiver_name;
+            $data['title'] = $or->title;
+            $data['category'] = $or->category;
+            $data['email_subject'] = 'Poster Presentation Notification – Jogja Cardiology Update (JCU) 2025';
+            $data['view'] = 'email.jcu25.displayed_poster';
+            Mail::to($or['email_receiver'])->send(new SendDefaultMail($data));
+
+            $or->update([
+                'status' => 1
+            ]);
+        }
     }
 }

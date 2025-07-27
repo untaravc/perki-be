@@ -35,9 +35,14 @@ class CreatePayment implements ShouldQueue
      */
     public function handle()
     {
-        $email_service = new EmailServiceController();
-        $email_service->bill($this->transaction->id);
-        $fonnte = new FonnteServiceController();
-        $fonnte->generateMessage($this->transaction);
+        try{
+            $email_service = new EmailServiceController();
+            $email_service->bill($this->transaction->id);
+        }catch (\Exception $e){}
+
+        try{
+            $fonnte = new FonnteServiceController();
+            $fonnte->generateMessage($this->transaction);
+        }catch (\Exception $e){}
     }
 }

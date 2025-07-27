@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Http\Controllers\System\CronController;
 use App\Http\Controllers\System\UploadFirebaseController;
+use App\Models\Reference;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,6 +25,7 @@ class Kernel extends ConsoleKernel
 //            $fb = new UploadFirebaseController();
 //            $fb->uploadDocument();
 //            $fb->uploadPostImage();
+            $cron->send_abstract_email();
         })->everyMinute();
     }
 

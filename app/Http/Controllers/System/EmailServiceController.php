@@ -199,7 +199,7 @@ class EmailServiceController extends Controller
         }
 
         $fonnte = new FonnteServiceController();
-//        $fonnte->generateQrMsg($data['transaction']);
+        $fonnte->generateQrMsg($data['transaction']);
 
         return true;
     }

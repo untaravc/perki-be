@@ -56,19 +56,17 @@ class FonnteServiceController extends Controller
     {
         $msg = "Dear *" . $transaction->user_name . "* \n \n";
 
-        $msg .= "Thank you for registering the Jogja Cardiology Update 2025,
-         scheduled to take place in 1st - 3rd of August at The Tentrem Hotel Yogyakarta.
-         Below are the event details based on your selected events: \n \n";
+        $msg .= "Thank you for registering the Jogja Cardiology Update 2025, scheduled to take place in 1st - 3rd of August at The Tentrem Hotel Yogyakarta. Below are the event details based on your selected events: \n \n";
 
         foreach ($transaction->transaction_details as $detail) {
             if ($detail->event_id !== 314) {
-                $msg .= "- " . $detail->event_name . ": February 23rd " . date("H:i", strtotime($detail->event->date_start)) . " - " . date("H:i", strtotime($detail->event->date_end)) . " \n";
+                $msg .= "- " . $detail->event_name . ": August 1st " . date("H:i", strtotime($detail->event->date_start)) . " - " . date("H:i", strtotime($detail->event->date_end)) . " \n";
             }
         }
 
         $msg .= "- Symposium: August 2nd 08.00 - August 3rd 16.00 (WIB) \n";
 
-        $msg .= "\n \n";
+        $msg .= "\n";
         $msg .= "Please download the QR code from this following link, which will serve as your access for event check-in. You will need to present this upon entering the venue. \n \n";
         $msg .= "https://src.perki-jogja.com/storage/qr_pdf/" . $transaction->number . ".pdf";
 
