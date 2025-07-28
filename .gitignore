@@ -26,3 +26,4 @@ yarn-error.log
 /.vscode
 
 firebase-adminsdk.json
+mysql_dump.sh

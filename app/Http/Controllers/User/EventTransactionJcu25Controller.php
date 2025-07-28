@@ -80,11 +80,10 @@ class EventTransactionJcu25Controller extends BaseController
 
         $data['symposium'] = $symposium;
 
+        $data['workshop'] = [];
         if ($transaction['job_type_code'] !== 'MHSA') {
             if(date('Y-m-d H:i:s') < '2025-07-29 12:00:00'){
                 $data['workshop'] = $workshop;
-            } else {
-                $data['workshop'] = [];
             }
         }
 

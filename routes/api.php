@@ -163,6 +163,7 @@ Route::group(['prefix' => 'pub', 'middleware' => 'public_dynamic'], function () 
 
 // PUBLIC API
 Route::group(['prefix' => 'pub'], function () {
+    Route::get('open-register', [UserAuthController::class, 'open_register']);
     Route::post('login', [UserAuthController::class, 'login']);
     Route::post('logas', [UserAuthController::class, 'logas']);
     Route::post('login-by-google', [UserAuthController::class, 'login_by_google']);
@@ -190,3 +191,43 @@ Route::group(['prefix' => 'pub'], function () {
     Route::post('scan-qrcode-event', [EventPresenceController::class, 'record_qrcode_data']);
 });
 // =========
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

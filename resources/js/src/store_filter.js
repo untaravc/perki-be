@@ -50,6 +50,7 @@ export const useFilterStore = defineStore('filter', () => {
         per_page: 50,
         name: '',
         align: 'center',
+        section: 'jcu25',
     })
 
     const post_store = reactive({

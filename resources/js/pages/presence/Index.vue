@@ -17,7 +17,15 @@
                                     <option value="left">Rata Kiri</option>
                                 </select>
                             </div>
-                            <div class="col-md-3"></div>
+                            <div class="col-md-3">
+                                <select class="form-control" @change="loadEvent()"
+                                        v-model="presence_store.section">
+                                    <option value="">Semua</option>
+                                    <option v-for="section in response.sections" :value="section.section">
+                                        {{ section.name }}
+                                    </option>
+                                </select>
+                            </div>
                             <div class="col-md-3 text-right">
                                 <button class="btn btn-light btn-sm" @click="clearFilter()">Clear Filter</button>
                                 <button class="btn btn-primary btn-sm" @click="loadDataContent()">Reload</button>
@@ -29,16 +37,6 @@
                                  class="rounded  p-2 text-center cursor-pointer hover:bg-slate-300">
                                 {{ event.name }}
                             </div>
-<!--                            <div @click="selectEvent(111001)"-->
-<!--                                 :class="presence_store.event_id === 111001 ? 'bg-blue-600 text-white' : 'bg-slate-100'"-->
-<!--                                 class="rounded  p-2 text-center cursor-pointer hover:bg-slate-300">-->
-<!--                                Symposium Day 1-->
-<!--                            </div>-->
-<!--                            <div @click="selectEvent(111)"-->
-<!--                                 :class="presence_store.event_id === 111 ? 'bg-blue-600 text-white' : 'bg-slate-100'"-->
-<!--                                 class="rounded  p-2 text-center cursor-pointer hover:bg-slate-300">-->
-<!--                                Symposium Day 2-->
-<!--                            </div>-->
                         </div>
                         <div class="dataTables_wrapper dt-bootstrap4 no-footer">
                             <div class="table-responsive">
@@ -132,7 +130,8 @@ export default {
             data_content: {
                 data: []
             },
-            events: []
+            events: [],
+            sections: []
         })
 
         function loadDataContent(page = 1) {
@@ -154,8 +153,6 @@ export default {
         }
 
         loadDataContent(presence_store.page)
-
-        loadEvent()
 
         function changePerPage(per_page) {
             presence_store.per_page = per_page
@@ -184,6 +181,16 @@ export default {
             loadDataContent()
         }
 
+        function loadSection() {
+            getData('sections').then((data) => {
+                response.sections = data.result
+            })
+        }
+
+        loadSection()
+
+        loadEvent()
+
         function deletePresence(id) {
             if (confirm('Apakah anda yakin ingin menghapus data ini?')) {
                 deleteData('event-presence/' + id)
@@ -207,7 +214,8 @@ export default {
             selectEvent,
             clearFilter,
             deleteData,
-            deletePresence
+            deletePresence,
+            loadEvent
         }
     }
 }

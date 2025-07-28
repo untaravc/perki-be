@@ -98,6 +98,18 @@ class AuthController extends BaseController
         }
     }
 
+    public function open_register()
+    {
+        $status = true;
+        if(date('Y-m-d H:i:s') > '2025-07-30 12:00:00'){
+            $status = false;
+        }
+        $this->response['result'] = [
+            'open_register' => $status,
+        ];
+
+        return $this->response;
+    }
     private function validate_register($request)
     {
         // Jika sudah login.
